@@ -112,8 +112,7 @@
     } showHUD:NO];
 //    [self performSegueWithIdentifier:@"login" sender:self];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
-}
+   }
 
 
 
