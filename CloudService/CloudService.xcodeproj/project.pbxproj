@@ -104,6 +104,7 @@
 		F07FF9DF1C81752D00EB1BB1 /* MyTeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9DD1C81752D00EB1BB1 /* MyTeamTableViewCell.m */; };
 		F07FF9E01C81752D00EB1BB1 /* MyTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07FF9DE1C81752D00EB1BB1 /* MyTeamTableViewCell.xib */; };
 		F07FF9E31C8189E200EB1BB1 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */; };
+		F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DED91C89394900168BF8 /* RequestEntity.m */; };
 		F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */; };
 		F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B59B1C8000E500A2312D /* HomeCollectionCell.m */; };
 		F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094B59C1C8000E500A2312D /* HomeCollectionCell.xib */; };
@@ -284,6 +285,8 @@
 		F07FF9DE1C81752D00EB1BB1 /* MyTeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTeamTableViewCell.xib; sourceTree = "<group>"; };
 		F07FF9E11C8189E200EB1BB1 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		F090DED81C89394900168BF8 /* RequestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestEntity.h; sourceTree = "<group>"; };
+		F090DED91C89394900168BF8 /* RequestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestEntity.m; sourceTree = "<group>"; };
 		F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQScrollPageView.h; sourceTree = "<group>"; };
 		F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQScrollPageView.m; sourceTree = "<group>"; };
 		F094B59A1C8000E500A2312D /* HomeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionCell.h; sourceTree = "<group>"; };
@@ -619,6 +622,8 @@
 		F0292BC41C7B015200A810A9 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				F090DED81C89394900168BF8 /* RequestEntity.h */,
+				F090DED91C89394900168BF8 /* RequestEntity.m */,
 				F0292BC91C7B015200A810A9 /* RestAPI.h */,
 			);
 			path = API;
@@ -975,6 +980,7 @@
 				F09A5F931A55F0AA008D4963 /* InviteFriendViewController.m in Sources */,
 				63C54E3E1C7C35AA007CE8CA /* ResultViewController.m in Sources */,
 				630EF1A61C8579630059CB34 /* MyIntergralViewController.m in Sources */,
+				F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */,
 				F07FF9DF1C81752D00EB1BB1 /* MyTeamTableViewCell.m in Sources */,
 				630EF18A1C8530940059CB34 /* MyClientTableViewCell.m in Sources */,
 				F059AA791A55822E0008D7BD /* VerifyCodeViewController.m in Sources */,
