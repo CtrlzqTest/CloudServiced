@@ -1,0 +1,31 @@
+//
+//  PrefixHeader.pch
+//  OnePage
+//
+//  Created by zhangqiang on 15/11/19.
+//  Copyright © 2015年 zhangqiang. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import "RestAPI.h"
+#import "HelperUtil.h"
+#import <Masonry.h>
+#import "UIViewController+AYCNavigationItem.h"
+#import "MBProgressHUD+Add.h"
+
+#ifdef DEBUG
+#define ZQLog(...) NSLog(__VA_ARGS__)
+#else
+#define ZQLog(...)
+#endif
+
+/**
+ *  屏幕宽高
+ */
+#define KWidth  [UIScreen mainScreen].bounds.size.width
+#define KHeight  [UIScreen mainScreen].bounds.size.height
+#define ProportionWidth 1.0/375*KWidth
+#define ProportionHeight 1.0/667*KHeight
+
+#endif /* PrefixHeader_pch */
