@@ -9,6 +9,7 @@
 #import "RequestEntity.h"
 #import "RestAPI.h"
 #import "MHNetwrok.h"
+#import "RequestManager.h"
 
 @implementation RequestEntity
 

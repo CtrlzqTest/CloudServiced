@@ -11,6 +11,7 @@
 #import <Masonry.h>
 #import "LoginInputView.h"
 #import "RequestEntity.h"
+#import "MHNetwrok.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -100,7 +101,7 @@
 
     } failure:^(NSError *error) {
         
-    }];
+    } showHUD:NO];
 //    [self performSegueWithIdentifier:@"login" sender:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
    }
