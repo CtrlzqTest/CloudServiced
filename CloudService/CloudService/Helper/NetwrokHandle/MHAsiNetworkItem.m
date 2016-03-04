@@ -54,7 +54,7 @@
         self.tagrget        = target;
         self.select         = action;
         if (showHUD==YES) {
-            [MBProgressHUD showHUDAddedTo:nil animated:YES];
+            [MBProgressHUD showHUDAddedTo:(UIView*)[[[UIApplication sharedApplication]delegate]window] animated:YES];
         }
         __weak typeof(self)weakSelf = self;
         DTLog(@"--请求url地址--%@\n",url);
@@ -72,7 +72,7 @@
             [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [MBProgressHUD hideAllHUDsForView:nil animated:YES];
+                [MBProgressHUD hideAllHUDsForView:(UIView*)[[[UIApplication sharedApplication]delegate]window] animated:YES];
                 DTLog(@"\n\n----请求的返回结果 %@\n",responseObject);
                 if (successBlock) {
                     successBlock(responseObject);
@@ -83,7 +83,7 @@
                 [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:responseObject withObject:nil];
                 [weakSelf removewItem];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [MBProgressHUD hideAllHUDsForView:nil animated:YES];
+                [MBProgressHUD hideAllHUDsForView:(UIView*)[[[UIApplication sharedApplication]delegate]window] animated:YES];
                 DTLog(@"---error==%@\n",error.localizedDescription);
                 if (failureBlock) {
                     failureBlock(error);
@@ -123,7 +123,7 @@
             [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [MBProgressHUD hideHUDForView:nil animated:YES];
+                [MBProgressHUD hideHUDForView:(UIView*)[[[UIApplication sharedApplication]delegate]window] animated:YES];
                 DTLog(@"\n\n----请求的返回结果 %@\n",responseObject);
                 if (successBlock) {
                     successBlock(responseObject);
@@ -134,7 +134,7 @@
                 [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:responseObject withObject:nil];
                 [weakSelf removewItem];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [MBProgressHUD hideAllHUDsForView:nil animated:YES];
+                [MBProgressHUD hideAllHUDsForView:(UIView*)[[[UIApplication sharedApplication]delegate]window] animated:YES];
                 DTLog(@"---error==%@\n",error.localizedDescription);
                 if (failureBlock) {
                     failureBlock(error);

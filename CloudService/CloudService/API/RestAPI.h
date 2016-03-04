@@ -25,6 +25,7 @@
 
 #define kSignedAPI              @"/app/sign/ signed"                     //签到
 
+#define kSendCode               @"/userapp/sendCode"                     //业绩查询
 
 //   常量
 /**************************************************************************************/
