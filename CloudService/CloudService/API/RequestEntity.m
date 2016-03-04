@@ -27,8 +27,8 @@
         [paramer setValue:passWord forKey:@"password"];
         [paramer setValue:addDress forKey:@"address"];
  
-      
-        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:paramer successBlock:^(NSDictionary *returnData) {
+     
+        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:paramer successBlock:^(id returnData) {
             
             success(returnData,error);
         } failureBlock:^(NSError *error) {
