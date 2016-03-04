@@ -11,6 +11,7 @@
 #import <Masonry.h>
 #import "LoginInputView.h"
 #import "RequestEntity.h"
+#import "MHNetwrok.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -95,11 +96,20 @@
 //        [MBProgressHUD showError:@"请输入密码" toView:self.view];
 //        return;
 //    }
-    [RequestEntity LoginWithUserName:@"liangming" passWord:@"123456" address:@"0102" success:^(id responseObject, NSError *error) {
+//    [RequestEntity LoginWithUserName:@"liangming" passWord:@"123456" address:@"0102" success:^(id responseObject, NSError *error) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    [paramer setObject:@"liangming" forKey:@"userName"];
+    [paramer setValue:@"123456" forKey:@"password"];
+    [paramer setValue:@"0102" forKey:@"address"];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:paramer successBlock:^(NSDictionary *returnData) {
         
-    } failure:^(NSError *error) {
+    } failureBlock:^(NSError *error) {
         
-    }];
+    } showHUD:NO];
 //    [self performSegueWithIdentifier:@"login" sender:self];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];

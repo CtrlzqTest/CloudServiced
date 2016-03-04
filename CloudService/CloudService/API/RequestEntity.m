@@ -9,6 +9,7 @@
 #import "RequestEntity.h"
 #import "RestAPI.h"
 #import "MHNetwrok.h"
+#import "RequestManager.h"
 
 @implementation RequestEntity
 
@@ -28,13 +29,7 @@
         [paramer setValue:addDress forKey:@"address"];
  
         
-        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:paramer successBlock:^(NSDictionary *returnData) {
-            
-            success(returnData,error);
-        } failureBlock:^(NSError *error) {
-            
-            failure(error);
-        } showHUD:NO];
+//        []
     }
     @catch (NSException *exception) {
         NSLog(@"%@",[[exception callStackSymbols] componentsJoinedByString:@"\n"]);

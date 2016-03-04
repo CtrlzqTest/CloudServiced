@@ -24,4 +24,11 @@
                  address:(NSString *)addDress
                  success:(void (^)(id responseObject, NSError *error))success
                  failure:(void (^)(NSError *error))failure;
+
+
+
+
+
++(NSString *)urlString:(NSString *)kString;
+
 @end
