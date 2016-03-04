@@ -8,22 +8,25 @@
 
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
-#import "FloatButton.h"
+#import "ButelHandle.h"
+
 
 @interface OrderInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(nonatomic,strong) UIView *footView;
+
 @end
 
 @implementation OrderInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [FloatButton showFloatButton:@"18637092233"];
+    
+    [[ButelHandle shareButelHandle] isHidden:NO tel:@"18637092233"];
     self.tableView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
-        [FloatButton hiddenFloatButton];
+        [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     // Do any additional setup after loading the view.

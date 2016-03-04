@@ -49,7 +49,7 @@
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // YES代表需要蒙版效果
-    hud.dimBackground = YES;
+    hud.dimBackground = NO;
     [hud hide:YES afterDelay:2];
     return hud;
 }
