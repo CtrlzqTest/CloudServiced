@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CallView : UIView
-- (void)showCallView;
+- (void)isHidden:(BOOL)hidden tel:(NSString *)telNum ;
 @end

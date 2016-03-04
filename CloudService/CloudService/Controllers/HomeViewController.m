@@ -10,8 +10,8 @@
 #import "HomeCollectionCell.h"
 #import "HomeHeaderView.h"
 #import "IntergralCityViewController.h"
-#import "SingleHandle.h"
-#import "CallView.h"
+#import "ButelHandle.h"
+
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -33,8 +33,8 @@ static NSString *headerView_ID = @"headerView";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CallView *callView = [[CallView alloc] initWithFrame:CGRectMake(KWidth-20, KHeight/2, 220, 80)];
-    [callView showCallView];
+    [[ButelHandle shareButelHandle] initCallViewWithFrame:CGRectMake(KWidth-20, KHeight/2, 220, 80)];
+
 //    [self.tabBarController.tabBar setBackgroundColor:[UIColor blackColor]];
     [self initData];
     [self setupViews];
