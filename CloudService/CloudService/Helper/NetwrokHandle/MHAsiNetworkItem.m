@@ -68,7 +68,9 @@
         //        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         if (networkType==MHAsiNetWorkGET)
         {
-            [manager GET:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
+            [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [MBProgressHUD hideAllHUDsForView:nil animated:YES];
                 DTLog(@"\n\n----请求的返回结果 %@\n",responseObject);
                 if (successBlock) {
@@ -79,7 +81,7 @@
                 }
                 [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:responseObject withObject:nil];
                 [weakSelf removewItem];
-            } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [MBProgressHUD hideAllHUDsForView:nil animated:YES];
                 DTLog(@"---error==%@\n",error.localizedDescription);
                 if (failureBlock) {
@@ -90,10 +92,36 @@
                 }
                 [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:nil withObject:error];
                 [weakSelf removewItem];
+
             }];
+//            [manager GET:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
+//                [MBProgressHUD hideAllHUDsForView:nil animated:YES];
+//                DTLog(@"\n\n----请求的返回结果 %@\n",responseObject);
+//                if (successBlock) {
+//                    successBlock(responseObject);
+//                }
+//                if ([weakSelf.delegate respondsToSelector:@selector(requestDidFinishLoading:)]) {
+//                    [weakSelf.delegate requestDidFinishLoading:responseObject];
+//                }
+//                [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:responseObject withObject:nil];
+//                [weakSelf removewItem];
+//            } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+//                [MBProgressHUD hideAllHUDsForView:nil animated:YES];
+//                DTLog(@"---error==%@\n",error.localizedDescription);
+//                if (failureBlock) {
+//                    failureBlock(error);
+//                }
+//                if ([weakSelf.delegate respondsToSelector:@selector(requestdidFailWithError:)]) {
+//                    [weakSelf.delegate requestdidFailWithError:error];
+//                }
+//                [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:nil withObject:error];
+//                [weakSelf removewItem];
+//            }];
             
         }else{
-            [manager POST:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
+            [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [MBProgressHUD hideHUDForView:nil animated:YES];
                 DTLog(@"\n\n----请求的返回结果 %@\n",responseObject);
                 if (successBlock) {
@@ -104,7 +132,7 @@
                 }
                 [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:responseObject withObject:nil];
                 [weakSelf removewItem];
-            } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [MBProgressHUD hideAllHUDsForView:nil animated:YES];
                 DTLog(@"---error==%@\n",error.localizedDescription);
                 if (failureBlock) {
@@ -115,7 +143,32 @@
                 }
                 [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:nil withObject:error];
                 [weakSelf removewItem];
+
             }];
+            
+//            [manager POST:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id responseObject) {
+//                [MBProgressHUD hideHUDForView:nil animated:YES];
+//                DTLog(@"\n\n----请求的返回结果 %@\n",responseObject);
+//                if (successBlock) {
+//                    successBlock(responseObject);
+//                }
+//                if ([weakSelf.delegate respondsToSelector:@selector(requestDidFinishLoading:)]) {
+//                    [weakSelf.delegate requestDidFinishLoading:responseObject];
+//                }
+//                [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:responseObject withObject:nil];
+//                [weakSelf removewItem];
+//            } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+//                [MBProgressHUD hideAllHUDsForView:nil animated:YES];
+//                DTLog(@"---error==%@\n",error.localizedDescription);
+//                if (failureBlock) {
+//                    failureBlock(error);
+//                }
+//                if ([weakSelf.delegate respondsToSelector:@selector(requestdidFailWithError:)]) {
+//                    [weakSelf.delegate requestdidFailWithError:error];
+//                }
+//                [weakSelf performSelector:@selector(finishedRequest: didFaild:) withObject:nil withObject:error];
+//                [weakSelf removewItem];
+//            }];
         }
     }
     return self;
