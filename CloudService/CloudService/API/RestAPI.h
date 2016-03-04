@@ -19,7 +19,7 @@
 
 #define kGetCodeAPI             @"/app/user/getCode"                     //获取验证码
 
-#define kUserInfoAPI            @"/app/user/findUserInfo"                     //个人信息
+#define kGetuserInfoAPI            @"/app/user/findUserInfo"                     //个人信息
 
 #define kResetUserInfoAPI       @"/app/user/changeUserInfo"                     //修改个人信息
 

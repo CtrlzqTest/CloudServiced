@@ -26,35 +26,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    [ShareSDK registerApp:MObAppKey
-//     
-//          activePlatforms:@[
-//                            @(SSDKPlatformTypeWechat)]
-//                 onImport:^(SSDKPlatformType platformType)
-//     {
-//         switch (platformType)
-//         {
-//             case SSDKPlatformTypeWechat:
-//                 [ShareSDKConnector connectWeChat:[WXApi class]];
-//                 break;
-//                          default:
-//                 break;
-//         }
-//     }
-//          onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo)
-//     {
-//         
-//         switch (platformType)
-//         {
-//
-//             case SSDKPlatformTypeWechat:
-//                 [appInfo SSDKSetupWeChatByAppId:WXAppID
-//                                       appSecret:WXAppSecret];
-//                 break;
-//            default:
-//                 break;
-//         }
-//     }];
+    // 注册shareSDK
+    [self registerShareSDK];
     
     //设置状态栏为白色
     
@@ -69,6 +42,38 @@
     [self registerNotifications];
     
     return YES;
+}
+
+- (void)registerShareSDK {
+    [ShareSDK registerApp:MObAppKey
+     
+          activePlatforms:@[
+                            @(SSDKPlatformTypeWechat)]
+                 onImport:^(SSDKPlatformType platformType)
+     {
+         switch (platformType)
+         {
+             case SSDKPlatformTypeWechat:
+                 [ShareSDKConnector connectWeChat:[WXApi class]];
+                 break;
+             default:
+                 break;
+         }
+     }
+          onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo)
+     {
+         
+         switch (platformType)
+         {
+                 
+             case SSDKPlatformTypeWechat:
+                 [appInfo SSDKSetupWeChatByAppId:WXAppID
+                                       appSecret:WXAppSecret];
+                 break;
+             default:
+                 break;
+         }
+     }];
 }
 
 - (void)registerNotifications {

@@ -96,12 +96,13 @@
 //        [MBProgressHUD showError:@"请输入密码" toView:self.view];
 //        return;
 //    }
+//    
     [RequestEntity LoginWithUserName:@"liangming" passWord:@"123456" address:@"0102" success:^(id responseObject, NSError *error) {
         
     } failure:^(NSError *error) {
         
     }];
-//    [self performSegueWithIdentifier:@"login" sender:self];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
    }
 

@@ -106,7 +106,21 @@
 }
 
 - (IBAction)getCodeAction:(id)sender {
-    [self countDownTime:@60];
+    
+    NSString * regexPhoneNum = @"^1[0-9]{10}$";
+    NSPredicate *predicatePhoneNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPhoneNum];
+    BOOL isPhoneMatch = [predicatePhoneNum evaluateWithObject:self.phoneNum.text];
+    if (!isPhoneMatch)
+    {
+        [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
+    }else {
+        [self countDownTime:@60];
+        [RequestEntity getCodeWithUserPhoneNum:self.phoneNum.text success:^(id responseObject, NSError *error) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)hideCityPickerView:(UIGestureRecognizer *)sender {
