@@ -96,14 +96,14 @@
 //        return;
 //    }
     [RequestEntity LoginWithUserName:@"liangming" passWord:@"123456" address:@"0102" success:^(id responseObject, NSError *error) {
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
+
     } failure:^(NSError *error) {
         
     }];
 //    [self performSegueWithIdentifier:@"login" sender:self];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
-}
+   }
 
 
 
