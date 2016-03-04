@@ -6,7 +6,6 @@
 
 @implementation RequestManager
 
-
 +(AFHTTPSessionManager *)requestManagerWithBaseURL:(NSString *)baseURLString {
     NSURL *baseURL = [NSURL URLWithString:baseURLString];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
