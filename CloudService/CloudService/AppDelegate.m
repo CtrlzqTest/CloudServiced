@@ -11,14 +11,13 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import "WXApi.h"
-#import <ButelCommonConnectSDK/ButelCommonConnectSDK.h>
-#import <ButelCommonConnectSDK/ButelRecordConnect.h>
+
 
 #define MObAppKey  @"100082c56c5c0"
 #define WXAppID   @"wx125bcc153468cc36"
 #define WXAppSecret   @"5d792862f07b6ff0b27eaced2ffbd01d"
-@interface AppDelegate ()<ButelCommonConnectDelegateV1>
-@property (retain) ButelCommonConnectV1 *connect;
+@interface AppDelegate ()
+
 @end
 
 @implementation AppDelegate
@@ -60,12 +59,7 @@
     //设置状态栏为白色
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    //初始化青牛SDK
-    self.connect = [ButelEventConnectSDK CreateButelCommonConn:self];
-    if ([self.connect Init] == -50006) {
-        [MBProgressHUD showMessag:@"网络不可用..." toView:self.window];
-    }
+   
     // 注册通知
     [self registerNotifications];
     
