@@ -8,7 +8,7 @@
 
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
-#import "ButelHandle.h"
+
 
 
 @interface OrderInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -22,11 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[ButelHandle shareButelHandle] isHidden:NO tel:@"18637092233"];
+ 
     self.tableView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
-        [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
+      
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     // Do any additional setup after loading the view.
