@@ -10,6 +10,7 @@
 #import "RestAPI.h"
 #import <Masonry.h>
 #import "LoginInputView.h"
+#import "RequestEntity.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -86,15 +87,19 @@
 // 登录
 - (IBAction)loginAction:(id)sender {
     
-    if (self.UserTextFiled.text.length <= 0) {
-        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
-        return;
-    }else if (self.pwdTextFiled.text.length <= 0){
-
-        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-        return;
-    }
-    
+//    if (self.UserTextFiled.text.length <= 0) {
+//        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
+//        return;
+//    }else if (self.pwdTextFiled.text.length <= 0){
+//
+//        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+//        return;
+//    }
+    [RequestEntity LoginWithUserName:@"liangming" passWord:@"123456" address:@"0102" success:^(id responseObject, NSError *error) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 //    [self performSegueWithIdentifier:@"login" sender:self];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];

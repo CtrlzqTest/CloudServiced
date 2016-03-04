@@ -10,29 +10,20 @@
 #define _____RestAPI_h
 #import <UIKit/UIKit.h>
 
-//#define BaseAPI                 @"http://192.168.16.139:8080/onepage/"  // 龙龙
 
-#define BaseAPI                 @"http://192.168.16.147:8080/onepage/"  // 公司服务器
+#define BaseAPI                 @"http://10.136.97.140:8080/cloudSales-action"  // 阳光服务器
 
-//#define BaseAPI                 @"http://192.168.16.124:8080/znweb/"    // 赵楠
+#define kRegisterAPI            @"/app/user/register"                     //注册
 
-#define kUpdateDataBaseToHost   @"vote3/test/update.do"
+#define kLoginAPI               @"/app/user/login"                     //登录
 
-#define kHostUrlString          @"appinfo/list.do"
+#define kGetCodeAPI             @"/app/user/getCode"                     //获取验证码
 
-#define kProductListAPI         @"appinfo/plist"
+#define kUserInfoAPI            @"/app/user/findUserInfo"                     //个人信息
 
-#define kGoodsListAPI           @"appinfo/slist"       // 购物列表
+#define kResetUserInfoAPI       @"/app/user/changeUserInfo"                     //修改个人信息
 
-#define kLoginAPI               @"appuser/login"       // 登录
-
-#define SnsLoginUrlAPI          @"user_login2.action"  // 第三方登录
-
-#define kRegisteAPI             @"appuser/reg"         //注册
-
-#define kCollectAPI             @"appmyfavorite/save"  //收藏
-
-#define kCollectionListAPI      @"appmyfavorite/findPersonalList"  //收藏列表
+#define kSignedAPI              @"/app/sign/ signed"                     //签到
 
 
 //   常量
