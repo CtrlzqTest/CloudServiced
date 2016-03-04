@@ -10,12 +10,26 @@
 
 @interface User : NSObject
 
-@property(nonatomic,copy)NSString *NAME;
-@property(nonatomic,copy)NSString *PASSWORD;
-@property(nonatomic,copy)NSString *SEX;
-@property(nonatomic,copy)NSString *USERNAME;
-@property(nonatomic,copy)NSString *LAST_LOGIN;
-@property(nonatomic,copy)NSString *USER_ID;
+@property(nonatomic,copy)NSString *userName;
+@property(nonatomic,copy)NSString *address;
+@property(nonatomic,copy)NSString *age;
+@property(nonatomic,copy)NSString *applySaleCompany;
+@property(nonatomic,copy)NSString *chatName;
+@property(nonatomic,copy)NSString *idCard;
+@property(nonatomic,copy)NSString *password;
+@property(nonatomic,copy)NSString *oldPost;
+@property(nonatomic,copy)NSString *phoneNo;
+@property(nonatomic,copy)NSString *photoUrl;
+@property(nonatomic,copy)NSString *realName;
+@property(nonatomic,copy)NSString *registerTime;
+
+@property(nonatomic,copy)NSString *roleId;
+@property(nonatomic,copy)NSString *roleName;
+@property(nonatomic,copy)NSString *saleCity;
+@property(nonatomic,copy)NSString *sex;
+@property(nonatomic,copy)NSString *userId;
+@property(nonatomic,copy)NSString *nickName;
+@property(nonatomic,copy)NSString *workStartDate;
 
 - (NSDictionary *)dictionaryWithModel:(User *)user;
 

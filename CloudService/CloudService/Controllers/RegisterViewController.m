@@ -84,6 +84,11 @@
     
     [self resignKeyBoardInView:self.view];
     if ([self checkInputMode]) {
+        [RequestEntity registerWithPhoneNum:self.phoneNum.text passWord:self.pwdText.text address:@"0102" code:self.codeText.text success:^(id responseObject, NSError *error) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
         [self performSegueWithIdentifier:RegisterSuccess sender:self];
     }
 }

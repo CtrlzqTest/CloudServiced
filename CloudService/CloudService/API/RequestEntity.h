@@ -24,7 +24,22 @@
                  address:(NSString *)addDress
                  success:(void (^)(id responseObject, NSError *error))success
                  failure:(void (^)(NSError *error))failure;
-
+/**
+ *  注册
+ *
+ *  @param userName 用户名
+ *  @param passWord 密码
+ *  @param addDress 地址
+ *  @param code     验证码
+ *  @param success
+ *  @param failure  
+ */
++(void)registerWithPhoneNum:(NSString *)PhoneNum
+                   passWord:(NSString *)passWord
+                    address:(NSString *)addDress
+                       code:(NSString *)code
+                    success:(void (^)(id responseObject, NSError *error))success
+                    failure:(void (^)(NSError *error))failure;
 /**
  *  获取验证码
  *

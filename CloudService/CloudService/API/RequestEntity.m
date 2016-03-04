@@ -38,19 +38,21 @@
 }
 
 // 注册
-+(void)registerWithUserName:(NSString *)userName
-                passWord:(NSString *)passWord
-                 address:(NSString *)addDress
++(void)registerWithPhoneNum:(NSString *)PhoneNum
+                   passWord:(NSString *)passWord
+                    address:(NSString *)addDress
+                       code:(NSString *)code
                  success:(void (^)(id responseObject, NSError *error))success
                  failure:(void (^)(NSError *error))failure
 {
     @try {
         NSError *error = nil;
         NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
-        [paramer setObject:userName forKey:@"userName"];
+        [paramer setObject:PhoneNum forKey:@"phoneNo"];
         [paramer setValue:passWord forKey:@"password"];
         [paramer setValue:addDress forKey:@"address"];
-        [RequestManager startRequest:kLoginAPI paramer:paramer method:RequestMethodPost success:^(NSURLSessionDataTask *task, id responseObject) {
+        [paramer setValue:code forKey:@"code"];
+        [RequestManager startRequest:kRegisterAPI paramer:paramer method:RequestMethodPost success:^(NSURLSessionDataTask *task, id responseObject) {
             success(responseObject,error);
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             
