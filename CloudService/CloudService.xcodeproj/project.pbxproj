@@ -19,7 +19,6 @@
 		630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630EF19E1C856CFD0059CB34 /* CouponsTableViewCell.xib */; };
 		630EF1A51C8579630059CB34 /* IntergralChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */; };
 		630EF1A61C8579630059CB34 /* MyIntergralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A41C8579630059CB34 /* MyIntergralViewController.m */; };
-		6320B7331C897C1A0076FC7E /* ButelHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6320B7321C897C1A0076FC7E /* ButelHandle.m */; };
 		63508C851C86D37800505F08 /* YWBCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63508C841C86D37800505F08 /* YWBCityPickerView.m */; };
 		635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635C2AC81C8527D10051708D /* CreatClientViewController.m */; };
 		636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */; };
@@ -94,7 +93,6 @@
 		F06DDBAA1C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F06DDBA81C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m */; };
 		F06DDBB01C7DACDE00C862A1 /* OrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F06DDBAF1C7DACDE00C862A1 /* OrderManagerViewController.m */; };
 		F07531D21C8687BB00E71796 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07531D11C8687BB00E71796 /* area.plist */; };
-		F07531FF1C86D2F400E71796 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9D51C81469400EB1BB1 /* ResetPhonePopView.m */; };
 		F07FF9D81C8146D800EB1BB1 /* ResetPhonePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07FF9D71C8146D800EB1BB1 /* ResetPhonePopView.xib */; };
 		F07FF9DB1C815BF600EB1BB1 /* MyTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9DA1C815BF600EB1BB1 /* MyTeamViewController.m */; };
@@ -135,8 +133,6 @@
 		630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntergralChangeViewController.m; sourceTree = "<group>"; };
 		630EF1A31C8579630059CB34 /* MyIntergralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIntergralViewController.h; sourceTree = "<group>"; };
 		630EF1A41C8579630059CB34 /* MyIntergralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntergralViewController.m; sourceTree = "<group>"; };
-		6320B7311C897C1A0076FC7E /* ButelHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButelHandle.h; sourceTree = "<group>"; };
-		6320B7321C897C1A0076FC7E /* ButelHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButelHandle.m; sourceTree = "<group>"; };
 		63508C831C86D37800505F08 /* YWBCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWBCityPickerView.h; sourceTree = "<group>"; };
 		63508C841C86D37800505F08 /* YWBCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWBCityPickerView.m; sourceTree = "<group>"; };
 		635C2AC71C8527D10051708D /* CreatClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatClientViewController.h; sourceTree = "<group>"; };
@@ -663,8 +659,6 @@
 				63F7D8FC1C894829002E56C9 /* 青牛 */,
 				63508C831C86D37800505F08 /* YWBCityPickerView.h */,
 				63508C841C86D37800505F08 /* YWBCityPickerView.m */,
-				635089321C8698AC00505F08 /* FloatButton.h */,
-				635089331C8698AC00505F08 /* FloatButton.m */,
 				63C2FB961C8022D900D48B8C /* PlaceholderTextView.h */,
 				63C2FB971C8022D900D48B8C /* PlaceholderTextView.m */,
 				F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */,
@@ -932,7 +926,6 @@
 				F0292BE01C7B015200A810A9 /* BaseNaviViewController.m in Sources */,
 				63C54E321C7C2F96007CE8CA /* OrderManagerCell.m in Sources */,
 				F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */,
-				F07531FF1C86D2F400E71796 /* (null) in Sources */,
 				636CD9881C884E9A0050935E /* IntergralSearchViewController.m in Sources */,
 				F094B5A31C80223400A2312D /* PersonalViewCell.m in Sources */,
 				F06DDBA41C7DAAE900C862A1 /* SearchOrderViewController.m in Sources */,
@@ -962,7 +955,6 @@
 				63C07B9B1C7B14BB0084581F /* MHAsiNetworkHandler.m in Sources */,
 				F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */,
 				F09A5F8F1A55BEDD008D4963 /* HomeHeaderView.m in Sources */,
-				6320B7331C897C1A0076FC7E /* ButelHandle.m in Sources */,
 				F01A616D1C7D860E008CBBD5 /* LoginInputView.m in Sources */,
 				F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */,
 				630EF1A51C8579630059CB34 /* IntergralChangeViewController.m in Sources */,
