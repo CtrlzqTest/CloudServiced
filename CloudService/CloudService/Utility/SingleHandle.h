@@ -10,6 +10,16 @@
 #import "User.h"
 
 @interface SingleHandle : NSObject
+@property (nonatomic,strong)User *user;
 +(SingleHandle *)shareSingleHandle;
 
+/**
+ *  获取用户信息model
+ */
+- (User *)getUserInfo;
+
+/**
+ *  存储用户信息
+ */
+- (void)saveUserInfo:(User *)userModel;
 @end

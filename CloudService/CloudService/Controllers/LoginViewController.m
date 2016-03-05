@@ -111,16 +111,15 @@
     
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-            [Utility saveUserInfo:[returnData valueForKey:@"data"]];
+//            [Utility saveUserInfo:[returnData valueForKey:@"data"]];
+            User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
+            [[SingleHandle shareSingleHandle] saveUserInfo:user];
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }
-        
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];
 }
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

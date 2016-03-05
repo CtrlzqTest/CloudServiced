@@ -53,7 +53,8 @@
     _keyArray = @[@"头像",@"名字",@"手机号",@"身份证号",@"微信号",@"银行账号"];
     _valueArray = @[@"",@"张三",@"15027264687",@"421123199303042452",
                     @"zhangqiang",@"6228480791546253810"];
-    
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+
 }
 
 - (void)setupViews {
