@@ -19,5 +19,4 @@
 @property (nonatomic, copy)NSString *time;
 @property (nonatomic, copy)NSString *type;
 
-- (NSDictionary *)dictionaryWithModel:(Integral *)integral;
 @end
