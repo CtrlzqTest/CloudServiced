@@ -8,7 +8,7 @@
 
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
-
+#import "ClientData.h"
 
 
 @interface OrderInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -46,9 +46,14 @@
     OrderInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OrderInfoTableViewCell" owner:self options:nil];
-        cell = [array objectAtIndex:2];
+        cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.lbOrderNum.text = _clientData.baseId;
+    cell.lbCustName.text = _clientData.custName;
+    cell.lbPhoneNo.text = _clientData.phoneNo;
+    cell.lbLicenseNo.text = _clientData.licenseNo;
+    cell.lbEndCode.text = _clientData.endCode;
     [cell.callBtn addTarget:self action:@selector(callClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.priceBtn addTarget:self action:@selector(priceClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.appointmentBtn addTarget:self action:@selector(appointmentClick:) forControlEvents:UIControlEventTouchUpInside];

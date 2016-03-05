@@ -34,7 +34,11 @@
 #define kTeamCouponsList        @"/app/coupon/findTeamCouponsList"                 //团队业绩查询
 
 #define kfindUserCreditsRecord    @"/app/credits/findUserCreditsRecord"             //积分历史查询
+
 #define kapplyCustomerData     @"/app/customerData/applyCustomerData"             //客户数据申请
+
+#define kfindPersonCustList     @"/app/customerData/findPersonCustList"          //历史客户数据列表
+
 //   常量
 /**************************************************************************************/
 
