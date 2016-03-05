@@ -23,6 +23,7 @@
     NSArray *_scrollImgArray;
     
     BOOL _isHide;
+    NSString *_integral; // 积分
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -39,6 +40,8 @@ static NSString *headerView_ID = @"headerView";
 //    [self.tabBarController.tabBar setBackgroundColor:[UIColor blackColor]];
     [self initData];
     [self setupViews];
+    // 获取我的积分
+    [self getMyintegralData];
 }
 
 - (void)initData {
@@ -110,13 +113,16 @@ static NSString *headerView_ID = @"headerView";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:@"5e98d681531cd8e201531cd8ec590000" forKey:@"userId"];
     [dict setValue:[Utility location] forKey:@"address"];
+    NSLog(@"%@",[[SingleHandle shareSingleHandle] getUserInfo].sign);
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kSignedAPI] params:dict successBlock:^(id returnData) {
-        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-            [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
-            [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
-        }
+            if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+                [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
+                [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
+                sender.enabled = NO;
+                
+            }
     } failureBlock:^(NSError *error) {
-        
+            
     } showHUD:YES];
     
 }
@@ -133,9 +139,17 @@ static NSString *headerView_ID = @"headerView";
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HomeHeaderView *headerView = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID forIndexPath:indexPath];
-        [headerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction)]];
+        if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"0"]) {
+            [headerView.sginBtn setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
+            [headerView.sginBtn setTitle:@"已签到" forState:(UIControlStateNormal)];
+            headerView.sginBtn.enabled = NO;
+        }
+        headerView.headImg.userInteractionEnabled = YES;
+        [headerView.headImg addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction)]];
         [headerView.sginBtn addTarget:self action:@selector(signAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        [headerView setDataWithDictionary:@{@"userName":@"李小米2"}];
+        headerView.integralLabel.text = _integral;
+        User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+        [headerView setDataWithDictionary:@{@"userName":user.userName}];
         // 轮播图开始轮播
         [headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
             
@@ -197,18 +211,38 @@ static NSString *headerView_ID = @"headerView";
             break;
     }
 }
+
+/**
+ *  获取我的积分
+ */
+
+- (void)getMyintegralData {
+    
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    __weak typeof(self) weakSelf = self;
+    NSLog(@"%@",user.userId);
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            NSString *str = [returnData[@"data"] valueForKey:@"totalNum"];
+            _integral = [NSString stringWithFormat:@"%@",str];
+            [weakSelf.collectionView reloadData];
+        }
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+}
+
 /** 获取数据*/
 - (void)getData {
     NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000"};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyCustomerData];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             ClientData *clientData = [ClientData mj_objectWithKeyValues:dataDic];
             [self performSegueWithIdentifier:@"getData" sender:self];
-  
+            
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
             

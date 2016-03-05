@@ -41,6 +41,15 @@
 
 #define kCheckPhoneNumAPI       @"/app/user/verifyPhoneNo"                     //验证手机
 
+#define kfindUserCreditsRecord  @"/app/credits/findUserCreditsRecord"             //积分历史查询
+
+#define kapplyCustomerData      @"/app/customerData/applyCustomerData"             //客户数据申请
+
+#define kfindPersonCustList     @"/app/customerData/findPersonCustList"          //历史客户数据列表
+
+#define kMyTeamList             @"/app/team/findTeamMember"          //我的团队
+
+
 
 //   常量
 /**************************************************************************************/

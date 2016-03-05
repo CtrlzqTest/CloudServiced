@@ -30,20 +30,12 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjf-id-eE3">
                             <rect key="frame" x="90" y="10" width="80" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="KrK-dE-NKz"/>
                                 <constraint firstAttribute="height" constant="21" id="T38-8t-d6T"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="W8d-w2-XTX"/>
-                                <constraint firstAttribute="width" constant="80" id="ePy-JA-j5R"/>
+                                <constraint firstAttribute="width" constant="80" id="xRG-BT-jrT"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="KrK-dE-NKz"/>
-                                    <exclude reference="W8d-w2-XTX"/>
-                                </mask>
-                            </variation>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎你！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waJ-bX-2QI">
                             <rect key="frame" x="170" y="10" width="80" height="21"/>
@@ -103,6 +95,9 @@
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head1" translatesAutoresizingMaskIntoConstraints="NO" id="rBZ-u0-D07">
                             <rect key="frame" x="20" y="10" width="55" height="55"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="rBZ-u0-D07" secondAttribute="height" id="lfS-ux-kxU"/>
                             </constraints>
@@ -162,10 +157,10 @@
                 <outlet property="integralLabel" destination="AKQ-wc-bsR" id="yiq-Cv-jEJ"/>
                 <outlet property="pageScrBackView" destination="PJC-bM-IIT" id="QWN-G6-6xa"/>
                 <outlet property="sginBtn" destination="NuD-9f-8p3" id="95P-DR-FuE"/>
-                <outlet property="userLabelWidth" destination="ePy-JA-j5R" id="3dh-MB-HNm"/>
+                <outlet property="userLabelWidth" destination="xRG-BT-jrT" id="GHV-gh-2Cx"/>
                 <outlet property="userNameLabel" destination="Tjf-id-eE3" id="XS3-Br-Sft"/>
             </connections>
-            <point key="canvasLocation" x="240" y="357"/>
+            <point key="canvasLocation" x="139" y="359"/>
         </collectionReusableView>
     </objects>
     <resources>

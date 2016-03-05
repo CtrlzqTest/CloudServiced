@@ -36,7 +36,8 @@
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     __weak typeof(self) weakSelf = self;
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI] params:@{@"userid":user.userId} successBlock:^(id returnData) {
+    NSLog(@"%@",user.userId);
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
         NSDictionary *dict = [returnData valueForKey:@"data"];
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             user.totalNum = dict[@"totalNum"];
