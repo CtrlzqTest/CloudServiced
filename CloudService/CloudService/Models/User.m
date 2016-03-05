@@ -16,5 +16,12 @@
     return [user mj_keyValues];
     
 }
++ (NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{
+             @"couponId" : @"id",
+             
+             };
+}
 
 @end

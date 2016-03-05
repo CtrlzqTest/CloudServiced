@@ -29,6 +29,28 @@
     [super viewDidLoad];
     [self setupLayoutConstranints];
     [self setupViews];
+    [self getData];
+}
+
+- (void)getData {
+    
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    __weak typeof(self) weakSelf = self;
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI] params:@{@"userid":user.userId} successBlock:^(id returnData) {
+        NSDictionary *dict = [returnData valueForKey:@"data"];
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            user.totalNum = dict[@"totalNum"];
+            user.frozenNum = dict[@"frozenNum"];
+            user.usableNum = dict[@"usableNum"];
+            [[SingleHandle shareSingleHandle] saveUserInfo:user];
+//
+            weakSelf.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
+            weakSelf.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
+            weakSelf.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
+        }
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
 }
 
 - (void)setupLayoutConstranints {
@@ -51,9 +73,8 @@
         [weakSelf performSegueWithIdentifier:@"integral" sender:weakSelf];
        
     }];
-    
-    
 }
+
 - (IBAction)intergralCityAction:(id)sender {
     
     IntergralCityViewController *VC = [[IntergralCityViewController alloc] init];
