@@ -16,6 +16,7 @@
 #import "RequestEntity.h"
 #import "MHNetwrok.h"
 #import <MJExtension.h>
+#import "SingleHandle.h"
 
 #ifdef DEBUG
 #define ZQLog(...) NSLog(__VA_ARGS__)

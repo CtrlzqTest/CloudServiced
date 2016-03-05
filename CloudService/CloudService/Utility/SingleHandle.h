@@ -7,8 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface SingleHandle : NSObject
-+(SingleHandle *)shareSingleHandle ;
-@property(nonatomic,strong)NSString *isHidden;
+@property (nonatomic,strong)User *user;
++(SingleHandle *)shareSingleHandle;
+
+/**
+ *  获取用户信息model
+ */
+- (User *)getUserInfo;
+
+/**
+ *  存储用户信息
+ */
+- (void)saveUserInfo:(User *)userModel;
 @end

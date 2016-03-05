@@ -43,8 +43,13 @@
     self.getCodeBtn.layer.borderWidth = 0.2;
     self.getCodeBtn.layer.borderColor = [UIColor redColor].CGColor;
     self.getCodeBtn.highlighted = NO;
+    NSString *location = [Utility location];
+    if (location) {
+        [self.locateBtn setTitle:location forState:(UIControlStateNormal)];
+    }else {
+        [self.locateBtn setTitle:@"获取不到定位信息" forState:(UIControlStateNormal)];
+    }
     self.registerBtn.layer.cornerRadius = 2;
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -57,23 +62,25 @@
 - (IBAction)registerAction:(id)sender {
     
     [self resignKeyBoardInView:self.view];
-    if (![self checkInputMode]) {
-        
+    if ([self checkInputMode]) {
+        NSString *location = self.locateBtn.titleLabel.text;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setValue:@"12345678901" forKey:@"phoneNo"];
-        [dict setValue:@"111111" forKey:@"password"];
-        [dict setValue:@"0102" forKey:@"address"];
-        [dict setValue:@"123456" forKey:@"code"];
+        [dict setValue:self.phoneNum.text forKey:@"phoneNo"];
+        [dict setValue:self.pwdText.text forKey:@"password"];
+        [dict setValue:location forKey:@"address"];
+        [dict setValue:self.codeText.text forKey:@"code"];
         __weak typeof(self) weakSelf = self;
     
         [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kRegisterAPI] params:dict successBlock:^(id returnData) {
             NSDictionary *dict = returnData;
             if ([dict[@"flag"] isEqualToString:@"success"]) {
-                [Utility saveUserInfo:dict[@"data"]];
+                [Utility saveUserInfo:dict];
                 [weakSelf performSegueWithIdentifier:RegisterSuccess sender:weakSelf];
+            }else {
+                [MBProgressHUD showError:dict[@"msg"] toView:self.view];
             }
         } failureBlock:^(NSError *error) {
-            
+            [MBProgressHUD showError:@"无法连接网络,请检查手机网络" toView:self.view];
         } showHUD:YES];
     }
 }

@@ -13,6 +13,7 @@
 #import "RequestEntity.h"
 #import "MHNetwrok.h"
 #import "Utility.h"
+#import "User.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -100,20 +101,25 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:@"liangming" forKey:@"userName"];
     [dict setValue:@"123456" forKey:@"password"];
-//    NSString *address = [uit]
-    [dict setValue:@"0102" forKey:@"address"];
+    NSString *address = [Utility location];
+    if (address) {
+        [dict setValue:address forKey:@"address"];
+    }else {
+        [MBProgressHUD showError:@"无法获取定位信息,系统默认您的的登录城市为北京市" toView:self.view];
+        [dict setValue:@"北京市" forKey:@"address"];
+    }
     
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
-    
-        [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
-        
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+//            [Utility saveUserInfo:[returnData valueForKey:@"data"]];
+            User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
+            [[SingleHandle shareSingleHandle] saveUserInfo:user];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
+        }
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];
-//
 }
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

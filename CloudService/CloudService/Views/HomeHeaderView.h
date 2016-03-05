@@ -21,4 +21,5 @@ typedef void(^ClickBlock)(NSInteger index);
 - (void)playWithImageArray:(NSArray *)imgStrArray clickAtIndex:(ClickBlock )tapIndex;
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
+
 @end

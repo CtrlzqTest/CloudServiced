@@ -7,6 +7,7 @@
 //
 
 #import "SingleHandle.h"
+#import "Utility.h"
 
 static SingleHandle *singleHandle = nil;
 @implementation SingleHandle
@@ -18,6 +19,21 @@ static SingleHandle *singleHandle = nil;
         singleHandle = [[SingleHandle alloc] init];
     });
     return singleHandle;
+}
+
+- (User *)getUserInfo {
+    if (!self.user) {
+        self.user = [[User alloc] init];
+        self.user = [User mj_objectWithKeyValues:[Utility getUserInfoFromLocal]];
+    }
+    return self.user;
+}
+
+-(void)saveUserInfo:(User *)userModel {
+    
+    NSDictionary *dict = [userModel mj_keyValues];
+    [Utility saveUserInfo:dict];
+    
 }
 
 @end
