@@ -102,6 +102,7 @@
 		F07FF9E31C8189E200EB1BB1 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */; };
 		F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DED91C89394900168BF8 /* RequestEntity.m */; };
 		F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEDF1C896B1800168BF8 /* RequestManager.m */; };
+		F090DEE81C89AB3C00168BF8 /* BankInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* BankInfoData.m */; };
 		F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */; };
 		F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B59B1C8000E500A2312D /* HomeCollectionCell.m */; };
 		F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094B59C1C8000E500A2312D /* HomeCollectionCell.xib */; };
@@ -282,6 +283,8 @@
 		F090DED91C89394900168BF8 /* RequestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestEntity.m; sourceTree = "<group>"; };
 		F090DEDE1C896B1800168BF8 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
 		F090DEDF1C896B1800168BF8 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
+		F090DEE61C89AB3C00168BF8 /* BankInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BankInfoData.h; path = CloudService/API/BankInfoData.h; sourceTree = SOURCE_ROOT; };
+		F090DEE71C89AB3C00168BF8 /* BankInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankInfoData.m; path = CloudService/API/BankInfoData.m; sourceTree = SOURCE_ROOT; };
 		F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQScrollPageView.h; sourceTree = "<group>"; };
 		F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQScrollPageView.m; sourceTree = "<group>"; };
 		F094B59A1C8000E500A2312D /* HomeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionCell.h; sourceTree = "<group>"; };
@@ -651,6 +654,8 @@
 		F0292BD21C7B015200A810A9 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				F090DEE61C89AB3C00168BF8 /* BankInfoData.h */,
+				F090DEE71C89AB3C00168BF8 /* BankInfoData.m */,
 			);
 			name = DataStorage;
 			path = ../../../../DadaStorage;

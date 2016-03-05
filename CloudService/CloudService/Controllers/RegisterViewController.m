@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import "RestAPI.h"
 #import "YWBCityPickerView.h"
+#import "Utility.h"
 
 @interface RegisterViewController ()<CLLocationManagerDelegate> {
     BOOL _isSetCity;
@@ -83,13 +84,24 @@
 - (IBAction)registerAction:(id)sender {
     
     [self resignKeyBoardInView:self.view];
-    if ([self checkInputMode]) {
-        [RequestEntity registerWithPhoneNum:self.phoneNum.text passWord:self.pwdText.text address:@"0102" code:self.codeText.text success:^(id responseObject, NSError *error) {
+    if (![self checkInputMode]) {
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setValue:@"12345678901" forKey:@"phoneNo"];
+        [dict setValue:@"111111" forKey:@"password"];
+        [dict setValue:@"0102" forKey:@"address"];
+        [dict setValue:@"123456" forKey:@"code"];
+        __weak typeof(self) weakSelf = self;
+    
+        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kRegisterAPI] params:dict successBlock:^(id returnData) {
+            NSDictionary *dict = returnData;
+            if ([dict[@"flag"] isEqualToString:@"success"]) {
+                [Utility saveUserInfo:dict[@"data"]];
+                [weakSelf performSegueWithIdentifier:RegisterSuccess sender:weakSelf];
+            }
+        } failureBlock:^(NSError *error) {
             
-        } failure:^(NSError *error) {
-            
-        }];
-        [self performSegueWithIdentifier:RegisterSuccess sender:self];
+        } showHUD:YES];
     }
 }
 

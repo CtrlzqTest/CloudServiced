@@ -96,15 +96,21 @@
 //        [MBProgressHUD showError:@"请输入密码" toView:self.view];
 //        return;
 //    }
-//    
-    [RequestEntity LoginWithUserName:@"liangming" passWord:@"123456" address:@"0102" success:^(id responseObject, NSError *error) {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:@"liangming" forKey:@"userName"];
+    [dict setValue:@"123456" forKey:@"password"];
+    [dict setValue:@"0102" forKey:@"address"];
+    
+//    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         
-    } failure:^(NSError *error) {
-        
-    }];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
-   }
+//    } failureBlock:^(NSError *error) {
+//        
+//    } showHUD:YES];
+//
+}
 
 
 
