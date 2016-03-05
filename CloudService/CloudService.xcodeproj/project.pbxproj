@@ -19,6 +19,7 @@
 		630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630EF19E1C856CFD0059CB34 /* CouponsTableViewCell.xib */; };
 		630EF1A51C8579630059CB34 /* IntergralChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */; };
 		630EF1A61C8579630059CB34 /* MyIntergralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A41C8579630059CB34 /* MyIntergralViewController.m */; };
+		6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */ = {isa = PBXBuildFile; fileRef = 6320B73B1C89A2CE0076FC7E /* Coupons.m */; };
 		63508C851C86D37800505F08 /* YWBCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63508C841C86D37800505F08 /* YWBCityPickerView.m */; };
 		635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635C2AC81C8527D10051708D /* CreatClientViewController.m */; };
 		636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */; };
@@ -133,6 +134,8 @@
 		630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntergralChangeViewController.m; sourceTree = "<group>"; };
 		630EF1A31C8579630059CB34 /* MyIntergralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIntergralViewController.h; sourceTree = "<group>"; };
 		630EF1A41C8579630059CB34 /* MyIntergralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntergralViewController.m; sourceTree = "<group>"; };
+		6320B73A1C89A2CE0076FC7E /* Coupons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupons.h; sourceTree = "<group>"; };
+		6320B73B1C89A2CE0076FC7E /* Coupons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupons.m; sourceTree = "<group>"; };
 		63508C831C86D37800505F08 /* YWBCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWBCityPickerView.h; sourceTree = "<group>"; };
 		63508C841C86D37800505F08 /* YWBCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWBCityPickerView.m; sourceTree = "<group>"; };
 		635C2AC71C8527D10051708D /* CreatClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatClientViewController.h; sourceTree = "<group>"; };
@@ -680,6 +683,8 @@
 			children = (
 				F0292BD51C7B015200A810A9 /* User.h */,
 				F0292BD61C7B015200A810A9 /* User.m */,
+				6320B73A1C89A2CE0076FC7E /* Coupons.h */,
+				6320B73B1C89A2CE0076FC7E /* Coupons.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -925,6 +930,7 @@
 				F0292BE31C7B015200A810A9 /* User.m in Sources */,
 				F0292BE01C7B015200A810A9 /* BaseNaviViewController.m in Sources */,
 				63C54E321C7C2F96007CE8CA /* OrderManagerCell.m in Sources */,
+				6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */,
 				F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */,
 				636CD9881C884E9A0050935E /* IntergralSearchViewController.m in Sources */,
 				F094B5A31C80223400A2312D /* PersonalViewCell.m in Sources */,

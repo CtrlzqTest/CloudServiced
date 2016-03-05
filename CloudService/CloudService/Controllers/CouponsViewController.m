@@ -8,9 +8,20 @@
 
 #import "CouponsViewController.h"
 #import "CouponsTableViewCell.h"
-
-@interface CouponsViewController ()
-
+#import <LazyPageScrollView.h>
+#import <MJRefresh.h>
+#import "Coupons.h"
+#import <MJExtension.h>
+@interface CouponsViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
+{
+    int _page;//当前页数
+    int _pageSize;//每页加载数
+    NSMutableArray *_userArray;//我的优惠券列表
+    NSMutableArray *_teamArray;//团队优惠券列表
+    UITableView *_tableView1;
+    UITableView *_tableView2;
+}
+@property (strong, nonatomic) IBOutlet LazyPageScrollView *pageView;
 @end
 
 @implementation CouponsViewController
@@ -21,6 +32,7 @@
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
+    [self initPageView];
     // Do any additional setup after loading the view.
 }
 -(void)viewWillDisappear:(BOOL)animated {
@@ -32,10 +44,144 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+#pragma mark pageView
+- (void)initPageView {
+    _page=1;
+    _pageSize=6;
+    
+    _pageView.delegate=self;
+    [_pageView initTab:YES Gap:38 TabHeight:38 VerticalDistance:0 BkColor:[UIColor whiteColor]];
+    _tableView1 = [[UITableView alloc] init];
+    _tableView1.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+    _tableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+    // 下拉刷新
+    _tableView1.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+        [self requestPersonalData];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    _tableView1.mj_header.automaticallyChangeAlpha = YES;
+        [_tableView1.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    _tableView1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        
+        
+    }];
+    
+    _tableView1.tag = 100;
+    _tableView1.delegate = self;
+    _tableView1.dataSource = self;
+    [_pageView addTab:@"个人优惠券" View:_tableView1 Info:nil];
+    _tableView2 = [[UITableView alloc] init];
+    _tableView2.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+    _tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
+    // 下拉刷新
+    _tableView2.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+//        [self requestGroupData];
+        
+
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    _tableView2.mj_header.automaticallyChangeAlpha = YES;
+    [_tableView2.mj_header beginRefreshing];
+    
+    
+    // 上拉刷新
+    _tableView2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        
+        
+    }];
+    _tableView2.tag = 101;
+    _tableView2.delegate = self;
+    _tableView2.dataSource = self;
+    [_pageView addTab:@"团队优惠券" View:_tableView2 Info:nil];
+
+    
+    [_pageView enableTabBottomLine:YES LineHeight:2 LineColor:[HelperUtil colorWithHexString:@"277FD9"] LineBottomGap:0 ExtraWidth:60];
+    //    [_pageView enableBreakLine:YES Width:2 TopMargin:0 BottomMargin:0 Color:[UIColor lightGrayColor]];
+    [_pageView setTitleStyle:[UIFont systemFontOfSize:14] SelFont:[UIFont systemFontOfSize:16] Color:[UIColor blackColor] SelColor:[HelperUtil colorWithHexString:@"277FD9"]];
+    [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
+        CGRect frame= firstTitleControl.frame;
+        frame.size.height-=5;
+        frame.size.width-=6;
+        viewTitleEffect.frame=frame;
+        viewTitleEffect.center=firstTitleControl.center;
+    }];
+}
+
+- (void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn {
+    NSLog(@"之前下标：%ld 当前下标：%ld",preIndex,index);
+}
+
+-(void)LazyPageScrollViewEdgeSwipe:(LazyPageScrollView *)pageScrollView Left:(BOOL)bLeft
+{
+    if(bLeft)
+    {
+        NSLog(@"left");
+    }
+    else
+    {
+        NSLog(@"right");
+    }
+}
+#pragma mark 加载个人优惠券
+- (void)requestPersonalData {
+    _userArray = nil;
+    _userArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        NSDictionary *dataDic = [dic objectForKey:@"data"];
+        NSArray *listArray = [dataDic objectForKey:@"list"];
+        [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+        NSLog(@"%@",_userArray);
+        [_tableView1 reloadData];
+        [_tableView1.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [_tableView1.mj_header endRefreshing];
+    } showHUD:YES];
+}
+- (void)requestMorePersonalData {
+    _page++;
+    _userArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        NSDictionary *dataDic = [dic objectForKey:@"data"];
+        NSArray *listArray = [dataDic objectForKey:@"list"];
+        [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+        NSLog(@"%@",_userArray);
+        [_tableView1 reloadData];
+        [_tableView1.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [_tableView1.mj_header endRefreshing];
+    } showHUD:YES];
+}
+#pragma mark 加载团队优惠券
+- (void)requestGroupData {
+    
+}
+
 
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return _userArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"cell";
@@ -44,6 +190,7 @@
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"CouponsTableViewCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     
