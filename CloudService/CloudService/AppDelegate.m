@@ -42,6 +42,7 @@
 //    }
     // 注册通知
     [self registerNotifications];
+ self.locateManager = [[CLLocationManager alloc] init];
     // 注册定位
     [self registerLocation];
     return YES;
@@ -85,16 +86,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logOut) name:LogOutViewNotice object:nil];
     
 }
-
 - (void)registerLocation {
     
-    self.locateManager = [[CLLocationManager alloc] init];
+    
     if (![CLLocationManager locationServicesEnabled]) {
         NSLog(@"aaaa");
+        return;
     }
     //如果没有授权则请求用户授权
     if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
         [self.locateManager requestWhenInUseAuthorization];
+//        [self registerLocation];
     }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
         //设置代理
         self.locateManager.delegate = self;

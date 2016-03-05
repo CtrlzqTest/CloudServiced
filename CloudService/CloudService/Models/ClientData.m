@@ -1,20 +1,18 @@
 //
-//  Integral.m
+//  ClientData.m
 //  CloudService
 //
 //  Created by 安永超 on 16/3/5.
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import "Integral.h"
-#import <MJExtension.h>
+#import "ClientData.h"
 
-@implementation Integral
-
+@implementation ClientData
 + (NSDictionary *)replacedKeyFromPropertyName
 {
     return @{
-             @"creditsId" : @"id",
+             @"clientId" : @"id",
              
              };
 }

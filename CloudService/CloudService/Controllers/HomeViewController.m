@@ -11,7 +11,7 @@
 #import "HomeHeaderView.h"
 #import "IntergralCityViewController.h"
 #import "SingleHandle.h"
-
+#import "ClientData.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -145,7 +145,8 @@ static NSString *headerView_ID = @"headerView";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            [self performSegueWithIdentifier:@"getData" sender:self];
+            [self getData];
+
             break;
         case 1:
             [self performSegueWithIdentifier:@"myClient" sender:self];
@@ -173,6 +174,41 @@ static NSString *headerView_ID = @"headerView";
         default:
             break;
     }
+}
+/** 获取数据*/
+- (void)getData {
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000"};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyCustomerData];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            ClientData *clientData = [ClientData mj_objectWithKeyValues:dataDic];
+            [self performSegueWithIdentifier:@"getData" sender:self];
+  
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            
+        }
+        
+
+    } failureBlock:^(NSError *error) {
+
+    } showHUD:YES];
+
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // segue.identifier：获取连线的ID
+//    if ([segue.identifier isEqualToString:@"SendValue"]) {
+//        // segue.destinationViewController：获取连线时所指的界面（VC）
+//        ReceiveViewController *receive = segue.destinationViewController;
+//        receive.name = @"Garvey";
+//        receive.age = 110;
+//        // 这里不需要指定跳转了，因为在按扭的事件里已经有跳转的代码
+//        //		[self.navigationController pushViewController:receive animated:YES];
+//    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

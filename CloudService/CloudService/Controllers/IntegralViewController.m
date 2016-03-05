@@ -105,7 +105,7 @@
 }
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return _integralArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"cell";
@@ -115,7 +115,11 @@
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"IntegralTableViewCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
     }
-
+    Integral *integral = [_integralArray objectAtIndex:indexPath.row];
+    cell.lbComment.text = integral.comment;
+    cell.lbTime.text = [HelperUtil timeFormat:integral.time format:@"yyyy-MM-dd HH:mm"];
+    cell.lbReason.text = integral.reason;
+    cell.lbCreditsNum.text = [NSString stringWithFormat:@"%i",integral.creditsNum];
     
     return cell;
 }

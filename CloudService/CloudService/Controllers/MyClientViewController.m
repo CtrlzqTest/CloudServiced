@@ -8,9 +8,15 @@
 
 #import "MyClientViewController.h"
 #import "MyClientTableViewCell.h"
+#import <MJRefresh.h>
 
 @interface MyClientViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic)IBOutlet UITableView *tabelView;
+{
+    int _page;//当前页数
+    int _pageSize;//每页加载数
+    NSMutableArray *_clientArray;
+}
+@property (weak, nonatomic)IBOutlet UITableView *tableView;
 @end
 
 @implementation MyClientViewController
@@ -29,6 +35,75 @@
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"head-add" selectImage:@"head-add" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];
     }];
+}
+- (void)addMjRefresh {
+    _page=1;
+    _pageSize=7;
+    // 下拉刷新
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+        [self requestData];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    [self.tableView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreData];
+        
+    }];
+}
+- (void)requestData {
+    _clientArray = nil;
+    _clientArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+//            NSDictionary *dataDic = [dic objectForKey:@"data"];
+//            NSArray *listArray = [dataDic objectForKey:@"list"];
+//            [_clientArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+            NSLog(@"%@",_clientArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            
+        }
+        
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+    } showHUD:YES];
+    
+}
+
+- (void)requestMoreData {
+    _page++;
+    
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+//        NSDictionary *dic = returnData;
+//        NSDictionary *dataDic = [dic objectForKey:@"data"];
+//        NSArray *listArray = [dataDic objectForKey:@"list"];
+//        [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+//        NSLog(@"%@",_integralArray);
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [self.tableView.mj_footer endRefreshing];
+    } showHUD:YES];
+    
 }
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

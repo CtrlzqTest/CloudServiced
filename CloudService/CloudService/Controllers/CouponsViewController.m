@@ -256,12 +256,12 @@
     if ([tableView isEqual:_tableView1]) {
         Coupons *coupons = [_userArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
-        cell.lbEndTime.text = [HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"];
+        cell.lbEndTime.text = [NSString stringWithFormat:@"有效期至%@",[HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"]];
      
     }else{
         Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
-        cell.lbEndTime.text = [HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"];
+        cell.lbEndTime.text = [NSString stringWithFormat:@"有效期至%@",[HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"]];
     }
     
   

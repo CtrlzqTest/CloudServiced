@@ -46,6 +46,7 @@
 		63AA2BD51C8A70ED00D7CF04 /* BankInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* BankInfoData.m */; };
 		63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */; };
 		63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BD91C8A8E1E00D7CF04 /* Integral.m */; };
+		63AA2BDD1C8AAEF700D7CF04 /* ClientData.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */; };
 		63ADFBE11C7E8E8F000D3164 /* OrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADFBE01C7E8E8F000D3164 /* OrderInfoViewController.m */; };
 		63ADFBE61C7EAC52000D3164 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADFBE41C7EAC52000D3164 /* ResultTableViewCell.m */; };
 		63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63ADFBE51C7EAC52000D3164 /* ResultTableViewCell.xib */; };
@@ -173,6 +174,8 @@
 		63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		63AA2BD81C8A8E1E00D7CF04 /* Integral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Integral.h; sourceTree = "<group>"; };
 		63AA2BD91C8A8E1E00D7CF04 /* Integral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Integral.m; sourceTree = "<group>"; };
+		63AA2BDB1C8AAEF700D7CF04 /* ClientData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientData.h; sourceTree = "<group>"; };
+		63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientData.m; sourceTree = "<group>"; };
 		63ADFBDF1C7E8E8F000D3164 /* OrderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoViewController.h; sourceTree = "<group>"; };
 		63ADFBE01C7E8E8F000D3164 /* OrderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoViewController.m; sourceTree = "<group>"; };
 		63ADFBE31C7EAC52000D3164 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
@@ -698,6 +701,8 @@
 				6320B73B1C89A2CE0076FC7E /* Coupons.m */,
 				63AA2BD81C8A8E1E00D7CF04 /* Integral.h */,
 				63AA2BD91C8A8E1E00D7CF04 /* Integral.m */,
+				63AA2BDB1C8AAEF700D7CF04 /* ClientData.h */,
+				63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -961,6 +966,7 @@
 				63C07BA81C7B15C10084581F /* NSArray+AYCUnicode.m in Sources */,
 				63C07BAA1C7B15C10084581F /* NSObject+AYCUnicode.m in Sources */,
 				F019C9D91C7BFD8D00E73A2C /* RegisterViewController.m in Sources */,
+				63AA2BDD1C8AAEF700D7CF04 /* ClientData.m in Sources */,
 				63C54E411C7C35BA007CE8CA /* PersonalViewController.m in Sources */,
 				F06DDBB01C7DACDE00C862A1 /* OrderManagerViewController.m in Sources */,
 				6383656A1C7DB8BA001A10C4 /* HZQDatePickerView.m in Sources */,
