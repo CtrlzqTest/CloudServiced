@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="359" height="89"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有限期至2016-12-12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3U6-oi-4xx">
-                                <rect key="frame" x="135" y="50" width="144" height="21"/>
+                                <rect key="frame" x="107" y="56" width="144" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="K0A-zM-mXv"/>
                                     <constraint firstAttribute="height" constant="21" id="Wt1-WS-p26"/>
@@ -67,7 +67,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kI-eh-ohJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kI-eh-ohJ">
                                 <rect key="frame" x="25" y="14" width="102" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="102" id="KPp-oz-5kL"/>
@@ -86,9 +86,9 @@
                             <constraint firstAttribute="trailing" secondItem="vcF-0o-sGj" secondAttribute="trailing" constant="15" id="8HJ-z8-DOk"/>
                             <constraint firstItem="7kI-eh-ohJ" firstAttribute="leading" secondItem="Yb9-yD-EhD" secondAttribute="leading" constant="25" id="TS6-CQ-RND"/>
                             <constraint firstAttribute="bottom" secondItem="z6F-2g-Lhb" secondAttribute="bottom" id="UoG-PJ-58y"/>
-                            <constraint firstItem="3U6-oi-4xx" firstAttribute="top" secondItem="fQQ-DU-lIP" secondAttribute="bottom" constant="6" id="WOZ-ts-Nwq"/>
+                            <constraint firstItem="3U6-oi-4xx" firstAttribute="top" secondItem="fQQ-DU-lIP" secondAttribute="bottom" constant="12" id="WOZ-ts-Nwq"/>
                             <constraint firstItem="HNx-FH-Uab" firstAttribute="leading" secondItem="fQQ-DU-lIP" secondAttribute="trailing" constant="8" id="Wso-64-JFe"/>
-                            <constraint firstItem="3U6-oi-4xx" firstAttribute="leading" secondItem="7kI-eh-ohJ" secondAttribute="trailing" constant="8" id="bfJ-Q1-FFl"/>
+                            <constraint firstItem="3U6-oi-4xx" firstAttribute="leading" secondItem="7kI-eh-ohJ" secondAttribute="trailing" constant="-20" id="bfJ-Q1-FFl"/>
                             <constraint firstItem="fQQ-DU-lIP" firstAttribute="top" secondItem="Yb9-yD-EhD" secondAttribute="top" constant="19" id="f2X-CQ-XXe"/>
                             <constraint firstItem="z6F-2g-Lhb" firstAttribute="leading" secondItem="Yb9-yD-EhD" secondAttribute="leading" id="ouv-za-P8c"/>
                             <constraint firstItem="68G-Hc-4YW" firstAttribute="leading" secondItem="Yb9-yD-EhD" secondAttribute="leading" constant="12" id="qAD-9Y-n5c"/>
@@ -107,6 +107,10 @@
                     <constraint firstAttribute="trailing" secondItem="Yb9-yD-EhD" secondAttribute="trailing" constant="8" id="ffK-Kt-y3w"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="lbCouponNum" destination="7kI-eh-ohJ" id="8is-cI-Q7W"/>
+                <outlet property="lbEndTime" destination="3U6-oi-4xx" id="TFj-kn-GyT"/>
+            </connections>
             <point key="canvasLocation" x="385.5" y="362"/>
         </tableViewCell>
     </objects>

@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 
-#define BaseAPI                 @"http://10.136.61.110:8889/cloudSales-action"  // 阳光服务器
+#define BaseAPI                 @"http://10.136.96.139:8889/cloudSales-action"  // 阳光服务器
 
 #define kRegisterAPI            @"/app/user/register"                     //注册
 
@@ -26,7 +26,9 @@
 #define kSignedAPI              @"/app/sign/ signed"                     //签到
 
 #define kSendCode               @"/userapp/sendCode"                     //业绩查询
-
+#define kUserCouponsList        @"/app/coupon/findUserCouponsList"                 //个人业绩查询
+#define kTeamCouponsList        @"/app/coupon/findTeamCouponsList"                 //团队业绩查询
+#define kfindUserCreditsRecord    @"/app/credits/findUserCreditsRecord"             //积分历史查询
 //   常量
 /**************************************************************************************/
 

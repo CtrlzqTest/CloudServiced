@@ -19,6 +19,7 @@
 		630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630EF19E1C856CFD0059CB34 /* CouponsTableViewCell.xib */; };
 		630EF1A51C8579630059CB34 /* IntergralChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */; };
 		630EF1A61C8579630059CB34 /* MyIntergralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A41C8579630059CB34 /* MyIntergralViewController.m */; };
+		6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */ = {isa = PBXBuildFile; fileRef = 6320B73B1C89A2CE0076FC7E /* Coupons.m */; };
 		63508C851C86D37800505F08 /* YWBCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63508C841C86D37800505F08 /* YWBCityPickerView.m */; };
 		635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635C2AC81C8527D10051708D /* CreatClientViewController.m */; };
 		636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */; };
@@ -42,6 +43,8 @@
 		6383656A1C7DB8BA001A10C4 /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365641C7DB8BA001A10C4 /* HZQDatePickerView.m */; };
 		6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638365651C7DB8BA001A10C4 /* HZQDatePickerView.xib */; };
 		6383656C1C7DB8BA001A10C4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365671C7DB8BA001A10C4 /* UIColor+HexString.m */; };
+		63AA2BD51C8A70ED00D7CF04 /* BankInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* BankInfoData.m */; };
+		63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */; };
 		63ADFBE11C7E8E8F000D3164 /* OrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADFBE01C7E8E8F000D3164 /* OrderInfoViewController.m */; };
 		63ADFBE61C7EAC52000D3164 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADFBE41C7EAC52000D3164 /* ResultTableViewCell.m */; };
 		63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63ADFBE51C7EAC52000D3164 /* ResultTableViewCell.xib */; };
@@ -101,7 +104,6 @@
 		F07FF9E31C8189E200EB1BB1 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */; };
 		F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DED91C89394900168BF8 /* RequestEntity.m */; };
 		F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEDF1C896B1800168BF8 /* RequestManager.m */; };
-		F090DEE81C89AB3C00168BF8 /* BankInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* BankInfoData.m */; };
 		F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */; };
 		F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B59B1C8000E500A2312D /* HomeCollectionCell.m */; };
 		F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094B59C1C8000E500A2312D /* HomeCollectionCell.xib */; };
@@ -134,6 +136,8 @@
 		630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntergralChangeViewController.m; sourceTree = "<group>"; };
 		630EF1A31C8579630059CB34 /* MyIntergralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIntergralViewController.h; sourceTree = "<group>"; };
 		630EF1A41C8579630059CB34 /* MyIntergralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntergralViewController.m; sourceTree = "<group>"; };
+		6320B73A1C89A2CE0076FC7E /* Coupons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupons.h; sourceTree = "<group>"; };
+		6320B73B1C89A2CE0076FC7E /* Coupons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupons.m; sourceTree = "<group>"; };
 		63508C831C86D37800505F08 /* YWBCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWBCityPickerView.h; sourceTree = "<group>"; };
 		63508C841C86D37800505F08 /* YWBCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWBCityPickerView.m; sourceTree = "<group>"; };
 		635C2AC71C8527D10051708D /* CreatClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatClientViewController.h; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 		638365651C7DB8BA001A10C4 /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
 		638365661C7DB8BA001A10C4 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
 		638365671C7DB8BA001A10C4 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
+		63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		63ADFBDF1C7E8E8F000D3164 /* OrderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoViewController.h; sourceTree = "<group>"; };
 		63ADFBE01C7E8E8F000D3164 /* OrderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoViewController.m; sourceTree = "<group>"; };
 		63ADFBE31C7EAC52000D3164 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
@@ -662,19 +667,20 @@
 			isa = PBXGroup;
 			children = (
 				63F7D8FC1C894829002E56C9 /* 青牛 */,
+				63ADFBE81C7F0622000D3164 /* lib1 */,
 				63508C831C86D37800505F08 /* YWBCityPickerView.h */,
 				63508C841C86D37800505F08 /* YWBCityPickerView.m */,
 				63C2FB961C8022D900D48B8C /* PlaceholderTextView.h */,
 				63C2FB971C8022D900D48B8C /* PlaceholderTextView.m */,
 				F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */,
 				F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */,
-				63ADFBE81C7F0622000D3164 /* lib1 */,
 				F06DDBA51C7DAB7400C862A1 /* AYCButton.h */,
 				F06DDBA61C7DAB7400C862A1 /* AYCButton.m */,
 				F06DDBA71C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.h */,
 				F06DDBA81C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m */,
 				63C07B8B1C7B14BB0084581F /* MBProgressHUD+Add.h */,
 				63C07B8C1C7B14BB0084581F /* MBProgressHUD+Add.m */,
+				63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */,
 				63C07B8D1C7B14BB0084581F /* NetwrokHandle */,
 			);
 			path = Helper;
@@ -685,6 +691,8 @@
 			children = (
 				F0292BD51C7B015200A810A9 /* User.h */,
 				F0292BD61C7B015200A810A9 /* User.m */,
+				6320B73A1C89A2CE0076FC7E /* Coupons.h */,
+				6320B73B1C89A2CE0076FC7E /* Coupons.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -700,9 +708,9 @@
 		F0292BD91C7B015200A810A9 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				63C07B9F1C7B15C00084581F /* AYCUnicode */,
 				F0292BDA1C7B015200A810A9 /* Utility.h */,
 				F0292BDB1C7B015200A810A9 /* Utility.m */,
-				63C07B9F1C7B15C00084581F /* AYCUnicode */,
 				63C07BA61C7B15C10084581F /* HelperUtil.h */,
 				63C07BA71C7B15C10084581F /* HelperUtil.m */,
 				F05732091C859D2400D88B78 /* SingleHandle.h */,
@@ -850,6 +858,7 @@
 				F0292BB81C7B00CD00A810A9 /* Main.storyboard in Resources */,
 				630EF1901C8543900059CB34 /* PersonResultCell.xib in Resources */,
 				637533B01C83F64100A12932 /* details-icon.png in Resources */,
+				63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +932,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63AA2BD51C8A70ED00D7CF04 /* BankInfoData.m in Sources */,
 				630EF19B1C856CD00059CB34 /* CouponsViewController.m in Sources */,
 				F0292BE21C7B015200A810A9 /* BaseViewController.m in Sources */,
 				F0292BE41C7B015200A810A9 /* Utility.m in Sources */,
@@ -930,7 +940,7 @@
 				F0292BE31C7B015200A810A9 /* User.m in Sources */,
 				F0292BE01C7B015200A810A9 /* BaseNaviViewController.m in Sources */,
 				63C54E321C7C2F96007CE8CA /* OrderManagerCell.m in Sources */,
-				F090DEE81C89AB3C00168BF8 /* BankInfoData.m in Sources */,
+				6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */,
 				F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */,
 				636CD9881C884E9A0050935E /* IntergralSearchViewController.m in Sources */,
 				F094B5A31C80223400A2312D /* PersonalViewCell.m in Sources */,

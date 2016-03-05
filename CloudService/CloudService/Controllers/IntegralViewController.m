@@ -8,8 +8,14 @@
 
 #import "IntegralViewController.h"
 #import "IntegralTableViewCell.h"
+#import <MJRefresh.h>
 
 @interface IntegralViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    int _page;//当前页数
+    int _pageSize;//每页加载数
+    NSMutableArray *_integralArray;
+}
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
 @end
 
@@ -24,10 +30,52 @@
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"intergralSearch" sender:weakSelf];
     }];
-
+    [self addMjRefresh];
     // Do any additional setup after loading the view.
 }
+- (void)addMjRefresh {
+    _page=1;
+    _pageSize=7;
+    // 下拉刷新
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+        [self requestData];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    [self.tableView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreData];
+        
+    }];
+}
+- (void)requestData {
+    _integralArray = nil;
+    _integralArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
 
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [self.tableView.mj_header endRefreshing];
+    } showHUD:YES];
+
+}
+
+- (void)requestMoreData {
+    
+}
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 5;
