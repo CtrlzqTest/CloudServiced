@@ -11,7 +11,6 @@
 #import <LazyPageScrollView.h>
 #import <MJRefresh.h>
 #import "Coupons.h"
-#import <MJExtension.h>
 @interface CouponsViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     int _page1;//当前页数
@@ -158,7 +157,7 @@
         [_tableView1 reloadData];
         [_tableView1.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
+        [MBProgressHUD showError:@"服务器异常" toView:self.view];
         [_tableView1.mj_header endRefreshing];
     } showHUD:YES];
 }
@@ -171,10 +170,14 @@
         NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_userArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
         [_tableView1 reloadData];
         [_tableView1.mj_footer endRefreshing];
     } failureBlock:^(NSError *error) {
@@ -192,10 +195,14 @@
         NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_teamArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
         [_tableView2 reloadData];
         [_tableView2.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
@@ -212,10 +219,14 @@
         NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_teamArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
         [_tableView2 reloadData];
         [_tableView2.mj_footer endRefreshing];
     } failureBlock:^(NSError *error) {
@@ -245,35 +256,18 @@
     if ([tableView isEqual:_tableView1]) {
         Coupons *coupons = [_userArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
-        cell.lbEndTime.text = [self timeFormat:coupons.endTime];
+        cell.lbEndTime.text = [HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"];
+     
     }else{
         Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
-        cell.lbEndTime.text = [self timeFormat:coupons.endTime];
+        cell.lbEndTime.text = [HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"];
     }
     
   
     return cell;
 }
-- (NSString *)timeFormat:(NSString *)date
-{
 
-    
-    NSTimeInterval time=([date doubleValue]+28800)/1000;//因为时差问题要加8小时 == 28800 sec
-    
-    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
-    
-    //实例化一个NSDateFormatter对象
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    //设定时间格式,这里可以设置成自己需要的格式
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
-    return currentDateStr;
-}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
 }

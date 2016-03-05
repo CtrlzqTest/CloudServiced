@@ -13,12 +13,12 @@
 - (NSDictionary *)dictionaryWithModel:(Coupons *)coupons {
     return [coupons mj_keyValues];
 }
-//+ (NSDictionary *)replacedKeyFromPropertyName
-//{
-//    return @{
-//             @"couponId" : @"id",
-//            
-//             };
-//}
++ (NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{
+             @"couponId" : @"id",
+            
+             };
+}
 
 @end

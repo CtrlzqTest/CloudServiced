@@ -9,6 +9,7 @@
 #import "IntegralViewController.h"
 #import "IntegralTableViewCell.h"
 #import <MJRefresh.h>
+#import "Integral.h"
 
 @interface IntegralViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -61,20 +62,46 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
-        
         NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            NSArray *listArray = [dataDic objectForKey:@"list"];
+            [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+            NSLog(@"%@",_integralArray);
+        }else {
+        [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+
+        }
 
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
+        
         [self.tableView.mj_header endRefreshing];
     } showHUD:YES];
 
 }
 
 - (void)requestMoreData {
+    _page++;
     
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        NSDictionary *dataDic = [dic objectForKey:@"data"];
+        NSArray *listArray = [dataDic objectForKey:@"list"];
+        [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+        NSLog(@"%@",_integralArray);
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [self.tableView.mj_footer endRefreshing];
+    } showHUD:YES];
+
 }
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
