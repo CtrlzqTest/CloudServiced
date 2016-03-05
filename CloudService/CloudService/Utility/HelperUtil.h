@@ -29,6 +29,9 @@
 /** 计算时间差
  */
 + (NSString *)formateDate:(NSString *)dateString withFormate:(NSString *) formate;
+/** 时间戳转时间
+ */
++ (NSString *)timeFormat:(NSString *)date format:(NSString *)dateFormat;
 /** 计算时间差
  */
 + (NSString *) returnUploadTime:(NSString *)timeStr;
