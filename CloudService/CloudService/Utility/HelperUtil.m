@@ -346,4 +346,17 @@
     BOOL isMatch = [pred evaluateWithObject:nickname];
     return isMatch;
 }
+
++ (BOOL)checkBankCard: (NSString *) bankCard
+{
+    BOOL flag;
+    if (bankCard.length <= 0) {
+        flag = NO;
+        return flag;
+    }
+    NSString *regex2 = @"^\\d{16,19}$|^\\d{6}[- ]\\d{10,13}$|^\\d{4}[- ]\\d{4}[- ]\\d{4}[- ]\\d{4,7}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
+    BOOL isMatch = [pred evaluateWithObject:bankCard];
+    return isMatch;
+}
 @end
