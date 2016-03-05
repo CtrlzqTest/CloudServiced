@@ -88,29 +88,29 @@
 // 登录
 - (IBAction)loginAction:(id)sender {
     
-    if (self.UserTextFiled.text.length <= 0) {
-        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
-        return;
-    }else if (self.pwdTextFiled.text.length <= 0){
-
-        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-        return;
-    }
+//    if (self.UserTextFiled.text.length <= 0) {
+//        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
+//        return;
+//    }else if (self.pwdTextFiled.text.length <= 0){
+//
+//        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+//        return;
+//    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:self.UserTextFiled.text forKey:@"userName"];
-    [dict setValue:self.pwdTextFiled.text forKey:@"password"];
+    [dict setValue:@"liangming" forKey:@"userName"];
+    [dict setValue:@"123456" forKey:@"password"];
     [dict setValue:@"0102" forKey:@"address"];
     
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
+//    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         
-    } failureBlock:^(NSError *error) {
-        
-    } showHUD:YES];
-
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
-   }
+//    } failureBlock:^(NSError *error) {
+//        
+//    } showHUD:YES];
+//
+}
 
 
 

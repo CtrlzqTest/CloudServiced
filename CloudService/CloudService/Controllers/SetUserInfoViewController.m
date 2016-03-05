@@ -10,6 +10,10 @@
 #import "SetUserInfoCell.h"
 #import "SetUserInfoHeaderView.h"
 #import "HZQDatePickerView.h"
+#import "HelperUtil.h"
+#import "BankInfoData.h"
+#import "YWBCityPickerView.h"
+
 
 static NSString *const cell_id = @"setUserInfoCell";
 static NSString *const header_id = @"setUserInfoHeader";
@@ -24,14 +28,18 @@ static NSString *const select_CellID = @"selectCell";
     
     NSIndexPath *_indexPath;
     BOOL _isAnimating;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(nonatomic,strong) UITableView *selectTableView;
 @property(nonatomic,strong) NSArray *selectArray;
-@property(nonatomic,strong) UIButton *maskView;
+@property(nonatomic,strong) UIButton *maskBtn;
 @property (nonatomic,strong)HZQDatePickerView *pickerView;
+@property (nonatomic, strong) YWBCityPickerView *cityPickerView;
+@property (nonatomic,strong)UIView *maskView;
+
 @end
 
 @implementation SetUserInfoViewController
@@ -59,9 +67,8 @@ static NSString *const select_CellID = @"selectCell";
 
 - (IBAction)saveAction:(id)sender {
     
-}
-
-- (IBAction)uploadAction:(id)sender {
+    [self resignKeyBoardInView:self.view];
+    [self getParam];
     
 }
 
@@ -93,8 +100,8 @@ static NSString *const select_CellID = @"selectCell";
                        @"微信号",@"申请销售保险公司",
                        @"销售数据城市"];
     
-    _keyArray_Bank = @[@"开户人姓名",@"开户银行",
-                       @"银行账号",@"支行名称",
+    _keyArray_Bank = @[@"开户人姓名",@"银行账号",
+                       @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
     _valueArray_User = [NSMutableArray arrayWithArray:@[@"",@"身份证",@"",@"初级用户",@"",@"",@"2015-01-01",@"销售人员",@"",@"阳光保险",@""]];
@@ -106,12 +113,12 @@ static NSString *const select_CellID = @"selectCell";
 - (void)setupSelectTableView {
     
     // 现加上蒙版
-    self.maskView = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.maskView.frame = self.view.bounds;
-    [self.maskView addTarget:self action:@selector(hidePullDownView) forControlEvents:UIControlEventTouchUpInside];
+    self.maskBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.maskBtn.frame = self.view.bounds;
+    [self.maskBtn addTarget:self action:@selector(hidePullDownView) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.maskView.hidden = YES;
-    [self.view addSubview:self.maskView];
+    self.maskBtn.hidden = YES;
+    [self.view addSubview:self.maskBtn];
     
     self.selectTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStylePlain)];
     self.selectTableView.dataSource = self;
@@ -125,7 +132,7 @@ static NSString *const select_CellID = @"selectCell";
 //    self.selectTableView.layer.shadowRadius = 3;
     self.tableView.clipsToBounds = NO;
     self.selectTableView.layer.shadowOffset = CGSizeMake(3, 1);
-    [self.maskView addSubview:self.selectTableView];
+    [self.maskBtn addSubview:self.selectTableView];
 }
 
 // 显示下拉列表
@@ -135,7 +142,7 @@ static NSString *const select_CellID = @"selectCell";
         return ;
     }
     _isAnimating = YES;
-    self.maskView.hidden = NO;
+    self.maskBtn.hidden = NO;
     [self.selectTableView reloadData];
     CGRect tempRect = rect;
     tempRect.size.height = 0.1;
@@ -162,7 +169,7 @@ static NSString *const select_CellID = @"selectCell";
     [UIView animateWithDuration:0.2 animations:^{
         self.selectTableView.frame = tempRext;
     } completion:^(BOOL finished) {
-       self.maskView.hidden = YES;
+       self.maskBtn.hidden = YES;
         _isAnimating = NO;
     }];
 //    // 收回列表
@@ -172,8 +179,6 @@ static NSString *const select_CellID = @"selectCell";
 }
 
 - (void)showDataPickerView {
-    
-
         
     _pickerView = [HZQDatePickerView instanceDatePickerView];
     _pickerView.frame = CGRectMake(0, 0, KWidth, KHeight + 20);
@@ -183,6 +188,20 @@ static NSString *const select_CellID = @"selectCell";
     [_pickerView.datePickerView setMinimumDate:[NSDate date]];
     [self.view addSubview:_pickerView];
     
+}
+
+/** 消失键盘*/
+- (void)resignKeyBoardInView:(UIView *)view
+
+{
+    for (UIView *v in view.subviews) {
+        if ([v.subviews count] > 0) {
+            [self resignKeyBoardInView:v];
+        }
+        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
+            [v resignFirstResponder];
+        }
+    }
 }
 
 #pragma mark -- HZQDatePickerViewDelegate
@@ -264,6 +283,15 @@ static NSString *const select_CellID = @"selectCell";
         }else if(indexPath.row == 6){
             cell.textFiled.enabled = NO;
         }
+    }else if(indexPath.row == 1){
+        cell.textFiled.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    if (indexPath.section == 1)
+    {
+        if (indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 5)
+        {
+            cell.textFiled.enabled = NO;
+        }
     }
     return cell;
 }
@@ -319,6 +347,14 @@ static NSString *const select_CellID = @"selectCell";
                 break;
         }
     }
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row == 4 || indexPath.row == 5)
+        {
+            [self showCityPickerView];
+        }
+       
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -372,7 +408,80 @@ static NSString *const select_CellID = @"selectCell";
 
 
 
+- (NSDictionary *)getParam {
+    
+    //    NSMutableDictionary *dic
+    for (int i = 0; i < _valueArray_User.count; i ++) {
+        
+        if ([_valueArray_User[i] length] <= 0) {
+            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_User[i]] toView:self.view];
+            return nil;
+        }
+    }
+    for (int i = 0; i < _valueArray_Bank.count; i ++) {
+        if ([_valueArray_Bank[i] length] <= 0) {
+            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_Bank[i]] toView:self.view];
+            return nil;
+        }
+    }
+    if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
+        [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
+    }
+    return nil;
+}
 
+// 二分查找卡户银行
+- (NSString *)getBankNameWithBankbin:(NSString *)bankBin {
+    
+    NSArray *bankBinArray = [BankInfoData bankBin];
+    NSArray *bankNameArray = [BankInfoData bankNameArray];
+    int low = 0;
+    int high = (int)(bankBinArray.count-1);
+    while(low <= high)
+    {
+        int middle = (low + high) / 2;
+        if([bankBin isEqualToString:bankBinArray[middle]])
+        {
+            return bankNameArray[middle];
+        }
+        else if(bankBin < bankBinArray[middle])
+        {
+            high = middle - 1;
+        }
+        else
+        {
+            low = middle + 1;
+        }
+    }
+    return nil;
+}
+
+
+- (void)hideCityPickerView:(UIGestureRecognizer *)sender {
+    
+    _valueArray_Bank[4] = self.cityPickerView.province;
+    _valueArray_Bank[5] = self.cityPickerView.city;
+    [self.tableView reloadData];
+    _maskView.hidden = YES;
+    [self.cityPickerView hiddenPickerView];
+}
+
+- (void)showCityPickerView {
+    
+    [self resignKeyBoardInView:self.view];
+    if (!self.cityPickerView) {
+        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _maskView.backgroundColor = [UIColor colorWithRed:0.363 green:0.380 blue:0.373 alpha:0.500];
+        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCityPickerView:)]];
+        [self.view addSubview:_maskView];
+        self.cityPickerView = [[YWBCityPickerView alloc] init];
+        self.cityPickerView.backgroundColor = [UIColor whiteColor];
+        self.cityPickerView.frame = CGRectMake(0, self.view.frame.size.height, KWidth, 300);
+    }
+    _maskView.hidden = NO;
+    [self.cityPickerView showInView:self.maskView];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
