@@ -47,6 +47,10 @@ static User *user = nil;
     
 }
 
++ (NSString *)location {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"locate"];
+}
+
 +(NSDictionary *)getUserInfoFromLocal
 {
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] valueForKey:@"userInfo"];
@@ -59,6 +63,11 @@ static User *user = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (void)saveLocation:(NSString *)locate {
+    
+    [[NSUserDefaults standardUserDefaults] setValue:locate forKey:@"locate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{
     

@@ -12,6 +12,7 @@
 #import "LoginInputView.h"
 #import "RequestEntity.h"
 #import "MHNetwrok.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -111,8 +112,6 @@
     } showHUD:YES];
 //
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {

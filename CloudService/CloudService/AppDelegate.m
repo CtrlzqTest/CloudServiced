@@ -11,12 +11,14 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import "WXApi.h"
-
+#import "Utility.h"
 
 #define MObAppKey  @"100082c56c5c0"
 #define WXAppID   @"wx125bcc153468cc36"
 #define WXAppSecret   @"5d792862f07b6ff0b27eaced2ffbd01d"
-@interface AppDelegate ()
+@interface AppDelegate ()<CLLocationManagerDelegate> {
+    BOOL _isSetCity;
+}
 
 @end
 
@@ -40,7 +42,8 @@
 //    }
     // 注册通知
     [self registerNotifications];
-    
+    // 注册定位
+    [self registerLocation];
     return YES;
 }
 
@@ -83,6 +86,28 @@
     
 }
 
+- (void)registerLocation {
+    
+    self.locateManager = [[CLLocationManager alloc] init];
+    if (![CLLocationManager locationServicesEnabled]) {
+        NSLog(@"aaaa");
+    }
+    //如果没有授权则请求用户授权
+    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
+        [self.locateManager requestWhenInUseAuthorization];
+    }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
+        //设置代理
+        self.locateManager.delegate = self;
+        //设置定位精度
+        self.locateManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+        //定位频率,每隔多少米定位一次
+        CLLocationDistance distance=100.0;//十米定位一次
+        self.locateManager.distanceFilter=distance;
+        //启动跟踪定位
+        [self.locateManager startUpdatingLocation];
+    }
+}
+
 - (void)loginToMenu {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     BaseNaviViewController *menuVC = [storyBoard instantiateViewControllerWithIdentifier:@"MenuNavi"];
@@ -95,6 +120,30 @@
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavi"];
     self.window.rootViewController = loginVC;
+}
+
+#pragma mark -- CLLocationManagerDelegate
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    CLLocation *currentLocation = [locations lastObject];
+    CLGeocoder *geoder = [[CLGeocoder alloc] init];
+    __block CLPlacemark *placeMark = nil;
+//    __weak typeof(self) weakSelf = self;
+    [geoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (_isSetCity) {
+            return ;
+        }
+        if (placemarks.count > 0) {
+            placeMark = [placemarks firstObject];
+            NSString *city = [NSString stringWithFormat:@"%@%@",placeMark.locality,placeMark.subLocality];
+            NSLog(@"%@",city);
+            [Utility saveLocation:city];
+            _isSetCity = YES;
+        }
+    }];
+    //如果不需要实时定位，使用完即使关闭定位服务
+    [self.locateManager stopUpdatingLocation];
 }
 #pragma mark 青牛回调入口
 /****************************************************回调实现****************************************************************/

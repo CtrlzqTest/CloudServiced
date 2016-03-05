@@ -11,13 +11,10 @@
 #import "YWBCityPickerView.h"
 #import "Utility.h"
 
-@interface RegisterViewController ()<CLLocationManagerDelegate> {
-    BOOL _isSetCity;
-}
+@interface RegisterViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *getCodeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
-@property(nonatomic,strong)CLLocationManager *locateManager;
 @property (weak, nonatomic) IBOutlet UIButton *locateBtn;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
 @property (weak, nonatomic) IBOutlet UITextField *codeText;
@@ -50,34 +47,10 @@
     
 }
 
-- (void)registerLocation {
-    
-    self.locateManager = [[CLLocationManager alloc] init];
-    
-    if (![CLLocationManager locationServicesEnabled]) {
-        NSLog(@"");
-    }
-    //如果没有授权则请求用户授权
-    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
-        [self.locateManager requestWhenInUseAuthorization];
-    }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
-        //设置代理
-        self.locateManager.delegate = self;
-        //设置定位精度
-        self.locateManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-        //定位频率,每隔多少米定位一次
-        CLLocationDistance distance=100.0;//十米定位一次
-        self.locateManager.distanceFilter=distance;
-        //启动跟踪定位
-        [self.locateManager startUpdatingLocation];
-    }
-}
-
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    // 注册定位
-    [self registerLocation];
+
 }
 
 // 注册
@@ -188,30 +161,6 @@
         }
     });
     dispatch_resume(_timer);
-}
-
-#pragma mark -- CLLocationManagerDelegate
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    
-    CLLocation *currentLocation = [locations lastObject];
-    CLGeocoder *geoder = [[CLGeocoder alloc] init];
-    __block CLPlacemark *placeMark = nil;
-    __weak typeof(self) weakSelf = self;
-    [geoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (_isSetCity) {
-            return ;
-        }
-        if (placemarks.count > 0) {
-            placeMark = [placemarks firstObject];
-            NSString *city = [NSString stringWithFormat:@"%@%@",placeMark.locality,placeMark.subLocality];
-            NSLog(@"%@",city);
-            [weakSelf.locateBtn setTitle:city forState:(UIControlStateNormal)];
-            _isSetCity = YES;
-        }
-    }];
-    //如果不需要实时定位，使用完即使关闭定位服务
-    [self.locateManager stopUpdatingLocation];
 }
 
 /** 消失键盘*/

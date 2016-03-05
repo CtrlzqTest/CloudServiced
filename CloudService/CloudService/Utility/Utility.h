@@ -45,4 +45,14 @@
  */
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock;
 
+/**
+ *  获取定位城市
+ */
++ (NSString *)location;
+
+/**
+ *  存储定位城市
+ */
++ (void)saveLocation:(NSString *)locate;
+
 @end
