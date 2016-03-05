@@ -12,6 +12,8 @@
 #import "IntergralCityViewController.h"
 #import "SingleHandle.h"
 #import "ClientData.h"
+#import "UserInfoViewController.h"
+#import "Utility.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
