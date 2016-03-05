@@ -12,7 +12,7 @@
 #import "LoginInputView.h"
 #import "RequestEntity.h"
 #import "MHNetwrok.h"
-#import "AppDelegate.h"
+#import "Utility.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -50,7 +50,6 @@
         [self.choseBtn setBackgroundImage:nil forState:(UIControlStateNormal)];
     }
 }
-
 
 - (void)setupView {
     
@@ -101,6 +100,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:@"liangming" forKey:@"userName"];
     [dict setValue:@"123456" forKey:@"password"];
+//    NSString *address = [uit]
     [dict setValue:@"0102" forKey:@"address"];
     
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
