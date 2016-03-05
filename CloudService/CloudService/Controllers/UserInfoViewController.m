@@ -10,6 +10,7 @@
 #import "SetUserInfoCell.h"
 #import "SetUserInfoViewController.h"
 #import "ResetPhonePopView.h"
+#import "Utility.h"
 
 @interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -40,7 +41,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (!_isTosetUserInfo) {
-        [self.navigationController setNavigationBarHidden:YES animated:animated];
+        if (!self.isFromhomeVC) {
+            [self.navigationController setNavigationBarHidden:YES animated:animated];
+        }
     }
     
 }
@@ -50,7 +53,6 @@
     _keyArray = @[@"头像",@"名字",@"手机号",@"身份证号",@"微信号",@"银行账号"];
     _valueArray = @[@"",@"张三",@"15027264687",@"421123199303042452",
                     @"zhangqiang",@"6228480791546253810"];
-    
     
 }
 

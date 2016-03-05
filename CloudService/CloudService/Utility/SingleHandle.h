@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface SingleHandle : NSObject
-+(SingleHandle *)shareSingleHandle ;
-@property(nonatomic,strong)NSString *isHidden;
++(SingleHandle *)shareSingleHandle;
+
 @end

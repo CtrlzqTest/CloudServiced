@@ -10,4 +10,6 @@
 
 @interface UserInfoViewController : BaseViewController
 
+@property(nonatomic,assign)BOOL isFromhomeVC;
+
 @end

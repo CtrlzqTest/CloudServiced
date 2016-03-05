@@ -148,8 +148,6 @@
     }
 }
 
-
-
 +(NSString *)urlString:(NSString *)kString {
     NSLog(@"%@",[NSString stringWithFormat:@"%@%@",BaseAPI,kString]);
     return [NSString stringWithFormat:@"%@%@",BaseAPI,kString];

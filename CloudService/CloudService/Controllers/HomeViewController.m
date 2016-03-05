@@ -11,7 +11,8 @@
 #import "HomeHeaderView.h"
 #import "IntergralCityViewController.h"
 #import "SingleHandle.h"
-
+#import "UserInfoViewController.h"
+#import "Utility.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -104,8 +105,19 @@ static NSString *headerView_ID = @"headerView";
 }
 
 - (void)signAction:(UIButton *)sender {
-    [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
-    [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:@"5e98d681531cd8e201531cd8ec590000" forKey:@"userId"];
+    [dict setValue:[Utility location] forKey:@"address"];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kSignedAPI] params:dict successBlock:^(id returnData) {
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
+            [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
+        }
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -120,6 +132,7 @@ static NSString *headerView_ID = @"headerView";
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HomeHeaderView *headerView = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID forIndexPath:indexPath];
+        [headerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction)]];
         [headerView.sginBtn addTarget:self action:@selector(signAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [headerView setDataWithDictionary:@{@"userName":@"李小米2"}];
         // 轮播图开始轮播
@@ -131,6 +144,14 @@ static NSString *headerView_ID = @"headerView";
         return [[UICollectionReusableView alloc] init];
     }
     return nil;
+}
+
+- (void)tapHeaderAction {
+    
+    UIStoryboard *stroyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UserInfoViewController *userInfoVC = [stroyBoard instantiateViewControllerWithIdentifier:@"userInfoVC"];
+    userInfoVC.isFromhomeVC = YES;
+    [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
