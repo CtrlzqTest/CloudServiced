@@ -14,8 +14,10 @@
 #import <MJExtension.h>
 @interface CouponsViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
-    int _page;//当前页数
-    int _pageSize;//每页加载数
+    int _page1;//当前页数
+    int _pageSize1;//每页加载数
+    int _page2;//当前页数
+    int _pageSize2;//每页加载数
     NSMutableArray *_userArray;//我的优惠券列表
     NSMutableArray *_teamArray;//团队优惠券列表
     UITableView *_tableView1;
@@ -46,8 +48,10 @@
 }
 #pragma mark pageView
 - (void)initPageView {
-    _page=1;
-    _pageSize=6;
+    _page1=1;
+    _pageSize1=6;
+    _page2=1;
+    _pageSize2=6;
     
     _pageView.delegate=self;
     [_pageView initTab:YES Gap:38 TabHeight:38 VerticalDistance:0 BkColor:[UIColor whiteColor]];
@@ -57,7 +61,7 @@
 
     // 下拉刷新
     _tableView1.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _page = 1;
+        _page1 = 1;
         [self requestPersonalData];
         
     }];
@@ -69,7 +73,7 @@
     // 上拉刷新
     _tableView1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        
+        [self requestMorePersonalData];
         
     }];
     
@@ -82,21 +86,21 @@
     _tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 下拉刷新
     _tableView2.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _page = 1;
-//        [self requestGroupData];
+        _page2 = 1;
+        [self requestGroupData];
         
 
     }];
     
     // 设置自动切换透明度(在导航栏下面自动隐藏)
     _tableView2.mj_header.automaticallyChangeAlpha = YES;
-    [_tableView2.mj_header beginRefreshing];
+  
     
     
     // 上拉刷新
     _tableView2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        
+        [self requestMoreGroupData];
         
     }];
     _tableView2.tag = 101;
@@ -136,16 +140,21 @@
 - (void)requestPersonalData {
     _userArray = nil;
     _userArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
-        NSDictionary *dataDic = [dic objectForKey:@"data"];
-        NSArray *listArray = [dataDic objectForKey:@"list"];
-        [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
-        NSLog(@"%@",_userArray);
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            NSArray *listArray = [dataDic objectForKey:@"list"];
+            [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+            NSLog(@"%@",_userArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
+        
         [_tableView1 reloadData];
         [_tableView1.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
@@ -154,9 +163,9 @@
     } showHUD:YES];
 }
 - (void)requestMorePersonalData {
-    _page++;
-    _userArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    _page1++;
+
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -167,21 +176,62 @@
         [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_userArray);
         [_tableView1 reloadData];
-        [_tableView1.mj_header endRefreshing];
+        [_tableView1.mj_footer endRefreshing];
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
-        [_tableView1.mj_header endRefreshing];
+        [_tableView1.mj_footer endRefreshing];
     } showHUD:YES];
 }
 #pragma mark 加载团队优惠券
 - (void)requestGroupData {
-    
+    _teamArray = nil;
+    _teamArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        NSDictionary *dataDic = [dic objectForKey:@"data"];
+        NSArray *listArray = [dataDic objectForKey:@"list"];
+        [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+        NSLog(@"%@",_teamArray);
+        [_tableView2 reloadData];
+        [_tableView2.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [_tableView2.mj_header endRefreshing];
+    } showHUD:YES];
 }
-
+- (void)requestMoreGroupData {
+    _page2++;
+    
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        NSDictionary *dataDic = [dic objectForKey:@"data"];
+        NSArray *listArray = [dataDic objectForKey:@"list"];
+        [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+        NSLog(@"%@",_teamArray);
+        [_tableView2 reloadData];
+        [_tableView2.mj_footer endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [_tableView2.mj_footer endRefreshing];
+    } showHUD:YES];
+}
 
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _userArray.count;
+    if ([tableView isEqual:_tableView1]) {
+        return _userArray.count;
+    }else {
+        return _teamArray.count;
+    }
+    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"cell";
@@ -192,11 +242,38 @@
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    if ([tableView isEqual:_tableView1]) {
+        Coupons *coupons = [_userArray objectAtIndex:indexPath.row];
+        cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
+        cell.lbEndTime.text = [self timeFormat:coupons.endTime];
+    }else{
+        Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];
+        cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
+        cell.lbEndTime.text = [self timeFormat:coupons.endTime];
+    }
     
-    
+  
     return cell;
 }
+- (NSString *)timeFormat:(NSString *)date
+{
 
+    
+    NSTimeInterval time=([date doubleValue]+28800)/1000;//因为时差问题要加8小时 == 28800 sec
+    
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    //实例化一个NSDateFormatter对象
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //设定时间格式,这里可以设置成自己需要的格式
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
+    return currentDateStr;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
 }

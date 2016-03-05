@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign)int amount;
 @property (nonatomic, copy)NSString *couponName;
-@property (nonatomic, assign)int cpuponNum;
+@property (nonatomic, assign)int couponNum;
 @property (nonatomic, copy)NSString *createTime;
 @property (nonatomic, copy)NSString *ctype;
 @property (nonatomic, copy)NSString *endTime;
