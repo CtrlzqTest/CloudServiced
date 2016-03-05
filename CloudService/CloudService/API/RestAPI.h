@@ -21,6 +21,10 @@
 
 #define kGetuserInfoAPI         @"/app/user/findUserInfo"                     //个人信息
 
+#define kGetuserIntergralAPI         @"/app/credits/findUserCredits"                     //我的积分
+
+#define kGetExchangeIntergralAPI         @"/app/credits/exchangeMoney"                     //积分兑换
+
 #define kResetUserInfoAPI       @"/app/user/changeUserInfo"                     //修改个人信息
 
 #define kResetPwdAPI            @"/app/user/changePassword"                     //修改密码
@@ -33,7 +37,9 @@
 
 #define kTeamCouponsList        @"/app/coupon/findTeamCouponsList"                 //团队业绩查询
 
-#define kfindUserCreditsRecord    @"/app/credits/findUserCreditsRecord"             //积分历史查询
+#define kfindUserCreditsRecord  @"/app/credits/findUserCreditsRecord"             //积分历史查询
+
+#define kCheckPhoneNumAPI       @"/app/user/verifyPhoneNo"                     //验证手机
 
 
 //   常量

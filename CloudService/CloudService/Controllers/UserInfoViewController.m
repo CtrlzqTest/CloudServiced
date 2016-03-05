@@ -15,7 +15,7 @@
 @interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *_keyArray;
-    NSArray *_valueArray;
+    NSMutableArray *_valueArray;
     
     BOOL _isTosetUserInfo;
 }
@@ -51,10 +51,23 @@
 - (void)initData {
     
     _keyArray = @[@"头像",@"名字",@"手机号",@"身份证号",@"微信号",@"银行账号"];
-    _valueArray = @[@"",@"张三",@"15027264687",@"421123199303042452",
-                    @"zhangqiang",@"6228480791546253810"];
+    _valueArray = [NSMutableArray array];
+    
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-
+    
+    // 从user中获取
+//    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserInfoAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
+//        
+//    } failureBlock:^(NSError *error) {
+//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+//    } showHUD:YES];
+    
+    _valueArray[0] = @"";
+    _valueArray[1] = user.userName;
+    _valueArray[2] = user.phoneNo;
+    _valueArray[3] = user.idCard;
+    _valueArray[4] = user.chatName;
+    _valueArray[5] = user.bankNum;
 }
 
 - (void)setupViews {
@@ -69,10 +82,22 @@
         
         [popView showViewWithCallBack:^(NSInteger btnIndex) {
             if (btnIndex == 1) {
-                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
-                _isTosetUserInfo = YES;
-                [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
+                
+                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":popView.phoneNum,@"code":@"123456"} successBlock:^(id returnData) {
+                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+                        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
+                        _isTosetUserInfo = YES;
+                        [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
+                    }else {
+                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
+                    }
+                    
+                } failureBlock:^(NSError *error) {
+                    
+                } showHUD:YES];
+                
+                
             }
         }];
     }];
@@ -135,7 +160,8 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         cell.textLabel.text = _keyArray[indexPath.row];
-        cell.detailTextLabel.text = _valueArray[indexPath.row];
+        NSString *text =  [_valueArray[indexPath.row] length] ? _valueArray[indexPath.row] : @"未填写";
+        cell.detailTextLabel.text = text;
         return cell;
     }
 }
