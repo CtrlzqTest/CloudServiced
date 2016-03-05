@@ -102,13 +102,13 @@
     [dict setValue:@"123456" forKey:@"password"];
     [dict setValue:@"0102" forKey:@"address"];
     
-//    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
     
         [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         
-//    } failureBlock:^(NSError *error) {
-//        
-//    } showHUD:YES];
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
 //
 }
 

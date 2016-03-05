@@ -65,4 +65,9 @@
 /** 正则匹配昵称
  */
 + (BOOL) checkNickname:(NSString *) nickname;
+/**
+ *  正则匹配银行卡号
+ */
++ (BOOL)checkBankCard: (NSString *) bankCard;
+
 @end

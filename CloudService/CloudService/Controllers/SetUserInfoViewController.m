@@ -125,83 +125,13 @@ static NSString *const select_CellID = @"selectCell";
     self.selectTableView.delegate = self;
     self.selectTableView.backgroundColor = [UIColor grayColor];
     [self.selectTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:select_CellID];
-//    self.selectTableView.layer.borderWidth = 0.6;
-//    self.selectTableView.layer.borderColor = [UIColor grayColor].CGColor;
     self.selectTableView.layer.shadowOpacity = 1;
     self.selectTableView.layer.shadowColor = [UIColor grayColor].CGColor;
-//    self.selectTableView.layer.shadowRadius = 3;
     self.tableView.clipsToBounds = NO;
     self.selectTableView.layer.shadowOffset = CGSizeMake(3, 1);
     [self.maskBtn addSubview:self.selectTableView];
-}
-
-// 显示下拉列表
-- (void)showPullDownViewWithRect:(CGRect )rect {
     
-    if (_isAnimating) {
-        return ;
-    }
-    _isAnimating = YES;
-    self.maskBtn.hidden = NO;
-    [self.selectTableView reloadData];
-    CGRect tempRect = rect;
-    tempRect.size.height = 0.1;
-    self.selectTableView.frame = tempRect;
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        self.selectTableView.frame = rect;
-    } completion:^(BOOL finished) {
-        self.selectTableView.frame = rect;
-        _isAnimating = NO;
-    }];
-    
-}
-
-
-// 隐藏下拉列表
-- (void)hidePullDownView {
-    if (_isAnimating) {
-        return;
-    }
-    CGRect tempRext = self.selectTableView.frame;
-    tempRext.size.height = 0.1;
-    _isAnimating = YES;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.selectTableView.frame = tempRext;
-    } completion:^(BOOL finished) {
-       self.maskBtn.hidden = YES;
-        _isAnimating = NO;
-    }];
-//    // 收回列表
-//    SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
-//    cell.imageBtn.image = [UIImage imageNamed:@"details-arrow2"];
-//    [cell reloadInputViews];
-}
-
-- (void)showDataPickerView {
-        
-    _pickerView = [HZQDatePickerView instanceDatePickerView];
-    _pickerView.frame = CGRectMake(0, 0, KWidth, KHeight + 20);
-    [_pickerView setBackgroundColor:[UIColor clearColor]];
-    _pickerView.delegate = self;
-    _pickerView.type = DateTypeOfStart;
-    [_pickerView.datePickerView setMinimumDate:[NSDate date]];
-    [self.view addSubview:_pickerView];
-    
-}
-
-/** 消失键盘*/
-- (void)resignKeyBoardInView:(UIView *)view
-
-{
-    for (UIView *v in view.subviews) {
-        if ([v.subviews count] > 0) {
-            [self resignKeyBoardInView:v];
-        }
-        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
-            [v resignFirstResponder];
-        }
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidHidden) name:UIKeyboardDidHideNotification object:nil];
 }
 
 #pragma mark -- HZQDatePickerViewDelegate
@@ -219,17 +149,29 @@ static NSString *const select_CellID = @"selectCell";
 -(void)textFiledShouldBeginEditAtCell:(SetUserInfoCell *)cell {
     
     _indexPath = [self.tableView indexPathForCell:cell];
-    if (_indexPath.row) {
-        
-    }
     
 }
 
 -(void)textFiledDidEndEdit:(NSString *)text {
+    
     if (_indexPath.section == 0) {
         _valueArray_User[_indexPath.row] = text;
     }else {
         _valueArray_Bank[_indexPath.row] = text;
+    }
+    if (_indexPath.section == 1 && (_indexPath.row == 1)) {
+        if (![HelperUtil checkBankCard:text]) {
+            [MBProgressHUD showError:@"你输入的银行卡号无效,请重新输入" toView:self.view];
+        }else {
+            NSString *bankBin = [text substringToIndex:6];
+            if ([self getBankNameWithBankbin:bankBin].length <= 0) {
+                [MBProgressHUD showError:@"你输入的银行卡号无效,请重新输入" toView:self.view];
+            }else {
+                _valueArray_Bank[2] = [self getBankNameWithBankbin:bankBin];
+            }
+        }
+        _valueArray_Bank[_indexPath.row] = text;
+        
     }
     _indexPath = nil;
 }
@@ -305,11 +247,6 @@ static NSString *const select_CellID = @"selectCell";
         [self.tableView reloadData];
         return;
     }
-    
-//    if (_indexPath) {
-//        SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
-//        [cell.textFiled resignFirstResponder];
-//    }
     [self resignKeyBoardInView:self.view];
     _indexPath = indexPath;
     SetUserInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -319,10 +256,6 @@ static NSString *const select_CellID = @"selectCell";
             case 1:    {
                 _selectArray = @[@"身份证",@"军人证"];
                 CGRect rect1 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
-//                [UIView animateWithDuration:0.5 animations:^{
-//                    cell.imageBtn.transform = CGAffineTransformMakeRotation(M_PI);
-//                }];
-//                [cell reloadInputViews];
                 [self showPullDownViewWithRect:rect1];
                 
             }
@@ -405,10 +338,10 @@ static NSString *const select_CellID = @"selectCell";
     }
     
 }
-
+#pragma mark -- 私有方法
 - (NSDictionary *)getParam {
     
-    //    NSMutableDictionary *dic
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for (int i = 0; i < _valueArray_User.count; i ++) {
         
         if ([_valueArray_User[i] length] <= 0) {
@@ -425,6 +358,7 @@ static NSString *const select_CellID = @"selectCell";
     if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
         [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
     }
+    
     return nil;
 }
 
@@ -442,7 +376,7 @@ static NSString *const select_CellID = @"selectCell";
         {
             return bankNameArray[middle];
         }
-        else if(bankBin < bankBinArray[middle])
+        else if([bankBin compare:bankBinArray[middle]] == NSOrderedAscending)
         {
             high = middle - 1;
         }
@@ -480,6 +414,83 @@ static NSString *const select_CellID = @"selectCell";
     [self.cityPickerView showInView:self.maskView];
     
 }
+
+// 显示下拉列表
+- (void)showPullDownViewWithRect:(CGRect )rect {
+    
+    if (_isAnimating) {
+        return ;
+    }
+    _isAnimating = YES;
+    self.maskBtn.hidden = NO;
+    [self.selectTableView reloadData];
+    CGRect tempRect = rect;
+    tempRect.size.height = 0.1;
+    self.selectTableView.frame = tempRect;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.selectTableView.frame = rect;
+    } completion:^(BOOL finished) {
+        self.selectTableView.frame = rect;
+        _isAnimating = NO;
+    }];
+    
+}
+
+
+// 隐藏下拉列表
+- (void)hidePullDownView {
+    if (_isAnimating) {
+        return;
+    }
+    CGRect tempRext = self.selectTableView.frame;
+    tempRext.size.height = 0.1;
+    _isAnimating = YES;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.selectTableView.frame = tempRext;
+    } completion:^(BOOL finished) {
+        self.maskBtn.hidden = YES;
+        _isAnimating = NO;
+    }];
+    //    // 收回列表
+    //    SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
+    //    cell.imageBtn.image = [UIImage imageNamed:@"details-arrow2"];
+    //    [cell reloadInputViews];
+}
+
+- (void)showDataPickerView {
+    
+    _pickerView = [HZQDatePickerView instanceDatePickerView];
+    _pickerView.frame = CGRectMake(0, 0, KWidth, KHeight + 20);
+    [_pickerView setBackgroundColor:[UIColor clearColor]];
+    _pickerView.delegate = self;
+    _pickerView.type = DateTypeOfStart;
+    [_pickerView.datePickerView setMinimumDate:[NSDate date]];
+    [self.view addSubview:_pickerView];
+    
+}
+
+/** 消失键盘*/
+- (void)resignKeyBoardInView:(UIView *)view
+
+{
+    for (UIView *v in view.subviews) {
+        if ([v.subviews count] > 0) {
+            [self resignKeyBoardInView:v];
+        }
+        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
+            [v resignFirstResponder];
+        }
+    }
+}
+
+- (void)keyBoardDidHidden {
+    if ([_valueArray_Bank[2] length] <= 0) {
+        return;
+    }
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
