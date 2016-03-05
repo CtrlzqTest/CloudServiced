@@ -219,6 +219,9 @@ static NSString *const select_CellID = @"selectCell";
 -(void)textFiledShouldBeginEditAtCell:(SetUserInfoCell *)cell {
     
     _indexPath = [self.tableView indexPathForCell:cell];
+    if (_indexPath.row) {
+        
+    }
     
 }
 
@@ -234,10 +237,7 @@ static NSString *const select_CellID = @"selectCell";
 #pragma mark -- UITableViewDelegate
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
-    if (_indexPath) {
-        SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
-        [cell.textFiled resignFirstResponder];
-    }
+    [self resignKeyBoardInView:self.view];
     
 }
 
@@ -306,11 +306,11 @@ static NSString *const select_CellID = @"selectCell";
         return;
     }
     
-    if (_indexPath) {
-        SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
-        [cell.textFiled resignFirstResponder];
-    }
-    
+//    if (_indexPath) {
+//        SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
+//        [cell.textFiled resignFirstResponder];
+//    }
+    [self resignKeyBoardInView:self.view];
     _indexPath = indexPath;
     SetUserInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     CGRect tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
@@ -405,8 +405,6 @@ static NSString *const select_CellID = @"selectCell";
     }
     
 }
-
-
 
 - (NSDictionary *)getParam {
     
