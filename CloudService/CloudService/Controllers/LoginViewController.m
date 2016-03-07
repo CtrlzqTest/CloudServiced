@@ -122,9 +122,9 @@
             User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
             if (weakSelf.choseBtn.selected) {
-                [Utility saveUserInfo:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":weakSelf.pwdTextFiled.text}];
+                [Utility remenberUserAndPwd:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":weakSelf.pwdTextFiled.text}];
             }else {
-                [Utility saveUserInfo:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":@""}];
+                [Utility remenberUserAndPwd:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":@""}];
             }
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];

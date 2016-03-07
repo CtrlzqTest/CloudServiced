@@ -58,11 +58,14 @@
 /**
  *  记住密码
  */
-- (void)remenberUserAndPwd:(NSDictionary *)dict;
++ (void)remenberUserAndPwd:(NSDictionary *)dict;
 
 /**
  *  获取用户名密码本地
  */
 +(NSDictionary *)getUserNameAndPwd;
+
+
+
 
 @end
