@@ -151,7 +151,7 @@
 - (void)requestPersonalData {
     _userArray = nil;
     _userArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -187,7 +187,7 @@
 - (void)requestMorePersonalData {
     _page1++;
 
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -223,7 +223,7 @@
 - (void)requestGroupData {
     _teamArray = nil;
     _teamArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -258,7 +258,7 @@
 - (void)requestMoreGroupData {
     _page2++;
     
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);

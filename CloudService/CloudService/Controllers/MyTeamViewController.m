@@ -9,6 +9,7 @@
 #import "MyTeamViewController.h"
 #import "MyTeamTableViewCell.h"
 #import <MJRefresh.h>
+#import "TeamMember.h"
 
 @interface MyTeamViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -73,7 +74,7 @@ static NSString *cell_id = @"myTeamCell";
 - (void)requestTeamMemberData {
     _teamMemberArray = nil;
     _teamMemberArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -93,7 +94,7 @@ static NSString *cell_id = @"myTeamCell";
             }
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
-//            [_teamMemberArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+            [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_teamMemberArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -109,7 +110,7 @@ static NSString *cell_id = @"myTeamCell";
 - (void)requestMoreTeamMemberData {
     _page++;
     
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -129,7 +130,7 @@ static NSString *cell_id = @"myTeamCell";
             }
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
-//            [_teamMemberArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+            [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_teamMemberArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -159,12 +160,21 @@ static NSString *cell_id = @"myTeamCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return _teamMemberArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MyTeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id forIndexPath:indexPath];
+    MyTeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
+    if (cell == nil) {
+        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"MyTeamTableViewCell" owner:self options:nil];
+        cell = [array objectAtIndex:0];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    TeamMember *teamMember = [_teamMemberArray objectAtIndex:indexPath.row];
+    cell.lbName.text = teamMember.userName;
+    cell.lbIdCard.text = [NSString stringWithFormat:@"ID:%@",teamMember.idCard];
+    [cell.phoneBtn setTitle:teamMember.phoneNo forState:UIControlStateNormal];
     return cell;
     
 }
@@ -175,7 +185,7 @@ static NSString *cell_id = @"myTeamCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

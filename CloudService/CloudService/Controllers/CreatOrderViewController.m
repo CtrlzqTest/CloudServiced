@@ -9,7 +9,9 @@
 #import "CreatOrderViewController.h"
 
 @interface CreatOrderViewController ()
-
+@property (weak, nonatomic)IBOutlet UITextField *tfName;
+@property (weak, nonatomic)IBOutlet UITextField *tfPhone;
+@property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
 @end
 
 @implementation CreatOrderViewController
@@ -22,6 +24,32 @@
     }];
 
     // Do any additional setup after loading the view.
+}
+- (IBAction)nextAction:(id)sender {
+    if ([_tfName.text isEqualToString:@""]) {
+        [MBProgressHUD showMessag:@"请输入客户姓名" toView:self.view];
+    }else if ([_tfPhone.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入客户手机号" toView:self.view];
+    }else if ([_tfLicenseNo.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
+    }else {
+        NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,ksaveOrder];
+        NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"custName":_tfName.text,@"phoneNo":_tfPhone.text,@"licenseNo":_tfLicenseNo.text};
+        [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
+            
+            if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+                
+                
+            }else {
+                [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            }
+            
+        } failureBlock:^(NSError *error) {
+            
+        } showHUD:NO];
+    }
+    
+
 }
 - (void)viewWillAppear:(BOOL)animated {
     self.title=@"创建订单";

@@ -37,7 +37,7 @@
 #pragma mark requestData
 - (void)requestData {
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kSendCode];
-    [MHNetworkManager postReqeustWithURL:url params:@{@"userid":@"5e98d681531cd8e201531cd8ec590000"}successBlock:^(id returnData) {
+    [MHNetworkManager postReqeustWithURL:url params:@{@"userid":[[SingleHandle shareSingleHandle] getUserInfo].userId}successBlock:^(id returnData) {
         NSDictionary *dic = returnData;
         NSLog(@"%@",returnData);
         // 结束刷新
@@ -68,7 +68,6 @@
     
     // 设置自动切换透明度(在导航栏下面自动隐藏)
     tableView.mj_header.automaticallyChangeAlpha = YES;
-    
     
     [_pageView addTab:@"当日业绩" View:tableView Info:nil];
     tableView = [[UITableView alloc] init];
@@ -166,13 +165,9 @@
         // 下拉刷新
         _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self requestData];
-//            // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                // 结束刷新
-//                [_tableView.mj_header endRefreshing];
-//            });
+
         }];
-        [_tableView.mj_header beginRefreshing];
+//        [_tableView.mj_header beginRefreshing];
         // 设置自动切换透明度(在导航栏下面自动隐藏)
         _tableView.mj_header.automaticallyChangeAlpha = YES;
         

@@ -60,7 +60,7 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 214;
+    return 231;
 }
 /** 拨打电话*/
 - (void)callClick:(UIButton *)sender {
