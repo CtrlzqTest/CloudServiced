@@ -223,11 +223,12 @@ static NSString *headerView_ID = @"headerView";
     NSLog(@"%@",user.userId);
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
         
-//        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-//            NSString *str = [returnData[@"data"] valueForKey:@"totalNum"];
-//            _integral = [NSString stringWithFormat:@"%@",str];
-//            [weakSelf.collectionView reloadData];
-//        }
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            NSString *str = [returnData[@"data"] valueForKey:@"totalNum"];
+            _integral = [NSString stringWithFormat:@"%@",str];
+            [weakSelf.collectionView reloadData];
+        }
+        
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];

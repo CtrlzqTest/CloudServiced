@@ -18,7 +18,7 @@ static User *user = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSDictionary *infoDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfo"];
+        NSDictionary *infoDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         user = [User mj_objectWithKeyValues:infoDict];
     });
     return user;
@@ -54,6 +54,7 @@ static User *user = nil;
 +(NSDictionary *)getUserInfoFromLocal
 {
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] valueForKey:@"userInfo"];
+    NSLog(@"%@",dict);
     return dict;
 }
 
@@ -69,12 +70,12 @@ static User *user = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)remenberUserAndPwd:(NSDictionary *)dict {
++ (void)remenberUserAndPwd:(NSDictionary *)dict {
     [[NSUserDefaults standardUserDefaults] setValue:dict forKey:@"userAndPwd"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+(NSDictionary *)getUserNameAndPwd {
++(NSDictionary *)getUserNameAndPwd{
     return [[NSUserDefaults standardUserDefaults] valueForKey:@"userAndPwd"];
 }
 
