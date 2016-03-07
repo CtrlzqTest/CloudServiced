@@ -99,7 +99,7 @@ static NSString *const select_CellID = @"selectCell";
 
 - (void)initData {
     
-    _keyArray_User = @[@"真实姓名",@"证件类型",
+    _keyArray_User = @[@"真实姓名",
                        @"证件号码",@"用户类型",
                        @"原离职公司",@"原职位",
                        @"从业时间",@"工作类型",
@@ -110,7 +110,7 @@ static NSString *const select_CellID = @"selectCell";
                        @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
-    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"身份证",@"421123199303042452",@"初级用户",@"阳光保险",@"销售",@"2015-01-01",@"销售人员",@"6272",@"阳光保险",@"北京"]];
+    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"421123199303042452",@"初级用户",@"阳光保险",@"销售",@"2015-01-01",@"销售人员",@"6272",@"阳光保险",@"北京"]];
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"张强",@"6228280791546253810",@"农行",@"中国农业银行荆州支行",@"湖北省",@"荆州市"]];
     
@@ -203,7 +203,7 @@ static NSString *const select_CellID = @"selectCell";
         return _selectArray.count;
     }
     if (section == 0) {
-        return 11;
+        return _valueArray_User.count;
     }else {
         return 6;
     }
@@ -226,7 +226,7 @@ static NSString *const select_CellID = @"selectCell";
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
     if (indexPath.section == 0) {
-        if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 7 || indexPath.row == 9) {
+        if (indexPath.row == 2 || indexPath.row == 6 || indexPath.row == 8) {
             [cell isPullDown:YES];
         }else if(indexPath.row == 6){
             cell.textFiled.enabled = NO;
@@ -259,26 +259,19 @@ static NSString *const select_CellID = @"selectCell";
     CGRect tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
     if (indexPath.section == 0) {
         switch (indexPath.row) {
-            case 1:    {
-                _selectArray = @[@"身份证",@"军人证"];
-                CGRect rect1 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
-                [self showPullDownViewWithRect:rect1];
-                
-            }
-                        break;
-            case 3:     _selectArray = @[@"身份证",@"军人证"];
+            case 2:     _selectArray = @[@"身份证",@"军人证"];
                         CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
                         [self showPullDownViewWithRect:rect3];
                         break;
-            case 6:
+            case 5:
                         [self showDataPickerView];
                         break;
-            case 7:     _selectArray = @[@"身份证",@"军人证"];
+            case 6:     _selectArray = @[@"身份证",@"军人证"];
                         CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
                         [self showPullDownViewWithRect:rect7];
                         break;
                 
-            case 9:     _selectArray = @[@"身份证",@"军人证"];
+            case 8:     _selectArray = @[@"身份证",@"军人证"];
                         CGRect rect9 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
                         [self showPullDownViewWithRect:rect9];
                         break;
@@ -365,7 +358,7 @@ static NSString *const select_CellID = @"selectCell";
 //        return nil;
 //    }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSString *idCord = _valueArray_User[2];
+    NSString *idCord = _valueArray_User[1];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:user.userId forKey:@"userId"];
@@ -374,11 +367,11 @@ static NSString *const select_CellID = @"selectCell";
     [dict setValue:[HelperUtil getSexWithIdcord:idCord] forKey:@"sex"];
     [dict setValue:[HelperUtil getBorthDayWithIdCord:idCord] forKey:@"age"];
 //
-    [dict setValue:_valueArray_User[6] forKey:@"workStartDate"];
-    [dict setValue:_valueArray_User[5] forKey:@"oldPost"];
-    [dict setValue:_valueArray_User[4] forKey:@"oldCompany"];
-    [dict setValue:_valueArray_User[10] forKey:@"saleCity"];
-    [dict setValue:_valueArray_User[9] forKey:@"applySaleCompany"];
+    [dict setValue:_valueArray_User[5] forKey:@"workStartDate"];
+    [dict setValue:_valueArray_User[4] forKey:@"oldPost"];
+    [dict setValue:_valueArray_User[3] forKey:@"oldCompany"];
+    [dict setValue:_valueArray_User[9] forKey:@"saleCity"];
+    [dict setValue:_valueArray_User[8] forKey:@"applySaleCompany"];
     [dict setValue:idCord forKey:@"idCard"];
 
     // 银行信息
