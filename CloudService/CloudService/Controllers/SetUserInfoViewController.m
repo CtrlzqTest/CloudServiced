@@ -68,7 +68,13 @@ static NSString *const select_CellID = @"selectCell";
 - (IBAction)saveAction:(id)sender {
     
     [self resignKeyBoardInView:self.view];
-    [self getParam];
+    NSDictionary *dict = [self getParam];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetUserInfoAPI] params:dict successBlock:^(id returnData) {
+        
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
     
 }
 
@@ -104,9 +110,9 @@ static NSString *const select_CellID = @"selectCell";
                        @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
-    _valueArray_User = [NSMutableArray arrayWithArray:@[@"",@"身份证",@"",@"初级用户",@"",@"",@"2015-01-01",@"销售人员",@"",@"阳光保险",@""]];
+    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"身份证",@"421123199303042452",@"初级用户",@"阳光保险",@"销售",@"2015-01-01",@"销售人员",@"6272",@"阳光保险",@"北京"]];
     
-    _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
+    _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"张强",@"6228280791546253810",@"农行",@"中国农业银行荆州支行",@"湖北省",@"荆州市"]];
     
 }
 
@@ -341,25 +347,48 @@ static NSString *const select_CellID = @"selectCell";
 #pragma mark -- 私有方法
 - (NSDictionary *)getParam {
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    for (int i = 0; i < _valueArray_User.count; i ++) {
-        
-        if ([_valueArray_User[i] length] <= 0) {
-            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_User[i]] toView:self.view];
-            return nil;
-        }
-    }
-    for (int i = 0; i < _valueArray_Bank.count; i ++) {
-        if ([_valueArray_Bank[i] length] <= 0) {
-            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_Bank[i]] toView:self.view];
-            return nil;
-        }
-    }
-    if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
-        [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
-    }
+//    for (int i = 0; i < _valueArray_User.count; i ++) {
+//        
+//        if ([_valueArray_User[i] length] <= 0) {
+//            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_User[i]] toView:self.view];
+//            return nil;
+//        }
+//    }
+//    for (int i = 0; i < _valueArray_Bank.count; i ++) {
+//        if ([_valueArray_Bank[i] length] <= 0) {
+//            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_Bank[i]] toView:self.view];
+//            return nil;
+//        }
+//    }
+//    if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
+//        [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
+//        return nil;
+//    }
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    NSString *idCord = _valueArray_User[2];
     
-    return nil;
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:user.userId forKey:@"userId"];
+    [dict setValue:@"zhangqiang" forKey:@"userName"];
+    [dict setValue:user.phoneNo forKey:@"phoneNo"];
+    [dict setValue:[HelperUtil getSexWithIdcord:idCord] forKey:@"sex"];
+    [dict setValue:[HelperUtil getBorthDayWithIdCord:idCord] forKey:@"age"];
+//
+    [dict setValue:_valueArray_User[6] forKey:@"workStartDate"];
+    [dict setValue:_valueArray_User[5] forKey:@"oldPost"];
+    [dict setValue:_valueArray_User[4] forKey:@"oldCompany"];
+    [dict setValue:_valueArray_User[10] forKey:@"saleCity"];
+    [dict setValue:_valueArray_User[9] forKey:@"applySaleCompany"];
+    [dict setValue:idCord forKey:@"idCard"];
+
+    // 银行信息
+    [dict setValue:_valueArray_Bank[0] forKey:@"realName"];
+    [dict setValue:_valueArray_Bank[2] forKey:@"bankName"];
+    [dict setValue:_valueArray_Bank[1] forKey:@"bankNum"];
+    [dict setValue:_valueArray_Bank[3] forKey:@"subbranchName"];
+    [dict setValue:_valueArray_Bank[4] forKey:@"accountProvinces"];
+    [dict setValue:_valueArray_Bank[5] forKey:@"accountCity"];
+    return dict;
 }
 
 // 二分查找卡户银行

@@ -70,4 +70,19 @@
  */
 + (BOOL)checkBankCard: (NSString *) bankCard;
 
+/**
+ *  根据身份证号判别男女
+ */
++(NSString *)getSexWithIdcord:(NSString *)idCord;
+
+/**
+ *  获取出生年份
+ */
++(NSString *)getBorthDayWithIdCord:(NSString *)idCord;
+
+/**
+ *  字符串转时间戳
+ */
++(NSString *)getDateWithDateStr:(NSString *)dateStr;
+
 @end

@@ -45,10 +45,37 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+- (IBAction)resetPwdAction:(id)sender {
+    
+    NSDictionary *dict = @{@"phoneNo":self.phoneNum.text,@"code":self.codeTextFiled.text,@"password":self.pwdTextFiled.text};
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetPwdAPI] params:@{@"phoneNo":@"15910620512",@"code":@"",@"password":@"111111"} successBlock:^(id returnData) {
+        
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+}
 
 - (IBAction)getCodeAction:(id)sender {
     
-    [self countDownTime:@60];
+    NSString * regexPhoneNum = @"^1[0-9]{10}$";
+    NSPredicate *predicatePhoneNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPhoneNum];
+    BOOL isPhoneMatch = [predicatePhoneNum evaluateWithObject:self.phoneNum.text];
+    if (!isPhoneMatch)
+    {
+        [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
+    }else {
+        [self countDownTime:@60];
+        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":self.phoneNum.text} successBlock:^(id returnData) {
+            
+        } failureBlock:^(NSError *error) {
+            
+        } showHUD:NO];
+    }
+//    [self countDownTime:@60];
     
 }
 
@@ -86,7 +113,35 @@
     dispatch_resume(_timer);
 }
 
-
+/**
+ *  检查输入状态
+ */
+- (BOOL)checkInputMode
+{
+    NSString * regexPhoneNum = @"^1[0-9]{10}$";
+    NSPredicate *predicatePhoneNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPhoneNum];
+    NSString * regexPasswordNum = @"[^\n]{6,16}$";
+    NSPredicate *predicatePasswordNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPasswordNum];
+    BOOL isPhoneMatch = [predicatePhoneNum evaluateWithObject:self.phoneNum.text];
+    BOOL isPasswordMatch = [predicatePasswordNum evaluateWithObject: self.pwdTextFiled.text];
+    BOOL ensurePwd = [self.pwdTextFiled.text isEqualToString:self.ensurePwd.text];
+    if (!isPhoneMatch)
+    {
+        [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
+        return false;
+    }
+    if (!isPasswordMatch)
+    {
+        [MBProgressHUD showError:@"密码格式错误,请输入6到16位密码" toView:self.view];
+        return false;
+    }
+    if (!ensurePwd)
+    {
+        [MBProgressHUD showError:@"两次输入密码不一致" toView:self.view];
+        return false;
+    }
+    return true;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

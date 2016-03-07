@@ -128,6 +128,8 @@
             }
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
+        }else if([[returnData valueForKey:@"flag"] isEqualToString:@"error"]){
+            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
         }
     } failureBlock:^(NSError *error) {
         

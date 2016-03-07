@@ -94,18 +94,19 @@
         return;
     }
     //如果没有授权则请求用户授权
+    //设置代理
+    self.locateManager.delegate = self;
+    //设置定位精度
+    self.locateManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    //定位频率,每隔多少米定位一次
+    CLLocationDistance distance=100.0;//十米定位一次
+    self.locateManager.distanceFilter=distance;
+    //启动跟踪定位
     if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
         [self.locateManager requestWhenInUseAuthorization];
 //        [self registerLocation];
     }else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
-        //设置代理
-        self.locateManager.delegate = self;
-        //设置定位精度
-        self.locateManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-        //定位频率,每隔多少米定位一次
-        CLLocationDistance distance=100.0;//十米定位一次
-        self.locateManager.distanceFilter=distance;
-        //启动跟踪定位
+   
         [self.locateManager startUpdatingLocation];
     }
 }
@@ -147,6 +148,16 @@
     //如果不需要实时定位，使用完即使关闭定位服务
     [self.locateManager stopUpdatingLocation];
 }
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status  {
+    
+    if(status==kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [self.locateManager startUpdatingLocation];
+    }
+    
+}
+
 #pragma mark 青牛回调入口
 /****************************************************回调实现****************************************************************/
 - (void)OnInit:(int)reason

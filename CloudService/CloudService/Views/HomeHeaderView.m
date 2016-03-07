@@ -33,8 +33,8 @@
 - (void)setDataWithDictionary:(NSDictionary *)dict {
     self.userNameLabel.text = dict[@"userName"];
     CGSize size = [self.userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:19]}];
-    self.userLabelWidth.constant = size.width + 10;
-    [self setNeedsDisplay];
+    self.userLabelWidth.constant = size.width + 5;
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)playWithImageArray:(NSArray *)imgStrArray clickAtIndex:(ClickBlock )tapIndex {

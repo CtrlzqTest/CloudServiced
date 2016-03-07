@@ -377,4 +377,33 @@
     BOOL isMatch = [pred evaluateWithObject:bankCard];
     return isMatch;
 }
+
++(NSString *)getSexWithIdcord:(NSString *)idCord {
+    
+    NSRange range = NSMakeRange(idCord.length - 2, 1);
+    NSString *numStr = [idCord substringWithRange:range];
+    int num = (int )[numStr integerValue];
+    if (num % 2 == 1) {
+        return @"男";
+    }else {
+        return @"女";
+    }
+}
+
++(NSString *)getBorthDayWithIdCord:(NSString *)idCord {
+    NSRange range = NSMakeRange(6, 4);
+    return [idCord substringWithRange:range];
+}
+
++(NSString *)getDateWithDateStr:(NSString *)dateStr {
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];//格式化
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [dateFormatter dateFromString:dateStr];
+    
+    NSTimeInterval time = [date timeIntervalSince1970];
+    long time2 = (long )(time * 1000);
+    return [NSString stringWithFormat:@"%ldL",time2];
+}
+
 @end
