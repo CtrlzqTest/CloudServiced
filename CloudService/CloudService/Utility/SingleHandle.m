@@ -24,15 +24,15 @@ static SingleHandle *singleHandle = nil;
 - (User *)getUserInfo {
     if (!self.user) {
         self.user = [[User alloc] init];
+        self.user = [[User mj_objectWithKeyValues:[Utility getUserInfoFromLocal]] copy];
     }
-    self.user = [User mj_objectWithKeyValues:[Utility getUserInfoFromLocal]];
     return self.user;
 }
 
 -(void)saveUserInfo:(User *)userModel {
     
+    self.user = userModel;
     NSDictionary *dict = [userModel mj_keyValues];
-    NSLog(@"%@",dict);
     [Utility saveUserInfo:dict];
     
 }

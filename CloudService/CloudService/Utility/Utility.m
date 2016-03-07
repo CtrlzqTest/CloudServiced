@@ -54,7 +54,6 @@ static User *user = nil;
 +(NSDictionary *)getUserInfoFromLocal
 {
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] valueForKey:@"userInfo"];
-    NSLog(@"%@",dict);
     return dict;
 }
 
