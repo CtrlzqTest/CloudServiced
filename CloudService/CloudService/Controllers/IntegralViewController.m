@@ -65,6 +65,17 @@
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize*_page<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView.mj_footer endRefreshing];
+            }
+
             NSArray *listArray = [dataDic objectForKey:@"list"];
             [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_integralArray);
@@ -92,6 +103,17 @@
         
         NSDictionary *dic = returnData;
         NSDictionary *dataDic = [dic objectForKey:@"data"];
+        //取出总条数
+        int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+        NSLog(@"总条数：%i",totalCount);
+        if (totalCount-_pageSize*_page<=0) {
+            //没有数据，直接提示没有更多数据
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            //有数据，则结束刷新状态，以便下次能够刷新
+            [_tableView.mj_footer endRefreshing];
+        }
+
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_integralArray);

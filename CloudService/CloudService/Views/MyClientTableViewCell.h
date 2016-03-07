@@ -11,4 +11,7 @@
 
 @interface MyClientTableViewCell : UITableViewCell
 @property (weak, nonatomic)IBOutlet UILabel *lbInfo;
+@property (weak, nonatomic)IBOutlet UILabel *lbCustName;
+@property (weak, nonatomic)IBOutlet UILabel *lbLicenseNo;
+
 @end

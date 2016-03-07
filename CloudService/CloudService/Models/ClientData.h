@@ -26,4 +26,6 @@
 @property (nonatomic, copy)NSString *phoneNo;
 @property (nonatomic, copy)NSString *sex;
 @property (nonatomic, copy)NSString *type;
+@property (nonatomic, copy)NSString *baseId;
+@property (nonatomic, copy)NSString *endCode;
 @end

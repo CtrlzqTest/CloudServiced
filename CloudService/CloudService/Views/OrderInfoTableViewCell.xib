@@ -133,6 +133,11 @@
             <connections>
                 <outlet property="appointmentBtn" destination="ZHL-oW-Dk3" id="ft3-m5-4OB"/>
                 <outlet property="callBtn" destination="czd-BD-twX" id="SoI-o9-BqJ"/>
+                <outlet property="lbCustName" destination="hHH-oB-X4l" id="pdf-29-aZQ"/>
+                <outlet property="lbEndCode" destination="kap-3e-Z70" id="Yib-C9-7tG"/>
+                <outlet property="lbLicenseNo" destination="7bb-8G-65z" id="O2E-VP-tqK"/>
+                <outlet property="lbOrderNum" destination="4aq-H3-r14" id="PEJ-OF-dfp"/>
+                <outlet property="lbPhoneNo" destination="Xdk-EY-7CH" id="dY6-1J-xC3"/>
                 <outlet property="priceBtn" destination="QNG-L2-OfK" id="zDq-Ca-4cG"/>
             </connections>
             <point key="canvasLocation" x="344.5" y="36.5"/>
@@ -256,6 +261,9 @@
             <connections>
                 <outlet property="callBtn" destination="XUw-kQ-Z8L" id="N6T-1F-KaY"/>
                 <outlet property="giftBtn" destination="YGb-NM-MkY" id="GGd-az-z6a"/>
+                <outlet property="lbCustName" destination="DYG-lk-MNG" id="3rf-g7-aap"/>
+                <outlet property="lbLicenseNo" destination="45w-Kq-Gb6" id="T2Z-ii-bcc"/>
+                <outlet property="lbPhoneNo" destination="fNx-qg-FMI" id="z8F-ff-GmL"/>
             </connections>
             <point key="canvasLocation" x="251.5" y="481"/>
         </tableViewCell>
@@ -397,9 +405,14 @@
             <connections>
                 <outlet property="appointmentBtn" destination="DLn-MO-kaN" id="Y5c-5H-rNM"/>
                 <outlet property="callBtn" destination="KgO-YT-UOt" id="46r-9R-AYy"/>
+                <outlet property="lbCustName" destination="Mn2-VQ-IpI" id="wza-za-WPI"/>
+                <outlet property="lbEndCode" destination="xuC-Hg-V4S" id="HvL-gn-lYS"/>
+                <outlet property="lbLicenseNo" destination="NyH-5o-C9x" id="cD5-fP-ocj"/>
+                <outlet property="lbOrderNum" destination="bic-c9-7pd" id="e7c-1b-hoi"/>
+                <outlet property="lbPhoneNo" destination="BFw-cm-VyD" id="fNC-xf-g0d"/>
                 <outlet property="priceBtn" destination="Uxo-IN-Zat" id="54V-Pe-jZr"/>
             </connections>
-            <point key="canvasLocation" x="760.5" y="43"/>
+            <point key="canvasLocation" x="825.5" y="37"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="282" id="iyY-GL-nAJ" customClass="OrderInfoTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="282"/>
@@ -537,8 +550,12 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="appointmentBtn" destination="Am2-fp-ArM" id="E96-5g-b7t"/>
                 <outlet property="callBtn" destination="ijO-9c-ciw" id="wyV-w2-BDl"/>
+                <outlet property="lbCustName" destination="nJA-gE-8BI" id="IwU-cS-LwB"/>
+                <outlet property="lbEndCode" destination="lgo-r8-RDk" id="b7Q-rf-mAJ"/>
+                <outlet property="lbLicenseNo" destination="bpY-zF-tAu" id="i8X-ua-rey"/>
+                <outlet property="lbOrderNum" destination="IgT-WC-Ris" id="OqI-ck-uDX"/>
+                <outlet property="lbPhoneNo" destination="Dhh-WU-r9W" id="7gB-K6-FLj"/>
                 <outlet property="priceBtn" destination="nBn-km-cO7" id="vrb-LO-3rs"/>
             </connections>
             <point key="canvasLocation" x="767.5" y="449"/>

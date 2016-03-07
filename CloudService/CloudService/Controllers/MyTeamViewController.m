@@ -8,8 +8,15 @@
 
 #import "MyTeamViewController.h"
 #import "MyTeamTableViewCell.h"
+#import <MJRefresh.h>
 
 @interface MyTeamViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    NSMutableArray *_teamMemberArray;
+    int _page;//当前页数
+    int _pageSize;//每页加载数
+    
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *inviteBtn;
 
@@ -21,7 +28,32 @@ static NSString *cell_id = @"myTeamCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self addMjRefresh];
     [self setupViews];
+    
+}
+
+- (void)addMjRefresh {
+    _page=1;
+    _pageSize=8;
+    // 下拉刷新
+    _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+        [self requestTeamMemberData];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    [_tableView.mj_header beginRefreshing];
+    
+    // 上拉刷新
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreTeamMemberData];
+        
+    }];
+
 }
 
 - (void)setupViews {
@@ -35,6 +67,79 @@ static NSString *cell_id = @"myTeamCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"MyTeamTableViewCell" bundle:nil] forCellReuseIdentifier:cell_id];
     self.tableView.tableFooterView = [[UIView alloc] init];
+}
+
+#pragma mark 加载个人优惠券
+- (void)requestTeamMemberData {
+    _teamMemberArray = nil;
+    _teamMemberArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize*_page<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView.mj_footer endRefreshing];
+            }
+            
+            NSArray *listArray = [dataDic objectForKey:@"list"];
+//            [_teamMemberArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+            NSLog(@"%@",_teamMemberArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
+        
+        [_tableView reloadData];
+        [_tableView.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+        [_tableView.mj_header endRefreshing];
+    } showHUD:YES];
+}
+- (void)requestMoreTeamMemberData {
+    _page++;
+    
+    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize*_page<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView.mj_footer endRefreshing];
+            }
+            
+            NSArray *listArray = [dataDic objectForKey:@"list"];
+//            [_teamMemberArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
+            NSLog(@"%@",_teamMemberArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
+        [_tableView reloadData];
+        [_tableView.mj_footer endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [_tableView.mj_footer endRefreshing];
+    } showHUD:YES];
 }
 
 - (IBAction)inviteAction:(id)sender {

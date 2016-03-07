@@ -23,7 +23,7 @@
 
 #define kGetuserIntergralAPI         @"/app/credits/findUserCredits"                     //我的积分
 
-#define kGetExchangeIntergralAPI         @"/app/credits/exchangeMoney"                     //积分兑换
+#define kGetExchangeIntergralAPI         @"/app/credits/exchangeMoney"                    //积分兑换
 
 #define kResetUserInfoAPI       @"/app/user/changeUserInfo"                     //修改个人信息
 
@@ -31,25 +31,25 @@
 
 #define kSignedAPI              @"/app/sign/signed"                     //签到
 
+#define kCheckPhoneNumAPI       @"/app/user/verifyPhoneNo"                     //验证手机
+
 #define kSendCode               @"/userapp/sendCode"                     //业绩查询
 
 #define kUserCouponsList        @"/app/coupon/findUserCouponsList"                 //个人业绩查询
 
 #define kTeamCouponsList        @"/app/coupon/findTeamCouponsList"                 //团队业绩查询
 
-#define kfindUserCreditsRecord  @"/app/credits/findUserCreditsRecord"             //积分历史查询
+#define kfindUserCreditsRecord    @"/app/credits/findUserCreditsRecord"             //积分历史查询
 
-#define kCheckPhoneNumAPI       @"/app/user/verifyPhoneNo"                     //验证手机
-
-#define kfindUserCreditsRecord  @"/app/credits/findUserCreditsRecord"             //积分历史查询
-
-#define kapplyCustomerData      @"/app/customerData/applyCustomerData"             //客户数据申请
+#define kapplyCustomerData     @"/app/customerData/applyCustomerData"             //客户数据申请
 
 #define kfindPersonCustList     @"/app/customerData/findPersonCustList"          //历史客户数据列表
 
-#define kMyTeamList             @"/app/team/findTeamMember"          //我的团队
+#define kaddReserve              @"/app/reserve/addReserve"                      //保存预约
 
+#define kgetEndCode           @"/app/dic/getEndCode"                    //获取结束码
 
+#define kfindTeamMember           @"/app/team/findTeamMember"                    //查询团队成员
 
 //   常量
 /**************************************************************************************/

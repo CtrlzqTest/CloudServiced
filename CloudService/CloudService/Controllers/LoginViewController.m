@@ -110,7 +110,8 @@
     if (address) {
         [dict setValue:address forKey:@"address"];
     }else {
-        [MBProgressHUD showError:@"无法获取定位信息,系统默认您的的登录城市为北京市" toView:self.view];
+//        [MBProgressHUD showError:@"无法获取定位信息,系统默认您的的登录城市为北京市" toView:self.view];
+        [MBProgressHUD showMessag:@"无法获取定位信息,系统默认您的的登录城市为北京市" toView:self.view];
         [dict setValue:@"北京市" forKey:@"address"];
     }
     

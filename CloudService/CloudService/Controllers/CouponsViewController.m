@@ -21,6 +21,7 @@
     NSMutableArray *_teamArray;//团队优惠券列表
     UITableView *_tableView1;
     UITableView *_tableView2;
+    BOOL _isLoad;//是否已加载
 }
 @property (strong, nonatomic) IBOutlet LazyPageScrollView *pageView;
 @end
@@ -121,6 +122,13 @@
 }
 
 - (void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn {
+    if (index == 1) {
+    
+        if (!_isLoad) {
+            [_tableView2.mj_header beginRefreshing];
+            _isLoad = YES;
+        }
+    }
     NSLog(@"之前下标：%ld 当前下标：%ld",preIndex,index);
 }
 
@@ -129,6 +137,10 @@
     if(bLeft)
     {
         NSLog(@"left");
+        if (!_isLoad) {
+            [_tableView2.mj_header beginRefreshing];
+            _isLoad = YES;
+        }
     }
     else
     {
@@ -147,6 +159,17 @@
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize1*_page1<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView1.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView1.mj_footer endRefreshing];
+            }
+
             NSArray *listArray = [dataDic objectForKey:@"list"];
             [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_userArray);
@@ -172,6 +195,17 @@
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize1*_page1<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView1.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView1.mj_footer endRefreshing];
+            }
+
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_userArray);
@@ -197,6 +231,17 @@
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize2*_page2<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView2.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView2.mj_footer endRefreshing];
+            }
+
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_teamArray);
@@ -221,6 +266,17 @@
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if (totalCount-_pageSize2*_page2<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView2.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView2.mj_footer endRefreshing];
+            }
+
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_teamArray);
@@ -257,6 +313,7 @@
         Coupons *coupons = [_userArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
         cell.lbEndTime.text = [NSString stringWithFormat:@"有效期至%@",[HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"]];
+        
      
     }else{
         Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];

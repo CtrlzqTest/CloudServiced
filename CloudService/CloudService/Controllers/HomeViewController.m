@@ -14,6 +14,7 @@
 #import "ClientData.h"
 #import "UserInfoViewController.h"
 #import "Utility.h"
+#import "OrderInfoViewController.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -21,9 +22,9 @@
     NSArray *_dataKeyArray;
     NSArray *_imageArray;
     NSArray *_scrollImgArray;
-    
+    NSString *_integral;
     BOOL _isHide;
-    NSString *_integral; // 积分
+    ClientData *_clientData;//用户数据
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -242,7 +243,7 @@ static NSString *headerView_ID = @"headerView";
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             NSDictionary *dataDic = [dic objectForKey:@"data"];
-            ClientData *clientData = [ClientData mj_objectWithKeyValues:dataDic];
+            _clientData = [ClientData mj_objectWithKeyValues:dataDic];
             [self performSegueWithIdentifier:@"getData" sender:self];
             
         }else {
@@ -259,14 +260,11 @@ static NSString *headerView_ID = @"headerView";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // segue.identifier：获取连线的ID
-//    if ([segue.identifier isEqualToString:@"SendValue"]) {
-//        // segue.destinationViewController：获取连线时所指的界面（VC）
-//        ReceiveViewController *receive = segue.destinationViewController;
-//        receive.name = @"Garvey";
-//        receive.age = 110;
-//        // 这里不需要指定跳转了，因为在按扭的事件里已经有跳转的代码
-//        //		[self.navigationController pushViewController:receive animated:YES];
-//    }
+    if ([segue.identifier isEqualToString:@"getData"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        OrderInfoViewController *receive = segue.destinationViewController;
+        receive.clientData = _clientData;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
