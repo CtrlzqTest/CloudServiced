@@ -22,7 +22,7 @@
     NSArray *_dataKeyArray;
     NSArray *_imageArray;
     NSArray *_scrollImgArray;
-    
+    NSString *_integral;
     BOOL _isHide;
     ClientData *_clientData;//用户数据
 }
