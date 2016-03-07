@@ -237,24 +237,29 @@ static NSString *headerView_ID = @"headerView";
 
 /** 获取数据*/
 - (void)getData {
-    NSDictionary *paramsDic=@{@"userId":@"5e98d681531cd8e201531cd8ec590000"};
-    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyCustomerData];
-    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSDictionary *dic = returnData;
-        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
-            NSDictionary *dataDic = [dic objectForKey:@"data"];
-            _clientData = [ClientData mj_objectWithKeyValues:dataDic];
-            [self performSegueWithIdentifier:@"getData" sender:self];
+    if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"0"]) {
+        NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
+        NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyCustomerData];
+        [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+            NSDictionary *dic = returnData;
+            if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+                NSDictionary *dataDic = [dic objectForKey:@"data"];
+                _clientData = [ClientData mj_objectWithKeyValues:dataDic];
+                [self performSegueWithIdentifier:@"getData" sender:self];
+                
+            }else {
+                [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+                
+            }
             
-        }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
             
-        }
-        
-
-    } failureBlock:^(NSError *error) {
-
-    } showHUD:YES];
+        } failureBlock:^(NSError *error) {
+            
+        } showHUD:YES];
+    }else {
+        [MBProgressHUD showMessag:@"您还未签到，不能获取数据" toView:self.view];
+    }
+    
 
 }
 

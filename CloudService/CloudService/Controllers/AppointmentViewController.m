@@ -17,6 +17,7 @@
 @interface AppointmentViewController ()<HZQDatePickerViewDelegate,UITextViewDelegate>
 {
     NSArray *_codeArray;
+    NSDate *_date;
 }
 @property (nonatomic, strong) PlaceholderTextView * textView;
 @property (weak, nonatomic)IBOutlet UIView *bgView;
@@ -110,7 +111,7 @@
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
     switch (type) {
         case DateTypeOfStart:
-            
+            _date = date;
             self.lbDate.text = currentOlderOneDateStr;
             
             break;
@@ -163,8 +164,8 @@
 }
 - (IBAction)save:(id)sender {
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kaddReserve];
-    NSDictionary *params = @{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"customerId":@"",@"reserveTime":@"",@"comment":self.textView.text,@"endCode":_lbCode.text};
-    [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
+    NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"customerId":@"",@"reserveTime":[NSString stringWithFormat:@"%ld",(long)[_date timeIntervalSince1970]*1000],@"comment":self.textView.text,@"endCode":_lbCode.text};
+    [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
          

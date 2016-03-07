@@ -9,7 +9,9 @@
 #import "CreatClientViewController.h"
 
 @interface CreatClientViewController ()
-
+@property (weak, nonatomic)IBOutlet UITextField *tfName;
+@property (weak, nonatomic)IBOutlet UITextField *tfPhone;
+@property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
 @end
 
 @implementation CreatClientViewController
@@ -22,6 +24,19 @@
     }];
     // Do any additional setup after loading the view.
 }
+- (IBAction)nextAction:(id)sender {
+    if ([_tfName.text isEqualToString:@""]) {
+        [MBProgressHUD showMessag:@"请输入客户姓名" toView:self.view];
+    }else if ([_tfPhone.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入客户手机号" toView:self.view];
+    }else if ([_tfLicenseNo.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
+    }else {
+        [self performSegueWithIdentifier:@"offer" sender:self];
+    }
+}
+
+
 - (void)viewWillAppear:(BOOL)animated {
     self.title = @"创建客户";
    
