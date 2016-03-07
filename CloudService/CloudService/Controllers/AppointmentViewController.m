@@ -15,6 +15,9 @@
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 @interface AppointmentViewController ()<HZQDatePickerViewDelegate,UITextViewDelegate>
+{
+    NSArray *_codeArray;
+}
 @property (nonatomic, strong) PlaceholderTextView * textView;
 @property (weak, nonatomic)IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *lbCode;
@@ -28,10 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
+    //获取结束码
+    [self getCode];
+    
     [self.bgView addSubview:self.textView];
     
     self.wordCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textView.frame.origin.x + 20,  self.textView.frame.origin.y + 80 , [UIScreen mainScreen].bounds.size.width - 40, 20)];
@@ -51,15 +58,29 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)getCode {
+     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kgetEndCode];
+    [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
+    
+        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+            _codeArray = [returnData objectForKey:@"data"];
+            
+        }else {
+            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:NO];
+}
 - (void)codeClick:(UITapGestureRecognizer *)tap {
     [self resignKeyBoardInView:self.view];
-    NSArray *array = @[@"未报价",@"已报价",@"已完成"];
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(110, 135, 200, 200) selectData:
 
-     array
+     _codeArray
                                                         action:^(NSInteger index) {
                                                             
-                                                            _lbCode.text = [array objectAtIndex:index];
+                                                            _lbCode.text = [_codeArray objectAtIndex:index];
                                                         } animated:YES];
 }
 
@@ -134,12 +155,27 @@
         
     }
     else{
-        self.textView.editable = NO;
+        self.textView.text=[text.text substringToIndex:50];
+        [MBProgressHUD showMessag:@"最多输入50个字符" toView:self.view];
         
     }
     return nil;
 }
 - (IBAction)save:(id)sender {
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kaddReserve];
+    NSDictionary *params = @{@"userId":@"5e98d681531cd8e201531cd8ec590000",@"customerId":@"",@"reserveTime":@"",@"comment":self.textView.text,@"endCode":_lbCode.text};
+    [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
+        
+        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+         
+            
+        }else {
+            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:NO];
 }
 /** 消失键盘*/
 - (void)resignKeyBoardInView:(UIView *)view

@@ -21,6 +21,7 @@
     NSMutableArray *_teamArray;//团队优惠券列表
     UITableView *_tableView1;
     UITableView *_tableView2;
+    BOOL _isLoad;//是否已加载
 }
 @property (strong, nonatomic) IBOutlet LazyPageScrollView *pageView;
 @end
@@ -121,6 +122,13 @@
 }
 
 - (void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn {
+    if (index == 1) {
+    
+        if (!_isLoad) {
+            [_tableView2.mj_header beginRefreshing];
+            _isLoad = YES;
+        }
+    }
     NSLog(@"之前下标：%ld 当前下标：%ld",preIndex,index);
 }
 
@@ -129,6 +137,10 @@
     if(bLeft)
     {
         NSLog(@"left");
+        if (!_isLoad) {
+            [_tableView2.mj_header beginRefreshing];
+            _isLoad = YES;
+        }
     }
     else
     {
