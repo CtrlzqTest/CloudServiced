@@ -69,6 +69,15 @@ static User *user = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)remenberUserAndPwd:(NSDictionary *)dict {
+    [[NSUserDefaults standardUserDefaults] setValue:dict forKey:@"userAndPwd"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSDictionary *)getUserNameAndPwd {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userAndPwd"];
+}
+
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{
     
 //    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];

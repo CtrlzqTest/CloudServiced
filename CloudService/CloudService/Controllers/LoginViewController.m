@@ -15,7 +15,9 @@
 #import "Utility.h"
 #import "User.h"
 
-@interface LoginViewController ()<UITextFieldDelegate>
+@interface LoginViewController ()<UITextFieldDelegate>{
+    BOOL _isRemenberPwd;
+}
 
 @property (weak, nonatomic) IBOutlet LoginInputView *inputView;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -47,7 +49,9 @@
     self.choseBtn.selected = !self.choseBtn.selected;
     if (self.choseBtn.selected) {
         [self.choseBtn setBackgroundImage:[UIImage imageNamed:@"login-choose_"] forState:(UIControlStateNormal)];
+        _isRemenberPwd = YES;
     }else {
+        _isRemenberPwd = NO;
         [self.choseBtn setBackgroundImage:nil forState:(UIControlStateNormal)];
     }
 }
@@ -60,9 +64,11 @@
     self.inputView.backgroundColor = [UIColor colorWithRed:0.918 green:0.917
                                                       blue:0.925 alpha:0.600];
     
+    NSDictionary *userPwdDict = [Utility getUserNameAndPwd];
     UIColor *color = [UIColor colorWithRed:0.263 green:0.561 blue:0.796 alpha:1.000];
     self.UserTextFiled.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-user"]];
     self.UserTextFiled.leftViewMode = UITextFieldViewModeAlways;
+    self.UserTextFiled.text = userPwdDict[@"userName"];
     self.UserTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                 initWithString:@"用户名/手机号码/邮箱"
                                                 attributes:@{NSForegroundColorAttributeName:color}];
@@ -74,11 +80,10 @@
     self.pwdTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                initWithString:@"请输入密码"
                                                attributes:@{NSForegroundColorAttributeName:color}];
-    
+    self.pwdTextFiled.text = userPwdDict[@"pwd"];
     
     self.loginBtn.layer.cornerRadius = 3;
     self.loginBtn.clipsToBounds = YES;
-    NSLog(@"%@",NSStringFromCGRect(self.choseBtn.frame));
     self.choseBtn.layer.cornerRadius = self.choseBtn.frame.size.width / 2.0;
     
     
@@ -110,11 +115,18 @@
         [dict setValue:@"北京市" forKey:@"address"];
     }
     
+    __weak typeof(self) weakSelf = self;
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
 //            [Utility saveUserInfo:[returnData valueForKey:@"data"]];
             User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
+            if (weakSelf.choseBtn.selected) {
+                [Utility saveUserInfo:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":weakSelf.pwdTextFiled.text}];
+            }else {
+                [Utility saveUserInfo:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":@""}];
+            }
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }
     } failureBlock:^(NSError *error) {
