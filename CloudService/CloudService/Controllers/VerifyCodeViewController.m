@@ -7,6 +7,7 @@
 //
 
 #import "VerifyCodeViewController.h"
+#import "Utility.h"
 
 @interface VerifyCodeViewController ()
 
@@ -35,7 +36,14 @@
 }
 - (IBAction)nextStepActopn:(id)sender {
     
-    [self performSegueWithIdentifier:@"setNewPwd_push" sender:self];
+    NSString *pwd = [[Utility getUserNameAndPwd] valueForKey:@"pwd"];
+    if ([pwd isEqualToString:self.pwdTextWord.text])
+    {
+        [self performSegueWithIdentifier:@"setNewPwd_push" sender:self];
+    }else
+    {
+        [MBProgressHUD showError:@"原始密码错误" toView:self.view];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

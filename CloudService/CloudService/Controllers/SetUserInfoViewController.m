@@ -71,6 +71,12 @@ static NSString *const select_CellID = @"selectCell";
     NSDictionary *dict = [self getParam];
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetUserInfoAPI] params:dict successBlock:^(id returnData) {
         
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+            [[SingleHandle shareSingleHandle] saveUserInfo:user];
+            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
         
     } failureBlock:^(NSError *error) {
         
@@ -110,7 +116,7 @@ static NSString *const select_CellID = @"selectCell";
                        @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
-    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"421123199303042452",@"初级用户",@"阳光保险",@"销售",@"2015-01-01",@"销售人员",@"6272",@"阳光保险",@"北京"]];
+    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"421133199303042452",@"初级用户",@"阳光保险",@"销售",@"2015-01-01",@"销售人员",@"6272",@"阳光保险",@"北京"]];
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"张强",@"6228280791546253810",@"农行",@"中国农业银行荆州支行",@"湖北省",@"荆州市"]];
     
@@ -226,9 +232,9 @@ static NSString *const select_CellID = @"selectCell";
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
     if (indexPath.section == 0) {
-        if (indexPath.row == 2 || indexPath.row == 6 || indexPath.row == 8) {
+        if (indexPath.row == 6 || indexPath.row == 8 || indexPath.row == 3 || indexPath.row == 4) {
             [cell isPullDown:YES];
-        }else if(indexPath.row == 6){
+        }else if(indexPath.row == 2 || indexPath.row == 5){
             cell.textFiled.enabled = NO;
         }
     }else if(indexPath.row == 1){
@@ -259,20 +265,24 @@ static NSString *const select_CellID = @"selectCell";
     CGRect tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
     if (indexPath.section == 0) {
         switch (indexPath.row) {
-            case 2:     _selectArray = @[@"身份证",@"军人证"];
-                        CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
+            case 3:     _selectArray = @[@"身份证",@"军人证"];
+                        CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect3];
+                        break;
+            case 4:     _selectArray = @[@"身份证",@"军人证"];
+                        CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
+                        [self showPullDownViewWithRect:rect4];
                         break;
             case 5:
                         [self showDataPickerView];
                         break;
-            case 6:     _selectArray = @[@"身份证",@"军人证"];
-                        CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
+            case 6:     _selectArray = @[@"全职",@"兼职"];
+                        CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect7];
                         break;
                 
             case 8:     _selectArray = @[@"身份证",@"军人证"];
-                        CGRect rect9 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, _selectArray.count * 30);
+                        CGRect rect9 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect9];
                         break;
             default:
@@ -359,28 +369,43 @@ static NSString *const select_CellID = @"selectCell";
 //    }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSString *idCord = _valueArray_User[1];
+    user.sex = [HelperUtil getSexWithIdcord:idCord];
+    user.age = [HelperUtil getBorthDayWithIdCord:idCord];
+    user.workStartDate = _valueArray_User[5];
+    user.oldPost = _valueArray_User[4];
+    user.oldCompany = _valueArray_User[3];
+    user.saleCity = _valueArray_User[9];
+    user.applySaleCompany = _valueArray_User[8];
+    user.idCard = idCord;
+    user.realName = _valueArray_Bank[0];
+    user.bankNum = _valueArray_Bank[1];
+    user.bankName = _valueArray_Bank[2];
+    user.subbranchName = _valueArray_Bank[3];
+    user.accountProvinces = _valueArray_Bank[4];
+    user.accountCity = _valueArray_Bank[5];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:user.userId forKey:@"userId"];
-    [dict setValue:@"zhangqiang" forKey:@"userName"];
+    [dict setValue:user.userName forKey:@"userName"];
     [dict setValue:user.phoneNo forKey:@"phoneNo"];
-    [dict setValue:[HelperUtil getSexWithIdcord:idCord] forKey:@"sex"];
-    [dict setValue:[HelperUtil getBorthDayWithIdCord:idCord] forKey:@"age"];
+    [dict setValue:user.sex forKey:@"sex"];
+    [dict setValue:user.age forKey:@"age"];
 //
-    [dict setValue:_valueArray_User[5] forKey:@"workStartDate"];
-    [dict setValue:_valueArray_User[4] forKey:@"oldPost"];
-    [dict setValue:_valueArray_User[3] forKey:@"oldCompany"];
-    [dict setValue:_valueArray_User[9] forKey:@"saleCity"];
-    [dict setValue:_valueArray_User[8] forKey:@"applySaleCompany"];
-    [dict setValue:idCord forKey:@"idCard"];
+    [dict setValue:user.workStartDate forKey:@"workStartDate"];
+    [dict setValue:user.oldPost forKey:@"oldPost"];
+    [dict setValue:user.oldCompany forKey:@"oldCompany"];
+    [dict setValue:user.saleCity forKey:@"saleCity"];
+    [dict setValue:user.applySaleCompany forKey:@"applySaleCompany"];
+    [dict setValue:user.idCard forKey:@"idCard"];
 
     // 银行信息
-    [dict setValue:_valueArray_Bank[0] forKey:@"realName"];
-    [dict setValue:_valueArray_Bank[2] forKey:@"bankName"];
-    [dict setValue:_valueArray_Bank[1] forKey:@"bankNum"];
-    [dict setValue:_valueArray_Bank[3] forKey:@"subbranchName"];
-    [dict setValue:_valueArray_Bank[4] forKey:@"accountProvinces"];
-    [dict setValue:_valueArray_Bank[5] forKey:@"accountCity"];
+    [dict setValue:user.realName forKey:@"realName"];
+    [dict setValue:user.bankName forKey:@"bankName"];
+    [dict setValue:user.bankNum forKey:@"bankNum"];
+    [dict setValue:user.subbranchName forKey:@"subbranchName"];
+    [dict setValue:user.accountProvinces forKey:@"accountProvinces"];
+    [dict setValue:user.accountCity forKey:@"accountCity"];
+    
     return dict;
 }
 

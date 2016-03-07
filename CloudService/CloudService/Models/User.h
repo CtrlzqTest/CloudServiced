@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *photoUrl;
 @property(nonatomic,copy)NSString *realName;
 @property(nonatomic,copy)NSString *registerTime;
+@property(nonatomic,copy)NSString *oldCompany;
 
 @property(nonatomic,copy)NSString *roleId;
 @property(nonatomic,copy)NSString *roleName;
