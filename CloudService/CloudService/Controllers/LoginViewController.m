@@ -104,8 +104,8 @@
 //    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:@"15910435235" forKey:@"userName"];
-    [dict setValue:@"999999" forKey:@"password"];
+    [dict setValue:@"13245628349" forKey:@"userName"];
+    [dict setValue:@"123456" forKey:@"password"];
     NSString *address = [Utility location];
     if (address) {
         [dict setValue:address forKey:@"address"];
@@ -131,7 +131,7 @@
             [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
         }
     } failureBlock:^(NSError *error) {
-        
+        [MBProgressHUD showError:@"服务器异常" toView:self.view];
     } showHUD:YES];
 }
 - (void)didReceiveMemoryWarning {

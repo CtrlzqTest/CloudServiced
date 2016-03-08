@@ -232,7 +232,7 @@ static NSString *const select_CellID = @"selectCell";
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
     if (indexPath.section == 0) {
-        if (indexPath.row == 6 || indexPath.row == 8 || indexPath.row == 3 || indexPath.row == 4) {
+        if (indexPath.row == 6 || indexPath.row == 8 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 9) {
             [cell isPullDown:YES];
         }else if(indexPath.row == 2 || indexPath.row == 5){
             cell.textFiled.enabled = NO;
@@ -263,8 +263,10 @@ static NSString *const select_CellID = @"selectCell";
     _indexPath = indexPath;
     SetUserInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     CGRect tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
-    if (indexPath.section == 0) {
-        switch (indexPath.row) {
+    if (indexPath.section == 0)
+    {
+        switch (indexPath.row)
+        {
             case 3:     _selectArray = @[@"身份证",@"军人证"];
                         CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect3];
@@ -284,6 +286,9 @@ static NSString *const select_CellID = @"selectCell";
             case 8:     _selectArray = @[@"身份证",@"军人证"];
                         CGRect rect9 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect9];
+                        break;
+                
+            case 9:     [self showCityPickerView];
                         break;
             default:
                 break;
@@ -375,6 +380,7 @@ static NSString *const select_CellID = @"selectCell";
     user.oldPost = _valueArray_User[4];
     user.oldCompany = _valueArray_User[3];
     user.saleCity = _valueArray_User[9];
+    user.chatName = _valueArray_User[7];
     user.applySaleCompany = _valueArray_User[8];
     user.idCard = idCord;
     user.realName = _valueArray_Bank[0];
