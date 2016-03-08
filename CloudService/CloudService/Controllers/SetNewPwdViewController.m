@@ -7,6 +7,7 @@
 //
 
 #import "SetNewPwdViewController.h"
+#import "Utility.h"
 
 @interface SetNewPwdViewController ()
 
@@ -34,7 +35,48 @@
 }
 
 - (IBAction)resetPwdAction:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    if (![self checkInputMode]) {
+        return;
+    }
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    NSDictionary *dict = @{@"password":@"111111" ,@"newPwd":self.pwdTextFiled.text,@"userId":user.userId};
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetPwdAPI] params:dict successBlock:^(id returnData) {
+        
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"])
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else
+        {
+            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+    
+}
+
+/**
+ *  检查输入状态
+ */
+- (BOOL)checkInputMode
+{
+    NSString * regexPasswordNum = @"[^\n]{6,16}$";
+    NSPredicate *predicatePasswordNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPasswordNum];
+    BOOL isPasswordMatch = [predicatePasswordNum evaluateWithObject: self.pwdTextFiled.text];
+    BOOL ensurePwd = [self.pwdTextFiled.text isEqualToString:self.enSurePwdTextFiled.text];
+    if (!isPasswordMatch)
+    {
+        [MBProgressHUD showError:@"密码格式错误,请输入6到16位密码" toView:self.view];
+        return false;
+    }
+    if (!ensurePwd)
+    {
+        [MBProgressHUD showError:@"两次输入密码不一致" toView:self.view];
+        return false;
+    }
+    return true;
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

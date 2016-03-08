@@ -65,9 +65,23 @@
     _valueArray[0] = @"";
     _valueArray[1] = user.userName;
     _valueArray[2] = user.phoneNo;
-    _valueArray[3] = user.idCard;
-    _valueArray[4] = user.chatName;
-    _valueArray[5] = user.bankNum;
+//    if (![user.idCard compare:@"(null)"]) {
+//        _valueArray[3] = @"";
+//    }else
+//    {
+        _valueArray[3] = user.idCard;
+//    }
+//    if (![user.chatName compare:@"(null)"]) {
+//        _valueArray[4] = @"";
+//    }else
+//    {
+        _valueArray[4] = user.chatName;
+//    }
+//    if (![user.bankNum compare:@"(null)"]) {
+//        _valueArray[5] = user.bankNum;
+//    }else {
+        _valueArray[5] = user.bankNum;
+//    }
 }
 
 - (void)setupViews {

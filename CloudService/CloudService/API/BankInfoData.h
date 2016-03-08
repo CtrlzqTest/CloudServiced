@@ -19,4 +19,14 @@
  */
 +(NSArray *)bankNameArray;
 
+/**
+ *  保险公司
+ */
++(NSArray *)insureCommpanyNameArray;
+
+/**
+ *  保险公司编码
+ */
++(NSArray *)insureCommpanyCodeArray;
+
 @end

@@ -21,13 +21,15 @@
 
 #define kGetuserInfoAPI         @"/app/user/findUserInfo"                     //个人信息
 
-#define kGetuserIntergralAPI         @"/app/credits/findUserCredits"                     //我的积分
+#define kGetuserIntergralAPI    @"/app/credits/findUserCredits"                     //我的积分
 
-#define kGetExchangeIntergralAPI         @"/app/credits/exchangeMoney"                    //积分兑换
+#define kGetExchangeIntergralAPI  @"/app/credits/exchangeMoney"                    //积分兑换
 
 #define kResetUserInfoAPI       @"/app/user/changeUserInfo"                     //修改个人信息
 
-#define kResetPwdAPI            @"/app/user/changePassword"                     //修改密码
+#define kForgetPwdAPI            @"/app/user/forgetPassword"                     //忘记密码
+
+#define kResetPwdAPI            @"/app/user/changePassword"                     // 登陆后修改密码
 
 #define kSignedAPI              @"/app/sign/signed"                     //签到
 

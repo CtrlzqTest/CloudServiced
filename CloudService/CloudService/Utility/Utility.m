@@ -24,8 +24,6 @@ static User *user = nil;
     return user;
 }
 
-
-
 + (BOOL)isFirstLoadding {
     
     BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLoadding"];
