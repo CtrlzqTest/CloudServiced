@@ -12,6 +12,7 @@
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import "WXApi.h"
 #import "Utility.h"
+#import "MHAsiNetworkHandler.h"
 
 #define MObAppKey  @"100082c56c5c0"
 #define WXAppID   @"wx125bcc153468cc36"
@@ -28,6 +29,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //检测网络状态
+    [MHAsiNetworkHandler startMonitoring];
     // 注册shareSDK
     [self registerShareSDK];
     

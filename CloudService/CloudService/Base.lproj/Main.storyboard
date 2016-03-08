@@ -1374,6 +1374,9 @@
                                     <constraint firstAttribute="height" constant="44" id="9Ff-yU-adx"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Pp4-nm-jZd" id="80t-IX-wkz"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8V5-JM-VpR">
                                 <rect key="frame" x="0.0" y="44" width="375" height="559"/>
@@ -1398,6 +1401,7 @@
                     <navigationItem key="navigationItem" id="tUt-Qw-OdF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="searchBar" destination="35M-mE-y8y" id="Zsa-uv-RT7"/>
                         <outlet property="tableView" destination="8V5-JM-VpR" id="MDd-3u-VpU"/>
                         <segue destination="azA-T9-zXt" kind="push" identifier="creatClient" id="ZgM-Ik-4vH"/>
                     </connections>
