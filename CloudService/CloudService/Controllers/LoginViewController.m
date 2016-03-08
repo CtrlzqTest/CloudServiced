@@ -51,6 +51,7 @@
         [self.choseBtn setBackgroundImage:[UIImage imageNamed:@"login-choose_"] forState:(UIControlStateNormal)];
         _isRemenberPwd = YES;
     }else {
+        
         _isRemenberPwd = NO;
         [self.choseBtn setBackgroundImage:nil forState:(UIControlStateNormal)];
     }
@@ -58,17 +59,20 @@
 
 - (void)setupView {
     
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     [self.view bringSubviewToFront:self.backImg];
     self.inputView.layer.cornerRadius = 3;
     self.inputView.clipsToBounds = YES;
     self.inputView.backgroundColor = [UIColor colorWithRed:0.918 green:0.917
                                                       blue:0.925 alpha:0.600];
     
-    NSDictionary *userPwdDict = [Utility getUserNameAndPwd];
+    NSString *userPwd = [Utility getUserPwd];
     UIColor *color = [UIColor colorWithRed:0.263 green:0.561 blue:0.796 alpha:1.000];
     self.UserTextFiled.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-user"]];
     self.UserTextFiled.leftViewMode = UITextFieldViewModeAlways;
-    self.UserTextFiled.text = userPwdDict[@"userName"];
+    if (user.phoneNo) {
+        self.UserTextFiled.text = user.phoneNo;
+    }
     self.UserTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                 initWithString:@"用户名/手机号码/邮箱"
                                                 attributes:@{NSForegroundColorAttributeName:color}];
@@ -80,32 +84,30 @@
     self.pwdTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                initWithString:@"请输入密码"
                                                attributes:@{NSForegroundColorAttributeName:color}];
-    self.pwdTextFiled.text = userPwdDict[@"pwd"];
+    self.pwdTextFiled.text = userPwd;
     
     self.loginBtn.layer.cornerRadius = 3;
     self.loginBtn.clipsToBounds = YES;
+    
     self.choseBtn.layer.cornerRadius = self.choseBtn.frame.size.width / 2.0;
-    
-    
+    if ([userPwd length] > 0) {
+        self.choseBtn.selected = YES;
+        [self.choseBtn setBackgroundImage:[UIImage imageNamed:@"login-choose_"] forState:(UIControlStateNormal)];
+    }
     [self.view sendSubviewToBack:self.backImg];
     
 }
 
 // 登录
 - (IBAction)loginAction:(id)sender {
-  
-//    if (self.UserTextFiled.text.length <= 0) {
-//        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
-//        return;
-//    }else if (self.pwdTextFiled.text.length <= 0){
-//
-//        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-//        return;
-//    }
     
+    if (![self checkInputMode]) {
+        return;
+    }
+
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:@"13245678903" forKey:@"userName"];
-    [dict setValue:@"123456" forKey:@"password"];
+    [dict setValue:self.UserTextFiled.text forKey:@"userName"];
+    [dict setValue:self.pwdTextFiled.text forKey:@"password"];
     NSString *address = [Utility location];
     if (address) {
         [dict setValue:address forKey:@"address"];
@@ -120,11 +122,10 @@
             User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
             if (weakSelf.choseBtn.selected) {
-                [Utility remenberUserAndPwd:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":weakSelf.pwdTextFiled.text}];
+                [Utility remenberUserPwd:self.pwdTextFiled.text];
             }else {
-                [Utility remenberUserAndPwd:@{@"userName":weakSelf.UserTextFiled.text,@"pwd":@""}];
+                [Utility forgetUserPwd];
             }
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }else if([[returnData valueForKey:@"flag"] isEqualToString:@"error"]){
             [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
@@ -133,6 +134,33 @@
         [MBProgressHUD showError:@"服务器异常" toView:self.view];
     } showHUD:YES];
 }
+
+/**
+ *  检查输入状态
+ */
+- (BOOL)checkInputMode
+{
+    
+    if (self.UserTextFiled.text.length <= 0) {
+        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
+        return false;
+    }else if (self.pwdTextFiled.text.length <= 0){
+        
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return false;
+    }
+    
+    NSString * regexPasswordNum = @"[^\n]{6,16}$";
+    NSPredicate *predicatePasswordNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPasswordNum];
+    BOOL isPasswordMatch = [predicatePasswordNum evaluateWithObject: self.pwdTextFiled.text];
+    if (!isPasswordMatch)
+    {
+        [MBProgressHUD showError:@"密码格式错误,请输入6到16位密码" toView:self.view];
+        return false;
+    }
+    return true;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

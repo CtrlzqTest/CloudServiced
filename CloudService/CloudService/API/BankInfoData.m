@@ -18,10 +18,10 @@
 }
 
 +(NSArray *)insureCommpanyNameArray {
-    return @[@"平安",@"太保",@"天安",@"中华",@"大地",@"阳光",@"安盛"];
+    return @[@"平安",@"太保",@"天安",@"中华",@"大地",@"阳光",@"安盛",@"其他"];
 }
 
 +(NSArray *)insureCommpanyCodeArray {
-    return @[@"PAIC",@"CPIC",@"TAIC",@"CICP",@"CCIC",@"YGBX",@"TPIC"];
+    return @[@"PAIC",@"CPIC",@"TAIC",@"CICP",@"CCIC",@"YGBX",@"TPIC",@"其他"];
 }
 @end

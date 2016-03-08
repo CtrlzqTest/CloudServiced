@@ -70,6 +70,9 @@ static NSString *const select_CellID = @"selectCell";
     
     [self resignKeyBoardInView:self.view];
     NSDictionary *dict = [self getParam];
+    if (!dict) {
+        return ;
+    }
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetUserInfoAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
@@ -117,9 +120,9 @@ static NSString *const select_CellID = @"selectCell";
                        @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
-    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"421133199303042452",@"初级用户",@"阳光保险",@"销售职",@"2015-01-01",@"6272",@"阳光保险",@"北京"]];
+    _valueArray_User = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"销售职",@"2015-01-01",@"",@"",@""]];
     
-    _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"张强",@"6228280791546253810",@"农行",@"中国农业银行荆州支行",@"湖北省",@"荆州市"]];
+    _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
     
 }
 
@@ -351,23 +354,23 @@ static NSString *const select_CellID = @"selectCell";
 #pragma mark -- 私有方法
 - (NSDictionary *)getParam {
     
-//    for (int i = 0; i < _valueArray_User.count; i ++) {
-//        
-//        if ([_valueArray_User[i] length] <= 0) {
-//            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_User[i]] toView:self.view];
-//            return nil;
-//        }
-//    }
-//    for (int i = 0; i < _valueArray_Bank.count; i ++) {
-//        if ([_valueArray_Bank[i] length] <= 0) {
-//            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_Bank[i]] toView:self.view];
-//            return nil;
-//        }
-//    }
-//    if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
-//        [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
-//        return nil;
-//    }
+    for (int i = 0; i < _valueArray_User.count; i ++) {
+        
+        if ([_valueArray_User[i] length] <= 0) {
+            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_User[i]] toView:self.view];
+            return nil;
+        }
+    }
+    for (int i = 0; i < _valueArray_Bank.count; i ++) {
+        if ([_valueArray_Bank[i] length] <= 0) {
+            [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_Bank[i]] toView:self.view];
+            return nil;
+        }
+    }
+    if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
+        [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
+        return nil;
+    }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSString *idCord = _valueArray_User[1];
     user.sex = [HelperUtil getSexWithIdcord:idCord];
@@ -440,8 +443,15 @@ static NSString *const select_CellID = @"selectCell";
 
 - (void)hideCityPickerView:(UIGestureRecognizer *)sender {
     
-    _valueArray_Bank[4] = self.cityPickerView.province;
-    _valueArray_Bank[5] = self.cityPickerView.city;
+    if (_indexPath.section == 0)
+    {
+        _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",self.cityPickerView.province,self.cityPickerView.city];
+        
+    }else
+    {
+        _valueArray_Bank[4] = self.cityPickerView.province;
+        _valueArray_Bank[5] = self.cityPickerView.city;
+    }
     [self.tableView reloadData];
     _maskView.hidden = YES;
     [self.cityPickerView hiddenPickerView];

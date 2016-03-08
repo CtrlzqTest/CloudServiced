@@ -50,14 +50,14 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名/手机号码/邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJO-FG-2Ad">
                                         <rect key="frame" x="10" y="0.0" width="293" height="48"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.11323822542673218" green="0.38522516170733362" blue="0.76025698158051103" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rmt-vQ-TTC">
                                         <rect key="frame" x="10" y="48" width="293" height="47"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.11838943712470253" green="0.40274907072181454" blue="0.79484110405525843" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
@@ -175,7 +175,6 @@
                             <constraint firstItem="GLr-ZD-azv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BRt-wN-LZM"/>
                             <constraint firstItem="YbJ-cX-B4x" firstAttribute="leading" secondItem="KW6-Fn-8rL" secondAttribute="leading" id="Cco-hN-7Td"/>
                             <constraint firstItem="vHH-zz-iXo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="CiS-Pd-DcW"/>
-                            <constraint firstItem="iT1-Te-c9Q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="GDd-Kq-dDT"/>
                             <constraint firstItem="lwO-gM-fzR" firstAttribute="bottom" secondItem="YbJ-cX-B4x" secondAttribute="bottom" id="HZN-Wk-kzS"/>
                             <constraint firstItem="joa-O4-GUy" firstAttribute="top" secondItem="YbJ-cX-B4x" secondAttribute="top" id="IV1-f3-iQD"/>
                             <constraint firstItem="iT1-Te-c9Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Js3-MU-6BL"/>
@@ -192,6 +191,7 @@
                             <constraint firstAttribute="bottom" secondItem="GLr-ZD-azv" secondAttribute="bottom" id="dx9-9G-ueO"/>
                             <constraint firstItem="tgA-FW-9Ad" firstAttribute="leading" secondItem="ZGG-YC-mkw" secondAttribute="trailing" constant="5" id="fIt-Cd-Vhu"/>
                             <constraint firstAttribute="trailing" secondItem="GLr-ZD-azv" secondAttribute="trailing" id="fhh-Nk-Ecj"/>
+                            <constraint firstItem="iT1-Te-c9Q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="hLR-jU-33c"/>
                             <constraint firstItem="KW6-Fn-8rL" firstAttribute="trailing" secondItem="vHH-zz-iXo" secondAttribute="trailing" id="kry-uP-kNI"/>
                             <constraint firstItem="lwO-gM-fzR" firstAttribute="top" secondItem="KW6-Fn-8rL" secondAttribute="bottom" constant="30" id="ktK-Kb-vkh"/>
                             <constraint firstItem="tgA-FW-9Ad" firstAttribute="top" secondItem="ZGG-YC-mkw" secondAttribute="top" id="ozU-PZ-6Tl"/>
@@ -2344,7 +2344,7 @@
                                         <color key="textColor" red="0.25047348479999998" green="0.25047348479999998" blue="0.25047348479999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVU-fd-sqr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVU-fd-sqr">
                                         <rect key="frame" x="50" y="0.0" width="57" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2388,7 +2388,7 @@
                                         <color key="textColor" red="0.36142676769999998" green="0.36142676769999998" blue="0.36142676769999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivn-d0-XlP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivn-d0-XlP">
                                         <rect key="frame" x="56" y="0.0" width="66" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

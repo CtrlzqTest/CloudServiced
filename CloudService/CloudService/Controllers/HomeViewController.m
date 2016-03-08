@@ -111,8 +111,9 @@ static NSString *headerView_ID = @"headerView";
 
 - (void)signAction:(UIButton *)sender {
     
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:@"5e98d681531cd8e201531cd8ec590000" forKey:@"userId"];
+    [dict setValue:user.userId forKey:@"userId"];
     [dict setValue:[Utility location] forKey:@"address"];
     NSLog(@"%@",[[SingleHandle shareSingleHandle] getUserInfo].sign);
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kSignedAPI] params:dict successBlock:^(id returnData) {
@@ -120,7 +121,7 @@ static NSString *headerView_ID = @"headerView";
                 [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
                 [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
                 sender.enabled = NO;
-                
+                user.sign = @"0";
             }
     } failureBlock:^(NSError *error) {
             

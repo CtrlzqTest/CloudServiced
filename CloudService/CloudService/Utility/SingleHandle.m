@@ -24,7 +24,7 @@ static SingleHandle *singleHandle = nil;
 - (User *)getUserInfo {
     if (!self.user) {
         self.user = [[User alloc] init];
-        self.user = [[User mj_objectWithKeyValues:[Utility getUserInfoFromLocal]] copy];
+        self.user = [User mj_objectWithKeyValues:[Utility getUserInfoFromLocal]];
     }
     return self.user;
 }

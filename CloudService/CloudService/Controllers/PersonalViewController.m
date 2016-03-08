@@ -89,6 +89,9 @@ static NSString *cell_id = @"personalCell";
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    self.userNameLabel.text = user.userName;
+    self.phoneNumLabel.text = user.phoneNo;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
