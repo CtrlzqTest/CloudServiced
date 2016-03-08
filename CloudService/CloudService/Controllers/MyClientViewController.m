@@ -11,12 +11,13 @@
 #import <MJRefresh.h>
 #import "ClientData.h"
 
-@interface MyClientViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface MyClientViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
     int _page;//当前页数
     int _pageSize;//每页加载数
     NSMutableArray *_clientArray;
 }
+@property (weak, nonatomic)IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
 @end
 
@@ -60,7 +61,7 @@
         
     }];
 }
-- (void)requestData {
+- (void)requestData{
     _clientArray = nil;
     _clientArray = [NSMutableArray array];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
@@ -74,7 +75,7 @@
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
             NSLog(@"总条数：%i",totalCount);
             if (totalCount-_pageSize*_page<=0) {
-                //没有数据，直接提示没有更多数据
+                //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
             }else{
                 //有数据，则结束刷新状态，以便下次能够刷新
@@ -98,7 +99,7 @@
     
 }
 
-- (void)requestMoreData {
+- (void)requestMoreData{
     _page++;
     
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
@@ -164,6 +165,14 @@
 
 }
 
+#pragma mark searchBar
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
