@@ -22,4 +22,9 @@
  *  存储用户信息
  */
 - (void)saveUserInfo:(User *)userModel;
+/**
+ *  获取结束码
+ */
+- (NSArray *)getEndCodeArray;
+
 @end

@@ -10,13 +10,14 @@
 #import "PlaceholderTextView.h"
 #import "PellTableViewSelect.h"
 #import "HZQDatePickerView.h"
+#import "SingleHandle.h"
 
 #undef  RGBCOLOR
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 @interface AppointmentViewController ()<HZQDatePickerViewDelegate,UITextViewDelegate>
 {
-    NSArray *_codeArray;
+
     NSDate *_date;
 }
 @property (nonatomic, strong) PlaceholderTextView * textView;
@@ -37,8 +38,7 @@
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
-    //获取结束码
-    [self getCode];
+
     
     [self.bgView addSubview:self.textView];
     
@@ -59,29 +59,15 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)getCode {
-     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kgetEndCode];
-    [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
-    
-        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
-            _codeArray = [returnData objectForKey:@"data"];
-            
-        }else {
-            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
-        }
-        
-    } failureBlock:^(NSError *error) {
-        
-    } showHUD:NO];
-}
+
 - (void)codeClick:(UITapGestureRecognizer *)tap {
     [self resignKeyBoardInView:self.view];
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(110, 135, 200, 200) selectData:
 
-     _codeArray
+     [[SingleHandle shareSingleHandle] getEndCodeArray]
                                                         action:^(NSInteger index) {
                                                             
-                                                            _lbCode.text = [_codeArray objectAtIndex:index];
+                                                            _lbCode.text = [[[SingleHandle shareSingleHandle] getEndCodeArray] objectAtIndex:index];
                                                         } animated:YES];
 }
 

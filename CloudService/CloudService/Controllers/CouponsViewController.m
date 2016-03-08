@@ -137,10 +137,7 @@
     if(bLeft)
     {
         NSLog(@"left");
-        if (!_isLoad) {
-            [_tableView2.mj_header beginRefreshing];
-            _isLoad = YES;
-        }
+      
     }
     else
     {

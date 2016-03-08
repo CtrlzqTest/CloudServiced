@@ -10,4 +10,8 @@
 
 @interface ResultTableViewCell : UITableViewCell
 
+@property (weak, nonatomic)IBOutlet UILabel *lbName;
+@property (weak, nonatomic)IBOutlet UILabel *lbIdCard;
+@property (weak, nonatomic)IBOutlet UILabel *lbOrderNum;
+@property (weak, nonatomic)IBOutlet UILabel *lbTotalPremium;
 @end

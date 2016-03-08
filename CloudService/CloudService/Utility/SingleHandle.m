@@ -37,4 +37,19 @@ static SingleHandle *singleHandle = nil;
     
 }
 
+- (NSArray *)getEndCodeArray {
+    NSArray *array = @[@"初始",
+                       @"已报价",
+                       @"未报价",
+                       @"未联系到",
+                       @"空错号",
+                       @"到期日不准",
+                       @"客户毁单",
+                       @"客户拒绝",
+                       @"费用少",
+                       @"无效数据",
+                       @"成交"];
+    return array;
+}
+
 @end

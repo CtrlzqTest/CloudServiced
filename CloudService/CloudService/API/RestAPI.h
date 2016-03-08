@@ -35,11 +35,13 @@
 
 #define kCheckPhoneNumAPI       @"/app/user/verifyPhoneNo"                     //验证手机
 
-#define kSendCode               @"/userapp/sendCode"                     //业绩查询
+#define kUserCouponsList        @"/app/coupon/findUserCouponsList"                 //个人优惠券查询
 
-#define kUserCouponsList        @"/app/coupon/findUserCouponsList"                 //个人业绩查询
+#define kTeamCouponsList        @"/app/coupon/findTeamCouponsList"                 //团队优惠券查询
 
-#define kTeamCouponsList        @"/app/coupon/findTeamCouponsList"                 //团队业绩查询
+#define kfindUserAchievement        @"/app/order/findUserAchievement"               //个人业绩查询
+
+#define kfindTeamAchievement        @"/app/order/findTeamAchievement"               //团队业绩查询
 
 #define kfindUserCreditsRecord    @"/app/credits/findUserCreditsRecord"             //积分历史查询
 

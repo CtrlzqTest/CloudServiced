@@ -109,6 +109,10 @@
                     <constraint firstAttribute="trailing" secondItem="WDq-DD-i8R" secondAttribute="trailing" id="xeq-79-DLd"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="lbOrderNum" destination="mgV-wr-t8M" id="5V8-Ar-4Qi"/>
+                <outlet property="lbTotalPremium" destination="Tc3-ry-MMS" id="jbz-oQ-QU4"/>
+            </connections>
             <point key="canvasLocation" x="385.5" y="320.5"/>
         </tableViewCell>
     </objects>
