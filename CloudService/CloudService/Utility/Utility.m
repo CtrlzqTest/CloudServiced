@@ -67,13 +67,28 @@ static User *user = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)remenberUserAndPwd:(NSDictionary *)dict {
-    [[NSUserDefaults standardUserDefaults] setValue:dict forKey:@"userAndPwd"];
++ (void)remenberUserPwd:(NSString *)pwd {
+    [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:@"userPwd"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+(NSDictionary *)getUserNameAndPwd{
-    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userAndPwd"];
++ (void)forgetUserPwd {
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"userPwd"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSString *)getUserPwd{
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userPwd"];
+}
+
++ (void)savePwdForResetPwd:(NSString *)pwd {
+    [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:@"userPwdForResetPwd"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSString *)getPwdForResetPwd {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userPwdForResetPwd"];
 }
 
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{

@@ -62,16 +62,16 @@
 - (IBAction)registerAction:(id)sender {
     
     [self resignKeyBoardInView:self.view];
-//    if ([self checkInputMode]) {
-//        NSString *location = self.locateBtn.titleLabel.text;
-//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//        [dict setValue:self.phoneNum.text forKey:@"phoneNo"];
-//        [dict setValue:self.pwdText.text forKey:@"password"];
-//        [dict setValue:location forKey:@"address"];
-//        [dict setValue:self.codeText.text forKey:@"code"];
+    if ([self checkInputMode]) {
+        NSString *location = self.locateBtn.titleLabel.text;
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setValue:self.phoneNum.text forKey:@"phoneNo"];
+        [dict setValue:self.pwdText.text forKey:@"password"];
+        [dict setValue:location forKey:@"address"];
+        [dict setValue:self.codeText.text forKey:@"code"];
         __weak typeof(self) weakSelf = self;
     
-        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kRegisterAPI] params:@{@"phoneNo":@"13245678903",@"password":@"123456",@"address":@"0102",@"code":@"123456"} successBlock:^(id returnData) {
+        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kRegisterAPI] params:dict successBlock:^(id returnData) {
             NSDictionary *dict = returnData;
             if ([dict[@"flag"] isEqualToString:@"success"]) {
                 User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
@@ -83,7 +83,7 @@
         } failureBlock:^(NSError *error) {
             [MBProgressHUD showError:@"无法连接网络,请检查手机网络" toView:self.view];
         } showHUD:YES];
-//    }
+    }
 }
 
 // 定位按钮
