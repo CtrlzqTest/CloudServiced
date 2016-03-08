@@ -10,4 +10,6 @@
 
 @interface PersonResultCell : UITableViewCell
 
+@property (nonatomic, weak)IBOutlet UILabel *lbOrderNum;
+@property (nonatomic, weak)IBOutlet UILabel *lbTotalPremium;
 @end

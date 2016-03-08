@@ -11,8 +11,28 @@
 #import "PersonResultCell.h"
 #import <LazyPageScrollView.h>
 #import <MJRefresh.h>
+#import "SingleHandle.h"
+#import "Achievement.h"
 
 @interface ResultViewController ()<LazyPageScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+{
+
+    NSMutableArray *_dayArray;//当日业绩列表
+    NSMutableArray *_weekArray;//本周业绩列表
+    NSMutableArray *_monthArray;//本月业绩列表
+    int _page1;//当前页数
+    int _pageSize1;//每页加载数
+    int _page2;//当前页数
+    int _pageSize2;//每页加载数
+    int _page3;//当前页数
+    int _pageSize3;//每页加载数
+    UITableView *_tableView1;
+    UITableView *_tableView2;
+    UITableView *_tableView3;
+    BOOL _isLoad2;//是否已加载
+    BOOL _isLoad3;//是否已加载
+    NSArray *_userAchievementArray;//个人业绩
+}
 @property (strong, nonatomic) LazyPageScrollView *pageView;
 @property (strong, nonatomic) UITableView *tableView;
 @end
@@ -21,8 +41,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self initPageView];
-    [self initTableView];
+    if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+            [self initPageView];
+    }else{
+         [self initTableView];
+    }
+   
+   
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -34,57 +59,87 @@
     [self.view addSubview:self.tableView];
 }
 
-#pragma mark requestData
-- (void)requestData {
-    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kSendCode];
-    [MHNetworkManager postReqeustWithURL:url params:@{@"userid":[[SingleHandle shareSingleHandle] getUserInfo].userId}successBlock:^(id returnData) {
-        NSDictionary *dic = returnData;
-        NSLog(@"%@",returnData);
-        // 结束刷新
-        [_tableView.mj_header endRefreshing];
-    } failureBlock:^(NSError *error) {
-        
-    } showHUD:YES];
-}
 #pragma mark pageView
 - (void)initPageView {
+    
+    _page1=1;
+    _pageSize1=6;
+    _page2=1;
+    _pageSize2=6;
+    _page3=1;
+    _pageSize3=6;
     [self.view addSubview:self.pageView];
     _pageView.delegate=self;
     [_pageView initTab:YES Gap:38 TabHeight:38 VerticalDistance:0 BkColor:[UIColor whiteColor]];
-    UITableView *tableView = [[UITableView alloc] init];
-    tableView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
-    tableView.showsHorizontalScrollIndicator = NO;
-    tableView.tag = 100;
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    _tableView1 = [[UITableView alloc] init];
+    _tableView1.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+    _tableView1.showsHorizontalScrollIndicator = NO;
+    _tableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView1.tag = 100;
+    _tableView1.delegate = self;
+    _tableView1.dataSource = self;
+    
     // 下拉刷新
-    tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 结束刷新
-            [tableView.mj_header endRefreshing];
-        });
+    _tableView1.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page1 = 1;
+        [self requestTeamAchievement:@"day"];
+    }];
+    // 上拉刷新
+    _tableView1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreTeamAchievement:@"day"];
+        
+    }];
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    _tableView1.mj_header.automaticallyChangeAlpha = YES;
+    [_tableView1.mj_header beginRefreshing];
+    
+    [_pageView addTab:@"当日业绩" View:_tableView1 Info:nil];
+    _tableView2 = [[UITableView alloc] init];
+    _tableView2.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+    _tableView2.showsHorizontalScrollIndicator = NO;
+    _tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView2.tag = 101;
+    _tableView2.delegate = self;
+    _tableView2.dataSource = self;
+    // 下拉刷新
+    _tableView2.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page2 = 1;
+        [self requestTeamAchievement:@"week"];
+    }];
+    // 上拉刷新
+    _tableView2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreTeamAchievement:@"week"];
+        
+    }];
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    _tableView2.mj_header.automaticallyChangeAlpha = YES;
+    [_pageView addTab:@"本周业绩" View:_tableView2 Info:nil];
+    
+    _tableView3 = [[UITableView alloc] init];
+    _tableView3.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+    _tableView3.showsHorizontalScrollIndicator = NO;
+    _tableView3.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView3.tag = 102;
+    _tableView3.delegate = self;
+    _tableView3.dataSource = self;
+    // 下拉刷新
+    _tableView3.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page3 = 1;
+        [self requestTeamAchievement:@"month"];
     }];
     
     // 设置自动切换透明度(在导航栏下面自动隐藏)
-    tableView.mj_header.automaticallyChangeAlpha = YES;
+    _tableView3.mj_header.automaticallyChangeAlpha = YES;
     
-    [_pageView addTab:@"当日业绩" View:tableView Info:nil];
-    tableView = [[UITableView alloc] init];
-    tableView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
-    tableView.showsHorizontalScrollIndicator = NO;
-    tableView.tag = 101;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [_pageView addTab:@"本周业绩" View:tableView Info:nil];
-    
-    tableView = [[UITableView alloc] init];
-    tableView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
-    tableView.showsHorizontalScrollIndicator = NO;
-    tableView.tag = 102;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [_pageView addTab:@"本月业绩" View:tableView Info:nil];
+    // 上拉刷新
+    _tableView3.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreTeamAchievement:@"month"];
+        
+    }];
+    [_pageView addTab:@"本月业绩" View:_tableView3 Info:nil];
     
     [_pageView enableTabBottomLine:YES LineHeight:2 LineColor:[HelperUtil colorWithHexString:@"277FD9"] LineBottomGap:0 ExtraWidth:50];
     [_pageView setTitleStyle:[UIFont systemFontOfSize:14] SelFont:[UIFont systemFontOfSize:16] Color:[UIColor blackColor] SelColor:[HelperUtil colorWithHexString:@"277FD9"]];    [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
@@ -97,6 +152,19 @@
 }
 
 - (void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn {
+    if (index == 1) {
+        
+        if (!_isLoad2) {
+            [_tableView2.mj_header beginRefreshing];
+            _isLoad2 = YES;
+        }
+    }
+    if (index == 2) {
+        if (!_isLoad3) {
+            [_tableView3.mj_header beginRefreshing];
+            _isLoad3 = YES;
+        }
+    }
     NSLog(@"之前下标：%ld 当前下标：%ld",preIndex,index);
 }
 
@@ -113,8 +181,15 @@
 }
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return 3;
+    if ([tableView isEqual:_tableView]) {
+        return _userAchievementArray.count;
+    }if ([tableView isEqual:_tableView1]) {
+        return _dayArray.count;
+    }if ([tableView isEqual:_tableView2]) {
+        return _weekArray.count;
+    }else {
+        return _monthArray.count;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"cell";
@@ -123,16 +198,32 @@
         if (cell == nil) {
             NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"PersonResultCell" owner:self options:nil];
             cell = [array objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        Achievement *achievement = [_userAchievementArray objectAtIndex:indexPath.row];
+        cell.lbOrderNum.text = [NSString stringWithFormat:@"%i",achievement.orderNum];
+        cell.lbTotalPremium.text = [NSString stringWithFormat:@"%.2f",achievement.totalPremium];
         return cell;
     }else{
         ResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell == nil) {
             NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ResultTableViewCell" owner:self options:nil];
             cell = [array objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        Achievement *achievement;
+        if ([tableView isEqual:_tableView1]) {
+             achievement= [_dayArray objectAtIndex:indexPath.row];
+        }if ([tableView isEqual:_tableView2]) {
+            achievement = [_weekArray objectAtIndex:indexPath.row];
+        }else{
+            achievement = [_monthArray objectAtIndex:indexPath.row];
+        }
+        cell.lbOrderNum.text = [NSString stringWithFormat:@"%i",achievement.orderNum];
+        cell.lbTotalPremium.text = [NSString stringWithFormat:@"%.2f",achievement.totalPremium];
+        cell.lbIdCard.text = achievement.userNum;
+        cell.lbName.text = achievement.realName;
+
         return cell;
     }
     
@@ -141,7 +232,7 @@
     if (tableView.tag == 103) {
         return 145;
     }else {
-        return 81;
+        return 103;
     }
     
 }
@@ -164,10 +255,10 @@
         _tableView.tag = 103;
         // 下拉刷新
         _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [self requestData];
+            [self requestUserAchievement];
 
         }];
-//        [_tableView.mj_header beginRefreshing];
+        [_tableView.mj_header beginRefreshing];
         // 设置自动切换透明度(在导航栏下面自动隐藏)
         _tableView.mj_header.automaticallyChangeAlpha = YES;
         
@@ -175,6 +266,218 @@
     }
     return _tableView;
 }
+//获取个人业绩
+- (void)requestUserAchievement {
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserAchievement];
+    NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
+    [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
+        
+        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+            
+            NSDictionary *dataDic = [returnData objectForKey:@"data"];
+            NSDictionary *dayDic = [dataDic objectForKey:@"day"];
+            Achievement *dayAchievement = [[Achievement alloc] init];
+            dayAchievement.orderNum = [[dayDic objectForKey:@"orderNum"] intValue];
+            dayAchievement.totalPremium = [[dayDic objectForKey:@"totalPremium"] floatValue];
+            
+            NSDictionary *monthDic = [dataDic objectForKey:@"month"];
+            Achievement *monthAchievement = [[Achievement alloc] init];
+            monthAchievement.orderNum = [[monthDic objectForKey:@"orderNum"] intValue];
+            monthAchievement.totalPremium = [[monthDic objectForKey:@"totalPremium"] floatValue];
+            
+            NSDictionary *weekDic = [dataDic objectForKey:@"week"];
+            Achievement *weekAchievement = [[Achievement alloc] init];
+            weekAchievement.orderNum = [[weekDic objectForKey:@"orderNum"] intValue];
+            weekAchievement.totalPremium = [[weekDic objectForKey:@"totalPremium"] floatValue];
+            
+            _userAchievementArray = @[dayAchievement,monthAchievement,weekAchievement];
+            [_tableView reloadData];
+            [_tableView.mj_header endRefreshing];
+            
+        }else {
+            [_tableView.mj_header endRefreshing];
+            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        [_tableView.mj_header endRefreshing];
+        
+    } showHUD:NO];
+}
+
+#pragma mark 加载团队业绩
+- (void)requestTeamAchievement:(NSString *)type {
+    NSDictionary *paramsDic;
+    if ([type isEqualToString:@"day"]) {
+        _dayArray = nil;
+        _dayArray = [NSMutableArray array];
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1],@"type":type};
+    }if ([type isEqualToString:@"week"]) {
+        _weekArray = nil;
+        _weekArray = [NSMutableArray array];
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2],@"type":type};
+    }if ([type isEqualToString:@"month"]) {
+        _monthArray = nil;
+        _monthArray = [NSMutableArray array];
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],@"pageNo":[NSString stringWithFormat:@"%i",_page3],@"type":type};
+    }
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamAchievement];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if ([type isEqualToString:@"day"]) {
+                if (totalCount-_pageSize1*_page1<=0) {
+                    //没有数据，直接提示没有更多数据
+                    [_tableView1.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    //有数据，则结束刷新状态，以便下次能够刷新
+                    [_tableView1.mj_footer endRefreshing];
+                }
+                NSArray *listArray = [dataDic objectForKey:@"list"];
+                [_dayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+            }if ([type isEqualToString:@"week"]) {
+                if (totalCount-_pageSize2*_page2<=0) {
+                    //没有数据，直接提示没有更多数据
+                    [_tableView2.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    //有数据，则结束刷新状态，以便下次能够刷新
+                    [_tableView2.mj_footer endRefreshing];
+                }
+                NSArray *listArray = [dataDic objectForKey:@"list"];
+                [_weekArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+            }if ([type isEqualToString:@"month"]) {
+                if (totalCount-_pageSize3*_page3<=0) {
+                    //没有数据，直接提示没有更多数据
+                    [_tableView3.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    //有数据，则结束刷新状态，以便下次能够刷新
+                    [_tableView3.mj_footer endRefreshing];
+                }
+                NSArray *listArray = [dataDic objectForKey:@"list"];
+                [_monthArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+            }
+            
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
+        if ([type isEqualToString:@"day"]) {
+            [_tableView1 reloadData];
+            [_tableView1.mj_header endRefreshing];
+        }if ([type isEqualToString:@"week"]) {
+            [_tableView2 reloadData];
+            [_tableView2.mj_header endRefreshing];
+        }if ([type isEqualToString:@"month"]) {
+            [_tableView3 reloadData];
+            [_tableView3.mj_header endRefreshing];
+        }
+        
+       
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+        if ([type isEqualToString:@"day"]) {
+            [_tableView1 reloadData];
+            [_tableView1.mj_header endRefreshing];
+        }if ([type isEqualToString:@"week"]) {
+            [_tableView2 reloadData];
+            [_tableView2.mj_header endRefreshing];
+        }if ([type isEqualToString:@"month"]) {
+            [_tableView3 reloadData];
+            [_tableView3.mj_header endRefreshing];
+        }
+    } showHUD:YES];
+}
+- (void)requestMoreTeamAchievement:(NSString *)type {
+    NSDictionary *paramsDic;
+    if ([type isEqualToString:@"day"]) {
+         _page1++;
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1],@"type":type};
+    }if ([type isEqualToString:@"week"]) {
+        _page2++;
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2],@"type":type};
+    }if ([type isEqualToString:@"month"]) {
+        _page3++;
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],@"pageNo":[NSString stringWithFormat:@"%i",_page3],@"type":type};
+    }
+    
+        NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamAchievement];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            NSLog(@"总条数：%i",totalCount);
+            if ([type isEqualToString:@"day"]) {
+                if (totalCount-_pageSize1*_page1<=0) {
+                    //没有数据，直接提示没有更多数据
+                    [_tableView1.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    //有数据，则结束刷新状态，以便下次能够刷新
+                    [_tableView1.mj_footer endRefreshing];
+                }
+                NSArray *listArray = [dataDic objectForKey:@"list"];
+                [_dayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+            }if ([type isEqualToString:@"week"]) {
+                if (totalCount-_pageSize2*_page2<=0) {
+                    //没有数据，直接提示没有更多数据
+                    [_tableView2.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    //有数据，则结束刷新状态，以便下次能够刷新
+                    [_tableView2.mj_footer endRefreshing];
+                }
+                NSArray *listArray = [dataDic objectForKey:@"list"];
+                [_weekArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+            }if ([type isEqualToString:@"month"]) {
+                if (totalCount-_pageSize3*_page3<=0) {
+                    //没有数据，直接提示没有更多数据
+                    [_tableView3.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    //有数据，则结束刷新状态，以便下次能够刷新
+                    [_tableView3.mj_footer endRefreshing];
+                }
+                NSArray *listArray = [dataDic objectForKey:@"list"];
+                [_monthArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+            }
+
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+        }
+        if ([type isEqualToString:@"day"]) {
+            [_tableView1 reloadData];
+            [_tableView1.mj_header endRefreshing];
+        }if ([type isEqualToString:@"week"]) {
+            [_tableView2 reloadData];
+            [_tableView2.mj_header endRefreshing];
+        }if ([type isEqualToString:@"month"]) {
+            [_tableView3 reloadData];
+            [_tableView3.mj_header endRefreshing];
+        }
+
+    } failureBlock:^(NSError *error) {
+        if ([type isEqualToString:@"day"]) {
+            [_tableView1 reloadData];
+            [_tableView1.mj_header endRefreshing];
+        }if ([type isEqualToString:@"week"]) {
+            [_tableView2 reloadData];
+            [_tableView2.mj_header endRefreshing];
+        }if ([type isEqualToString:@"month"]) {
+            [_tableView3 reloadData];
+            [_tableView3.mj_header endRefreshing];
+        }
+    } showHUD:YES];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

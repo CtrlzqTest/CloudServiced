@@ -44,6 +44,7 @@
 		6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638365651C7DB8BA001A10C4 /* HZQDatePickerView.xib */; };
 		6383656C1C7DB8BA001A10C4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365671C7DB8BA001A10C4 /* UIColor+HexString.m */; };
 		6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6392CFF01C8D235400D84F38 /* TeamMember.m */; };
+		6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6392CFF31C8D8F8200D84F38 /* Achievement.m */; };
 		63AA2BD51C8A70ED00D7CF04 /* BankInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* BankInfoData.m */; };
 		63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */; };
 		63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BD91C8A8E1E00D7CF04 /* Integral.m */; };
@@ -174,6 +175,8 @@
 		638365671C7DB8BA001A10C4 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		6392CFEF1C8D235400D84F38 /* TeamMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMember.h; sourceTree = "<group>"; };
 		6392CFF01C8D235400D84F38 /* TeamMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMember.m; sourceTree = "<group>"; };
+		6392CFF21C8D8F8200D84F38 /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
+		6392CFF31C8D8F8200D84F38 /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
 		63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		63AA2BD81C8A8E1E00D7CF04 /* Integral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Integral.h; sourceTree = "<group>"; };
 		63AA2BD91C8A8E1E00D7CF04 /* Integral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Integral.m; sourceTree = "<group>"; };
@@ -708,6 +711,8 @@
 				63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */,
 				6392CFEF1C8D235400D84F38 /* TeamMember.h */,
 				6392CFF01C8D235400D84F38 /* TeamMember.m */,
+				6392CFF21C8D8F8200D84F38 /* Achievement.h */,
+				6392CFF31C8D8F8200D84F38 /* Achievement.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1012,6 +1017,7 @@
 				6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */,
 				F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */,
 				F057320B1C859D2400D88B78 /* SingleHandle.m in Sources */,
+				6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */,
 				630EF1971C8567960059CB34 /* IntegralTableViewCell.m in Sources */,
 				F05732051C8584F300D88B78 /* IntergralCityViewController.m in Sources */,
 				F0DF32121C87E612008D098F /* ResetUserPwdViewController.m in Sources */,
