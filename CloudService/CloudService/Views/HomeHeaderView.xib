@@ -37,8 +37,8 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎你！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waJ-bX-2QI">
-                            <rect key="frame" x="170" y="10" width="80" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎你！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waJ-bX-2QI">
+                            <rect key="frame" x="178" y="10" width="80" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.2239188762626263" green="0.2239188762626263" blue="0.2239188762626263" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -111,7 +111,7 @@
                         <constraint firstAttribute="trailing" secondItem="NuD-9f-8p3" secondAttribute="trailing" constant="15" id="JTp-0H-AM4"/>
                         <constraint firstItem="waJ-bX-2QI" firstAttribute="top" secondItem="Tjf-id-eE3" secondAttribute="top" id="KyS-4A-1BA"/>
                         <constraint firstAttribute="height" constant="75" id="Ojs-NB-8j5"/>
-                        <constraint firstItem="waJ-bX-2QI" firstAttribute="leading" secondItem="Tjf-id-eE3" secondAttribute="trailing" id="W62-eh-rWj"/>
+                        <constraint firstItem="waJ-bX-2QI" firstAttribute="leading" secondItem="Tjf-id-eE3" secondAttribute="trailing" constant="8" id="W62-eh-rWj"/>
                         <constraint firstItem="waJ-bX-2QI" firstAttribute="width" secondItem="Tjf-id-eE3" secondAttribute="width" id="WV5-rL-JcP"/>
                         <constraint firstItem="NuD-9f-8p3" firstAttribute="centerY" secondItem="2cp-iw-sPn" secondAttribute="centerY" id="Wfn-b5-IyR"/>
                         <constraint firstItem="0DF-dH-dHA" firstAttribute="leading" secondItem="Tjf-id-eE3" secondAttribute="leading" id="X8F-4H-yi3"/>
