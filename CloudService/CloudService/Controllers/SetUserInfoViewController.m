@@ -13,6 +13,7 @@
 #import "HelperUtil.h"
 #import "BankInfoData.h"
 #import "YWBCityPickerView.h"
+#import "BankInfoData.h"
 
 
 static NSString *const cell_id = @"setUserInfoCell";
@@ -108,7 +109,7 @@ static NSString *const select_CellID = @"selectCell";
     _keyArray_User = @[@"真实姓名",
                        @"证件号码",@"用户类型",
                        @"原离职公司",@"原职位",
-                       @"从业时间",@"工作类型",
+                       @"从业时间",
                        @"微信号",@"申请销售保险公司",
                        @"销售数据城市"];
     
@@ -116,7 +117,7 @@ static NSString *const select_CellID = @"selectCell";
                        @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
-    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"421133199303042452",@"初级用户",@"阳光保险",@"销售",@"2015-01-01",@"销售人员",@"6272",@"阳光保险",@"北京"]];
+    _valueArray_User = [NSMutableArray arrayWithArray:@[@"张强",@"421133199303042452",@"初级用户",@"阳光保险",@"销售职",@"2015-01-01",@"6272",@"阳光保险",@"北京"]];
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"张强",@"6228280791546253810",@"农行",@"中国农业银行荆州支行",@"湖北省",@"荆州市"]];
     
@@ -232,7 +233,7 @@ static NSString *const select_CellID = @"selectCell";
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
     if (indexPath.section == 0) {
-        if (indexPath.row == 6 || indexPath.row == 8 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 9) {
+        if (indexPath.row == 7 || indexPath.row == 3 || indexPath.row == 8 || indexPath.row == 4) {
             [cell isPullDown:YES];
         }else if(indexPath.row == 2 || indexPath.row == 5){
             cell.textFiled.enabled = NO;
@@ -267,28 +268,23 @@ static NSString *const select_CellID = @"selectCell";
     {
         switch (indexPath.row)
         {
-            case 3:     _selectArray = @[@"身份证",@"军人证"];
+            case 3:     _selectArray = [BankInfoData insureCommpanyNameArray];
                         CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect3];
-                        break;
-            case 4:     _selectArray = @[@"身份证",@"军人证"];
-                        CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
-                        [self showPullDownViewWithRect:rect4];
                         break;
             case 5:
                         [self showDataPickerView];
                         break;
-            case 6:     _selectArray = @[@"全职",@"兼职"];
+            case 4:     _selectArray = @[@"销售职",@"销售管理职",@"其他"];
+                        CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 3 * 30);
+                        [self showPullDownViewWithRect:rect4];
+                        break;
+            case 7:     _selectArray = [BankInfoData insureCommpanyNameArray];
                         CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect7];
                         break;
                 
-            case 8:     _selectArray = @[@"身份证",@"军人证"];
-                        CGRect rect9 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
-                        [self showPullDownViewWithRect:rect9];
-                        break;
-                
-            case 9:     [self showCityPickerView];
+            case 8:     [self showCityPickerView];
                         break;
             default:
                 break;
@@ -379,9 +375,9 @@ static NSString *const select_CellID = @"selectCell";
     user.workStartDate = _valueArray_User[5];
     user.oldPost = _valueArray_User[4];
     user.oldCompany = _valueArray_User[3];
-    user.saleCity = _valueArray_User[9];
-    user.chatName = _valueArray_User[7];
-    user.applySaleCompany = _valueArray_User[8];
+    user.saleCity = _valueArray_User[8];
+    user.chatName = _valueArray_User[6];
+    user.applySaleCompany = _valueArray_User[7];
     user.idCard = idCord;
     user.realName = _valueArray_Bank[0];
     user.bankNum = _valueArray_Bank[1];

@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 
-#define BaseAPI                 @"http://10.136.96.139:8889/cloudSales-action"  // 阳光服务器
+#define BaseAPI                 @"http://10.136.97.140:8080/cloudSales-action"  // 阳光服务器
 
 #define kRegisterAPI            @"/app/user/register"                     //注册
 
