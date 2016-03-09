@@ -1729,29 +1729,78 @@
                     <view key="view" contentMode="scaleToFill" id="s29-oa-q04">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="077-DH-8Kb" customClass="LazyPageScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="077-DH-8Kb" firstAttribute="leading" secondItem="s29-oa-q04" secondAttribute="leading" id="drl-Ls-aOS"/>
-                            <constraint firstItem="077-DH-8Kb" firstAttribute="top" secondItem="hFe-zi-Hwe" secondAttribute="bottom" id="maf-Vj-kwv"/>
-                            <constraint firstAttribute="trailing" secondItem="077-DH-8Kb" secondAttribute="trailing" id="r9K-iH-33B"/>
-                            <constraint firstAttribute="bottom" secondItem="077-DH-8Kb" secondAttribute="bottom" id="z1J-qE-0VF"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="优惠券" id="KIl-Cu-67Q"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="pageView" destination="077-DH-8Kb" id="PVv-qj-gra"/>
+                        <segue destination="29r-zM-NAa" kind="push" identifier="distribute" id="vb2-PX-STz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhm-AB-eKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2247.5" y="2656.5"/>
+        </scene>
+        <!--优惠券派发-->
+        <scene sceneID="3Dp-hs-Okd">
+            <objects>
+                <viewController id="29r-zM-NAa" customClass="CouponsDistributeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dvt-gI-R9z"/>
+                        <viewControllerLayoutGuide type="bottom" id="yF7-7d-fqb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xvl-od-Vtc">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="B5m-Uh-ekL">
+                                <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="29r-zM-NAa" id="tBU-qH-HFa"/>
+                                    <outlet property="delegate" destination="29r-zM-NAa" id="gHK-bu-Q3m"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3SA-8l-P6s">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="youhuiquan-checkbox" translatesAutoresizingMaskIntoConstraints="NO" id="Ri0-PI-0n7">
+                                        <rect key="frame" x="25" y="11" width="22" height="22"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="h4p-3q-x1A" appends="YES" id="KPe-cw-zUp"/>
+                                        </connections>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="全选" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iag-aD-jH8">
+                                        <rect key="frame" x="55" y="11" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.96470588235294119" green="0.2627450980392157" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="派发金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTI-Uo-blz">
+                                        <rect key="frame" x="233" y="11" width="102" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="优惠券派发" id="0lg-cJ-J7t"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="allCheckImg" destination="Ri0-PI-0n7" id="9an-Un-5cf"/>
+                        <outlet property="allCheckTap" destination="h4p-3q-x1A" id="U4M-nM-HJ9"/>
+                        <outlet property="tableView" destination="B5m-Uh-ekL" id="nej-O1-nFv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XBH-Af-Oj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="h4p-3q-x1A"/>
+            </objects>
+            <point key="canvasLocation" x="2730.5" y="2646.5"/>
         </scene>
         <!--积分查询-->
         <scene sceneID="TFm-ND-MAv">
@@ -2872,6 +2921,7 @@
         <image name="point1" width="8" height="9"/>
         <image name="point2" width="8" height="9"/>
         <image name="share-pix" width="360" height="183"/>
+        <image name="youhuiquan-checkbox" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MPx-U3-8mP"/>

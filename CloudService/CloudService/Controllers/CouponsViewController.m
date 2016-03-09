@@ -23,7 +23,8 @@
     UITableView *_tableView2;
     BOOL _isLoad;//是否已加载
 }
-@property (strong, nonatomic) IBOutlet LazyPageScrollView *pageView;
+@property (strong, nonatomic) LazyPageScrollView *pageView;
+
 @end
 
 @implementation CouponsViewController
@@ -34,17 +35,25 @@
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
-    [self initPageView];
+
+    if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+        [self initPageView];
+    }else{
+        [self initTableView];
+    }
     // Do any additional setup after loading the view.
 }
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
+//-(void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//}
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+- (void)initTableView {
+    [self.view addSubview:self.tableView];
 }
 #pragma mark pageView
 - (void)initPageView {
@@ -52,7 +61,7 @@
     _pageSize1=6;
     _page2=1;
     _pageSize2=6;
-    
+    [self.view addSubview:self.pageView];
     _pageView.delegate=self;
     [_pageView initTab:YES Gap:38 TabHeight:38 VerticalDistance:0 BkColor:[UIColor whiteColor]];
     _tableView1 = [[UITableView alloc] init];
@@ -144,6 +153,38 @@
         NSLog(@"right");
     }
 }
+
+//懒加载
+- (LazyPageScrollView *)pageView {
+    if (!_pageView) {
+        _pageView = [[LazyPageScrollView alloc] initWithFrame:CGRectMake(0, 0, KWidth, KHeight-64)];
+        
+    }
+    return _pageView;
+}
+- (UITableView *)tableView {
+    if (!_tableView1) {
+        _tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWidth, KHeight-64)];
+        _tableView1.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+        _tableView1.showsHorizontalScrollIndicator = NO;
+        _tableView1.delegate = self;
+        _tableView1.dataSource = self;
+        _tableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView1.tag = 103;
+        // 下拉刷新
+        _tableView1.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self requestPersonalData];
+            
+        }];
+        [_tableView1.mj_header beginRefreshing];
+        // 设置自动切换透明度(在导航栏下面自动隐藏)
+        _tableView1.mj_header.automaticallyChangeAlpha = YES;
+        
+        
+    }
+    return _tableView1;
+}
+
 #pragma mark 加载个人优惠券
 - (void)requestPersonalData {
     _userArray = nil;
@@ -290,10 +331,10 @@
 
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([tableView isEqual:_tableView1]) {
-        return _userArray.count;
-    }else {
+    if ([tableView isEqual:_tableView2]) {
         return _teamArray.count;
+    }else {
+        return _userArray.count;
     }
     
 }
@@ -304,16 +345,17 @@
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"CouponsTableViewCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
     }
-    if ([tableView isEqual:_tableView1]) {
-        Coupons *coupons = [_userArray objectAtIndex:indexPath.row];
+    if ([tableView isEqual:_tableView2]) {
+        Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
         cell.lbEndTime.text = [NSString stringWithFormat:@"有效期至%@",[HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"]];
         
      
     }else{
-        Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        Coupons *coupons = [_userArray objectAtIndex:indexPath.row];
         cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
         cell.lbEndTime.text = [NSString stringWithFormat:@"有效期至%@",[HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"]];
     }
@@ -327,7 +369,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if ([tableView isEqual:_tableView2]) {
+        [self performSegueWithIdentifier:@"distribute" sender:self];
+    }
 }
 
 
