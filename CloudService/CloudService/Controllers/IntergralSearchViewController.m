@@ -23,10 +23,10 @@
     int _page;//当前页数
     int _pageSize;//每页加载数
     NSMutableArray *_integralArray;
-    NSDate *_startDate;
-    NSDate *_endDate;
     UIImageView *_noDataImg;
     UILabel *_lbNoData;
+    NSString *_startTime;
+    NSString *_endTime;
 }
 
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
@@ -36,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _startTime = @"";
+    _endTime = @"";
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -261,7 +263,6 @@
     [_pickerView.datePickerView setDatePickerMode:UIDatePickerModeDateAndTime];
     _pickerView.delegate = self;
     _pickerView.type = type;
-    [_pickerView.datePickerView setMinimumDate:[NSDate date]];
     [self.view addSubview:_pickerView];
     
 }
@@ -269,19 +270,19 @@
 - (void)getSelectDate:(NSDate *)date type:(DateType)type {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
     
     switch (type) {
         case DateTypeOfStart:
             _lbStart.text = currentOlderOneDateStr;
-            _startDate = date;
+            _startTime = currentOlderOneDateStr;
             
             break;
             
         case DateTypeOfEnd:
             _lbEnd.text = currentOlderOneDateStr;
-            _endDate = date;
+            _endTime = currentOlderOneDateStr;
             
             break;
             
@@ -345,7 +346,7 @@
     [self removeNoData];
     _integralArray = nil;
     _integralArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"startDate":[NSString stringWithFormat:@"%ld",(long)[_startDate timeIntervalSince1970]*1000],@"endData":[NSString stringWithFormat:@"%ld",(long)[_endDate timeIntervalSince1970]*1000]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"startDate":_startTime,@"endData":_endTime};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -355,9 +356,9 @@
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
             if (totalCount>0) {
-                [self setupNoData];
-            }else {
                 [self removeNoData];
+            }else {
+                [self setupNoData];
             }
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
@@ -380,6 +381,7 @@
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
         [self setupNoData];
+        [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     } showHUD:YES];
     
@@ -388,7 +390,7 @@
 - (void)requestMoreData {
     _page++;
     
-    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"startDate":[NSString stringWithFormat:@"%ld",(long)[_startDate timeIntervalSince1970]*1000],@"endData":[NSString stringWithFormat:@"%ld",(long)[_endDate timeIntervalSince1970]*1000]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"startDate":_startTime,@"endData":_endTime};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);

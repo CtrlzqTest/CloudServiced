@@ -164,7 +164,12 @@ static NSString *cell_id = @"personalCell";
         switch (indexPath.row) {
             case 0:
             {
-                [self performSegueWithIdentifier:@"pushMyTeam" sender:self];
+                if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+                   [self performSegueWithIdentifier:@"pushMyTeam" sender:self];
+                }else{
+                    
+                }
+                
             }
                 break;
             case 1:
