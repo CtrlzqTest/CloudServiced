@@ -7,6 +7,7 @@
 //
 
 #import "ZQCityPickerView.h"
+#import "DataSource.h"
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
 
@@ -14,11 +15,13 @@
 @interface ZQCityPickerView()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     NSArray *_provinceArray;
-    NSArray *_cityArray;
-    NSArray *_selectArray;
-    NSString *_cityIndex;
+    NSMutableArray *_cityArray;
+    NSString *_provinceCode;
+    NSDictionary *_provinceCodeDict;
+    NSMutableArray *_cityCodeArray;
     
     hidePickerViewBlock _block;
+    UIView *_accessInputView;
 }
 
 @property(nonatomic,strong)UIPickerView *pickerView;
@@ -30,11 +33,16 @@
 
 - (instancetype)initWithProvincesArray:(NSArray *)provinceArray cityArray:(NSArray *)cityArray{
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
-        _provinceArray = @[@"北京",@"上海"];
-        _cityArray = @[@[@"朝阳",@"昌平",@"大兴"],@[@"浦东",@"闵行",@"南翔"]];
-        _selectArray = _cityArray[0];
+        
+        _cityArray = [NSMutableArray array];
+        _cityCodeArray = [NSMutableArray array];
+        _provinceArray = [DataSource provinceArray];
+        _provinceCodeDict = [DataSource provinceCodeDict];
+        _provinceCode = [_provinceCodeDict valueForKey:_provinceArray[0]];
+        [self searchCityinProvinceCode:_provinceCode];
+        
         self.province = [_provinceArray firstObject];
-        self.city = [_selectArray firstObject];
+        self.city = [_cityArray firstObject];
         self.frame = [UIScreen mainScreen].bounds;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
@@ -48,16 +56,31 @@
     self.maskView = [[UIView alloc] initWithFrame:self.bounds];
     self.maskView.alpha = 0;
     self.maskView.backgroundColor = [UIColor blackColor];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidePickerView)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMaskView)];
     [self.maskView addGestureRecognizer:tap];
-    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KHeight + 20, KWidth, KHeight * 7 / 16.0 - 20)];
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KHeight + 30, KWidth, KHeight * 3 / 8.0 - 30)];
     self.pickerView.backgroundColor = [UIColor whiteColor];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     
+    _accessInputView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.pickerView.frame) - 30, KWidth, 30)];
+    _accessInputView.hidden = YES;
+    _accessInputView.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *cancleBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    cancleBtn.frame = CGRectMake(20, 0, 30, 30);
+    [cancleBtn setTitle:@"取消" forState:(UIControlStateNormal)];
+    [cancleBtn addTarget:self action:@selector(cancleAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    UIButton *ensureBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    ensureBtn.frame = CGRectMake(KWidth - 20 - 30, 0, 30, 30);
+    [ensureBtn setTitle:@"确定" forState:(UIControlStateNormal)];
+    [ensureBtn addTarget:self action:@selector(ensureAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [_accessInputView addSubview:cancleBtn];
+    [_accessInputView addSubview:ensureBtn];
     
     [self addSubview:self.maskView];
     [self addSubview:self.pickerView];
+    [self addSubview:_accessInputView];
     
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     [window addSubview:self];
@@ -74,27 +97,36 @@
         return _provinceArray.count;
     }else
     {
-        return [_cityArray[component] count];
+        return _cityArray.count;
     }
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
 
-    return component == 0 ? _provinceArray[row] : _selectArray[row];
+    return component == 0 ? _provinceArray[row] : _cityArray[row];
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (component == 0)
     {
-        _selectArray = _cityArray[row];
+        _provinceCode = [_provinceCodeDict valueForKey:_provinceArray[row]];
+        [self searchCityinProvinceCode:_provinceCode];
         [self.pickerView reloadComponent:1];
     }else
     {
         
     }
-    
     self.province = _provinceArray[[self .pickerView selectedRowInComponent:0]];
-    self.city = _selectArray[[self.pickerView selectedRowInComponent:1]];
+    self.city = _cityArray[[self.pickerView selectedRowInComponent:1]];
+    self.cityCode = _cityCodeArray[[self.pickerView selectedRowInComponent:1]];
+}
+
+- (void)cancleAction:(UIButton *)sender {
+    [self hidePickerViewWithEnsure:NO];
+}
+
+- (void)ensureAction:(UIButton *)sender {
+    [self hidePickerViewWithEnsure:YES];
 }
 
 - (void)showPickViewAnimated:(hidePickerViewBlock )block {
@@ -103,27 +135,53 @@
     self.hidden = NO;
     [UIView animateWithDuration:0.3 animations:^{
         self.maskView.alpha = 0.5;
-        self.pickerView.transform = CGAffineTransformMakeTranslation(0, - KHeight * 7 / 16.0);
+        _accessInputView.transform = CGAffineTransformMakeTranslation(0, - KHeight * 3 / 8.0);
+        self.pickerView.transform = CGAffineTransformMakeTranslation(0, - KHeight * 3 / 8.0);
     } completion:^(BOOL finished) {
         
     }];
-    
 }
 
-- (void)hidePickerView {
-    
+- (void)hidePickerViewWithEnsure:(BOOL )flag {
     
     [UIView animateWithDuration:0.3 animations:^{
         self.maskView.alpha = 0;
+        _accessInputView.transform = CGAffineTransformIdentity;
         self.pickerView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.hidden = YES;
-        _block(self.province,self.city);
+        if (flag) {
+            _block(self.province,self.city,self.cityCode);
+        }
         [self removeFromSuperview];
     }];
-    
 }
 
+- (void)tapMaskView {
+    [self hidePickerViewWithEnsure:YES];
+}
 
+/**
+ *  搜索城市
+ *
+ *  @param provinceCode 省编码
+ *
+ *  @return 市
+ */
+- (void)searchCityinProvinceCode:(NSString *)provinceCode {
+    
+    NSArray *searchCodeArray = [[DataSource cityCodeDict] allKeys];
+    NSLog(@"%@",[DataSource cityCodeDict]);
+    [_cityArray removeAllObjects];
+    [_cityCodeArray removeAllObjects];
+    [searchCodeArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *cityCode = obj;
+        if ([cityCode hasPrefix:provinceCode]) {
+            NSString *city = [[DataSource cityCodeDict] valueForKey:cityCode];
+            [_cityArray addObject:city];
+            [_cityCodeArray addObject:cityCode];
+        }
+    }];
+}
 
 @end

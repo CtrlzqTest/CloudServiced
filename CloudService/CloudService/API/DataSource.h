@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BankInfoData : NSObject
+@interface DataSource : NSObject
 /**
  *  银行开头
  */
@@ -29,4 +29,18 @@
  */
 +(NSArray *)insureCommpanyCodeArray;
 
+/**
+ *  所有省
+ */
++(NSArray *)provinceArray;
+
+/**
+ *  省对应编码
+ */
++(NSDictionary *)provinceCodeDict;
+
+/**
+ *  城市对应编码
+ */
++(NSDictionary *)cityCodeDict;
 @end

@@ -49,7 +49,7 @@
 		6383656C1C7DB8BA001A10C4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365671C7DB8BA001A10C4 /* UIColor+HexString.m */; };
 		6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6392CFF01C8D235400D84F38 /* TeamMember.m */; };
 		6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6392CFF31C8D8F8200D84F38 /* Achievement.m */; };
-		63AA2BD51C8A70ED00D7CF04 /* BankInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* BankInfoData.m */; };
+		63AA2BD51C8A70ED00D7CF04 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* DataSource.m */; };
 		63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */; };
 		63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BD91C8A8E1E00D7CF04 /* Integral.m */; };
 		63AA2BDD1C8AAEF700D7CF04 /* ClientData.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */; };
@@ -309,8 +309,8 @@
 		F090DED91C89394900168BF8 /* RequestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestEntity.m; sourceTree = "<group>"; };
 		F090DEDE1C896B1800168BF8 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
 		F090DEDF1C896B1800168BF8 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
-		F090DEE61C89AB3C00168BF8 /* BankInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BankInfoData.h; path = CloudService/API/BankInfoData.h; sourceTree = SOURCE_ROOT; };
-		F090DEE71C89AB3C00168BF8 /* BankInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BankInfoData.m; path = CloudService/API/BankInfoData.m; sourceTree = SOURCE_ROOT; };
+		F090DEE61C89AB3C00168BF8 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = CloudService/API/DataSource.h; sourceTree = SOURCE_ROOT; };
+		F090DEE71C89AB3C00168BF8 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataSource.m; path = CloudService/API/DataSource.m; sourceTree = SOURCE_ROOT; };
 		F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQScrollPageView.h; sourceTree = "<group>"; };
 		F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQScrollPageView.m; sourceTree = "<group>"; };
 		F094B59A1C8000E500A2312D /* HomeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionCell.h; sourceTree = "<group>"; };
@@ -684,8 +684,8 @@
 		F0292BD21C7B015200A810A9 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
-				F090DEE61C89AB3C00168BF8 /* BankInfoData.h */,
-				F090DEE71C89AB3C00168BF8 /* BankInfoData.m */,
+				F090DEE61C89AB3C00168BF8 /* DataSource.h */,
+				F090DEE71C89AB3C00168BF8 /* DataSource.m */,
 			);
 			name = DataStorage;
 			path = ../../../../DadaStorage;
@@ -855,7 +855,6 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 2936LQZ357;
 					};
 				};
 			};
@@ -977,7 +976,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63AA2BD51C8A70ED00D7CF04 /* BankInfoData.m in Sources */,
+				63AA2BD51C8A70ED00D7CF04 /* DataSource.m in Sources */,
 				630EF19B1C856CD00059CB34 /* CouponsViewController.m in Sources */,
 				F0292BE21C7B015200A810A9 /* BaseViewController.m in Sources */,
 				F0292BE41C7B015200A810A9 /* Utility.m in Sources */,
@@ -1099,8 +1098,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1144,8 +1143,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
