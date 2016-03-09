@@ -32,6 +32,8 @@
     BOOL _isLoad2;//是否已加载
     BOOL _isLoad3;//是否已加载
     NSArray *_userAchievementArray;//个人业绩
+    UIImageView *_noDataImg;
+    UILabel *_lbNoData;
 }
 @property (strong, nonatomic) LazyPageScrollView *pageView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -41,6 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupNoData];
     if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
             [self initPageView];
     }else{
@@ -58,6 +61,19 @@
 - (void)initTableView {
     [self.view addSubview:self.tableView];
 }
+- (void)setupNoData {
+    _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
+    _noDataImg.image = [UIImage imageNamed:@"pix2"];
+    _lbNoData = [[UILabel alloc] initWithFrame:CGRectMake(KWidth/2-20, KHeight/2+10, 60, 25)];
+    _lbNoData.text = @"暂无数据";
+    _lbNoData.font = [UIFont systemFontOfSize:14];
+    _lbNoData.textColor = [UIColor lightGrayColor];
+}
+- (void)removeNoData {
+    [_noDataImg removeFromSuperview];
+    [_lbNoData removeFromSuperview];
+}
+
 
 #pragma mark pageView
 - (void)initPageView {
@@ -268,11 +284,14 @@
 }
 //获取个人业绩
 - (void)requestUserAchievement {
+    [self removeNoData];
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserAchievement];
     NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
     [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+            
+            
             
             NSDictionary *dataDic = [returnData objectForKey:@"data"];
             NSDictionary *dayDic = [dataDic objectForKey:@"day"];
@@ -297,10 +316,14 @@
         }else {
             [_tableView.mj_header endRefreshing];
             [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            [self.tableView addSubview:_noDataImg];
+            [self.tableView addSubview:_lbNoData];
         }
         
     } failureBlock:^(NSError *error) {
         [_tableView.mj_header endRefreshing];
+        [self.tableView addSubview:_noDataImg];
+        [self.tableView addSubview:_lbNoData];
         
     } showHUD:NO];
 }
@@ -322,17 +345,25 @@
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],@"pageNo":[NSString stringWithFormat:@"%i",_page3],@"type":type};
     }
     
-    
+    [self removeNoData];
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamAchievement];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+          
+            
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
+            //如果有数据显示数据，如果没有数据则显示暂无数据
+            if (totalCount>0) {
+                [self removeNoData];
+            }else{
+                [self.pageView addSubview:_noDataImg];
+                [self.pageView addSubview:_lbNoData];
+            }
             if ([type isEqualToString:@"day"]) {
                 if (totalCount-_pageSize1*_page1<=0) {
                     //没有数据，直接提示没有更多数据
@@ -367,6 +398,8 @@
             
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
         }
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];
@@ -381,6 +414,8 @@
         
        
     } failureBlock:^(NSError *error) {
+        [self.pageView addSubview:_noDataImg];
+        [self.pageView addSubview:_lbNoData];
         [MBProgressHUD showError:@"服务器异常" toView:self.view];
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];

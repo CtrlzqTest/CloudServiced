@@ -16,6 +16,7 @@
     int _page;//当前页数
     int _pageSize;//每页加载数
     NSMutableArray *_clientArray;
+    NSString *_conditon;//模糊搜索
 }
 @property (weak, nonatomic)IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
@@ -25,6 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _conditon = @"";
+    //滑动tableview隐藏键盘
+    self.tableView.keyboardDismissMode  = UIScrollViewKeyboardDismissModeInteractive;
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -46,7 +50,7 @@
     // 下拉刷新
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _page = 1;
-        [self requestData];
+        [self requestData:_conditon];
         
     }];
     
@@ -57,14 +61,14 @@
     // 上拉刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self requestMoreData];
+        [self requestMoreData:_conditon];
         
     }];
 }
-- (void)requestData{
+- (void)requestData:(NSString *)condition{
     _clientArray = nil;
     _clientArray = [NSMutableArray array];
-    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"condition":condition};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -99,10 +103,10 @@
     
 }
 
-- (void)requestMoreData{
+- (void)requestMoreData:(NSString *)condition{
     _page++;
     
-    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"condition":condition};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
@@ -168,9 +172,14 @@
 #pragma mark searchBar
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     searchBar.text = @"";
+    
+    _conditon = searchBar.text;
+    [self requestData:_conditon];
     [searchBar resignFirstResponder];
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    _conditon = searchBar.text;
+    [self requestData:_conditon];
     [searchBar resignFirstResponder];
 }
 - (void)didReceiveMemoryWarning {

@@ -32,6 +32,7 @@
         [weakSelf performSegueWithIdentifier:@"intergralSearch" sender:weakSelf];
     }];
     [self addMjRefresh];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     // Do any additional setup after loading the view.
 }
 - (void)addMjRefresh {
