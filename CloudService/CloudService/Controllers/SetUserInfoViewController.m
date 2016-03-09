@@ -173,6 +173,7 @@ static NSString *const select_CellID = @"selectCell";
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
     _valueArray_User[_indexPath.row] = currentOlderOneDateStr;
     [self.tableView reloadData];
+    _pickerView = nil;
 }
 
 #pragma mark -- SetUserInfoCellDelegate
@@ -528,12 +529,7 @@ static NSString *const select_CellID = @"selectCell";
 - (void)showDataPickerView {
     
     _pickerView = [HZQDatePickerView instanceDatePickerView];
-    _pickerView.frame = CGRectMake(0, 0, KWidth, KHeight + 20);
-    [_pickerView setBackgroundColor:[UIColor clearColor]];
-    _pickerView.delegate = self;
-    _pickerView.type = DateTypeOfStart;
-    [_pickerView.datePickerView setMinimumDate:[NSDate date]];
-    [self.view addSubview:_pickerView];
+    [_pickerView showDateViewWithDelegate:self];
     
 }
 

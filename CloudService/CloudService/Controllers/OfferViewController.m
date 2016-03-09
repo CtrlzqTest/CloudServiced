@@ -42,12 +42,14 @@ static CGFloat headerHeight = 30;
     UIButton *btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnSave setTitle:@"保存" forState:UIControlStateNormal];
     btnSave.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btnSave addTarget:self action:@selector(saveAction) forControlEvents:(UIControlEventTouchUpInside)];
     [btnSave setBackgroundImage:[UIImage imageNamed:@"btn8"] forState:UIControlStateNormal];
     [_footView addSubview:btnSave];
     
     UIButton *btnOffer = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnOffer setTitle:@"报价" forState:UIControlStateNormal];
     btnOffer.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btnOffer addTarget:self action:@selector(offerAction) forControlEvents:(UIControlEventTouchUpInside)];
     [btnOffer setBackgroundImage:[UIImage imageNamed:@"btn4"] forState:UIControlStateNormal];
     [_footView addSubview:btnOffer];
     // 给左边视图添加约束
@@ -81,6 +83,35 @@ static CGFloat headerHeight = 30;
     }];
 }
 
+// 保存
+- (void)saveAction {
+    
+    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+    OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
+    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
+        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+        return ;
+    }
+    NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
+    OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
+    NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
+    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
+        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+        return ;
+    }
+    
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kEstablishCustBySelf] params:@{@"userId":user.userId,@"custName":self.custName,@"phoneNo":self.phoneNo,@"licenseNo":self.carCode,@"engineNo":cell1.engine.text,@"frameNo":cell1.carFrameCode.text} successBlock:^(id returnData) {
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+}
+
+- (void)offerAction {
+    
+}
+
 #pragma mark tabelView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -99,22 +130,24 @@ static CGFloat headerHeight = 30;
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OfferTableViewCell" owner:self options:nil];
         if (indexPath.section == 0) {
             cell = [array objectAtIndex:0];
+            if (self.carCode) {
+                cell.carCode.text = self.carCode;
+            }
         }else{
             cell = [array objectAtIndex:1];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
     return cell;
 }
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     SetUserInfoHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header_id];
-    headerView.titleLabel.text = section == 0 ? @"个人信息" : @"银行信息";
+    headerView.titleLabel.text = section == 0 ? @"车辆信息" : @"车主信息";
     return headerView;
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section == 0) {
         return nil;
