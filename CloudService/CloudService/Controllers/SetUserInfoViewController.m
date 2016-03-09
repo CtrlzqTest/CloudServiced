@@ -14,7 +14,7 @@
 #import "BankInfoData.h"
 #import "YWBCityPickerView.h"
 #import "BankInfoData.h"
-
+#import "ZQCityPickerView.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
 static NSString *const header_id = @"setUserInfoHeader";
@@ -121,8 +121,25 @@ static NSString *const select_CellID = @"selectCell";
                        @"开户省份",@"开户城市"];
     
     _valueArray_User = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"销售职",@"2015-01-01",@"",@"",@""]];
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    _valueArray_User[0] = user.realName;
+    _valueArray_User[1] = user.idCard;
+    _valueArray_User[2] = user.roleName;
+    _valueArray_User[3] = user.oldCompany;
+    _valueArray_User[4] = user.oldPost.length > 0 ? user.oldPost : @"销售职";
+    _valueArray_User[5] = @"2015-01-01";
+    _valueArray_User[6] = user.chatName;
+    _valueArray_User[7] = user.applySaleCompany;
+    _valueArray_User[8] = user.saleCity;
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
+    _valueArray_Bank[0] = user.realName;
+    _valueArray_Bank[1] = user.bankNum;
+    _valueArray_Bank[2] = user.bankName;
+    _valueArray_Bank[3] = user.subbranchName;
+    _valueArray_Bank[4] = user.accountProvinces;
+    _valueArray_Bank[5] = user.accountCity;
+    
     
 }
 
@@ -367,22 +384,23 @@ static NSString *const select_CellID = @"selectCell";
             return nil;
         }
     }
-    if (![HelperUtil checkUserIdCard:_valueArray_User[2]]) {
-        [MBProgressHUD showMessag:@"省份证号输入不正确" toView:self.view];
+    if (![HelperUtil checkUserIdCard:_valueArray_User[1]]) {
+        [MBProgressHUD showMessag:@"身份证号输入不正确" toView:self.view];
         return nil;
     }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSString *idCord = _valueArray_User[1];
+    user.realName = _valueArray_User[0];
     user.sex = [HelperUtil getSexWithIdcord:idCord];
     user.age = [HelperUtil getBorthDayWithIdCord:idCord];
     user.workStartDate = _valueArray_User[5];
     user.oldPost = _valueArray_User[4];
     user.oldCompany = _valueArray_User[3];
-    user.saleCity = _valueArray_User[8];
-    user.chatName = _valueArray_User[6];
+    user.saleCity =   _valueArray_User[8];
+    user.chatName  = _valueArray_User[6];
     user.applySaleCompany = _valueArray_User[7];
     user.idCard = idCord;
-    user.realName = _valueArray_Bank[0];
+    user.bankAccountName = _valueArray_Bank[0];
     user.bankNum = _valueArray_Bank[1];
     user.bankName = _valueArray_Bank[2];
     user.subbranchName = _valueArray_Bank[3];
@@ -395,6 +413,8 @@ static NSString *const select_CellID = @"selectCell";
     [dict setValue:user.phoneNo forKey:@"phoneNo"];
     [dict setValue:user.sex forKey:@"sex"];
     [dict setValue:user.age forKey:@"age"];
+    [dict setValue:user.realName forKey:@"realName"];
+    [dict setValue:user.chatName forKey:@"chatName"];
 //
     [dict setValue:user.workStartDate forKey:@"workStartDate"];
     [dict setValue:user.oldPost forKey:@"oldPost"];
@@ -404,7 +424,7 @@ static NSString *const select_CellID = @"selectCell";
     [dict setValue:user.idCard forKey:@"idCard"];
 
     // 银行信息
-    [dict setValue:user.realName forKey:@"realName"];
+    [dict setValue:user.bankAccountName forKey:@"bankAccountName"];
     [dict setValue:user.bankName forKey:@"bankName"];
     [dict setValue:user.bankNum forKey:@"bankNum"];
     [dict setValue:user.subbranchName forKey:@"subbranchName"];
@@ -459,18 +479,34 @@ static NSString *const select_CellID = @"selectCell";
 
 - (void)showCityPickerView {
     
-    [self resignKeyBoardInView:self.view];
-    if (!self.cityPickerView) {
-        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _maskView.backgroundColor = [UIColor colorWithRed:0.363 green:0.380 blue:0.373 alpha:0.500];
-        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCityPickerView:)]];
-        [self.view addSubview:_maskView];
-        self.cityPickerView = [[YWBCityPickerView alloc] init];
-        self.cityPickerView.backgroundColor = [UIColor whiteColor];
-        self.cityPickerView.frame = CGRectMake(0, self.view.frame.size.height, KWidth, 300);
-    }
-    _maskView.hidden = NO;
-    [self.cityPickerView showInView:self.maskView];
+//    [self resignKeyBoardInView:self.view];
+//    if (!self.cityPickerView) {
+//        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//        _maskView.backgroundColor = [UIColor colorWithRed:0.363 green:0.380 blue:0.373 alpha:0.500];
+//        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCityPickerView:)]];
+//        [self.view addSubview:_maskView];
+//        self.cityPickerView = [[YWBCityPickerView alloc] init];
+//        self.cityPickerView.backgroundColor = [UIColor whiteColor];
+//        self.cityPickerView.frame = CGRectMake(0, self.view.frame.size.height, KWidth, 300);
+//    }
+//    _maskView.hidden = NO;
+//    [self.cityPickerView showInView:self.maskView];
+    
+    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil];
+    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city) {
+        if (_indexPath.section == 0)
+        {
+            _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",province,city];
+            
+        }else
+        {
+            _valueArray_Bank[4] = province;
+            _valueArray_Bank[5] = city;
+        }
+        [self.tableView reloadData];
+        cityPickerView = nil;
+    }];
+    
     
 }
 

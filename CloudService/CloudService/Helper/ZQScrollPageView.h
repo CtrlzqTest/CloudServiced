@@ -24,4 +24,13 @@ typedef void(^ClickBlock)(NSInteger index);
 // 开始播放动画
 - (void)playWithImageArray:(NSArray *)imageArray TimeInterval:(NSTimeInterval)displayTime imageType:(ImageType )imageType clickImage:(ClickBlock )clickBlock;
 
+/**
+ *   暂停
+ */
+- (void)pause;
+
+/**
+ *  开始
+ */
+- (void)start;
 @end

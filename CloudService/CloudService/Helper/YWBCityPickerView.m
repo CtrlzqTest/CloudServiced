@@ -15,7 +15,6 @@
 @property (nonatomic, copy) NSMutableArray *areaArray;//县
 
 @property (nonatomic, copy) NSMutableArray *selectedArray;
-
 @property (nonatomic, strong) UIPickerView *pickerView;
 
 @end

@@ -11,6 +11,7 @@
 @interface User : NSObject
 
 @property(nonatomic,copy)NSString *userName;
+@property(nonatomic,copy)NSString *userType;
 @property(nonatomic,copy)NSString *address;
 @property(nonatomic,copy)NSString *age;             // 地址编码
 @property(nonatomic,copy)NSString *applySaleCompany;

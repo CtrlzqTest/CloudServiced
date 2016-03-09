@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *codeText;
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;
 @property (weak, nonatomic) IBOutlet UITextField *ensurePwd;
+@property (weak, nonatomic) IBOutlet UITextField *invateCode;
 
 @property (nonatomic, strong) YWBCityPickerView *cityPickerView;
 @property (nonatomic,strong)UIView *maskView;
