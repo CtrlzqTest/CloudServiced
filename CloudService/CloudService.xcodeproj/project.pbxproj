@@ -40,6 +40,10 @@
 		637533B61C842E2000A12932 /* OfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637533B51C842E2000A12932 /* OfferViewController.m */; };
 		637533BB1C84321500A12932 /* OfferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 637533B91C84321500A12932 /* OfferTableViewCell.m */; };
 		637533BC1C84321500A12932 /* OfferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637533BA1C84321500A12932 /* OfferTableViewCell.xib */; };
+		637A62481C8EBEC60020AE5E /* CouponsDistributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */; };
+		637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 637A624A1C8EC0020020AE5E /* CouponsDistributeCell.m */; };
+		637A624D1C8EC0020020AE5E /* CouponsDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637A624B1C8EC0020020AE5E /* CouponsDistributeCell.xib */; };
+		637A62501C8ED5A00020AE5E /* CouponsDistributed.m in Sources */ = {isa = PBXBuildFile; fileRef = 637A624F1C8ED5A00020AE5E /* CouponsDistributed.m */; };
 		6383656A1C7DB8BA001A10C4 /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365641C7DB8BA001A10C4 /* HZQDatePickerView.m */; };
 		6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638365651C7DB8BA001A10C4 /* HZQDatePickerView.xib */; };
 		6383656C1C7DB8BA001A10C4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365671C7DB8BA001A10C4 /* UIColor+HexString.m */; };
@@ -168,6 +172,13 @@
 		637533B81C84321500A12932 /* OfferTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableViewCell.h; sourceTree = "<group>"; };
 		637533B91C84321500A12932 /* OfferTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableViewCell.m; sourceTree = "<group>"; };
 		637533BA1C84321500A12932 /* OfferTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfferTableViewCell.xib; sourceTree = "<group>"; };
+		637A62461C8EBEC60020AE5E /* CouponsDistributeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsDistributeViewController.h; sourceTree = "<group>"; };
+		637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsDistributeViewController.m; sourceTree = "<group>"; };
+		637A62491C8EC0020020AE5E /* CouponsDistributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsDistributeCell.h; sourceTree = "<group>"; };
+		637A624A1C8EC0020020AE5E /* CouponsDistributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsDistributeCell.m; sourceTree = "<group>"; };
+		637A624B1C8EC0020020AE5E /* CouponsDistributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponsDistributeCell.xib; sourceTree = "<group>"; };
+		637A624E1C8ED5A00020AE5E /* CouponsDistributed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsDistributed.h; sourceTree = "<group>"; };
+		637A624F1C8ED5A00020AE5E /* CouponsDistributed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsDistributed.m; sourceTree = "<group>"; };
 		638365631C7DB8BA001A10C4 /* HZQDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZQDatePickerView.h; sourceTree = "<group>"; };
 		638365641C7DB8BA001A10C4 /* HZQDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZQDatePickerView.m; sourceTree = "<group>"; };
 		638365651C7DB8BA001A10C4 /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
@@ -506,6 +517,8 @@
 				F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */,
 				630EF1991C856CD00059CB34 /* CouponsViewController.h */,
 				630EF19A1C856CD00059CB34 /* CouponsViewController.m */,
+				637A62461C8EBEC60020AE5E /* CouponsDistributeViewController.h */,
+				637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */,
 			);
 			name = "PersonalController(个人中心)";
 			sourceTree = "<group>";
@@ -713,6 +726,8 @@
 				6392CFF01C8D235400D84F38 /* TeamMember.m */,
 				6392CFF21C8D8F8200D84F38 /* Achievement.h */,
 				6392CFF31C8D8F8200D84F38 /* Achievement.m */,
+				637A624E1C8ED5A00020AE5E /* CouponsDistributed.h */,
+				637A624F1C8ED5A00020AE5E /* CouponsDistributed.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -793,6 +808,9 @@
 				630EF19C1C856CFD0059CB34 /* CouponsTableViewCell.h */,
 				630EF19D1C856CFD0059CB34 /* CouponsTableViewCell.m */,
 				630EF19E1C856CFD0059CB34 /* CouponsTableViewCell.xib */,
+				637A62491C8EC0020020AE5E /* CouponsDistributeCell.h */,
+				637A624A1C8EC0020020AE5E /* CouponsDistributeCell.m */,
+				637A624B1C8EC0020020AE5E /* CouponsDistributeCell.xib */,
 			);
 			name = "PersonalViews(个人中心)";
 			sourceTree = "<group>";
@@ -875,6 +893,7 @@
 				F094B5A41C80223400A2312D /* PersonalViewCell.xib in Resources */,
 				F01A61611C7D3D3E008CBBD5 /* SetUserInfoCell.xib in Resources */,
 				637533BC1C84321500A12932 /* OfferTableViewCell.xib in Resources */,
+				637A624D1C8EC0020020AE5E /* CouponsDistributeCell.xib in Resources */,
 				6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */,
 				F0292BB81C7B00CD00A810A9 /* Main.storyboard in Resources */,
 				630EF1901C8543900059CB34 /* PersonResultCell.xib in Resources */,
@@ -959,6 +978,7 @@
 				F0292BE41C7B015200A810A9 /* Utility.m in Sources */,
 				630EF1931C8567400059CB34 /* IntegralViewController.m in Sources */,
 				F0292BE31C7B015200A810A9 /* User.m in Sources */,
+				637A62501C8ED5A00020AE5E /* CouponsDistributed.m in Sources */,
 				F0292BE01C7B015200A810A9 /* BaseNaviViewController.m in Sources */,
 				63C54E321C7C2F96007CE8CA /* OrderManagerCell.m in Sources */,
 				6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */,
@@ -998,6 +1018,7 @@
 				F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */,
 				630EF1A51C8579630059CB34 /* IntergralChangeViewController.m in Sources */,
 				F019C9E21C7C685700E73A2C /* RegisterSucViewController.m in Sources */,
+				637A62481C8EBEC60020AE5E /* CouponsDistributeViewController.m in Sources */,
 				63C07B9D1C7B14BB0084581F /* MHNetworkManager.m in Sources */,
 				F0292BE11C7B015200A810A9 /* BaseTabBarViewController.m in Sources */,
 				63ADFBEB1C7F0622000D3164 /* PellTableViewSelect.m in Sources */,
@@ -1014,6 +1035,7 @@
 				635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */,
 				63C07B9E1C7B14BB0084581F /* MHUploadParam.m in Sources */,
 				63C07BA91C7B15C10084581F /* NSDictionary+AYCUnicode.m in Sources */,
+				637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */,
 				F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */,
 				6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */,
 				F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */,

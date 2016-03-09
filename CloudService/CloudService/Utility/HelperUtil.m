@@ -9,6 +9,7 @@
 #import "HelperUtil.h"
 #import <CommonCrypto/CommonDigest.h>
 
+#define LocalStr_None  @""
 
 @implementation HelperUtil
 

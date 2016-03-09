@@ -13,4 +13,6 @@
 @property (nonatomic, copy)NSString *idCard;
 @property (nonatomic, copy)NSString *phoneNo;
 @property (nonatomic, copy)NSString *userId;
+@property (assign, nonatomic)BOOL isCheck;
+@property (assign, nonatomic)int moneyNum;
 @end
