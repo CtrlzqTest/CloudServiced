@@ -11,9 +11,8 @@
 #import "SetUserInfoHeaderView.h"
 #import "HZQDatePickerView.h"
 #import "HelperUtil.h"
-#import "BankInfoData.h"
+#import "DataSource.h"
 #import "YWBCityPickerView.h"
-#import "BankInfoData.h"
 #import "ZQCityPickerView.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
@@ -38,7 +37,6 @@ static NSString *const select_CellID = @"selectCell";
 @property(nonatomic,strong) NSArray *selectArray;
 @property(nonatomic,strong) UIButton *maskBtn;
 @property (nonatomic,strong)HZQDatePickerView *pickerView;
-@property (nonatomic, strong) YWBCityPickerView *cityPickerView;
 @property (nonatomic,strong)UIView *maskView;
 
 @end
@@ -288,7 +286,7 @@ static NSString *const select_CellID = @"selectCell";
     {
         switch (indexPath.row)
         {
-            case 3:     _selectArray = [BankInfoData insureCommpanyNameArray];
+            case 3:     _selectArray = [DataSource insureCommpanyNameArray];
                         CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect3];
                         break;
@@ -299,7 +297,7 @@ static NSString *const select_CellID = @"selectCell";
                         CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 3 * 30);
                         [self showPullDownViewWithRect:rect4];
                         break;
-            case 7:     _selectArray = [BankInfoData insureCommpanyNameArray];
+            case 7:     _selectArray = [DataSource insureCommpanyNameArray];
                         CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect7];
                         break;
@@ -437,8 +435,8 @@ static NSString *const select_CellID = @"selectCell";
 // 二分查找卡户银行
 - (NSString *)getBankNameWithBankbin:(NSString *)bankBin {
     
-    NSArray *bankBinArray = [BankInfoData bankBin];
-    NSArray *bankNameArray = [BankInfoData bankNameArray];
+    NSArray *bankBinArray = [DataSource bankBin];
+    NSArray *bankNameArray = [DataSource bankNameArray];
     int low = 0;
     int high = (int)(bankBinArray.count-1);
     while(low <= high)
@@ -460,40 +458,13 @@ static NSString *const select_CellID = @"selectCell";
     return nil;
 }
 
-
-- (void)hideCityPickerView:(UIGestureRecognizer *)sender {
-    
-    if (_indexPath.section == 0)
-    {
-        _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",self.cityPickerView.province,self.cityPickerView.city];
-        
-    }else
-    {
-        _valueArray_Bank[4] = self.cityPickerView.province;
-        _valueArray_Bank[5] = self.cityPickerView.city;
-    }
-    [self.tableView reloadData];
-    _maskView.hidden = YES;
-    [self.cityPickerView hiddenPickerView];
-}
-
 - (void)showCityPickerView {
     
-//    [self resignKeyBoardInView:self.view];
-//    if (!self.cityPickerView) {
-//        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//        _maskView.backgroundColor = [UIColor colorWithRed:0.363 green:0.380 blue:0.373 alpha:0.500];
-//        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCityPickerView:)]];
-//        [self.view addSubview:_maskView];
-//        self.cityPickerView = [[YWBCityPickerView alloc] init];
-//        self.cityPickerView.backgroundColor = [UIColor whiteColor];
-//        self.cityPickerView.frame = CGRectMake(0, self.view.frame.size.height, KWidth, 300);
-//    }
-//    _maskView.hidden = NO;
-//    [self.cityPickerView showInView:self.maskView];
+    [self resignKeyBoardInView:self.view];
     
     __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil];
-    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city) {
+    
+    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode) {
         if (_indexPath.section == 0)
         {
             _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",province,city];
@@ -503,6 +474,7 @@ static NSString *const select_CellID = @"selectCell";
             _valueArray_Bank[4] = province;
             _valueArray_Bank[5] = city;
         }
+        NSLog(@"%@",cityCode);
         [self.tableView reloadData];
         cityPickerView = nil;
     }];
