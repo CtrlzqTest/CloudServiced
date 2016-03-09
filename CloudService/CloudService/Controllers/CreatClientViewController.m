@@ -7,11 +7,13 @@
 //
 
 #import "CreatClientViewController.h"
+#import "OfferViewController.h"
 
 @interface CreatClientViewController ()
 @property (weak, nonatomic)IBOutlet UITextField *tfName;
 @property (weak, nonatomic)IBOutlet UITextField *tfPhone;
 @property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
+@property (weak, nonatomic) IBOutlet UIButton *isNewCarBtn;
 @end
 
 @implementation CreatClientViewController
@@ -33,14 +35,39 @@
         [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
     }else {
         [self performSegueWithIdentifier:@"offer" sender:self];
+        
     }
 }
 
+- (IBAction)newCarAction:(id)sender {
+    NSLog(@"%d",self.isNewCarBtn.selected);
+    if (self.isNewCarBtn.selected)
+    {
+        [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox"] forState:(UIControlStateNormal)];
+    }else
+    {
+        [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox_"] forState:(UIControlStateNormal)];
+    }
+    self.isNewCarBtn.selected = !self.isNewCarBtn.selected;
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     self.title = @"创建客户";
    
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // segue.identifier：获取连线的ID
+    if ([segue.identifier isEqualToString:@"offer"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        OfferViewController *offerVC = segue.destinationViewController;
+        offerVC.carCode = _tfLicenseNo.text;
+        offerVC.phoneNo = _tfPhone.text;
+        offerVC.custName = _tfName.text;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

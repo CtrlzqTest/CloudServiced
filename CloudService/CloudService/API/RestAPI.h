@@ -59,6 +59,8 @@
 
 #define kfindInviteLink           @"/app/dic/findInviteLink"                    //邀请链接
 
+#define kEstablishCustBySelf      @"/app/customerData/establishCustBySelf"   //创建客户,保存信息
+
 //   常量
 /**************************************************************************************/
 

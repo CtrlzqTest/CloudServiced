@@ -47,7 +47,7 @@
 //
             weakSelf.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
             weakSelf.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
-            weakSelf.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
+            weakSelf.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
         }
     } failureBlock:^(NSError *error) {
         

@@ -33,4 +33,6 @@ typedef enum {
 
 @property (nonatomic, assign) DateType type;
 
+- (void)showDateViewWithDelegate:(id<HZQDatePickerViewDelegate>)delegate;
+
 @end

@@ -2262,18 +2262,36 @@
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车牌号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-mf-7Mh">
-                                        <rect key="frame" x="115" y="123" width="217" height="30"/>
+                                        <rect key="frame" x="115" y="123" width="185" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="xFE-cI-jxo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI7-bI-wYy">
+                                        <rect key="frame" x="300" y="123" width="60" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="ZNA-V2-krd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="新车" image="checkbox">
+                                            <color key="titleColor" red="1" green="0.51000831264031443" blue="0.52438811985326894" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newCarAction:" destination="azA-T9-zXt" eventType="touchUpInside" id="PGf-re-pp9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="uI7-bI-wYy" firstAttribute="top" secondItem="BIr-mf-7Mh" secondAttribute="top" id="0NC-L8-bfa"/>
+                                    <constraint firstItem="uI7-bI-wYy" firstAttribute="bottom" secondItem="BIr-mf-7Mh" secondAttribute="bottom" id="0We-vU-Lj3"/>
                                     <constraint firstItem="apE-tZ-AEA" firstAttribute="top" secondItem="Ov7-6y-IXe" secondAttribute="bottom" constant="15" id="0ZP-1N-ZhQ"/>
                                     <constraint firstItem="p8l-uu-r1c" firstAttribute="top" secondItem="wih-Fj-OuT" secondAttribute="bottom" constant="16" id="32N-Lz-gDy"/>
+                                    <constraint firstItem="uI7-bI-wYy" firstAttribute="leading" secondItem="BIr-mf-7Mh" secondAttribute="trailing" id="3sB-ls-bg2"/>
                                     <constraint firstAttribute="height" constant="169" id="47O-ia-Pke"/>
                                     <constraint firstItem="Ov7-6y-IXe" firstAttribute="leading" secondItem="xeK-uh-QZb" secondAttribute="leading" id="5hL-Zo-X11"/>
                                     <constraint firstAttribute="trailing" secondItem="Yga-7i-mew" secondAttribute="trailing" id="9cV-OL-RKJ"/>
@@ -2290,6 +2308,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Ov7-6y-IXe" secondAttribute="trailing" id="Sjr-hZ-WjG"/>
                                     <constraint firstAttribute="trailing" secondItem="BIr-mf-7Mh" secondAttribute="trailing" constant="43" id="a1R-EC-nOE"/>
                                     <constraint firstItem="pOe-iP-xPQ" firstAttribute="leading" secondItem="MBW-C9-sw0" secondAttribute="trailing" constant="20" id="cUT-xt-D1S"/>
+                                    <constraint firstAttribute="trailing" secondItem="uI7-bI-wYy" secondAttribute="trailing" constant="15" id="cri-HC-6bF"/>
                                     <constraint firstItem="BIr-mf-7Mh" firstAttribute="top" secondItem="wih-Fj-OuT" secondAttribute="bottom" constant="11" id="dbN-I9-5Cv"/>
                                     <constraint firstItem="p8l-uu-r1c" firstAttribute="leading" secondItem="xeK-uh-QZb" secondAttribute="leading" constant="17" id="dcJ-Wq-s29"/>
                                     <constraint firstItem="pOe-iP-xPQ" firstAttribute="top" secondItem="Yga-7i-mew" secondAttribute="bottom" constant="11" id="gcW-eb-Yae"/>
@@ -2301,6 +2320,11 @@
                                     <constraint firstItem="kqN-XN-Wi2" firstAttribute="top" secondItem="Ov7-6y-IXe" secondAttribute="bottom" constant="10" id="xlo-pY-hHg"/>
                                     <constraint firstItem="Yga-7i-mew" firstAttribute="top" secondItem="kqN-XN-Wi2" secondAttribute="bottom" constant="13" id="ywL-tv-tp2"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="a1R-EC-nOE"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5O-RK-fhB">
                                 <rect key="frame" x="25" y="221" width="324" height="38"/>
@@ -2334,6 +2358,7 @@
                     <navigationItem key="navigationItem" title="创建客户" id="AA9-Z5-t5w"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="isNewCarBtn" destination="uI7-bI-wYy" id="MQb-Si-tfW"/>
                         <outlet property="tfLicenseNo" destination="BIr-mf-7Mh" id="XP4-KB-5Ss"/>
                         <outlet property="tfName" destination="kqN-XN-Wi2" id="dMc-Ep-6fR"/>
                         <outlet property="tfPhone" destination="pOe-iP-xPQ" id="L2V-zK-dag"/>
@@ -2910,6 +2935,7 @@
     <resources>
         <image name="btn-icon1" width="20" height="20"/>
         <image name="btn2" width="330" height="40"/>
+        <image name="checkbox" width="19" height="19"/>
         <image name="details-arrow2" width="25" height="25"/>
         <image name="head-bg" width="360" height="137"/>
         <image name="head2" width="64" height="64"/>

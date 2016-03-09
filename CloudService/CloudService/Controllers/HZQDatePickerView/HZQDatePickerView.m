@@ -39,6 +39,8 @@
     self.backgVIew.layer.borderWidth = 1;
     self.backgVIew.layer.borderColor = [[UIColor clearColor] CGColor];
     self.backgVIew.layer.masksToBounds = YES;
+    self.backgroundColor = [UIColor clearColor];
+    self.frame = [UIScreen mainScreen].bounds;
     
     /** 确定 */
     self.sureBtn.layer.cornerRadius = 4;
@@ -123,6 +125,14 @@
     
     
     [self removeBtnClick:nil];
+}
+
+- (void)showDateViewWithDelegate:(id<HZQDatePickerViewDelegate>)delegate {
+    self.delegate = delegate;
+    self.type = DateTypeOfStart;
+    [self.datePickerView setMinimumDate:[NSDate date]];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    [window addSubview:self];
 }
 
 @end
