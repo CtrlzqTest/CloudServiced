@@ -25,6 +25,8 @@
     NSString *_integral;
     BOOL _isHide;
     ClientData *_clientData;//用户数据
+    
+    HomeHeaderView *_headerView;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -112,19 +114,23 @@ static NSString *headerView_ID = @"headerView";
 - (void)signAction:(UIButton *)sender {
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    if ([user.roleName isEqualToString:@"普通用户"]) {
+        [MBProgressHUD showError:@"当前用户为普通用户,不能签到,请先认证" toView:self.view];
+        return ;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:user.userId forKey:@"userId"];
     [dict setValue:[Utility location] forKey:@"address"];
-    NSLog(@"%@",[[SingleHandle shareSingleHandle] getUserInfo].sign);
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kSignedAPI] params:dict successBlock:^(id returnData) {
             if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
                 [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
                 [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
                 sender.enabled = NO;
-                user.sign = @"0";
+                user.sign = @"1";
+                [[SingleHandle shareSingleHandle] saveUserInfo:user];
             }
     } failureBlock:^(NSError *error) {
-            
+        [MBProgressHUD showError:@"签到失败" toView:self.view];
     } showHUD:YES];
     
 }
@@ -140,23 +146,23 @@ static NSString *headerView_ID = @"headerView";
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        HomeHeaderView *headerView = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID forIndexPath:indexPath];
-        if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"0"]) {
-            [headerView.sginBtn setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
-            [headerView.sginBtn setTitle:@"已签到" forState:(UIControlStateNormal)];
-            headerView.sginBtn.enabled = NO;
+        _headerView = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID forIndexPath:indexPath];
+        if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"1"]) {
+            [_headerView.sginBtn setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
+            [_headerView.sginBtn setTitle:@"已签到" forState:(UIControlStateNormal)];
+            _headerView.sginBtn.enabled = NO;
         }
-        headerView.headImg.userInteractionEnabled = YES;
-        [headerView.headImg addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction)]];
-        [headerView.sginBtn addTarget:self action:@selector(signAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        headerView.integralLabel.text = _integral;
+        _headerView.headImg.userInteractionEnabled = YES;
+        [_headerView.headImg addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction)]];
+        [_headerView.sginBtn addTarget:self action:@selector(signAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        _headerView.integralLabel.text = _integral;
         User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-        [headerView setDataWithDictionary:@{@"userName":user.userName}];
+        [_headerView setDataWithDictionary:@{@"userName":user.userName}];
         // 轮播图开始轮播
-        [headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
+        [_headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
             
         }];
-        return headerView;
+        return _headerView;
     }else {
         return [[UICollectionReusableView alloc] init];
     }
@@ -238,7 +244,7 @@ static NSString *headerView_ID = @"headerView";
 
 /** 获取数据*/
 - (void)getData {
-    if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"0"]) {
+    if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"1"]) {
         NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
         NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyCustomerData];
         [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {

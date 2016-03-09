@@ -14,7 +14,7 @@
 #import "BankInfoData.h"
 #import "YWBCityPickerView.h"
 #import "BankInfoData.h"
-
+#import "ZQCityPickerView.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
 static NSString *const header_id = @"setUserInfoHeader";
@@ -109,27 +109,30 @@ static NSString *const select_CellID = @"selectCell";
 
 - (void)initData {
     
-    _keyArray_User = @[@"真实姓名",@"证件号码",
+    _keyArray_User = @[@"真实姓名",
+                       @"证件号码",@"用户类型",
                        @"原离职公司",@"原职位",
-                       @"从业时间",@"微信号",
-                       @"申请销售保险公司",@"销售数据城市"];
+                       @"从业时间",
+                       @"微信号",@"申请销售保险公司",
+                       @"销售数据城市"];
     
     _keyArray_Bank = @[@"开户人姓名",@"银行账号",
                        @"开户银行",@"支行名称",
                        @"开户省份",@"开户城市"];
     
-    _valueArray_User = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"销售职",@"2015-01-01",@"",@"",@""]];
+    _valueArray_User = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"销售职",@"2015-01-01",@"",@"",@""]];
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     _valueArray_User[0] = user.realName;
     _valueArray_User[1] = user.idCard;
-//    _valueArray_User[2] = user.userType;
-    _valueArray_User[2] = user.oldCompany;
-    _valueArray_User[3] = @"销售职";
-    _valueArray_User[4] = @"2015-01-01";
-    _valueArray_User[5] = user.chatName;
-    _valueArray_User[6] = user.applySaleCompany;
-    _valueArray_User[7] = user.saleCity;
+    _valueArray_User[2] = user.roleName;
+    _valueArray_User[3] = user.oldCompany;
+    _valueArray_User[4] = user.oldPost.length > 0 ? user.oldPost : @"销售职";
+    _valueArray_User[5] = @"2015-01-01";
+    _valueArray_User[6] = user.chatName;
+    _valueArray_User[7] = user.applySaleCompany;
+    _valueArray_User[8] = user.saleCity;
     
+    _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
     _valueArray_Bank[0] = user.realName;
     _valueArray_Bank[1] = user.bankNum;
     _valueArray_Bank[2] = user.bankName;
@@ -137,7 +140,6 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_Bank[4] = user.accountProvinces;
     _valueArray_Bank[5] = user.accountCity;
     
-    _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
     
 }
 
@@ -228,10 +230,9 @@ static NSString *const select_CellID = @"selectCell";
         return _selectArray.count;
     }
     if (section == 0) {
-        NSLog(@"%ld",_valueArray_User.count);
         return _valueArray_User.count;
     }else {
-        return _valueArray_Bank.count;
+        return 6;
     }
 }
 
@@ -248,13 +249,13 @@ static NSString *const select_CellID = @"selectCell";
     
     SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id forIndexPath:indexPath];
     cell.delegate = self;
-    cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row]: _keyArray_Bank[indexPath.row];
+    cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
     if (indexPath.section == 0) {
-        if (indexPath.row == 6 || indexPath.row == 2 || indexPath.row == 7 || indexPath.row == 3) {
+        if (indexPath.row == 7 || indexPath.row == 3 || indexPath.row == 8 || indexPath.row == 4) {
             [cell isPullDown:YES];
-        }else if(indexPath.row == 4){
+        }else if(indexPath.row == 2 || indexPath.row == 5){
             cell.textFiled.enabled = NO;
         }
     }else if(indexPath.row == 1){
@@ -287,23 +288,23 @@ static NSString *const select_CellID = @"selectCell";
     {
         switch (indexPath.row)
         {
-            case 2:     _selectArray = [BankInfoData insureCommpanyNameArray];
+            case 3:     _selectArray = [BankInfoData insureCommpanyNameArray];
                         CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect3];
                         break;
-            case 4:
+            case 5:
                         [self showDataPickerView];
                         break;
-            case 5:     _selectArray = @[@"销售职",@"销售管理职",@"其他"];
+            case 4:     _selectArray = @[@"销售职",@"销售管理职",@"其他"];
                         CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 3 * 30);
                         [self showPullDownViewWithRect:rect4];
                         break;
-            case 6:     _selectArray = [BankInfoData insureCommpanyNameArray];
+            case 7:     _selectArray = [BankInfoData insureCommpanyNameArray];
                         CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
                         [self showPullDownViewWithRect:rect7];
                         break;
                 
-            case 7:     [self showCityPickerView];
+            case 8:     [self showCityPickerView];
                         break;
             default:
                 break;
@@ -388,18 +389,17 @@ static NSString *const select_CellID = @"selectCell";
         return nil;
     }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSString *idCord =  _valueArray_User[1];
-    user.realName =     _valueArray_User[0];
+    NSString *idCord = _valueArray_User[1];
+    user.realName = _valueArray_User[0];
     user.sex = [HelperUtil getSexWithIdcord:idCord];
     user.age = [HelperUtil getBorthDayWithIdCord:idCord];
-    user.workStartDate = _valueArray_User[4];
-    user.oldPost    =   _valueArray_User[3];
-    user.oldCompany =   _valueArray_User[2];
-    user.saleCity   =   _valueArray_User[7];
-    user.chatName   =   _valueArray_User[5];
-    user.applySaleCompany = _valueArray_User[6];
+    user.workStartDate = _valueArray_User[5];
+    user.oldPost = _valueArray_User[4];
+    user.oldCompany = _valueArray_User[3];
+    user.saleCity =   _valueArray_User[8];
+    user.chatName  = _valueArray_User[6];
+    user.applySaleCompany = _valueArray_User[7];
     user.idCard = idCord;
-    
     user.bankAccountName = _valueArray_Bank[0];
     user.bankNum = _valueArray_Bank[1];
     user.bankName = _valueArray_Bank[2];
@@ -414,6 +414,7 @@ static NSString *const select_CellID = @"selectCell";
     [dict setValue:user.sex forKey:@"sex"];
     [dict setValue:user.age forKey:@"age"];
     [dict setValue:user.realName forKey:@"realName"];
+    [dict setValue:user.chatName forKey:@"chatName"];
 //
     [dict setValue:user.workStartDate forKey:@"workStartDate"];
     [dict setValue:user.oldPost forKey:@"oldPost"];
@@ -464,7 +465,7 @@ static NSString *const select_CellID = @"selectCell";
     
     if (_indexPath.section == 0)
     {
-        _valueArray_User[7] = [NSString stringWithFormat:@"%@ %@",self.cityPickerView.province,self.cityPickerView.city];
+        _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",self.cityPickerView.province,self.cityPickerView.city];
         
     }else
     {
@@ -478,18 +479,34 @@ static NSString *const select_CellID = @"selectCell";
 
 - (void)showCityPickerView {
     
-    [self resignKeyBoardInView:self.view];
-    if (!self.cityPickerView) {
-        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _maskView.backgroundColor = [UIColor colorWithRed:0.363 green:0.380 blue:0.373 alpha:0.500];
-        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCityPickerView:)]];
-        [self.view addSubview:_maskView];
-        self.cityPickerView = [[YWBCityPickerView alloc] init];
-        self.cityPickerView.backgroundColor = [UIColor whiteColor];
-        self.cityPickerView.frame = CGRectMake(0, self.view.frame.size.height, KWidth, 300);
-    }
-    _maskView.hidden = NO;
-    [self.cityPickerView showInView:self.maskView];
+//    [self resignKeyBoardInView:self.view];
+//    if (!self.cityPickerView) {
+//        _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//        _maskView.backgroundColor = [UIColor colorWithRed:0.363 green:0.380 blue:0.373 alpha:0.500];
+//        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCityPickerView:)]];
+//        [self.view addSubview:_maskView];
+//        self.cityPickerView = [[YWBCityPickerView alloc] init];
+//        self.cityPickerView.backgroundColor = [UIColor whiteColor];
+//        self.cityPickerView.frame = CGRectMake(0, self.view.frame.size.height, KWidth, 300);
+//    }
+//    _maskView.hidden = NO;
+//    [self.cityPickerView showInView:self.maskView];
+    
+    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil];
+    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city) {
+        if (_indexPath.section == 0)
+        {
+            _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",province,city];
+            
+        }else
+        {
+            _valueArray_Bank[4] = province;
+            _valueArray_Bank[5] = city;
+        }
+        [self.tableView reloadData];
+        cityPickerView = nil;
+    }];
+    
     
 }
 

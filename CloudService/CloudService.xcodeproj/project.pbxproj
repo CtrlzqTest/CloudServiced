@@ -116,6 +116,7 @@
 		F09A5F8F1A55BEDD008D4963 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F09A5F8D1A55BEDD008D4963 /* HomeHeaderView.m */; };
 		F09A5F901A55BEDD008D4963 /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09A5F8E1A55BEDD008D4963 /* HomeHeaderView.xib */; };
 		F09A5F931A55F0AA008D4963 /* InviteFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */; };
+		F0AB898C1C8ED04F00849E3A /* ZQCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */; };
 		F0DF32121C87E612008D098F /* ResetUserPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -312,6 +313,8 @@
 		F09A5F8E1A55BEDD008D4963 /* HomeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeHeaderView.xib; sourceTree = "<group>"; };
 		F09A5F911A55F0AA008D4963 /* InviteFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendViewController.h; sourceTree = "<group>"; };
 		F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendViewController.m; sourceTree = "<group>"; };
+		F0AB898A1C8ED04F00849E3A /* ZQCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQCityPickerView.h; sourceTree = "<group>"; };
+		F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQCityPickerView.m; sourceTree = "<group>"; };
 		F0DF32101C87E612008D098F /* ResetUserPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetUserPwdViewController.h; sourceTree = "<group>"; };
 		F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetUserPwdViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -682,6 +685,8 @@
 				63ADFBE81C7F0622000D3164 /* lib1 */,
 				63508C831C86D37800505F08 /* YWBCityPickerView.h */,
 				63508C841C86D37800505F08 /* YWBCityPickerView.m */,
+				F0AB898A1C8ED04F00849E3A /* ZQCityPickerView.h */,
+				F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */,
 				63C2FB961C8022D900D48B8C /* PlaceholderTextView.h */,
 				63C2FB971C8022D900D48B8C /* PlaceholderTextView.m */,
 				F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */,
@@ -832,7 +837,7 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7PS2AH4H79;
+						DevelopmentTeam = 2936LQZ357;
 					};
 				};
 			};
@@ -961,6 +966,7 @@
 				F0292BE31C7B015200A810A9 /* User.m in Sources */,
 				F0292BE01C7B015200A810A9 /* BaseNaviViewController.m in Sources */,
 				63C54E321C7C2F96007CE8CA /* OrderManagerCell.m in Sources */,
+				F0AB898C1C8ED04F00849E3A /* ZQCityPickerView.m in Sources */,
 				6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */,
 				F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */,
 				636CD9881C884E9A0050935E /* IntergralSearchViewController.m in Sources */,

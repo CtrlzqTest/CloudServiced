@@ -81,7 +81,7 @@
 
 #pragma 私有方法 -UIScrollViewDelegate
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
+
     [self setScollViewMid];
     
 }
@@ -94,7 +94,7 @@
 }
 
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    
+
     [self setScollViewMid];
     
 }
@@ -175,8 +175,6 @@
 
 - (void)setupScrollPageView {
     
-    
-    
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -230,6 +228,13 @@
     }
 }
 
+- (void)pause {
+    [_timer setFireDate:[NSDate distantFuture]];
+}
+
+- (void)start {
+    [_timer setFireDate:[NSDate date]];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
