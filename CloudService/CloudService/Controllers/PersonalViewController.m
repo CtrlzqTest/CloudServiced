@@ -164,7 +164,12 @@ static NSString *cell_id = @"personalCell";
         switch (indexPath.row) {
             case 0:
             {
-                [self performSegueWithIdentifier:@"pushMyTeam" sender:self];
+                if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]||[[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"认证用户"]) {
+                   [self performSegueWithIdentifier:@"pushMyTeam" sender:self];
+                }else{
+                    [MBProgressHUD showMessag:@"sorry,you have no team!" toView:self.view];
+                }
+                
             }
                 break;
             case 1:

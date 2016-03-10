@@ -173,7 +173,7 @@ static NSString *cell_id = @"myTeamCell";
     }
     TeamMember *teamMember = [_teamMemberArray objectAtIndex:indexPath.row];
     cell.lbName.text = teamMember.userName;
-    cell.lbIdCard.text = [NSString stringWithFormat:@"ID:%@",teamMember.idCard];
+    cell.lbIdCard.text = [NSString stringWithFormat:@"ID:%@",teamMember.userNum];
     [cell.phoneBtn setTitle:teamMember.phoneNo forState:UIControlStateNormal];
     return cell;
     

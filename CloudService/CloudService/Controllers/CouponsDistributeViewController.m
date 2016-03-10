@@ -53,8 +53,7 @@
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
             _teamMemberArray =[TeamMember mj_objectArrayWithKeyValuesArray:listArray];
-            [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
-            [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
+    
             NSLog(@"%@",_teamMemberArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -86,7 +85,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cell_id = [NSString stringWithFormat:@"cell%li",indexPath.row];
+    NSString *cell_id = [NSString stringWithFormat:@"cell"];
     CouponsDistributeCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"CouponsDistributeCell" owner:self options:nil];
@@ -101,6 +100,7 @@
     }
     cell.checkImg.tag = indexPath.row;
     [cell.checkTap addTarget:self action:@selector(checkTap:)];
+    cell.tfMoney.tag = indexPath.row;
     cell.tfMoney.delegate = self;
     if (teamMember.moneyNum==0) {
         cell.tfMoney.text = @"";
@@ -163,9 +163,8 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    CouponsDistributeCell *cell = (CouponsDistributeCell *)textField.superview.superview;
-    NSLog(@"%li",[self.tableView indexPathForCell:cell].row);
-    TeamMember *teamMember = [_teamMemberArray objectAtIndex:[self.tableView indexPathForCell:cell].row];
+
+    TeamMember *teamMember = [_teamMemberArray objectAtIndex:textField.tag];
     teamMember.moneyNum = [textField.text intValue];
    
 }
