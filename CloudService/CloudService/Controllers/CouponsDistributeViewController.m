@@ -53,8 +53,7 @@
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
             _teamMemberArray =[TeamMember mj_objectArrayWithKeyValuesArray:listArray];
-            [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
-            [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
+    
             NSLog(@"%@",_teamMemberArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];

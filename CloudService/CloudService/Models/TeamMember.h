@@ -10,7 +10,7 @@
 
 @interface TeamMember : NSObject
 @property (nonatomic, copy)NSString *userName;
-@property (nonatomic, copy)NSString *idCard;
+@property (nonatomic, copy)NSString *userNum;
 @property (nonatomic, copy)NSString *phoneNo;
 @property (nonatomic, copy)NSString *userId;
 @property (assign, nonatomic)BOOL isCheck;

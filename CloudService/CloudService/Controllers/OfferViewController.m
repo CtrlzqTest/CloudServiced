@@ -135,6 +135,8 @@ static CGFloat headerHeight = 30;
             }
         }else{
             cell = [array objectAtIndex:1];
+            NSLog(@"%@",cell.carUserName.text);
+            NSLog(@"%@",cell.carUserCard.text);
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
