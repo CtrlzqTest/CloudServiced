@@ -61,6 +61,9 @@
 
 #define kEstablishCustBySelf      @"/app/customerData/establishCustBySelf"   //创建客户,保存信息
 
+#define kapplyTeamLeader      @"/app/team/applyTeamLeader"                 //申请团队长
+
+#define kassignTeamCoupon      @"/app/coupon/assignTeamCoupon"                 //团队优惠券下发
 //   常量
 /**************************************************************************************/
 

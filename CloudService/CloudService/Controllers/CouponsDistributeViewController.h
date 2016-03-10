@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class Coupons;
 @interface CouponsDistributeViewController : UIViewController
 
+@property (nonatomic, strong)Coupons *coupons;
 @end

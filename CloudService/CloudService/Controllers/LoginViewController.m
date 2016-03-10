@@ -116,6 +116,7 @@
         [dict setValue:@"北京市" forKey:@"address"];
     }
     
+
     __weak typeof(self) weakSelf = self;
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
@@ -126,6 +127,8 @@
             }else {
                 [Utility forgetUserPwd];
             }
+           
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }else if([[returnData valueForKey:@"flag"] isEqualToString:@"error"]){
             [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];

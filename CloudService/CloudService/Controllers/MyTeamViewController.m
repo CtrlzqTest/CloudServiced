@@ -28,10 +28,16 @@ static NSString *cell_id = @"myTeamCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+        [self setupViews];
+        [self addMjRefresh];
+    }else{
+        [self.inviteBtn setTitle:@"申请团队长" forState:UIControlStateNormal];
+        [self setupViews];
+    }
+
     
-    [self addMjRefresh];
-    [self setupViews];
-    
+  
 }
 
 - (void)addMjRefresh {
@@ -144,7 +150,26 @@ static NSString *cell_id = @"myTeamCell";
 }
 
 - (IBAction)inviteAction:(id)sender {
-    
+    if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+       
+    }else{
+        NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyTeamLeader];
+        
+        [MHNetworkManager postReqeustWithURL:url params:@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId} successBlock:^(id returnData) {
+            
+            if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+           
+                
+            }else {
+                [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            }
+            
+        } failureBlock:^(NSError *error) {
+            [MBProgressHUD showError:@"请求异常" toView:self.view];
+            
+        } showHUD:NO];
+
+    }
     
 }
 

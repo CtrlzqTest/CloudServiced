@@ -11,6 +11,7 @@
 #import <LazyPageScrollView.h>
 #import <MJRefresh.h>
 #import "Coupons.h"
+#import "CouponsDistributeViewController.h"
 @interface CouponsViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     int _page1;//当前页数
@@ -22,6 +23,7 @@
     UITableView *_tableView1;
     UITableView *_tableView2;
     BOOL _isLoad;//是否已加载
+    NSIndexPath *_teamIndexPath;//点击哪行优惠券
 }
 @property (strong, nonatomic) LazyPageScrollView *pageView;
 
@@ -349,7 +351,7 @@
     }
     if ([tableView isEqual:_tableView2]) {
         Coupons *coupons = [_teamArray objectAtIndex:indexPath.row];
-        cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.couponNum];
+        cell.lbCouponNum.text = [NSString stringWithFormat:@"%i",coupons.amount];
         cell.lbEndTime.text = [NSString stringWithFormat:@"有效期至%@",[HelperUtil timeFormat:coupons.endTime format:@"yyyy-MM-dd"]];
         
      
@@ -370,11 +372,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([tableView isEqual:_tableView2]) {
+        _teamIndexPath = indexPath;
         [self performSegueWithIdentifier:@"distribute" sender:self];
     }
 }
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // segue.identifier：获取连线的ID
+    if ([segue.identifier isEqualToString:@"distribute"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        CouponsDistributeViewController *receive = segue.destinationViewController;
+        receive.coupons = [_teamArray objectAtIndex:_teamIndexPath.row];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

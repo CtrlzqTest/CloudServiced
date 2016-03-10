@@ -63,10 +63,7 @@
         manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObject:@"text/html"];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/xml", nil];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//        manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        //        AFJSONResponseSerializer *jsonSer =(AFJSONResponseSerializer*) manager.responseSerializer;
-        //        jsonSer.removesKeysWithNullValues = YES;
-        //        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
         if (networkType==MHAsiNetWorkGET)
         {
             [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {

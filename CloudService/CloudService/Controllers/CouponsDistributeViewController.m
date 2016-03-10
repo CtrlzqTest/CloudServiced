@@ -9,6 +9,7 @@
 #import "CouponsDistributeViewController.h"
 #import "CouponsDistributeCell.h"
 #import "TeamMember.h"
+#import "Coupons.h"
 
 @interface CouponsDistributeViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
@@ -16,9 +17,11 @@
     UIView *_footView;
     UIImageView *_checkImg;
     NSMutableArray *_teamMemberArray;//数据源数组
-
-    int checkCount;
-    BOOL isAllCheck;
+    
+    int checkCount;//选择数量
+    BOOL isAllCheck;//是否全选
+    BOOL isDistribute;//是否可以派发
+    int _couponsCount;//派发优惠券总额
 }
 @property (nonatomic, weak)IBOutlet UITableView *tableView;
 @property (nonatomic, weak)IBOutlet UIImageView *allCheckImg;
@@ -35,6 +38,7 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     [self.allCheckTap addTarget:self action:@selector(allCheckTap:)];
+    //加载团队成员
     [self requestMember];
     [self setupFoot];
     self.tableView.tableFooterView = _footView;
@@ -49,11 +53,13 @@
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             NSDictionary *dataDic = [dic objectForKey:@"data"];
-        
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
             _teamMemberArray =[TeamMember mj_objectArrayWithKeyValuesArray:listArray];
-    
+            if (_teamMemberArray.count>0) {
+                [_teamMemberArray removeObjectAtIndex:0];
+            }
+            
             NSLog(@"%@",_teamMemberArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -65,7 +71,7 @@
     } showHUD:YES];
 
 }
-
+//加载footView
 - (void)setupFoot {
     _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 60)];
     
@@ -76,7 +82,57 @@
     [button addTarget:self action:@selector(distributeClick:) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:button];
 }
+//派发优惠券
 - (void)distributeClick:(UIButton *)sender {
+    [self resignKeyBoardInView:self.view];
+    isDistribute = NO;
+    TeamMember *teamMember = [_teamMemberArray objectAtIndex:0];
+    NSMutableString *couponStr = [NSMutableString string];
+    NSMutableString *teamerIdStr = [NSMutableString string];
+    for (TeamMember *teamMember in _teamMemberArray) {
+        if (teamMember.isCheck) {
+            if (teamMember.moneyNum==0) {
+            isDistribute = YES;
+            [MBProgressHUD showMessag:@"请输入优惠券金额" toView:self.view];
+                return;
+            }else{
+                _couponsCount += teamMember.moneyNum;
+                [couponStr appendFormat:@",%i",teamMember.moneyNum];
+                [teamerIdStr appendFormat:@",%@",teamMember.userId];
+            }
+              
+        }
+    }
+   
+    
+            if (couponStr.length>1) {
+                if (_couponsCount>_coupons.amount) {
+                    [MBProgressHUD showMessag:@"分配额度超过优惠券额度" toView:self.view];
+                }else {
+                    NSDictionary *paramsDic=@{@"teamId":teamMember.teamId,@"totalCouponNum":[NSString stringWithFormat:@"%i",_couponsCount],@"couponId":_coupons.couponId,@"coupon":[couponStr substringFromIndex:1],@"teamerId":[teamerIdStr substringFromIndex:1]};
+                    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kassignTeamCoupon];
+                    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+                        NSLog(@"%@",returnData);
+                        
+                        NSDictionary *dic = returnData;
+                        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+                            [MBProgressHUD showMessag:@"派发优惠券成功" toView:self.view];
+                        }else {
+                            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+                        }
+                        
+                    } failureBlock:^(NSError *error) {
+                        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+                    } showHUD:YES];
+                }
+            
+            
+            }else {
+                [MBProgressHUD showMessag:@"请选择需要派发的成员" toView:self.view];
+            }
+
+
+    
     
 }
 #pragma  mark tableView
@@ -107,7 +163,7 @@
     }else {
         cell.tfMoney.text = [NSString stringWithFormat:@"%i",teamMember.moneyNum];
     }
-    
+    cell.lbName.text = teamMember.userName;
     return cell;
     
 }
@@ -162,13 +218,35 @@
     
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     TeamMember *teamMember = [_teamMemberArray objectAtIndex:textField.tag];
     teamMember.moneyNum = [textField.text intValue];
-   
+    return YES;
 }
 
+/** 消失键盘*/
+- (void)resignKeyBoardInView:(UIView *)view
+
+{
+    
+    for (UIView *v in view.subviews) {
+        
+        if ([v.subviews count] > 0) {
+            
+            [self resignKeyBoardInView:v];
+            
+        }
+        
+        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
+            
+            [v resignFirstResponder];
+            
+        }
+        
+    }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
