@@ -43,6 +43,9 @@
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"head-add" selectImage:@"head-add" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];
     }];
+    if (self.isSaveCarInfo) {
+        [self requestData:nil];
+    }
 }
 //添加mj
 - (void)addMjRefresh {
@@ -66,6 +69,7 @@
         
     }];
 }
+
 - (void)requestData:(NSString *)condition{
     _clientArray = nil;
     _clientArray = [NSMutableArray array];

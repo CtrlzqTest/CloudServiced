@@ -91,6 +91,48 @@ static User *user = nil;
     return [[NSUserDefaults standardUserDefaults] valueForKey:@"userPwdForResetPwd"];
 }
 
++(BOOL) isCookieExpired{
+    
+    BOOL status = YES;
+    NSArray *oldCookies = [[ NSHTTPCookieStorage sharedHTTPCookieStorage]
+                           cookiesForURL: [NSURL URLWithString:[RequestEntity urlString:kLoginAPI]]];
+    NSHTTPCookie *cookie = [oldCookies lastObject];
+    if (cookie) {
+        NSDate *expiresDate =    [cookie expiresDate];
+        NSDate *currentDate = [NSDate date];
+        NSComparisonResult result = [currentDate compare:expiresDate];
+        
+        if(result==NSOrderedAscending){
+            status = NO;
+            NSLog(@"expiresDate is in the future");
+        }
+        else if(result==NSOrderedDescending){
+            NSLog(@"expiresDate is in the past");
+        }
+        else{
+            status = NO;
+            NSLog(@"Both dates are the same");
+        }
+    }
+    return status;
+}
+
++ (void)saveCookie {
+    
+    NSArray *oldCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]
+                           cookiesForURL: [NSURL URLWithString:[RequestEntity urlString:kLoginAPI]]];
+    NSHTTPCookie *cookie = [oldCookies lastObject];
+    if (cookie) {
+        [[NSUserDefaults standardUserDefaults] setValue:cookie forKey:@"cookie"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (void)setCookie {
+    NSHTTPCookie *cookie = [[NSUserDefaults standardUserDefaults] valueForKey:@"cookie"];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+}
+
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{
     
 //    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];

@@ -80,4 +80,17 @@
  */
 +(NSString *)getPwdForResetPwd;
 
+/**
+ *  过期
+ */
++(BOOL) isCookieExpired;
+
+/**
+ *  保存
+ */
++ (void)saveCookie;
+/**
+ *  设置cookie
+ */
++ (void)setCookie;
 @end

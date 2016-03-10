@@ -8,6 +8,7 @@
 
 #import "ZQCityPickerView.h"
 #import "DataSource.h"
+#import <FMDB.h>
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
 
@@ -39,10 +40,12 @@
         _provinceArray = [DataSource provinceArray];
         _provinceCodeDict = [DataSource provinceCodeDict];
         _provinceCode = [_provinceCodeDict valueForKey:_provinceArray[0]];
+        
         [self searchCityinProvinceCode:_provinceCode];
         
         self.province = [_provinceArray firstObject];
         self.city = [_cityArray firstObject];
+        self.city = _provinceCode;
         self.frame = [UIScreen mainScreen].bounds;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
@@ -170,18 +173,20 @@
  */
 - (void)searchCityinProvinceCode:(NSString *)provinceCode {
     
-    NSArray *searchCodeArray = [[DataSource cityCodeDict] allKeys];
-    NSLog(@"%@",[DataSource cityCodeDict]);
     [_cityArray removeAllObjects];
-    [_cityCodeArray removeAllObjects];
-    [searchCodeArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *cityCode = obj;
-        if ([cityCode hasPrefix:provinceCode]) {
-            NSString *city = [[DataSource cityCodeDict] valueForKey:cityCode];
-            [_cityArray addObject:city];
-            [_cityCodeArray addObject:cityCode];
-        }
-    }];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Province" ofType:@"sqlite"];
+    FMDatabase *db = [FMDatabase databaseWithPath:path];
+    if (![db open]) {
+        NSLog(@"数据库打开失败!");
+        return;
+    }
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM city where cityCode like '%@%%'",_provinceCode];
+    FMResultSet *result = [db executeQuery:sqlStr];
+    while ([result next]) {
+        [_cityArray addObject:[result stringForColumn:@"cityName"]];
+        [_cityCodeArray addObject:[result stringForColumn:@"cityCode"]];
+    }
+    [db close];
 }
 
 @end

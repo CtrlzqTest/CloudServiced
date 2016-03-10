@@ -10,4 +10,6 @@
 
 @interface MyClientViewController : UIViewController
 
+@property (nonatomic,assign)BOOL isSaveCarInfo;
+
 @end
