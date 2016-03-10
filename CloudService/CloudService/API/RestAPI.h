@@ -85,6 +85,8 @@ static NSString *const LoginToMenuViewNotice = @"loginToMenu";
 
 static NSString *const LogOutViewNotice = @"logOut";
 
+static NSString *const ExchangeIntegralSuccess = @"ExchangeIntegralSuccess";
+
 /**************************************************************************************/
 
 #endif

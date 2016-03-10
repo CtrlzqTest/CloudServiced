@@ -122,6 +122,7 @@
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
+            [Utility savePwdForResetPwd:self.pwdTextFiled.text];
             if (weakSelf.choseBtn.selected) {
                 [Utility remenberUserPwd:self.pwdTextFiled.text];
             }else {

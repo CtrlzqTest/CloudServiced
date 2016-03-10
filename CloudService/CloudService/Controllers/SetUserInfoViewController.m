@@ -52,7 +52,7 @@ static NSString *const select_CellID = @"selectCell";
     if (self.rightBtnTitle) {
         [self.rightBtn setTitle:self.rightBtnTitle forState:(UIControlStateNormal)];
     }else {
-        [self.rightBtn setTitle:@"保存" forState:(UIControlStateNormal)];
+        [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
     }
 }
 
