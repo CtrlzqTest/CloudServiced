@@ -38,7 +38,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎你！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waJ-bX-2QI">
-                            <rect key="frame" x="178" y="10" width="80" height="21"/>
+                            <rect key="frame" x="178" y="10" width="90" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="gZ4-04-SBZ"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.2239188762626263" green="0.2239188762626263" blue="0.2239188762626263" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -126,6 +129,7 @@
                         <mask key="constraints">
                             <exclude reference="JDJ-zZ-iL9"/>
                             <exclude reference="HYC-ou-3X6"/>
+                            <exclude reference="WV5-rL-JcP"/>
                         </mask>
                     </variation>
                 </view>

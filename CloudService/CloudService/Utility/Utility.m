@@ -67,70 +67,30 @@ static User *user = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)remenberUserPwd:(NSString *)pwd {
-    [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:@"userPwd"];
++ (BOOL)isRemberPassWord {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"remberPassWord"];
+}
+
++(void)remberPassWord:(BOOL )isRemberPwd {
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isRemberPwd forKey:@"remberPassWord"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)forgetUserPwd {
++(void)saveUserName:(NSString *)userName passWord:(NSString *)passWord {
     
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"userPwd"];
+    [[NSUserDefaults standardUserDefaults] setValue:userName forKey:@"userName"];
+    [[NSUserDefaults standardUserDefaults] setValue:passWord forKey:@"passWord"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-+(NSString *)getUserPwd{
-    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userPwd"];
-}
-
-+ (void)savePwdForResetPwd:(NSString *)pwd {
-    [[NSUserDefaults standardUserDefaults] setValue:pwd forKey:@"userPwdForResetPwd"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-+(NSString *)getPwdForResetPwd {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userPwdForResetPwd"];
-}
-
-+(BOOL) isCookieExpired{
     
-    BOOL status = YES;
-    NSArray *oldCookies = [[ NSHTTPCookieStorage sharedHTTPCookieStorage]
-                           cookiesForURL: [NSURL URLWithString:[RequestEntity urlString:kLoginAPI]]];
-    NSHTTPCookie *cookie = [oldCookies lastObject];
-    if (cookie) {
-        NSDate *expiresDate =    [cookie expiresDate];
-        NSDate *currentDate = [NSDate date];
-        NSComparisonResult result = [currentDate compare:expiresDate];
-        
-        if(result==NSOrderedAscending){
-            status = NO;
-            NSLog(@"expiresDate is in the future");
-        }
-        else if(result==NSOrderedDescending){
-            NSLog(@"expiresDate is in the past");
-        }
-        else{
-            status = NO;
-            NSLog(@"Both dates are the same");
-        }
-    }
-    return status;
 }
 
-+ (void)saveCookie {
-    
-    NSArray *oldCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]
-                           cookiesForURL: [NSURL URLWithString:[RequestEntity urlString:kLoginAPI]]];
-    NSHTTPCookie *cookie = [oldCookies lastObject];
-    if (cookie) {
-        [[NSUserDefaults standardUserDefaults] setValue:cookie forKey:@"cookie"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
++(NSString *)userName {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"userName"];
 }
 
-+ (void)setCookie {
-    NSHTTPCookie *cookie = [[NSUserDefaults standardUserDefaults] valueForKey:@"cookie"];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
++(NSString *)passWord {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:@"passWord"];
 }
 
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{

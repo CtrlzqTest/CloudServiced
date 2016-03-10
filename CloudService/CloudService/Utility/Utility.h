@@ -56,41 +56,30 @@
 + (void)saveLocation:(NSString *)locate;
 
 /**
- *  记住密码
+ *  是否记住密码
  */
-+ (void)remenberUserPwd:(NSString *)pwd;
++ (BOOL)isRemberPassWord;
 
 /**
- *  获取用户名密码本地
+ *  是否记住密码
  */
-+(NSString *)getUserPwd;
+
++(void)remberPassWord:(BOOL )isRemberPwd;
 
 /**
- *  忘记密码
+ *  获取用户密码
  */
-+ (void)forgetUserPwd;
++(NSString *)passWord;
 
 /**
- *  修改密码时校验
+ *  获取用户名
  */
-+ (void)savePwdForResetPwd:(NSString *)pwd;
++(NSString *)userName;
 
 /**
- *  修改密码时校验
+ *  保存用户密码和用户名
  */
-+(NSString *)getPwdForResetPwd;
++(void)saveUserName:(NSString *)userName passWord:(NSString *)passWord;
 
-/**
- *  过期
- */
-+(BOOL) isCookieExpired;
 
-/**
- *  保存
- */
-+ (void)saveCookie;
-/**
- *  设置cookie
- */
-+ (void)setCookie;
 @end

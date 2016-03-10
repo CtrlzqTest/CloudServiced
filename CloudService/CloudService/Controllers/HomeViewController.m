@@ -160,7 +160,9 @@ static NSString *headerView_ID = @"headerView";
         [_headerView.sginBtn addTarget:self action:@selector(signAction:) forControlEvents:(UIControlEventTouchUpInside)];
         _headerView.integralLabel.text = _integral;
         User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-        [_headerView setDataWithDictionary:@{@"userName":user.userName}];
+        NSString *userName = nil;
+        userName = user.realName.length > 0 ? user.realName : user.userName;
+        [_headerView setDataWithDictionary:@{@"userName":userName}];
         // 轮播图开始轮播
         [_headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
             

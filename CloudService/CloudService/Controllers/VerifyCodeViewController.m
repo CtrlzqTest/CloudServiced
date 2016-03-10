@@ -36,7 +36,7 @@
 }
 - (IBAction)nextStepActopn:(id)sender {
     
-    NSString *pwd = [Utility getPwdForResetPwd];
+    NSString *pwd = [Utility passWord];
     if ([pwd isEqualToString:self.pwdTextWord.text])
     {
         [self performSegueWithIdentifier:@"setNewPwd_push" sender:self];

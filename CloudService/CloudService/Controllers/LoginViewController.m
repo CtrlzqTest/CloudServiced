@@ -61,20 +61,15 @@
 
 - (void)setupView {
     
-    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     [self.view bringSubviewToFront:self.backImg];
     self.inputView.layer.cornerRadius = 3;
     self.inputView.clipsToBounds = YES;
     self.inputView.backgroundColor = [UIColor colorWithRed:0.918 green:0.917
                                                       blue:0.925 alpha:0.600];
     
-    NSString *userPwd = [Utility getUserPwd];
     UIColor *color = [UIColor colorWithRed:0.263 green:0.561 blue:0.796 alpha:1.000];
     self.UserTextFiled.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-user"]];
     self.UserTextFiled.leftViewMode = UITextFieldViewModeAlways;
-    if (user.phoneNo) {
-        self.UserTextFiled.text = user.phoneNo;
-    }
     self.UserTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                 initWithString:@"用户名/手机号码/邮箱"
                                                 attributes:@{NSForegroundColorAttributeName:color}];
@@ -91,16 +86,16 @@
     self.pwdTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                initWithString:@"请输入密码"
                                                attributes:@{NSForegroundColorAttributeName:color}];
-    self.pwdTextFiled.text = userPwd;
-    
-    self.loginBtn.layer.cornerRadius = 3;
-    self.loginBtn.clipsToBounds = YES;
-    
-    self.choseBtn.layer.cornerRadius = self.choseBtn.frame.size.width / 2.0;
-    if ([userPwd length] > 0) {
+    if ([Utility isRemberPassWord]) {
+        self.pwdTextFiled.text = [Utility passWord];
+        self.UserTextFiled.text = [Utility userName];
         self.choseBtn.selected = YES;
         [self.choseBtn setBackgroundImage:[UIImage imageNamed:@"login-choose_"] forState:(UIControlStateNormal)];
     }
+    
+    self.loginBtn.layer.cornerRadius = 3;
+    self.loginBtn.clipsToBounds = YES;
+    self.choseBtn.layer.cornerRadius = self.choseBtn.frame.size.width / 2.0;
     [self.view sendSubviewToBack:self.backImg];
     
 }
@@ -142,11 +137,11 @@
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             User *user = [User mj_objectWithKeyValues:[returnData valueForKey:@"data"]];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
-            [Utility savePwdForResetPwd:self.pwdTextFiled.text];
+            [Utility saveUserName:self.UserTextFiled.text passWord:self.pwdTextFiled.text];
             if (weakSelf.choseBtn.selected) {
-                [Utility remenberUserPwd:self.pwdTextFiled.text];
+                [Utility remberPassWord:YES];
             }else {
-                [Utility forgetUserPwd];
+                [Utility remberPassWord:NO];
             }
            
             

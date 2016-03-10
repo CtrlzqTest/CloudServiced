@@ -90,7 +90,9 @@ static NSString *cell_id = @"personalCell";
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    self.userNameLabel.text = user.userName;
+    NSString *userName = nil;
+    userName = user.realName.length > 0 ? user.realName : user.userName;
+    self.userNameLabel.text = userName;
     self.phoneNumLabel.text = user.phoneNo;
 }
 
