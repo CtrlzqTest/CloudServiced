@@ -30,11 +30,25 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     self.backView.layer.cornerRadius = KWidth * 3 / 7 / 2.0;
+    
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    self.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
 }
 
 - (IBAction)changeIntergralAction:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetExchangeIntergralAPI] params:@{@"userId":user.userId,@"cash":self.intergNumTextFiled.text} successBlock:^(id returnData) {
+        if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ExchangeIntegralSuccess object:nil];
+        }else{
+            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+        }
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
 }
 
 - (void)didReceiveMemoryWarning {

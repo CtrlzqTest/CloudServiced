@@ -46,6 +46,8 @@ static NSString *headerView_ID = @"headerView";
     [self setupViews];
     // 获取我的积分
     [self getMyintegralData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyintegralData) name:ExchangeIntegralSuccess object:nil];
 }
 
 - (void)initData {
@@ -131,7 +133,7 @@ static NSString *headerView_ID = @"headerView";
                 [[SingleHandle shareSingleHandle] saveUserInfo:user];
             }
     } failureBlock:^(NSError *error) {
-        [MBProgressHUD showError:@"签到失败" toView:self.view];
+        [MBProgressHUD showError:@"服务器连接异常" toView:self.view];
     } showHUD:YES];
     
 }
