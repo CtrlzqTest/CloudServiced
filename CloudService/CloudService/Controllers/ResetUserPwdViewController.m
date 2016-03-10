@@ -52,6 +52,8 @@
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {

@@ -130,7 +130,6 @@
 - (void)showDateViewWithDelegate:(id<HZQDatePickerViewDelegate>)delegate {
     self.delegate = delegate;
     self.type = DateTypeOfStart;
-    [self.datePickerView setMinimumDate:[NSDate date]];
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     [window addSubview:self];
 }

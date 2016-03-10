@@ -45,6 +45,7 @@
         
         self.province = [_provinceArray firstObject];
         self.city = [_cityArray firstObject];
+        self.city = _provinceCode;
         self.frame = [UIScreen mainScreen].bounds;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;

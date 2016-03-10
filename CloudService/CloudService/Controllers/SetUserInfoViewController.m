@@ -533,6 +533,7 @@ static NSString *const select_CellID = @"selectCell";
 - (void)showDataPickerView {
     
     _pickerView = [HZQDatePickerView instanceDatePickerView];
+    [_pickerView.datePickerView setMaximumDate:[NSDate date]];
     [_pickerView showDateViewWithDelegate:self];
     
 }
