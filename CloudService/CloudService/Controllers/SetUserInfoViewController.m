@@ -14,6 +14,7 @@
 #import "DataSource.h"
 #import "YWBCityPickerView.h"
 #import "ZQCityPickerView.h"
+#import "LoginViewController.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
 static NSString *const header_id = @"setUserInfoHeader";
@@ -80,6 +81,11 @@ static NSString *const select_CellID = @"selectCell";
                 [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
             }else {
                 [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+            }
+            UIViewController *VC = [self.navigationController.viewControllers firstObject];
+            if ([[VC class] isSubclassOfClass:[LoginViewController class]]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
+                return ;
             }
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

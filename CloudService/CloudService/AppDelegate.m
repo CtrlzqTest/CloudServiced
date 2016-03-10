@@ -38,10 +38,6 @@
     // 注册定位
     [self registerLocation];
     
-    NSLog(@"%d",[Utility isCookieExpired]);
-    if ([Utility isCookieExpired]) {
-        
-    }
     //设置状态栏为白色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
