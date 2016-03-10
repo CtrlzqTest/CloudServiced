@@ -126,6 +126,7 @@ static CGFloat headerHeight = 30;
     NSString *cellId=@"cell";
     
     OfferTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OfferTableViewCell" owner:self options:nil];
         if (indexPath.section == 0) {

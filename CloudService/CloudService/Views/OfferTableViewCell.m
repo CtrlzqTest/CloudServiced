@@ -19,6 +19,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.carCode.enabled = NO;
+    
 }
 
 - (IBAction)tapDateLabel:(id)sender {
