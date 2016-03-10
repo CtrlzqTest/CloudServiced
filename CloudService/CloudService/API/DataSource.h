@@ -39,8 +39,4 @@
  */
 +(NSDictionary *)provinceCodeDict;
 
-/**
- *  城市对应编码
- */
-+(NSDictionary *)cityCodeDict;
 @end

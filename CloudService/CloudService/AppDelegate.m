@@ -33,9 +33,16 @@
     [MHAsiNetworkHandler startMonitoring];
     // 注册shareSDK
     [self registerShareSDK];
+    // 注册通知
+    [self registerNotifications];
+    // 注册定位
+    [self registerLocation];
     
+    NSLog(@"%d",[Utility isCookieExpired]);
+    if ([Utility isCookieExpired]) {
+        
+    }
     //设置状态栏为白色
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //初始化青牛SDK
@@ -43,11 +50,8 @@
 //    if ([self.connect Init] == -50006) {
 //        [MBProgressHUD showMessag:@"网络不可用..." toView:self.window];
 //    }
-    // 注册通知
-    [self registerNotifications];
- self.locateManager = [[CLLocationManager alloc] init];
-    // 注册定位
-    [self registerLocation];
+    
+
     return YES;
 }
 
@@ -91,7 +95,7 @@
 }
 - (void)registerLocation {
     
-    
+    self.locateManager = [[CLLocationManager alloc] init];
     if (![CLLocationManager locationServicesEnabled]) {
         NSLog(@"aaaa");
         return;

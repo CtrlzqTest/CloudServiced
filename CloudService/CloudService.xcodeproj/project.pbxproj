@@ -122,6 +122,7 @@
 		F09A5F931A55F0AA008D4963 /* InviteFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */; };
 		F0AB898C1C8ED04F00849E3A /* ZQCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */; };
 		F0DF32121C87E612008D098F /* ResetUserPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */; };
+		F0E2338C1C915AB8009462E6 /* Province.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F0E2338B1C915A90009462E6 /* Province.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -328,6 +329,7 @@
 		F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQCityPickerView.m; sourceTree = "<group>"; };
 		F0DF32101C87E612008D098F /* ResetUserPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetUserPwdViewController.h; sourceTree = "<group>"; };
 		F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetUserPwdViewController.m; sourceTree = "<group>"; };
+		F0E2338B1C915A90009462E6 /* Province.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Province.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -740,6 +742,7 @@
 		F0292BD81C7B015200A810A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F0E2338B1C915A90009462E6 /* Province.sqlite */,
 				F019C9DA1C7C05FD00E73A2C /* Images */,
 			);
 			path = Resources;
@@ -881,6 +884,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0E2338C1C915AB8009462E6 /* Province.sqlite in Resources */,
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,

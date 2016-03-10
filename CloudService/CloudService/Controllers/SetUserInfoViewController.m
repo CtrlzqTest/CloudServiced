@@ -76,7 +76,11 @@ static NSString *const select_CellID = @"selectCell";
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             User *user = [[SingleHandle shareSingleHandle] getUserInfo];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
-            [MBProgressHUD showSuccess:@"修改成功" toView:self.view];
+            if ([self.rightBtnTitle isEqualToString:@"提交"]) {
+                [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
+            }else {
+                [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+            }
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         

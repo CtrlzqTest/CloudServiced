@@ -9,6 +9,8 @@
 #import "OfferViewController.h"
 #import "SetUserInfoHeaderView.h"
 #import "OfferTableViewCell.h"
+#import "MyClientViewController.h"
+
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
 @interface OfferViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -102,7 +104,9 @@ static CGFloat headerHeight = 30;
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kEstablishCustBySelf] params:@{@"userId":user.userId,@"custName":self.custName,@"phoneNo":self.phoneNo,@"licenseNo":self.carCode,@"engineNo":cell1.engine.text,@"frameNo":cell1.carFrameCode.text} successBlock:^(id returnData) {
-        
+        MyClientViewController *VC = self.navigationController.viewControllers[1];
+        VC.isSaveCarInfo = YES;
+        [self.navigationController popToViewController:VC animated:YES];
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];
@@ -136,8 +140,6 @@ static CGFloat headerHeight = 30;
             }
         }else{
             cell = [array objectAtIndex:1];
-            NSLog(@"%@",cell.carUserName.text);
-            NSLog(@"%@",cell.carUserCard.text);
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
