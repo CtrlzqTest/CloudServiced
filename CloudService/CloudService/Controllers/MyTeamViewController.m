@@ -151,7 +151,7 @@ static NSString *cell_id = @"myTeamCell";
 
 - (IBAction)inviteAction:(id)sender {
     if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
-       
+        [self performSegueWithIdentifier:@"invite" sender:self];
     }else{
         NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyTeamLeader];
         
@@ -174,10 +174,10 @@ static NSString *cell_id = @"myTeamCell";
 }
 
 
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
+//-(void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//}
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

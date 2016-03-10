@@ -17,6 +17,7 @@
 
 @interface LoginViewController ()<UITextFieldDelegate>{
     BOOL _isRemenberPwd;
+    BOOL _isEye;
 }
 
 @property (weak, nonatomic) IBOutlet LoginInputView *inputView;
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextFiled;
 @property (weak, nonatomic) IBOutlet UIImageView *backImg;
 @property (weak, nonatomic) IBOutlet UIButton *choseBtn;
+@property (strong, nonatomic)UIImageView *eyeImg;
 
 @end
 
@@ -78,7 +80,12 @@
                                                 attributes:@{NSForegroundColorAttributeName:color}];
     
     self.pwdTextFiled.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-key"]];
-    self.pwdTextFiled.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
+    self.eyeImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
+
+    self.pwdTextFiled.rightView = self.eyeImg;
+    self.pwdTextFiled.rightView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(eyeTap:)];
+    [self.pwdTextFiled.rightView addGestureRecognizer:tap];
     self.pwdTextFiled.leftViewMode = UITextFieldViewModeAlways;
     self.pwdTextFiled.rightViewMode = UITextFieldViewModeAlways;
     self.pwdTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
@@ -96,6 +103,19 @@
     }
     [self.view sendSubviewToBack:self.backImg];
     
+}
+
+- (void)eyeTap:(UITapGestureRecognizer *)sender {
+    _isEye = !_isEye;
+    if (_isEye) {
+
+        self.eyeImg.image = [UIImage imageNamed:@"login-line_"];
+        self.pwdTextFiled.secureTextEntry = NO;
+    }else {
+
+        self.eyeImg.image = [UIImage imageNamed:@"login-line"];
+        self.pwdTextFiled.secureTextEntry = YES;
+    }
 }
 
 // 登录

@@ -44,7 +44,9 @@
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];
     }];
     if (self.isSaveCarInfo) {
-        [self requestData:nil];
+        _conditon = @"";
+//        [self requestData:@""];
+        [self.tableView.mj_header beginRefreshing];
     }
 }
 //添加mj

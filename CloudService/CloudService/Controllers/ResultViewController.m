@@ -231,9 +231,9 @@
         Achievement *achievement;
         if ([tableView isEqual:_tableView1]) {
              achievement= [_dayArray objectAtIndex:indexPath.row];
-        }if ([tableView isEqual:_tableView2]) {
+        }else if ([tableView isEqual:_tableView2]) {
             achievement = [_weekArray objectAtIndex:indexPath.row];
-        }else{
+        }else if ([tableView isEqual:_tableView3]){
             achievement = [_monthArray objectAtIndex:indexPath.row];
         }
         cell.lbOrderNum.text = [NSString stringWithFormat:@"%i",achievement.orderNum];
