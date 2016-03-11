@@ -12,6 +12,7 @@
 #import "HZQDatePickerView.h"
 #import "HelperUtil.h"
 #import "DataSource.h"
+#import "Utility.h"
 #import "YWBCityPickerView.h"
 #import "ZQCityPickerView.h"
 #import "LoginViewController.h"
@@ -26,6 +27,7 @@ static NSString *const select_CellID = @"selectCell";
     NSArray *_keyArray_Bank;
     NSMutableArray *_valueArray_User;
     NSMutableArray *_valueArray_Bank;
+    NSMutableDictionary *_companyCodeDict;
     
     NSIndexPath *_indexPath;
     BOOL _isAnimating;
@@ -87,7 +89,10 @@ static NSString *const select_CellID = @"selectCell";
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
                 return ;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:ReloadHomeData object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
+        }else {
+            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -135,7 +140,8 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_User[2] = user.roleName;
     _valueArray_User[3] = user.oldCompany;
     _valueArray_User[4] = user.oldPost.length > 0 ? user.oldPost : @"销售职";
-    _valueArray_User[5] = @"2015-01-01";
+    NSString *workDate = user.workStartDate.length > 0 ? [HelperUtil timeFormat:user.workStartDate format:@"yyyy-MM-dd"] : @"2015-01-01";
+    _valueArray_User[5] = workDate;
     _valueArray_User[6] = user.chatName;
     _valueArray_User[7] = user.applySaleCompany;
     _valueArray_User[8] = user.saleCity;
@@ -148,7 +154,7 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_Bank[4] = user.accountProvinces;
     _valueArray_Bank[5] = user.accountCity;
     
-    
+    _companyCodeDict = [NSMutableDictionary dictionary];
 }
 
 - (void)setupSelectTableView {
@@ -192,6 +198,14 @@ static NSString *const select_CellID = @"selectCell";
     
     _indexPath = [self.tableView indexPathForCell:cell];
     
+}
+
+-(void)didDeleteText:(SetUserInfoCell *)cell {
+    
+    [self resignKeyBoardInView:self.view];
+    _indexPath = [self.tableView indexPathForCell:cell];
+    _valueArray_User[_indexPath.row] = @"";
+    [self.tableView reloadData];
 }
 
 -(void)textFiledDidEndEdit:(NSString *)text {
@@ -261,11 +275,25 @@ static NSString *const select_CellID = @"selectCell";
     cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
+    if (self.isEnable) {
+        cell.textFiled.enabled = NO;
+        return cell;
+    }
     if (indexPath.section == 0) {
-        if (indexPath.row == 7 || indexPath.row == 3 || indexPath.row == 8 || indexPath.row == 4) {
+        if (indexPath.row == 4 || indexPath.row == 3)
+        {
             [cell isPullDown:YES];
-        }else if(indexPath.row == 2 || indexPath.row == 5){
+        }else if(indexPath.row == 2 || indexPath.row == 5)
+        {
             cell.textFiled.enabled = NO;
+        }else if(indexPath.row == 8 || indexPath.row == 7)
+        {
+            [cell isPullDown:YES];
+            if (cell.textFiled.text.length > 0) {
+                [cell setDeleteImage:YES];
+            }else{
+                [cell setDeleteImage:NO];
+            }
         }
     }else if(indexPath.row == 1){
         cell.textFiled.keyboardType = UIKeyboardTypeNumberPad;
@@ -285,7 +313,13 @@ static NSString *const select_CellID = @"selectCell";
     
     if ([tableView isEqual:self.selectTableView]) {
         [self hidePullDownView];
-        _valueArray_User[_indexPath.row] = _selectArray[indexPath.row];
+        if (_indexPath.row == 3 || _indexPath.row == 4) {
+            _valueArray_User[_indexPath.row] = _selectArray[indexPath.row];
+        }else{
+            NSString *code = [[DataSource insureCommpanyCodeArray] objectAtIndex:indexPath.row];
+            [_companyCodeDict setValue:code forKey:_selectArray[indexPath.row]];
+            _valueArray_User[_indexPath.row] = [Utility changeStrArraytoString:[_companyCodeDict allKeys]];
+        }
         [self.tableView reloadData];
         return;
     }

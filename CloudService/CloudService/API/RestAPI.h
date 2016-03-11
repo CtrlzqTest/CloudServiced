@@ -87,6 +87,8 @@ static NSString *const LogOutViewNotice = @"logOut";
 
 static NSString *const ExchangeIntegralSuccess = @"ExchangeIntegralSuccess";
 
+static NSString *const ReloadHomeData = @"ReloadHomeData";
+
 /**************************************************************************************/
 
 #endif

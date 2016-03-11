@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -13,10 +13,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="77.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="真实姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtY-jf-6mD">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="真实姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtY-jf-6mD">
                         <rect key="frame" x="16" y="8" width="120" height="62"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="LQY-K6-Si0"/>
@@ -31,9 +31,10 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="details-arrow2" translatesAutoresizingMaskIntoConstraints="NO" id="H2Y-Hb-TBc">
-                        <rect key="frame" x="244" y="8" width="61" height="62"/>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details-arrow2" translatesAutoresizingMaskIntoConstraints="NO" id="H2Y-Hb-TBc">
+                        <rect key="frame" x="280" y="26.5" width="25" height="25"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Y9r-af-QtA"/>
                             <constraint firstAttribute="width" secondItem="H2Y-Hb-TBc" secondAttribute="height" id="Yyr-bT-23k"/>
                         </constraints>
                     </imageView>
@@ -49,13 +50,20 @@
                     <constraint firstAttribute="bottomMargin" secondItem="LtY-jf-6mD" secondAttribute="bottom" id="gAq-qB-ThZ"/>
                     <constraint firstItem="H2Y-Hb-TBc" firstAttribute="top" secondItem="bzp-ED-hhq" secondAttribute="top" id="n5p-QT-ck6"/>
                     <constraint firstItem="H2Y-Hb-TBc" firstAttribute="leading" secondItem="bzp-ED-hhq" secondAttribute="trailing" id="ouZ-XN-vpv"/>
+                    <constraint firstItem="H2Y-Hb-TBc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pMN-EG-Mfl"/>
                     <constraint firstItem="bzp-ED-hhq" firstAttribute="bottom" secondItem="LtY-jf-6mD" secondAttribute="bottom" id="u40-mx-bqj"/>
                     <constraint firstAttribute="trailing" secondItem="H2Y-Hb-TBc" secondAttribute="trailing" constant="15" id="wVA-eK-CrV"/>
+                    <constraint firstAttribute="bottom" secondItem="H2Y-Hb-TBc" secondAttribute="bottom" constant="15" id="x4H-Gq-epa"/>
+                    <constraint firstItem="H2Y-Hb-TBc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="yo7-v2-hie"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="Cje-pc-eRD"/>
                         <exclude reference="TzO-g4-61e"/>
+                        <exclude reference="OTC-1q-IhH"/>
+                        <exclude reference="n5p-QT-ck6"/>
+                        <exclude reference="x4H-Gq-epa"/>
+                        <exclude reference="yo7-v2-hie"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

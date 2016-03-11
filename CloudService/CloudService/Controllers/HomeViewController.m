@@ -48,6 +48,7 @@ static NSString *headerView_ID = @"headerView";
     [self getMyintegralData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyintegralData) name:ExchangeIntegralSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollectionView:) name:ReloadHomeData object:nil];
 }
 
 - (void)initData {
@@ -224,6 +225,14 @@ static NSString *headerView_ID = @"headerView";
         default:
             break;
     }
+}
+
+/**
+ *  刷新数据
+ */
+
+-(void)reloadCollectionView:(id)notice {
+    [self.collectionView reloadData];
 }
 
 /**

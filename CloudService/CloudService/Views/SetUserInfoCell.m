@@ -9,15 +9,39 @@
 #import "SetUserInfoCell.h"
 
 @interface SetUserInfoCell()<UITextFieldDelegate>
-
-
+{
+    BOOL _flag;
+}
 @end
+
 @implementation SetUserInfoCell
 
 - (void)awakeFromNib {
     self.contentView.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.textFiled.delegate = self;
+    [self.imageBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageAction:)]];
+}
+
+- (void)tapImageAction:(UITapGestureRecognizer *)gesture {
+    if (!_flag) {
+        return;
+    }
+    if ([self.delegate respondsToSelector:@selector(didDeleteText:)]) {
+        [self.delegate didDeleteText:self];
+    }
+    self.textFiled.text = @"";
+}
+
+- (void)setDeleteImage:(BOOL )isDelete {
+
+    _flag = isDelete;
+    if (isDelete) {
+        self.imageBtn.hidden = NO;
+        self.imageBtn.image = [UIImage imageNamed:@"card-icon2"];
+    }else{
+        [self.imageBtn setImage:[UIImage imageNamed:@"details-arrow2"]];
+    }
 }
 
 - (void)isPullDown:(BOOL )pullDown {

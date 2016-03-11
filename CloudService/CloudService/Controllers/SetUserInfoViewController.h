@@ -11,6 +11,6 @@
 @interface SetUserInfoViewController : BaseViewController
 
 @property(nonatomic,strong)NSString *rightBtnTitle;
-
+@property(nonatomic,assign)BOOL isEnable;
 
 @end

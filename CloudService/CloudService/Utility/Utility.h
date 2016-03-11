@@ -81,5 +81,8 @@
  */
 +(void)saveUserName:(NSString *)userName passWord:(NSString *)passWord;
 
-
+/**
+ *  字符数组转字符串
+ */
++ (NSString *)changeStrArraytoString:(NSArray *)array;
 @end
