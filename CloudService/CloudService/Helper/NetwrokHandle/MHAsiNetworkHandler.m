@@ -60,6 +60,7 @@
 {
     if (self.networkError == YES) {
         SHOW_ALERT(@"网络连接断开,请检查网络!");
+        [MBProgressHUD showMessag:@"网络连接断开,请检查网络!" toView:nil];
         if (failureBlock) {
             failureBlock(nil);
         }

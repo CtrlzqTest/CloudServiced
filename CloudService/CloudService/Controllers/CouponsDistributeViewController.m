@@ -44,6 +44,7 @@
     self.tableView.tableFooterView = _footView;
     // Do any additional setup after loading the view.
 }
+//加载团队成员
 - (void)requestMember {
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
@@ -67,7 +68,7 @@
         [self.tableView reloadData];
 
     } failureBlock:^(NSError *error) {
-        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+       
     } showHUD:YES];
 
 }
@@ -122,7 +123,7 @@
                         }
                         
                     } failureBlock:^(NSError *error) {
-                        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+                      
                     } showHUD:YES];
                 }
             
