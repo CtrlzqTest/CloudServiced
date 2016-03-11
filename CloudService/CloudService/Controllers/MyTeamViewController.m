@@ -109,7 +109,7 @@ static NSString *cell_id = @"myTeamCell";
         [_tableView reloadData];
         [_tableView.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
         [_tableView.mj_header endRefreshing];
     } showHUD:YES];
 }
@@ -165,7 +165,7 @@ static NSString *cell_id = @"myTeamCell";
             }
             
         } failureBlock:^(NSError *error) {
-            [MBProgressHUD showError:@"请求异常" toView:self.view];
+//            [MBProgressHUD showError:@"请求异常" toView:self.view];
             
         } showHUD:NO];
 

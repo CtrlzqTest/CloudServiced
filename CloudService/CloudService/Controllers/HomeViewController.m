@@ -133,7 +133,7 @@ static NSString *headerView_ID = @"headerView";
                 [[SingleHandle shareSingleHandle] saveUserInfo:user];
             }
     } failureBlock:^(NSError *error) {
-        [MBProgressHUD showError:@"服务器连接异常" toView:self.view];
+//        [MBProgressHUD showError:@"服务器连接异常" toView:self.view];
     } showHUD:YES];
     
 }

@@ -220,7 +220,7 @@
         [_tableView1 reloadData];
         [_tableView1.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
         [_tableView1.mj_header endRefreshing];
     } showHUD:YES];
 }

@@ -417,7 +417,7 @@
     } failureBlock:^(NSError *error) {
         [self.pageView addSubview:_noDataImg];
         [self.pageView addSubview:_lbNoData];
-        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];
             [_tableView1.mj_header endRefreshing];

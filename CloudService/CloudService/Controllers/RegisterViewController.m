@@ -83,7 +83,7 @@
                 [MBProgressHUD showError:dict[@"msg"] toView:self.view];
             }
         } failureBlock:^(NSError *error) {
-            [MBProgressHUD showError:@"无法连接网络,请检查手机网络" toView:self.view];
+//            [MBProgressHUD showError:@"无法连接网络,请检查手机网络" toView:self.view];
         } showHUD:YES];
     }
 }
