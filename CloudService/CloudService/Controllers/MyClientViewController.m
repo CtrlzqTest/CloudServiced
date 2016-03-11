@@ -26,6 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //客户数组
+    _clientArray = [NSMutableArray array];
+    //模糊搜索
     _conditon = @"";
     //滑动tableview隐藏键盘
     self.tableView.keyboardDismissMode  = UIScrollViewKeyboardDismissModeInteractive;

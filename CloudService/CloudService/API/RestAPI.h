@@ -68,6 +68,9 @@
 #define kapplyTeamLeader      @"/app/team/applyTeamLeader"                 //申请团队长
 
 #define kassignTeamCoupon      @"/app/coupon/assignTeamCoupon"                 //团队优惠券下发
+
+#define kZhiKe      @"http://10.136.96.114:80/zkyq-web/platform/getInfo"              //直客
+
 //   常量
 /**************************************************************************************/
 

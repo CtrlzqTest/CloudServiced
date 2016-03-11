@@ -11,6 +11,7 @@
 #import "MBProgressHUD+Add.h"
 #import "MHAsiNetworkDefine.h"
 #import "MHNetwrok.h"
+#import "AppDelegate.h"
 @interface MHAsiNetworkItem ()
 
 @end
@@ -63,7 +64,10 @@
         manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObject:@"text/html"];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/xml", nil];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-
+        AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (delegate.isLogin) {
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        }
         if (networkType==MHAsiNetWorkGET)
         {
             [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
