@@ -12,5 +12,5 @@
 @property (weak, nonatomic)IBOutlet UIImageView *checkImg;
 @property (weak, nonatomic)IBOutlet UITapGestureRecognizer *checkTap;
 @property (weak, nonatomic)IBOutlet UITextField *tfMoney;
-
+@property (weak, nonatomic)IBOutlet UILabel *lbName;
 @end

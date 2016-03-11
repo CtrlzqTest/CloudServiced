@@ -68,9 +68,9 @@
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:@"云客服"
-                                         images:imageArray
+                                         images:_qrImgView.image
                                             url:[NSURL URLWithString:_linkUrl]
-                                          title:@"测试标题"
+                                          title:@"注册我的邀请码：5234"
                                            type:SSDKContentTypeAuto];
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响

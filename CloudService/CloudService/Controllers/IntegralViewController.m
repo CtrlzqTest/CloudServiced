@@ -15,7 +15,9 @@
 {
     int _page;//当前页数
     int _pageSize;//每页加载数
-    NSMutableArray *_integralArray;
+    NSMutableArray *_integralArray;//积分明细数组
+    UIImageView *_noDataImg;
+    UILabel *_lbNoData;
 }
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
 @end
@@ -35,6 +37,22 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     // Do any additional setup after loading the view.
 }
+
+- (void)setupNoData {
+    _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
+    _noDataImg.image = [UIImage imageNamed:@"pix2"];
+    _lbNoData = [[UILabel alloc] initWithFrame:CGRectMake(KWidth/2-20, KHeight/2+10, 60, 25)];
+    _lbNoData.text = @"暂无数据";
+    _lbNoData.font = [UIFont systemFontOfSize:14];
+    _lbNoData.textColor = [UIColor lightGrayColor];
+    [self.tableView addSubview:_noDataImg];
+    [self.tableView addSubview:_lbNoData];
+}
+- (void)removeNoData {
+    [_noDataImg removeFromSuperview];
+    [_lbNoData removeFromSuperview];
+}
+
 - (void)addMjRefresh {
     _page=1;
     _pageSize=7;
@@ -57,6 +75,7 @@
     }];
 }
 - (void)requestData {
+    [self removeNoData];
     _integralArray = nil;
     _integralArray = [NSMutableArray array];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
@@ -68,7 +87,12 @@
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
+    
+            if (totalCount>0) {
+                [self removeNoData];
+            }else {
+                [self setupNoData];
+            }
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
@@ -82,13 +106,13 @@
             NSLog(@"%@",_integralArray);
         }else {
         [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
-
+            [self setupNoData];
         }
 
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-        
+        [self setupNoData];
         [self.tableView.mj_header endRefreshing];
     } showHUD:YES];
 
@@ -117,7 +141,6 @@
 
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
-        NSLog(@"%@",_integralArray);
         [self.tableView reloadData];
         [self.tableView.mj_footer endRefreshing];
     } failureBlock:^(NSError *error) {

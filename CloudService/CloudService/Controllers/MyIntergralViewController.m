@@ -77,9 +77,9 @@
 }
 
 - (IBAction)intergralCityAction:(id)sender {
-    
-    IntergralCityViewController *VC = [[IntergralCityViewController alloc] init];
-    [self.navigationController pushViewController:VC animated:YES];
+    [MBProgressHUD showMessag:@"程序猿正在火力开发中" toView:self.view];
+//    IntergralCityViewController *VC = [[IntergralCityViewController alloc] init];
+//    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

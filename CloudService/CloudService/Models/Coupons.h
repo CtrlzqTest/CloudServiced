@@ -19,5 +19,6 @@
 @property (nonatomic, copy)NSString *couponId;
 @property (nonatomic, copy)NSString *startTime;
 
+
 - (NSDictionary *)dictionaryWithModel:(Coupons *)coupons;
 @end

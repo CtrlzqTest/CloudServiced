@@ -22,13 +22,13 @@
                         </connections>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="张三" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wn3-PZ-FIm">
-                        <rect key="frame" x="65" y="19" width="76" height="21"/>
+                        <rect key="frame" x="65" y="19" width="111" height="21"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入优惠券金额" textAlignment="center" minimumFontSize="17" background="youhuiquan-input" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-y1-YXC">
-                        <rect key="frame" x="207" y="14" width="149" height="30"/>
+                        <rect key="frame" x="226" y="14" width="130" height="30"/>
                         <color key="textColor" red="0.96470588235294119" green="0.2627450980392157" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -38,6 +38,7 @@
             <connections>
                 <outlet property="checkImg" destination="RBh-GY-MSB" id="A0R-aW-74Z"/>
                 <outlet property="checkTap" destination="lUW-0P-zf2" id="986-ET-YM7"/>
+                <outlet property="lbName" destination="wn3-PZ-FIm" id="GiN-U0-1h9"/>
                 <outlet property="tfMoney" destination="LBd-y1-YXC" id="NPM-Z6-Oth"/>
             </connections>
             <point key="canvasLocation" x="294.5" y="353"/>

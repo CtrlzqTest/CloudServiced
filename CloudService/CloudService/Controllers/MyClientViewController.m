@@ -29,6 +29,7 @@
     _conditon = @"";
     //滑动tableview隐藏键盘
     self.tableView.keyboardDismissMode  = UIScrollViewKeyboardDismissModeInteractive;
+    self.tableView.tableFooterView = [UIView new];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -45,7 +46,9 @@
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];
     }];
     if (self.isSaveCarInfo) {
-        [self requestData:nil];
+        _conditon = @"";
+//        [self requestData:@""];
+        [self.tableView.mj_header beginRefreshing];
     }
 }
 //添加mj
@@ -82,7 +85,7 @@
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
+    
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];

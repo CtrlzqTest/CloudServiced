@@ -61,6 +61,7 @@
 - (void)initTableView {
     [self.view addSubview:self.tableView];
 }
+
 - (void)setupNoData {
     _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
     _noDataImg.image = [UIImage imageNamed:@"pix2"];
@@ -230,9 +231,9 @@
         Achievement *achievement;
         if ([tableView isEqual:_tableView1]) {
              achievement= [_dayArray objectAtIndex:indexPath.row];
-        }if ([tableView isEqual:_tableView2]) {
+        }else if ([tableView isEqual:_tableView2]) {
             achievement = [_weekArray objectAtIndex:indexPath.row];
-        }else{
+        }else if ([tableView isEqual:_tableView3]){
             achievement = [_monthArray objectAtIndex:indexPath.row];
         }
         cell.lbOrderNum.text = [NSString stringWithFormat:@"%i",achievement.orderNum];
