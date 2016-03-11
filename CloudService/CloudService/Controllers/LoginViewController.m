@@ -150,7 +150,7 @@
             [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
         }
     } failureBlock:^(NSError *error) {
-//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+ 
     } showHUD:YES];
 }
 

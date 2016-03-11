@@ -24,6 +24,8 @@
     UITableView *_tableView2;
     BOOL _isLoad;//是否已加载
     NSIndexPath *_teamIndexPath;//点击哪行优惠券
+    UIImageView *_noDataImg;
+    UILabel *_lbNoData;
 }
 @property (strong, nonatomic) LazyPageScrollView *pageView;
 
@@ -33,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupNoData];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -45,10 +48,7 @@
     }
     // Do any additional setup after loading the view.
 }
-//-(void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
-//}
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -57,6 +57,20 @@
 - (void)initTableView {
     [self.view addSubview:self.tableView];
 }
+
+- (void)setupNoData {
+    _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
+    _noDataImg.image = [UIImage imageNamed:@"pix2"];
+    _lbNoData = [[UILabel alloc] initWithFrame:CGRectMake(KWidth/2-20, KHeight/2+10, 60, 25)];
+    _lbNoData.text = @"暂无数据";
+    _lbNoData.font = [UIFont systemFontOfSize:14];
+    _lbNoData.textColor = [UIColor lightGrayColor];
+}
+- (void)removeNoData {
+    [_noDataImg removeFromSuperview];
+    [_lbNoData removeFromSuperview];
+}
+
 #pragma mark pageView
 - (void)initPageView {
     _page1=1;
@@ -189,6 +203,7 @@
 
 #pragma mark 加载个人优惠券
 - (void)requestPersonalData {
+    [self removeNoData];
     _userArray = nil;
     _userArray = [NSMutableArray array];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
@@ -202,6 +217,14 @@
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
             NSLog(@"总条数：%i",totalCount);
+            //如果有数据显示数据，如果没有数据则显示暂无数据
+            if (totalCount>0) {
+                [self removeNoData];
+            }else{
+                [_tableView1 addSubview:_noDataImg];
+                [_tableView1 addSubview:_lbNoData];
+            }
+
             if (totalCount-_pageSize1*_page1<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView1.mj_footer endRefreshingWithNoMoreData];
@@ -215,15 +238,19 @@
             NSLog(@"%@",_userArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [_tableView1 addSubview:_noDataImg];
+            [_tableView1 addSubview:_lbNoData];
         }
         
         [_tableView1 reloadData];
         [_tableView1.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+        [_tableView1 addSubview:_noDataImg];
+        [_tableView1 addSubview:_lbNoData];
         [_tableView1.mj_header endRefreshing];
     } showHUD:YES];
 }
+//加载更多个人优惠券数据
 - (void)requestMorePersonalData {
     _page1++;
 
@@ -261,6 +288,7 @@
 }
 #pragma mark 加载团队优惠券
 - (void)requestGroupData {
+    [self removeNoData];
     _teamArray = nil;
     _teamArray = [NSMutableArray array];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
@@ -274,6 +302,15 @@
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
             NSLog(@"总条数：%i",totalCount);
+            //如果有数据显示数据，如果没有数据则显示暂无数据
+            if (totalCount>0) {
+                [self removeNoData];
+            }else{
+                [_tableView2 addSubview:_noDataImg];
+                [_tableView2 addSubview:_lbNoData];
+            }
+            
+            
             if (totalCount-_pageSize2*_page2<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView2.mj_footer endRefreshingWithNoMoreData];
@@ -284,17 +321,21 @@
 
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
-        NSLog(@"%@",_teamArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            
+            [_tableView2 addSubview:_noDataImg];
+            [_tableView2 addSubview:_lbNoData];
         }
         [_tableView2 reloadData];
         [_tableView2.mj_header endRefreshing];
     } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
+        [_tableView2 addSubview:_noDataImg];
+        [_tableView2 addSubview:_lbNoData];
         [_tableView2.mj_header endRefreshing];
     } showHUD:YES];
 }
+//加载更多团队优惠券数据
 - (void)requestMoreGroupData {
     _page2++;
     

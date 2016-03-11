@@ -30,6 +30,8 @@
     [self setupLayoutConstranints];
     [self setupViews];
     [self getData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:ExchangeIntegralSuccess object:nil];
 }
 
 - (void)getData {
