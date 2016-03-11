@@ -167,7 +167,17 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_Bank[5] = user.accountCity;
     
     _companyCodeDict = [NSMutableDictionary dictionary];
+    int i = 0;
+    for (NSString *companyCode in [DataSource changeSaleCompanyWithString:user.applySaleCompany]) {
+        [_companyCodeDict setValue:companyCode forKey:[DataSource insureCommpanyNameArray][i]];
+        i ++;
+    }
     _saleCityDict = [NSMutableDictionary dictionary];
+    i = 0;
+    for (NSString *provinceName in [DataSource changeSaleCompanyWithString:user.saleCityValue]) {
+        [_saleCityDict setValue:[[DataSource provinceCodeDict] valueForKey:provinceName] forKey:provinceName];
+        i ++;
+    }
 }
 
 - (void)setupSelectTableView {
@@ -541,7 +551,10 @@ static NSString *const select_CellID = @"selectCell";
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         if (_indexPath.section == 0)
         {
-            [_saleCityDict setObject:provinceCode forKey:province];
+            if (_saleCityDict.count > 3) {
+                [MBProgressHUD showSuccess:@"城市选择不能超过四个" toView:self.view];
+            }
+            [_saleCityDict setValue:provinceCode forKey:province];
             _valueArray_User[8] = [Utility changeStrArraytoString:[_saleCityDict allKeys]];
             
         }else

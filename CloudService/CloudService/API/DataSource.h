@@ -43,4 +43,9 @@
  *  编码转汉字
  */
 +(NSString *)changeSaleCompanyWithCodeString:(NSString *)codeStr;
+
+/**
+ *  编码转数组
+ */
++(NSArray *)changeSaleCompanyWithString:(NSString *)codeStr;
 @end

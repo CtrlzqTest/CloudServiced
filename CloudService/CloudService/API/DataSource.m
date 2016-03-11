@@ -41,7 +41,13 @@
         [resultStr appendString:[DataSource insureCommpanyNameArray][i]];
         [resultStr appendString:@","];
     }
-    [resultStr substringToIndex:resultStr.length - 1];
-    return resultStr;
+    
+    return [resultStr substringToIndex:resultStr.length - 1];
 }
+
++(NSArray *)changeSaleCompanyWithString:(NSString *)codeStr
+{
+    return [codeStr componentsSeparatedByString:@","];
+}
+
 @end
