@@ -59,7 +59,7 @@
 //    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserInfoAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
 //        
 //    } failureBlock:^(NSError *error) {
-//        [MBProgressHUD showError:@"服务器异常" toView:self.view];
+
 //    } showHUD:YES];
     
     _valueArray[0] = @"";
