@@ -55,8 +55,8 @@
 
 }
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.title=@"积分搜索";
-    
     [self setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
         if (isOpen) {
             [self upMenu];

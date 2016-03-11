@@ -23,6 +23,7 @@
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.tabBarController.title = @"订单管理";
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.view.frame = CGRectMake(0, 0, KWidth, KHeight - 64);
