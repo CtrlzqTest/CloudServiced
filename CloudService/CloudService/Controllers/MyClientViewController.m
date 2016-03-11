@@ -38,6 +38,8 @@
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
     self.title = @"我的客户";
     __weak typeof(self) weakSelf = self;
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"head-add" selectImage:@"head-add" action:^(AYCButton *button) {
@@ -73,8 +75,7 @@
 }
 
 - (void)requestData:(NSString *)condition{
-    _clientArray = nil;
-    _clientArray = [NSMutableArray array];
+    [_clientArray removeAllObjects];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"condition":condition};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {

@@ -34,6 +34,8 @@ static CGFloat headerHeight = 30;
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
     self.title = @"立即报价";
     
 }

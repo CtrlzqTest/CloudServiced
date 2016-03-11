@@ -52,6 +52,8 @@
 
 }
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
     self.title=@"创建订单";
 }
 
