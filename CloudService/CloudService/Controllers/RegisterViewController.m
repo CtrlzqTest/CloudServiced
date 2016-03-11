@@ -70,6 +70,7 @@
         [dict setValue:self.pwdText.text forKey:@"password"];
         [dict setValue:location forKey:@"address"];
         [dict setValue:self.codeText.text forKey:@"code"];
+        [dict setValue:self.invateCode.text forKey:@"inviteCode"];
         __weak typeof(self) weakSelf = self;
     
         [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kRegisterAPI] params:dict successBlock:^(id returnData) {
