@@ -89,31 +89,32 @@
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     __weak typeof(self) weakSelf = self;
-    [self setRightTextBarButtonItemWithFrame:CGRectMake(0, 0, 40, 30) title:@"编辑" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
+    [self setRightTextBarButtonItemWithFrame:CGRectMake(0, 0, 40, 30) title:@"更多" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
+        _isTosetUserInfo = YES;
+        setUserInfoVC.notEnable = YES;
+        [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
         
-        ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
-        popView.frame = [UIScreen mainScreen].bounds;
+//        ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
+//        popView.frame = [UIScreen mainScreen].bounds;
+//        
+//        [popView showViewWithCallBack:^(NSInteger btnIndex) {
+//            if (btnIndex == 1) {
+//                
+//                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":popView.phoneNum,@"code":@"123456"} successBlock:^(id returnData) {
+//                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+//                        
+//                    }else {
+//                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
+//                    }
+//                    
+//                } failureBlock:^(NSError *error) {
+//                    
+//                } showHUD:YES];
+//            }
+//        }];
         
-        [popView showViewWithCallBack:^(NSInteger btnIndex) {
-            if (btnIndex == 1) {
-                
-                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":popView.phoneNum,@"code":@"123456"} successBlock:^(id returnData) {
-                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-                        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                        SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
-                        _isTosetUserInfo = YES;
-                        [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
-                    }else {
-                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
-                    }
-                    
-                } failureBlock:^(NSError *error) {
-                    
-                } showHUD:YES];
-                
-                
-            }
-        }];
     }];
 
     [self setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"" action:^(AYCButton *button) {

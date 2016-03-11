@@ -32,4 +32,16 @@
 +(NSDictionary *)provinceCodeDict {
     return @{@"江西":@"34",@"黑龙江":@"35",@"重庆":@"36",@"青海":@"37",@"云南":@"24",@"甘肃":@"32",@"湖北":@"26",@"大连":@"31",@"北京":@"01",@"广东":@"08",@"海南":@"16",@"青岛":@"11",@"山东":@"02",@"河南":@"06",@"江苏":@"03",@"福建":@"35",@"陕西":@"25",@"宁波":@"29",@"浙江":@"19",@"山西":@"30",@"内蒙古":@"36",@"辽宁":@"12",@"安徽":@"33",@"吉林":@"27",@"贵州":@"20",@"湖南":@"18",@"上海":@"07",@"河北":@"15",@"天津":@"10",@"厦门":@"37",@"新疆":@"28",@"宁夏":@"38",@"西藏":@"39",@"广西":@"17",@"四川":@"21",@"深圳":@"09"};
 }
+
++(NSString *)changeSaleCompanyWithCodeString:(NSString *)codeStr {
+    
+    NSArray *codeArray = [codeStr componentsSeparatedByString:@","];
+    NSMutableString *resultStr = [NSMutableString string];
+    for (int i = 0; i < codeArray.count; i ++) {
+        [resultStr appendString:[DataSource insureCommpanyNameArray][i]];
+        [resultStr appendString:@","];
+    }
+    [resultStr substringToIndex:resultStr.length - 1];
+    return resultStr;
+}
 @end

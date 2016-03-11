@@ -39,4 +39,8 @@
  */
 +(NSDictionary *)provinceCodeDict;
 
+/**
+ *  编码转汉字
+ */
++(NSString *)changeSaleCompanyWithCodeString:(NSString *)codeStr;
 @end

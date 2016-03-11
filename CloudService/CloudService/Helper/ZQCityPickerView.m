@@ -23,6 +23,8 @@
     
     hidePickerViewBlock _block;
     UIView *_accessInputView;
+    
+    NSInteger _ComponentsCount;
 }
 
 @property(nonatomic,strong)UIPickerView *pickerView;
@@ -32,20 +34,24 @@
 
 @implementation ZQCityPickerView
 
-- (instancetype)initWithProvincesArray:(NSArray *)provinceArray cityArray:(NSArray *)cityArray{
+- (instancetype)initWithProvincesArray:(NSArray *)provinceArray cityArray:(NSArray *)cityArray componentsCount:(NSInteger )count{
+    
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
-        
-        _cityArray = [NSMutableArray array];
-        _cityCodeArray = [NSMutableArray array];
+    
+        _ComponentsCount = count;
         _provinceArray = [DataSource provinceArray];
         _provinceCodeDict = [DataSource provinceCodeDict];
         _provinceCode = [_provinceCodeDict valueForKey:_provinceArray[0]];
-        
-        [self searchCityinProvinceCode:_provinceCode];
-        
         self.province = [_provinceArray firstObject];
-        self.city = [_cityArray firstObject];
-        self.cityCode = _provinceCode;
+        
+        if (count != 1) {
+            _cityArray = [NSMutableArray array];
+            _cityCodeArray = [NSMutableArray array];
+            [self searchCityinProvinceCode:_provinceCode];
+            self.city = [_cityArray firstObject];
+            self.cityCode = [_cityCodeArray firstObject];
+        }
+        
         self.frame = [UIScreen mainScreen].bounds;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
@@ -90,7 +96,7 @@
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 2;
+    return _ComponentsCount;
 }
 
 // returns the # of rows in each component..
@@ -113,15 +119,19 @@
     if (component == 0)
     {
         _provinceCode = [_provinceCodeDict valueForKey:_provinceArray[row]];
-        [self searchCityinProvinceCode:_provinceCode];
-        [self.pickerView reloadComponent:1];
+        if (_ComponentsCount != 1) {
+            [self searchCityinProvinceCode:_provinceCode];
+            [self.pickerView reloadComponent:1];
+        }
     }else
     {
         
     }
     self.province = _provinceArray[[self .pickerView selectedRowInComponent:0]];
-    self.city = _cityArray[[self.pickerView selectedRowInComponent:1]];
-    self.cityCode = _cityCodeArray[[self.pickerView selectedRowInComponent:1]];
+    if (_ComponentsCount != 1) {
+        self.city = _cityArray[[self.pickerView selectedRowInComponent:1]];
+        self.cityCode = _cityCodeArray[[self.pickerView selectedRowInComponent:1]];
+    }
 }
 
 - (void)cancleAction:(UIButton *)sender {
@@ -147,6 +157,10 @@
 
 - (void)hidePickerViewWithEnsure:(BOOL )flag {
     
+    if (_ComponentsCount == 1) {
+        self.city = @"";
+        self.cityCode = @"";
+    }
     [UIView animateWithDuration:0.3 animations:^{
         self.maskView.alpha = 0;
         _accessInputView.transform = CGAffineTransformIdentity;
@@ -154,7 +168,7 @@
     } completion:^(BOOL finished) {
         self.hidden = YES;
         if (flag) {
-            _block(self.province,self.city,self.cityCode);
+            _block(self.province,self.city,self.cityCode,_provinceCode);
         }
         [self removeFromSuperview];
     }];

@@ -93,6 +93,15 @@ static User *user = nil;
     return [[NSUserDefaults standardUserDefaults] valueForKey:@"passWord"];
 }
 
++ (NSString *)changeStrArraytoString:(NSArray *)array {
+    NSMutableString *result = [NSMutableString string];
+    for (NSString *str in array) {
+        [result appendString:str];
+        [result appendString:@","];
+    }
+    return [result substringToIndex:result.length - 1];
+}
+
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{
     
 //    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
