@@ -24,7 +24,9 @@
 @end
 
 @implementation AppDelegate
+@synthesize window =_window;
 
+@synthesize isLogin;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    

@@ -8,12 +8,15 @@
 
 #import "CreatClientViewController.h"
 #import "OfferViewController.h"
+#import "ZQCityPickerView.h"
 
 @interface CreatClientViewController ()
 @property (weak, nonatomic)IBOutlet UITextField *tfName;
 @property (weak, nonatomic)IBOutlet UITextField *tfPhone;
 @property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
 @property (weak, nonatomic) IBOutlet UIButton *isNewCarBtn;
+@property (weak, nonatomic)IBOutlet UITextField *tfCarCity;
+
 @end
 
 @implementation CreatClientViewController
@@ -52,6 +55,23 @@
     
 }
 
+
+
+- (IBAction)showCityPickerView:(id)sender {
+    
+    [self resignKeyBoardInView:self.view];
+    
+    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil];
+    
+    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode) {
+        self.tfCarCity.text = [NSString stringWithFormat:@"%@ %@",province,city];
+        NSLog(@"%@",cityCode);
+        cityPickerView = nil;
+    }];
+    
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -69,7 +89,19 @@
         offerVC.custName = _tfName.text;
     }
 }
+/** 消失键盘*/
+- (void)resignKeyBoardInView:(UIView *)view
 
+{
+    for (UIView *v in view.subviews) {
+        if ([v.subviews count] > 0) {
+            [self resignKeyBoardInView:v];
+        }
+        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
+            [v resignFirstResponder];
+        }
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
