@@ -61,9 +61,9 @@
     
     [self resignKeyBoardInView:self.view];
     
-    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil];
+    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil componentsCount:2];
     
-    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode) {
+    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         self.tfCarCity.text = [NSString stringWithFormat:@"%@ %@",province,city];
         NSLog(@"%@",cityCode);
         cityPickerView = nil;
