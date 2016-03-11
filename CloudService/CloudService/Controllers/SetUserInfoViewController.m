@@ -28,6 +28,7 @@ static NSString *const select_CellID = @"selectCell";
     NSMutableArray *_valueArray_User;
     NSMutableArray *_valueArray_Bank;
     NSMutableDictionary *_companyCodeDict;
+    NSMutableDictionary *_saleCityDict;
     
     NSIndexPath *_indexPath;
     BOOL _isAnimating;
@@ -57,6 +58,9 @@ static NSString *const select_CellID = @"selectCell";
     }else {
         [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
     }
+    if (self.notEnable) {
+        [self.rightBtn setTitle:@"编辑" forState:(UIControlStateNormal)];
+    }
 }
 
 -(void)setSelectArray:(NSArray *)selectArray {
@@ -69,6 +73,13 @@ static NSString *const select_CellID = @"selectCell";
 
 - (IBAction)saveAction:(id)sender {
     
+    // 编辑
+    if (self.notEnable) {
+        self.notEnable = NO;
+        [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
+        [self.tableView reloadData];
+        return;
+    }
     [self resignKeyBoardInView:self.view];
     NSDictionary *dict = [self getParam];
     if (!dict) {
@@ -80,7 +91,7 @@ static NSString *const select_CellID = @"selectCell";
             User *user = [[SingleHandle shareSingleHandle] getUserInfo];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
             if ([self.rightBtnTitle isEqualToString:@"提交"]) {
-                [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
+//                [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
             }else {
                 [MBProgressHUD showSuccess:@"修改成功" toView:nil];
             }
@@ -143,8 +154,9 @@ static NSString *const select_CellID = @"selectCell";
     NSString *workDate = user.workStartDate.length > 0 ? [HelperUtil timeFormat:user.workStartDate format:@"yyyy-MM-dd"] : @"2015-01-01";
     _valueArray_User[5] = workDate;
     _valueArray_User[6] = user.chatName;
-    _valueArray_User[7] = user.applySaleCompany;
-    _valueArray_User[8] = user.saleCity;
+    // 编码汉字
+    _valueArray_User[7] = [DataSource changeSaleCompanyWithCodeString:user.applySaleCompany];;
+    _valueArray_User[8] = user.saleCityValue;
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
     _valueArray_Bank[0] = user.realName;
@@ -155,6 +167,7 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_Bank[5] = user.accountCity;
     
     _companyCodeDict = [NSMutableDictionary dictionary];
+    _saleCityDict = [NSMutableDictionary dictionary];
 }
 
 - (void)setupSelectTableView {
@@ -204,6 +217,14 @@ static NSString *const select_CellID = @"selectCell";
     
     [self resignKeyBoardInView:self.view];
     _indexPath = [self.tableView indexPathForCell:cell];
+    if (_indexPath.row == 7)
+    {
+        [_companyCodeDict removeAllObjects];
+    }
+    else if(_indexPath.row == 8)
+    {
+        [_saleCityDict removeAllObjects];
+    }
     _valueArray_User[_indexPath.row] = @"";
     [self.tableView reloadData];
 }
@@ -275,7 +296,7 @@ static NSString *const select_CellID = @"selectCell";
     cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     [cell isPullDown:NO];
-    if (self.isEnable) {
+    if (self.notEnable) {
         cell.textFiled.enabled = NO;
         return cell;
     }
@@ -310,7 +331,9 @@ static NSString *const select_CellID = @"selectCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    if (self.notEnable) {
+        return ;
+    }
     if ([tableView isEqual:self.selectTableView]) {
         [self hidePullDownView];
         if (_indexPath.row == 3 || _indexPath.row == 4) {
@@ -347,7 +370,7 @@ static NSString *const select_CellID = @"selectCell";
                         [self showPullDownViewWithRect:rect7];
                         break;
                 
-            case 8:     [self showCityPickerView];
+            case 8:     [self showCityPickerViewWithCount:1];
                         break;
             default:
                 break;
@@ -357,7 +380,7 @@ static NSString *const select_CellID = @"selectCell";
     if (indexPath.section == 1) {
         if (indexPath.row == 4 || indexPath.row == 5)
         {
-            [self showCityPickerView];
+            [self showCityPickerViewWithCount:2];
         }
        
     }
@@ -439,9 +462,15 @@ static NSString *const select_CellID = @"selectCell";
     user.workStartDate = _valueArray_User[5];
     user.oldPost = _valueArray_User[4];
     user.oldCompany = _valueArray_User[3];
-    user.saleCity =   _valueArray_User[8];
+    user.saleCityValue =   _valueArray_User[8];
+    if (_saleCityDict.count > 0) {
+        user.saleCity = [Utility changeStrArraytoString:[_saleCityDict allValues]];
+    }
     user.chatName  = _valueArray_User[6];
-    user.applySaleCompany = _valueArray_User[7];
+    if (_companyCodeDict.count > 0) {
+        // 用户显示汉字
+        user.applySaleCompany = [Utility changeStrArraytoString:[_companyCodeDict allKeys]];
+    }
     user.idCard = idCord;
     user.bankAccountName = _valueArray_Bank[0];
     user.bankNum = _valueArray_Bank[1];
@@ -463,7 +492,7 @@ static NSString *const select_CellID = @"selectCell";
     [dict setValue:user.oldPost forKey:@"oldPost"];
     [dict setValue:user.oldCompany forKey:@"oldCompany"];
     [dict setValue:user.saleCity forKey:@"saleCity"];
-    [dict setValue:user.applySaleCompany forKey:@"applySaleCompany"];
+    [dict setValue:[Utility changeStrArraytoString:[_companyCodeDict allValues]] forKey:@"applySaleCompany"];
     [dict setValue:user.idCard forKey:@"idCard"];
 
     // 银行信息
@@ -503,16 +532,17 @@ static NSString *const select_CellID = @"selectCell";
     return nil;
 }
 
-- (void)showCityPickerView {
+- (void)showCityPickerViewWithCount:(NSInteger )count {
     
     [self resignKeyBoardInView:self.view];
     
-    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil];
+    __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil componentsCount:count];
     
-    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode) {
+    [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         if (_indexPath.section == 0)
         {
-            _valueArray_User[8] = [NSString stringWithFormat:@"%@ %@",province,city];
+            [_saleCityDict setObject:provinceCode forKey:province];
+            _valueArray_User[8] = [Utility changeStrArraytoString:[_saleCityDict allKeys]];
             
         }else
         {
@@ -523,7 +553,6 @@ static NSString *const select_CellID = @"selectCell";
         [self.tableView reloadData];
         cityPickerView = nil;
     }];
-    
     
 }
 

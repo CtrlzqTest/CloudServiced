@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^hidePickerViewBlock)(NSString *province,NSString *city,NSString *cityCode);
+typedef void(^hidePickerViewBlock)(NSString *province,NSString *city,NSString *cityCode,NSString *provinceCode);
 
 @interface ZQCityPickerView : UIView
 
@@ -16,7 +16,7 @@ typedef void(^hidePickerViewBlock)(NSString *province,NSString *city,NSString *c
 @property (nonatomic,copy)NSString *province;
 @property (nonatomic,copy)NSString *cityCode;
 
-- (instancetype)initWithProvincesArray:(NSArray *)provinceArray cityArray:(NSArray *)cityArray;
+- (instancetype)initWithProvincesArray:(NSArray *)provinceArray cityArray:(NSArray *)cityArray componentsCount:(NSInteger )count;
 
 /**
  *  显示

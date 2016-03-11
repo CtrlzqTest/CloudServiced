@@ -97,9 +97,9 @@ static User *user = nil;
     NSMutableString *result = [NSMutableString string];
     for (NSString *str in array) {
         [result appendString:str];
-        [result appendString:@" "];
+        [result appendString:@","];
     }
-    return result;
+    return [result substringToIndex:result.length - 1];
 }
 
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{

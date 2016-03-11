@@ -32,6 +32,7 @@
 @property(nonatomic,copy)NSString *userId;
 @property(nonatomic,copy)NSString *nickName;
 @property(nonatomic,copy)NSString *workStartDate;
+@property(nonatomic,copy)NSString *saleCityValue;
 
 // 银行信息
 @property(nonatomic,copy)NSString *accountCity;  // 市

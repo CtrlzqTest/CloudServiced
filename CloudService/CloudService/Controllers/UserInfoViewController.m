@@ -93,7 +93,7 @@
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
         _isTosetUserInfo = YES;
-        setUserInfoVC.isEnable = NO;
+        setUserInfoVC.notEnable = YES;
         [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
         
 //        ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
