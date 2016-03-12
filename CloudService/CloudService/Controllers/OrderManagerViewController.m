@@ -31,6 +31,7 @@
     [self.tabBarController setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"searchOrder" sender:weakSelf];
     }];
+    
 }
 
 
