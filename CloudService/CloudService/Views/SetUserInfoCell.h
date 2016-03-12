@@ -18,6 +18,7 @@
 @end
 
 @interface SetUserInfoCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITextField *textFiled;

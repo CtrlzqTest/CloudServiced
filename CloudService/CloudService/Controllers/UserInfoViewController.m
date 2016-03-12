@@ -65,23 +65,10 @@
     _valueArray[0] = @"";
     _valueArray[1] = user.userName;
     _valueArray[2] = user.phoneNo;
-//    if (![user.idCard compare:@"(null)"]) {
-//        _valueArray[3] = @"";
-//    }else
-//    {
-        _valueArray[3] = user.idCard;
-//    }
-//    if (![user.chatName compare:@"(null)"]) {
-//        _valueArray[4] = @"";
-//    }else
-//    {
-        _valueArray[4] = user.chatName;
-//    }
-//    if (![user.bankNum compare:@"(null)"]) {
-//        _valueArray[5] = user.bankNum;
-//    }else {
-        _valueArray[5] = user.bankNum;
-//    }
+    _valueArray[3] = user.idCard;
+    _valueArray[4] = user.chatName;
+    _valueArray[5] = user.bankNum;
+    
 }
 
 - (void)setupViews {
@@ -89,32 +76,12 @@
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     __weak typeof(self) weakSelf = self;
-    [self setRightTextBarButtonItemWithFrame:CGRectMake(0, 0, 40, 30) title:@"更多" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
+    [self setRightTextBarButtonItemWithFrame:CGRectMake(10, 0, 40, 30) title:@"更多" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
         _isTosetUserInfo = YES;
         setUserInfoVC.notEnable = YES;
         [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
-        
-//        ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
-//        popView.frame = [UIScreen mainScreen].bounds;
-//        
-//        [popView showViewWithCallBack:^(NSInteger btnIndex) {
-//            if (btnIndex == 1) {
-//                
-//                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":popView.phoneNum,@"code":@"123456"} successBlock:^(id returnData) {
-//                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-//                        
-//                    }else {
-//                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
-//                    }
-//                    
-//                } failureBlock:^(NSError *error) {
-//                    
-//                } showHUD:YES];
-//            }
-//        }];
-        
     }];
 
     [self setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"" action:^(AYCButton *button) {
@@ -149,6 +116,7 @@
         SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setUserInfoCell" forIndexPath:indexPath];
         cell.textFiled.hidden = YES;
         cell.label.text = @"头像";
+        cell.imageHeight.constant = 40;
         [cell.imageBtn setImage:[UIImage imageNamed:@"head1"]];
         return cell;
     }else if(indexPath.section == 1) {

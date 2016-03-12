@@ -116,11 +116,14 @@
         [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
     }else {
         [self countDownTime:@60];
-        [RequestEntity getCodeWithUserPhoneNum:self.phoneNum.text success:^(id responseObject, NSError *error) {
+        User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":user.phoneNo} successBlock:^(id returnData) {
+            if ([returnData[@"flag"] isEqualToString:@"success"]) {
+                
+            }
+        } failureBlock:^(NSError *error) {
             
-        } failure:^(NSError *error) {
-            
-        }];
+        } showHUD:YES];
     }
 }
 

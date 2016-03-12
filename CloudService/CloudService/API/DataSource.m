@@ -35,6 +35,9 @@
 
 +(NSString *)changeSaleCompanyWithCodeString:(NSString *)codeStr {
     
+    if (codeStr.length <= 0) {
+        return @"";
+    }
     NSArray *codeArray = [codeStr componentsSeparatedByString:@","];
     NSMutableString *resultStr = [NSMutableString string];
     for (int i = 0; i < codeArray.count; i ++) {
@@ -47,7 +50,11 @@
 
 +(NSArray *)changeSaleCompanyWithString:(NSString *)codeStr
 {
-    return [codeStr componentsSeparatedByString:@","];
+    if (codeStr.length > 0) {
+        return [codeStr componentsSeparatedByString:@","];
+    }else{
+        return nil;
+    }
 }
 
 @end
