@@ -335,15 +335,24 @@
     if ([type isEqualToString:@"day"]) {
         _dayArray = nil;
         _dayArray = [NSMutableArray array];
-        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1],@"type":type};
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                    @"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],
+                    @"pageNo":[NSString stringWithFormat:@"%i",_page1],
+                    @"type":type};
     }if ([type isEqualToString:@"week"]) {
         _weekArray = nil;
         _weekArray = [NSMutableArray array];
-        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2],@"type":type};
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                    @"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@
+                    "pageNo":[NSString stringWithFormat:@"%i",_page2],
+                    @"type":type};
     }if ([type isEqualToString:@"month"]) {
         _monthArray = nil;
         _monthArray = [NSMutableArray array];
-        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],@"pageNo":[NSString stringWithFormat:@"%i",_page3],@"type":type};
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                    @"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],
+                    @"pageNo":[NSString stringWithFormat:@"%i",_page3],
+                    @"type":type};
     }
     
     [self removeNoData];
@@ -434,13 +443,22 @@
     NSDictionary *paramsDic;
     if ([type isEqualToString:@"day"]) {
          _page1++;
-        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1],@"type":type};
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                    @"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],
+                    @"pageNo":[NSString stringWithFormat:@"%i",_page1],
+                    @"type":type};
     }if ([type isEqualToString:@"week"]) {
         _page2++;
-        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2],@"type":type};
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                    @"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],
+                    @"pageNo":[NSString stringWithFormat:@"%i",_page2],
+                    @"type":type};
     }if ([type isEqualToString:@"month"]) {
         _page3++;
-        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],@"pageNo":[NSString stringWithFormat:@"%i",_page3],@"type":type};
+        paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                    @"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],
+                    @"pageNo":[NSString stringWithFormat:@"%i",_page3],
+                    @"type":type};
     }
     
         NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamAchievement];

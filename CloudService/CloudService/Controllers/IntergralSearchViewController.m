@@ -57,11 +57,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title=@"积分搜索";
-    [self setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
+    __weak typeof(self) weakSelf = self;
+    [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
         if (isOpen) {
-            [self upMenu];
+            [weakSelf upMenu];
         }else {
-            [self downMenu];
+            [weakSelf downMenu];
         }
         
     }];
@@ -315,7 +316,7 @@
 }
 - (void)searchClick:(UIButton *)sender {
     [self upMenu];
-    [self requestData];
+    [self.tableView.mj_header beginRefreshing];
 }
 - (void)cancelSearch:(UIButton *)sender {
     [self upMenu];

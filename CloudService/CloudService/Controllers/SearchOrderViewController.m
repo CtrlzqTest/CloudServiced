@@ -9,23 +9,40 @@
 #import "SearchOrderViewController.h"
 #import "HZQDatePickerView.h"
 #import "PellTableViewSelect.h"
+#import <MJRefresh.h>
+#import "OrderManagerCell.h"
 
-@interface SearchOrderViewController ()<HZQDatePickerViewDelegate>
+@interface SearchOrderViewController ()<HZQDatePickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UIView *_searchView;//搜索菜单页面
     UIButton *_blackBtn;//背景层
     BOOL isOpen;//菜单是否展开
+    UITextField *_tfName;//客户姓名
+    UITextField *_tfTel;//客户手机号
+    UITextField *_tfCar;//车牌号
     UILabel *_lbStart;//开始时间
     UILabel *_lbEnd;//结束时间
     HZQDatePickerView *_pickerView;//时间选择器
     UILabel *_lbCode;//结束码
+    int _page;//当前页数
+    int _pageSize;//每页加载数
+    UIImageView *_noDataImg;
+    UILabel *_lbNoData;
+    NSMutableArray *_orderArray;
+    NSString *_startTime;
+    NSString *_endTime;
+    NSString *_codeStr;
 }
+@property (weak, nonatomic)IBOutlet UITableView *tableView;
 @end
 
 @implementation SearchOrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _startTime = @"";
+    _endTime = @"";
+    _codeStr = @"";
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -41,15 +58,19 @@
         }
         
     }];
-    [self downMenu];
-   
+    self.tableView.tableFooterView = [UIView new];
+    [self addMjRefresh];
+    //蒙版
     _blackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _blackBtn.backgroundColor = [UIColor blackColor];
     _blackBtn.frame = self.view.frame;
     _blackBtn.alpha = 0.5f;
     [_blackBtn addTarget:self action:@selector(upMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_blackBtn];
+    //加载搜索试图
     [self initSearchMenu];
+    
+    [self downMenu];
     // Do any additional setup after loading the view.
 }
 
@@ -76,13 +97,13 @@
         make.top.mas_equalTo(15);
     }];
     
-    UITextField *tfName = [UITextField new];
-    tfName.placeholder = @"请输入客户姓名";
-    [tfName setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
-    tfName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    tfName.borderStyle = UITextBorderStyleRoundedRect;
-    [_searchView addSubview:tfName];
-    [tfName mas_makeConstraints:^(MASConstraintMaker *make) {
+    _tfName = [UITextField new];
+    _tfName.placeholder = @"请输入客户姓名";
+    [_tfName setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    _tfName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _tfName.borderStyle = UITextBorderStyleRoundedRect;
+    [_searchView addSubview:_tfName];
+    [_tfName mas_makeConstraints:^(MASConstraintMaker *make) {
         //添加高约束
         make.height.mas_equalTo(34);
         //添加左边距约束(距离左边label的距离)
@@ -110,13 +131,13 @@
         make.top.equalTo(lbName.mas_bottom).offset(15);
     }];
     
-    UITextField *tfTel = [UITextField new];
-    tfTel.placeholder = @"请输入客户手机号";
-    [tfTel setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
-    tfTel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    tfTel.borderStyle = UITextBorderStyleRoundedRect;
-    [_searchView addSubview:tfTel];
-    [tfTel mas_makeConstraints:^(MASConstraintMaker *make) {
+    _tfTel = [UITextField new];
+    _tfTel.placeholder = @"请输入客户手机号";
+    [_tfTel setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    _tfTel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _tfTel.borderStyle = UITextBorderStyleRoundedRect;
+    [_searchView addSubview:_tfTel];
+    [_tfTel mas_makeConstraints:^(MASConstraintMaker *make) {
         //添加高约束
         make.height.mas_equalTo(34);
         //添加左边距约束(距离左边label的距离)
@@ -124,7 +145,7 @@
         //添加右边距约束
         make.right.mas_equalTo(-20);
         //添加上边距约束
-        make.top.equalTo(tfName.mas_bottom).offset(15);
+        make.top.equalTo(_tfName.mas_bottom).offset(15);
  
     }];
     
@@ -143,13 +164,13 @@
         make.top.equalTo(lbTel.mas_bottom).offset(15);
     }];
     
-    UITextField *tfCar = [UITextField new];
-    tfCar.placeholder = @"请输入车牌号";
-    [tfCar setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
-    tfCar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    tfCar.borderStyle = UITextBorderStyleRoundedRect;
-    [_searchView addSubview:tfCar];
-    [tfCar mas_makeConstraints:^(MASConstraintMaker *make) {
+    _tfCar = [UITextField new];
+    _tfCar.placeholder = @"请输入车牌号";
+    [_tfCar setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    _tfCar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _tfCar.borderStyle = UITextBorderStyleRoundedRect;
+    [_searchView addSubview:_tfCar];
+    [_tfCar mas_makeConstraints:^(MASConstraintMaker *make) {
         //添加高约束
         make.height.mas_equalTo(34);
         //添加左边距约束(距离左边label的距离)
@@ -157,7 +178,7 @@
         //添加右边距约束
         make.right.mas_equalTo(-20);
         //添加上边距约束
-        make.top.equalTo(tfTel.mas_bottom).offset(15);
+        make.top.equalTo(_tfTel.mas_bottom).offset(15);
         
     }];
     
@@ -193,7 +214,7 @@
         //添加右边距约束
         make.right.mas_equalTo(-20);
         //添加上边距约束
-        make.top.equalTo(tfCar.mas_bottom).offset(15);
+        make.top.equalTo(_tfCar.mas_bottom).offset(15);
         
     }];
     
@@ -327,20 +348,23 @@
 
 - (void)cancelClick:(UIButton *)sender {
     [self upMenu];
+ 
 }
 
 - (void)sureClick:(UIButton *)sender {
-    
+    [self upMenu];
+    [self.tableView.mj_header beginRefreshing];
 }
 /** 结束码下拉*/
 -  (void)codeClick:(UITapGestureRecognizer *)tap {
-    NSArray *array = @[@"未报价",@"已报价",@"已完成"];
+    NSArray *array = [[SingleHandle shareSingleHandle] getEndCodeArray];
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(80, 260, 200, 200) selectData:
      
      array
                                                         action:^(NSInteger index) {
                                                             
                                                             _lbCode.text = [array objectAtIndex:index];
+                                                            _codeStr = [array objectAtIndex:index];
                                                         } animated:YES];
 
 }
@@ -391,18 +415,18 @@
 - (void)getSelectDate:(NSDate *)date type:(DateType)type {
   
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
 
     switch (type) {
         case DateTypeOfStart:
             _lbStart.text = currentOlderOneDateStr;
-            
+            _startTime = currentOlderOneDateStr;
             break;
             
         case DateTypeOfEnd:
             _lbEnd.text = currentOlderOneDateStr;
-            
+            _endTime = currentOlderOneDateStr;
             break;
             
         default:
@@ -432,6 +456,159 @@
     }
     
 }
+- (void)setupNoData {
+    _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
+    _noDataImg.image = [UIImage imageNamed:@"pix2"];
+    _lbNoData = [[UILabel alloc] initWithFrame:CGRectMake(KWidth/2-20, KHeight/2+10, 60, 25)];
+    _lbNoData.text = @"暂无数据";
+    _lbNoData.font = [UIFont systemFontOfSize:14];
+    _lbNoData.textColor = [UIColor lightGrayColor];
+    [self.tableView addSubview:_noDataImg];
+    [self.tableView addSubview:_lbNoData];
+}
+- (void)removeNoData {
+    [_noDataImg removeFromSuperview];
+    [_lbNoData removeFromSuperview];
+}
+
+- (void)addMjRefresh {
+    _page=1;
+    _pageSize=7;
+    // 下拉刷新
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+        [self requestData];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    
+    // 上拉刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self requestMoreData];
+        
+    }];
+}
+- (void)requestData {
+    [self removeNoData];
+    _orderArray = nil;
+    _orderArray = [NSMutableArray array];
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                              @"pageSize":[NSString stringWithFormat:@"%i",_pageSize],
+                              @"pageNo":[NSString stringWithFormat:@"%i",_page],
+                              @"startDate":_startTime,
+                              @"endData":_endTime,
+                              @"custName":_tfName.text,
+                              @"phoneNo":_tfTel.text,
+                              @"licenseNo":_tfCar.text,
+                              @"endCode":_codeStr};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindOrderByCondition];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        NSDictionary *dic = returnData;
+        if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [dic objectForKey:@"data"];
+            //取出总条数
+            int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+            if (totalCount>0) {
+                [self removeNoData];
+            }else {
+                [self setupNoData];
+            }
+            if (totalCount-_pageSize*_page<=0) {
+                //没有数据，直接提示没有更多数据
+                [_tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                //有数据，则结束刷新状态，以便下次能够刷新
+                [_tableView.mj_footer endRefreshing];
+            }
+            
+            NSArray *listArray = [dataDic objectForKey:@"list"];
+//            [_orderArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+            NSLog(@"%@",_orderArray);
+        }else {
+            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [self setupNoData];
+            
+        }
+        
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        [self setupNoData];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    } showHUD:YES];
+    
+}
+
+- (void)requestMoreData {
+    _page++;
+    
+    NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
+                              @"pageSize":[NSString stringWithFormat:@"%i",_pageSize],
+                              @"pageNo":[NSString stringWithFormat:@"%i",_page],
+                              @"startDate":_startTime,
+                              @"endData":_endTime,@"custName":_tfName.text,
+                              @"phoneNo":_tfTel.text,
+                              @"licenseNo":_tfCar.text,
+                              @"endCode":_codeStr};
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindOrderByCondition];
+    [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        NSLog(@"%@",returnData);
+        
+        NSDictionary *dic = returnData;
+        NSDictionary *dataDic = [dic objectForKey:@"data"];
+        //取出总条数
+        int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
+        NSLog(@"总条数：%i",totalCount);
+        if (totalCount-_pageSize*_page<=0) {
+            //没有数据，直接提示没有更多数据
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            //有数据，则结束刷新状态，以便下次能够刷新
+            [_tableView.mj_footer endRefreshing];
+        }
+        
+        NSArray *listArray = [dataDic objectForKey:@"list"];
+//        [_orderArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+        NSLog(@"%@",_orderArray);
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"%@",error);
+        [self.tableView.mj_footer endRefreshing];
+    } showHUD:YES];
+    
+}
+#pragma mark tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *cellId=@"cell";
+    
+    OrderManagerCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil) {
+        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OrderManagerCell" owner:self options:nil];
+        cell = [array objectAtIndex:0];
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 155;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+
 -(void)dealloc {
     NSLog(@"搜索界面已销毁");
 }
