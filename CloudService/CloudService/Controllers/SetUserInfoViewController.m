@@ -16,19 +16,22 @@
 #import "YWBCityPickerView.h"
 #import "ZQCityPickerView.h"
 #import "LoginViewController.h"
+#import "CodeNameModel.h"
+#import "ResetPhonePopView.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
 static NSString *const select_CellID = @"selectCell";
+
 @interface SetUserInfoViewController ()<SetUserInfoCellDelegate,HZQDatePickerViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *_keyArray_User;
     NSArray *_keyArray_Bank;
     NSMutableArray *_valueArray_User;
     NSMutableArray *_valueArray_Bank;
-    NSMutableDictionary *_companyCodeDict;
-    NSMutableDictionary *_saleCityDict;
+    NSMutableArray *_companyArray;
+    NSMutableArray *_saleCityArray;
     
     NSIndexPath *_indexPath;
     BOOL _isAnimating;
@@ -75,9 +78,27 @@ static NSString *const select_CellID = @"selectCell";
     
     // 编辑
     if (self.notEnable) {
-        self.notEnable = NO;
-        [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
-        [self.tableView reloadData];
+        typeof(self) weakSelf = self;
+        ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
+        popView.frame = [UIScreen mainScreen].bounds;
+        
+        [popView showViewWithCallBack:^(NSInteger btnIndex) {
+            if (btnIndex == 1) {
+                
+                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":popView.phoneNum,@"code":@"123456"} successBlock:^(id returnData) {
+                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+                        weakSelf.notEnable = NO;
+                        [weakSelf.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
+                        [weakSelf.tableView reloadData];
+                    }else {
+                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
+                    }
+                    
+                } failureBlock:^(NSError *error) {
+                    
+                } showHUD:YES];
+            }
+        }];
         return;
     }
     [self resignKeyBoardInView:self.view];
@@ -88,13 +109,8 @@ static NSString *const select_CellID = @"selectCell";
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetUserInfoAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-            User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-            [[SingleHandle shareSingleHandle] saveUserInfo:user];
-            if ([self.rightBtnTitle isEqualToString:@"提交"]) {
-//                [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
-            }else {
-                [MBProgressHUD showSuccess:@"修改成功" toView:nil];
-            }
+            
+            [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
             UIViewController *VC = [self.navigationController.viewControllers firstObject];
             if ([[VC class] isSubclassOfClass:[LoginViewController class]]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
@@ -155,7 +171,7 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_User[5] = workDate;
     _valueArray_User[6] = user.chatName;
     // 编码汉字
-    _valueArray_User[7] = [DataSource changeSaleCompanyWithCodeString:user.applySaleCompany];;
+    _valueArray_User[7] = [DataSource changeSaleCompanyWithCodeString:user.applySaleCompany];
     _valueArray_User[8] = user.saleCityValue;
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
@@ -166,16 +182,22 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_Bank[4] = user.accountProvinces;
     _valueArray_Bank[5] = user.accountCity;
     
-    _companyCodeDict = [NSMutableDictionary dictionary];
+    _companyArray = [NSMutableArray array];
     int i = 0;
     for (NSString *companyCode in [DataSource changeSaleCompanyWithString:user.applySaleCompany]) {
-        [_companyCodeDict setValue:companyCode forKey:[DataSource insureCommpanyNameArray][i]];
+        CodeNameModel *model = [[CodeNameModel alloc] init];
+        model.companyName = [DataSource insureCommpanyNameArray][i];
+        model.companyCode = companyCode;
+        [_companyArray addObject:model];
         i ++;
     }
-    _saleCityDict = [NSMutableDictionary dictionary];
+    _saleCityArray = [NSMutableArray array];
     i = 0;
     for (NSString *provinceName in [DataSource changeSaleCompanyWithString:user.saleCityValue]) {
-        [_saleCityDict setValue:[[DataSource provinceCodeDict] valueForKey:provinceName] forKey:provinceName];
+        CodeNameModel *model = [[CodeNameModel alloc] init];
+        model.provinceName = provinceName;
+        model.provinceCode = [[DataSource provinceCodeDict] valueForKey:provinceName];
+        [_saleCityArray addObject:model];
         i ++;
     }
 }
@@ -229,11 +251,11 @@ static NSString *const select_CellID = @"selectCell";
     _indexPath = [self.tableView indexPathForCell:cell];
     if (_indexPath.row == 7)
     {
-        [_companyCodeDict removeAllObjects];
+        [_companyArray removeAllObjects];
     }
     else if(_indexPath.row == 8)
     {
-        [_saleCityDict removeAllObjects];
+        [_saleCityArray removeAllObjects];
     }
     _valueArray_User[_indexPath.row] = @"";
     [self.tableView reloadData];
@@ -349,9 +371,19 @@ static NSString *const select_CellID = @"selectCell";
         if (_indexPath.row == 3 || _indexPath.row == 4) {
             _valueArray_User[_indexPath.row] = _selectArray[indexPath.row];
         }else{
+            
             NSString *code = [[DataSource insureCommpanyCodeArray] objectAtIndex:indexPath.row];
-            [_companyCodeDict setValue:code forKey:_selectArray[indexPath.row]];
-            _valueArray_User[_indexPath.row] = [Utility changeStrArraytoString:[_companyCodeDict allKeys]];
+            // 可以用二分查找
+            for (CodeNameModel *model in _companyArray) {
+                if ([model.companyCode isEqualToString:code]) {
+                    return;
+                }
+            }
+            CodeNameModel *model = [[CodeNameModel alloc] init];
+            model.companyName = _selectArray[indexPath.row];
+            model.companyCode = code;
+            [_companyArray addObject:model];
+            _valueArray_User[_indexPath.row] = [self changeStrArraytoTextString:_companyArray];
         }
         [self.tableView reloadData];
         return;
@@ -466,52 +498,30 @@ static NSString *const select_CellID = @"selectCell";
     }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSString *idCord = _valueArray_User[1];
-    user.realName = _valueArray_User[0];
-    user.sex = [HelperUtil getSexWithIdcord:idCord];
-    user.age = [HelperUtil getBorthDayWithIdCord:idCord];
-    user.workStartDate = _valueArray_User[5];
-    user.oldPost = _valueArray_User[4];
-    user.oldCompany = _valueArray_User[3];
-    user.saleCityValue =   _valueArray_User[8];
-    if (_saleCityDict.count > 0) {
-        user.saleCity = [Utility changeStrArraytoString:[_saleCityDict allValues]];
-    }
-    user.chatName  = _valueArray_User[6];
-    if (_companyCodeDict.count > 0) {
-        // 用户显示汉字
-        user.applySaleCompany = [Utility changeStrArraytoString:[_companyCodeDict allKeys]];
-    }
-    user.idCard = idCord;
-    user.bankAccountName = _valueArray_Bank[0];
-    user.bankNum = _valueArray_Bank[1];
-    user.bankName = _valueArray_Bank[2];
-    user.subbranchName = _valueArray_Bank[3];
-    user.accountProvinces = _valueArray_Bank[4];
-    user.accountCity = _valueArray_Bank[5];
-    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:user.userId forKey:@"userId"];
     [dict setValue:user.userName forKey:@"userName"];
     [dict setValue:user.phoneNo forKey:@"phoneNo"];
-    [dict setValue:user.sex forKey:@"sex"];
-    [dict setValue:user.age forKey:@"age"];
-    [dict setValue:user.realName forKey:@"realName"];
-    [dict setValue:user.chatName forKey:@"chatName"];
+    [dict setValue:[HelperUtil getSexWithIdcord:idCord] forKey:@"sex"];
+    [dict setValue:[HelperUtil getBorthDayWithIdCord:idCord] forKey:@"age"];
+    [dict setValue:_valueArray_User[0] forKey:@"realName"];
+    [dict setValue:_valueArray_User[6] forKey:@"chatName"];
 //
-    [dict setValue:user.workStartDate forKey:@"workStartDate"];
-    [dict setValue:user.oldPost forKey:@"oldPost"];
-    [dict setValue:user.oldCompany forKey:@"oldCompany"];
-    [dict setValue:user.saleCity forKey:@"saleCity"];
-    [dict setValue:[Utility changeStrArraytoString:[_companyCodeDict allValues]] forKey:@"applySaleCompany"];
-    [dict setValue:user.idCard forKey:@"idCard"];
+    [dict setValue:_valueArray_User[5] forKey:@"workStartDate"];
+    [dict setValue:_valueArray_User[4] forKey:@"oldPost"];
+    [dict setValue:_valueArray_User[3] forKey:@"oldCompany"];
+    NSString *saleCity = _saleCityArray.count > 0 ? [self changeStrArraytoCodeString:_saleCityArray] : user.saleCity;
+    [dict setValue:saleCity forKey:@"saleCity"];
+    [dict setValue:[self changeStrArraytoTextString:_companyArray] forKey:@"applySaleCompany"];
+    [dict setValue:idCord forKey:@"idCard"];
 
     // 银行信息
-    [dict setValue:user.bankAccountName forKey:@"bankAccountName"];
-    [dict setValue:user.bankName forKey:@"bankName"];
-    [dict setValue:user.bankNum forKey:@"bankNum"];
-    [dict setValue:user.subbranchName forKey:@"subbranchName"];
-    [dict setValue:user.accountProvinces forKey:@"accountProvinces"];
-    [dict setValue:user.accountCity forKey:@"accountCity"];
+    [dict setValue:_valueArray_Bank[0] forKey:@"bankAccountName"];
+    [dict setValue:_valueArray_Bank[2] forKey:@"bankName"];
+    [dict setValue:_valueArray_Bank[1] forKey:@"bankNum"];
+    [dict setValue:_valueArray_Bank[3] forKey:@"subbranchName"];
+    [dict setValue:_valueArray_Bank[4] forKey:@"accountProvinces"];
+    [dict setValue:_valueArray_Bank[5] forKey:@"accountCity"];
     
     return dict;
 }
@@ -551,11 +561,22 @@ static NSString *const select_CellID = @"selectCell";
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         if (_indexPath.section == 0)
         {
-            if (_saleCityDict.count > 3) {
+            if (_saleCityArray.count > 3) {
                 [MBProgressHUD showSuccess:@"城市选择不能超过四个" toView:self.view];
+                return ;
             }
-            [_saleCityDict setValue:provinceCode forKey:province];
-            _valueArray_User[8] = [Utility changeStrArraytoString:[_saleCityDict allKeys]];
+            
+            // 可以用二分查找
+            for (CodeNameModel *model in _saleCityArray) {
+                if ([model.provinceName isEqualToString:province]) {
+                    return;
+                }
+            }
+            CodeNameModel *model = [[CodeNameModel alloc] init];
+            model.provinceName = province;
+            model.provinceCode = provinceCode;
+            [_saleCityArray addObject:model];
+            _valueArray_User[8] = [self changeStrArraytoTextString:_saleCityArray];
             
         }else
         {
@@ -645,6 +666,66 @@ static NSString *const select_CellID = @"selectCell";
     [super didReceiveMemoryWarning];
     
 }
+
+// 通过数组模型得到城市或公司字符串
+- (NSString *)changeStrArraytoTextString:(NSArray *)array {
+    
+    
+    NSMutableString *resultStr = [NSMutableString string];
+    for (CodeNameModel *model in array) {
+        if (model.provinceName.length > 0)
+        {
+            [resultStr appendString:model.provinceName];
+        }else
+        {
+            [resultStr appendString:model.companyName];
+        }
+        [resultStr appendString:@","];
+    }
+    return [resultStr substringToIndex:resultStr.length - 1];
+}
+
+// 通过数组模型得到城市或公司编码
+- (NSString *)changeStrArraytoCodeString:(NSArray *)array {
+    
+    
+    NSMutableString *resultStr = [NSMutableString string];
+    for (CodeNameModel *model in array) {
+        if (model.provinceName.length > 0)
+        {
+            [resultStr appendString:model.provinceCode];
+        }else
+        {
+            [resultStr appendString:model.companyCode];
+        }
+        [resultStr appendString:@","];
+    }
+    return [resultStr substringToIndex:resultStr.length - 1];
+}
+
+/*
+ User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+ [[SingleHandle shareSingleHandle] saveUserInfo:user];
+ user.realName = _valueArray_User[0];
+ user.workStartDate = _valueArray_User[5];
+ user.oldPost = _valueArray_User[4];
+ user.oldCompany = _valueArray_User[3];
+ user.saleCityValue =   _valueArray_User[8];
+ if (_saleCityArray.count > 0) {
+ user.saleCity = [self changeStrArraytoCodeString:_saleCityArray];
+ }
+ user.chatName  = _valueArray_User[6];
+ if (_companyArray.count > 0) {
+ // 用户显示汉字
+ user.applySaleCompany = [self changeStrArraytoTextString:_companyArray];
+ }
+ user.bankAccountName = _valueArray_Bank[0];
+ user.bankNum = _valueArray_Bank[1];
+ user.bankName = _valueArray_Bank[2];
+ user.subbranchName = _valueArray_Bank[3];
+ user.accountProvinces = _valueArray_Bank[4];
+ user.accountCity = _valueArray_Bank[5];
+ */
 
 /*
 #pragma mark - Navigation

@@ -107,6 +107,8 @@
 		F06DDBA91C7DAB7400C862A1 /* AYCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F06DDBA61C7DAB7400C862A1 /* AYCButton.m */; };
 		F06DDBAA1C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F06DDBA81C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m */; };
 		F06DDBB01C7DACDE00C862A1 /* OrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F06DDBAF1C7DACDE00C862A1 /* OrderManagerViewController.m */; };
+		F074D9321C93A756007A6A88 /* CodeNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F074D9311C93A756007A6A88 /* CodeNameModel.m */; };
+		F074D9361C93CC35007A6A88 /* province.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F074D9351C93CC35007A6A88 /* province.sqlite */; };
 		F07531D21C8687BB00E71796 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07531D11C8687BB00E71796 /* area.plist */; };
 		F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9D51C81469400EB1BB1 /* ResetPhonePopView.m */; };
 		F07FF9D81C8146D800EB1BB1 /* ResetPhonePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07FF9D71C8146D800EB1BB1 /* ResetPhonePopView.xib */; };
@@ -126,7 +128,6 @@
 		F09A5F931A55F0AA008D4963 /* InviteFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */; };
 		F0AB898C1C8ED04F00849E3A /* ZQCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */; };
 		F0DF32121C87E612008D098F /* ResetUserPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */; };
-		F0E2338C1C915AB8009462E6 /* Province.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F0E2338B1C915A90009462E6 /* Province.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -306,6 +307,9 @@
 		F06DDBA81C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AYCNavigationItem.m"; sourceTree = "<group>"; };
 		F06DDBAE1C7DACDE00C862A1 /* OrderManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManagerViewController.h; sourceTree = "<group>"; };
 		F06DDBAF1C7DACDE00C862A1 /* OrderManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManagerViewController.m; sourceTree = "<group>"; };
+		F074D9301C93A756007A6A88 /* CodeNameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeNameModel.h; sourceTree = "<group>"; };
+		F074D9311C93A756007A6A88 /* CodeNameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeNameModel.m; sourceTree = "<group>"; };
+		F074D9351C93CC35007A6A88 /* province.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = province.sqlite; sourceTree = "<group>"; };
 		F07531D11C8687BB00E71796 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		F07FF9D41C81469400EB1BB1 /* ResetPhonePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPhonePopView.h; sourceTree = "<group>"; };
 		F07FF9D51C81469400EB1BB1 /* ResetPhonePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPhonePopView.m; sourceTree = "<group>"; };
@@ -340,7 +344,6 @@
 		F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQCityPickerView.m; sourceTree = "<group>"; };
 		F0DF32101C87E612008D098F /* ResetUserPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetUserPwdViewController.h; sourceTree = "<group>"; };
 		F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetUserPwdViewController.m; sourceTree = "<group>"; };
-		F0E2338B1C915A90009462E6 /* Province.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Province.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -738,6 +741,8 @@
 			children = (
 				F0292BD51C7B015200A810A9 /* User.h */,
 				F0292BD61C7B015200A810A9 /* User.m */,
+				F074D9301C93A756007A6A88 /* CodeNameModel.h */,
+				F074D9311C93A756007A6A88 /* CodeNameModel.m */,
 				6320B73A1C89A2CE0076FC7E /* Coupons.h */,
 				6320B73B1C89A2CE0076FC7E /* Coupons.m */,
 				63AA2BD81C8A8E1E00D7CF04 /* Integral.h */,
@@ -757,7 +762,7 @@
 		F0292BD81C7B015200A810A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F0E2338B1C915A90009462E6 /* Province.sqlite */,
+				F074D9351C93CC35007A6A88 /* province.sqlite */,
 				F019C9DA1C7C05FD00E73A2C /* Images */,
 			);
 			path = Resources;
@@ -902,7 +907,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0E2338C1C915AB8009462E6 /* Province.sqlite in Resources */,
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
@@ -920,6 +924,7 @@
 				F094B5A41C80223400A2312D /* PersonalViewCell.xib in Resources */,
 				F01A61611C7D3D3E008CBBD5 /* SetUserInfoCell.xib in Resources */,
 				637533BC1C84321500A12932 /* OfferTableViewCell.xib in Resources */,
+				F074D9361C93CC35007A6A88 /* province.sqlite in Resources */,
 				637A624D1C8EC0020020AE5E /* CouponsDistributeCell.xib in Resources */,
 				6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */,
 				F0292BB81C7B00CD00A810A9 /* Main.storyboard in Resources */,
@@ -1062,6 +1067,7 @@
 				63508C851C86D37800505F08 /* YWBCityPickerView.m in Sources */,
 				6383656C1C7DB8BA001A10C4 /* UIColor+HexString.m in Sources */,
 				635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */,
+				F074D9321C93A756007A6A88 /* CodeNameModel.m in Sources */,
 				63C07B9E1C7B14BB0084581F /* MHUploadParam.m in Sources */,
 				63C07BA91C7B15C10084581F /* NSDictionary+AYCUnicode.m in Sources */,
 				637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */,

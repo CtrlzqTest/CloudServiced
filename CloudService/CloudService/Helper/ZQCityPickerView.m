@@ -188,7 +188,7 @@
 - (void)searchCityinProvinceCode:(NSString *)provinceCode {
     
     [_cityArray removeAllObjects];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Province" ofType:@"sqlite"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"province" ofType:@"sqlite"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if (![db open]) {
         NSLog(@"数据库打开失败!");

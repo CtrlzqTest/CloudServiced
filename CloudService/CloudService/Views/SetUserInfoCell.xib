@@ -69,6 +69,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageBtn" destination="H2Y-Hb-TBc" id="h6u-Yo-vvq"/>
+                <outlet property="imageHeight" destination="Y9r-af-QtA" id="Ulk-ha-fkw"/>
                 <outlet property="label" destination="LtY-jf-6mD" id="drb-aB-QBZ"/>
                 <outlet property="textFiled" destination="bzp-ED-hhq" id="P9G-V8-bnf"/>
             </connections>

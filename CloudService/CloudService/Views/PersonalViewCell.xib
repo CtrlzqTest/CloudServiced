@@ -37,8 +37,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="details-arrow1" translatesAutoresizingMaskIntoConstraints="NO" id="oHg-za-B8E">
-                        <rect key="frame" x="256" y="8" width="51" height="52"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details-arrow1" translatesAutoresizingMaskIntoConstraints="NO" id="oHg-za-B8E">
+                        <rect key="frame" x="255" y="8" width="52" height="52"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="oHg-za-B8E" secondAttribute="height" id="ZqJ-Nh-BUI"/>
                         </constraints>
@@ -68,7 +68,7 @@
                 <outlet property="titleLabel" destination="wko-MS-SYK" id="E3Y-7C-Alh"/>
                 <outlet property="top" destination="Gmh-vQ-CLo" id="vIX-ZP-sIZ"/>
             </connections>
-            <point key="canvasLocation" x="346" y="256"/>
+            <point key="canvasLocation" x="247" y="240"/>
         </tableViewCell>
     </objects>
     <resources>
