@@ -36,6 +36,8 @@
         [MBProgressHUD showMessag:@"请输入客户手机号" toView:self.view];
     }else if ([_tfLicenseNo.text isEqualToString:@""]){
         [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
+    }else if ([_tfCarCity.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入汽车所在城市" toView:self.view];
     }else {
         [self performSegueWithIdentifier:@"offer" sender:self];
         
@@ -87,6 +89,7 @@
         offerVC.carCode = _tfLicenseNo.text;
         offerVC.phoneNo = _tfPhone.text;
         offerVC.custName = _tfName.text;
+        offerVC.carCity = _tfCarCity.text;
     }
 }
 /** 消失键盘*/
