@@ -378,7 +378,13 @@
     BOOL isMatch = [pred evaluateWithObject:bankCard];
     return isMatch;
 }
-
++ (BOOL)validateCarNo:(NSString *) carNo
+{
+    NSString *carRegex = @"^[A-Za-z]{1}[A-Za-z_0-9]{5}$";
+    NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
+    NSLog(@"carTest is %@",carTest);
+    return [carTest evaluateWithObject:carNo];
+}
 +(NSString *)getSexWithIdcord:(NSString *)idCord {
     
     NSRange range = NSMakeRange(idCord.length - 2, 1);

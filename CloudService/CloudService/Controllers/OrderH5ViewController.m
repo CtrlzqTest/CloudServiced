@@ -24,7 +24,7 @@
 
 - (void)setupViews {
     
-    self.title = @"积分商城";
+    self.title = @"报价页面";
     __weak typeof(self) weakSelf = self;
     [self setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
