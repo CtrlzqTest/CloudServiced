@@ -188,6 +188,11 @@ static NSString *cell_id = @"personalCell";
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
                 setUserInfoVC.rightBtnTitle = @"提交";
+                User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+                if (![user.userType isEqualToString:@"普通用户"]) {
+                    [MBProgressHUD showMessag:@"用户已认证,修改请到个人中心" toView:self.view];
+                    return;
+                }
                 [self.navigationController pushViewController:setUserInfoVC animated:YES];
             }
                 break;
