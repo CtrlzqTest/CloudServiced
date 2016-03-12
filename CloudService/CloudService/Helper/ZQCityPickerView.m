@@ -188,6 +188,7 @@
 - (void)searchCityinProvinceCode:(NSString *)provinceCode {
     
     [_cityArray removeAllObjects];
+    [_cityCodeArray removeAllObjects];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"province" ofType:@"sqlite"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if (![db open]) {
@@ -197,6 +198,7 @@
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM city where cityCode like '%@%%'",_provinceCode];
     FMResultSet *result = [db executeQuery:sqlStr];
     while ([result next]) {
+        NSLog(@"%@",[result stringForColumn:@"cityName"]);
         [_cityArray addObject:[result stringForColumn:@"cityName"]];
         [_cityCodeArray addObject:[result stringForColumn:@"cityCode"]];
     }

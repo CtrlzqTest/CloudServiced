@@ -10,6 +10,8 @@
 #import "SetUserInfoHeaderView.h"
 #import "OfferTableViewCell.h"
 #import "MyClientViewController.h"
+#import "AppDelegate.h"
+#import "OrderH5ViewController.h"
 
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
@@ -116,6 +118,98 @@ static CGFloat headerHeight = 30;
 
 - (void)offerAction {
     
+    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+    OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
+    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
+        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+        return ;
+    }
+    NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
+    OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
+    NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
+    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
+        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+        return ;
+    }
+    
+    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    delegate.isLogin=YES;
+    /**
+     *  dataType 01:创建订单,获取新数据 02:创建客户
+     */
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    NSDictionary *params = @{@"operType":@"测试",
+                             @"msg":@"",
+                             @"sendTime":@"",
+                             @"sign":@"",
+                             @"data":@{@"proportion":@"0.8",
+                                       @"customerName":cell2.carUserName.text,
+                                       @"phoneNo":self.phoneNo,
+                                       @"dataType":@"02",
+                                       @"comeFrom":@"YPT",
+                                       @"activeType":@"1",
+                                       @"macAdress":@"",
+                                       @"engineNo":cell1.engine.text,
+                                       @"vehicleFrameNo":cell1.carFrameCode.text,
+                                       @"licenseNo":cell1.carCode.text,
+                                       @"vehicleModelName":cell1.engineType.text,
+                                       @"userId":user.userId,
+                                       @"accountType":@"3",
+                                       @"cityCode":self.carCity,
+                                       @"registerDate":@"2015-01-01"}
+                             };
+    
+
+    __weak typeof(self) weakSelf = self;
+    [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {
+        
+        NSLog(@"%@",returnData);
+        delegate.isLogin=NO;
+        if ([returnData[@"state"] isEqualToString:@"0"]) {
+            NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
+            NSString *baseId = [returnData[@"data"] valueForKey:@"baseId"];
+            NSDictionary *myServerDict = @{
+                                           @"userId":user.userId,
+                                           @"baseId":baseId,
+                                           @"customerId":@"",
+                                           @"orderType":@"",
+                                           @"city":self.carCity,
+                                           @"custName":cell2.carUserName.text,
+                                           @"phoneNo":self.phoneNo,
+                                           @"licenseNo":cell1.carCode.text,
+                                           @"engineNo":cell1.engine.text,
+                                           @"frameNo":cell1.carFrameCode.text,
+                                           @"cappld":@"421123199303042452",
+                                           };
+            OrderH5ViewController *cliteVC = [[OrderH5ViewController alloc] init];
+            cliteVC.url = url;
+            [weakSelf createOrderWithParam:myServerDict pushUrl:url];
+        }else{
+            [MBProgressHUD showError:returnData[@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        delegate.isLogin=NO;
+        
+    } showHUD:YES];
+}
+
+- (void)createOrderWithParam:(NSDictionary *)param pushUrl:(NSString *)url{
+    
+    __weak typeof(self) weakSelf = self;
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:ksaveOrder] params:param successBlock:^(id returnData) {
+        
+        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+            OrderH5ViewController *orderH5VC = [[OrderH5ViewController alloc] init];
+            orderH5VC.url = url;
+            [weakSelf.navigationController pushViewController:orderH5VC animated:YES];
+        }else {
+            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:NO];
 }
 
 #pragma mark tabelView

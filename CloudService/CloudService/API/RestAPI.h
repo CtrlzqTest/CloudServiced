@@ -59,7 +59,7 @@
 
 #define kfindTeamMember           @"/app/team/findTeamMember"                    //查询团队成员
 
-#define ksaveOrder           @"/app/order/saveOrder"                    //新建订单
+#define ksaveOrder           @"/app/order/saveOrder"                    //同步至可数据
 
 #define kfindInviteLink           @"/app/dic/findInviteLink"                    //邀请链接
 

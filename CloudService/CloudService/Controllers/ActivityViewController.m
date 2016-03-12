@@ -97,7 +97,6 @@ static NSString *cellID = @"cellID";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"您点击了%li",indexPath.row);
     switch (indexPath.row) {
         case 0:
             self.button1.layer.borderColor = [[UIColor redColor] CGColor];

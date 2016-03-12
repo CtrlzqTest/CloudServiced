@@ -137,7 +137,7 @@
 #pragma mark 超过50字不能输入
 -(BOOL)wordLimit:(UITextView *)text{
     if (text.text.length < 50) {
-        NSLog(@"%ld",text.text.length);
+
         self.textView.editable = YES;
         
     }

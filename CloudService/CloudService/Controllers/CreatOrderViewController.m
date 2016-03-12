@@ -55,7 +55,7 @@
             
             NSLog(@"%@",returnData);
             delegate.isLogin=NO;
-            if ([[returnData[@"data"] valueForKey:@"flag"] isEqualToString:@"success"]) {
+            if ([returnData[@"state"] isEqualToString:@"0"]) {
                 NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
                 NSString *baseId = [returnData[@"data"] valueForKey:@"baseId"];
                 [weakSelf createOrderWithBaseId:baseId pushUrl:url];
@@ -77,7 +77,7 @@
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
             OrderH5ViewController *orderH5VC = [[OrderH5ViewController alloc] init];
-            orderH5VC.url = @"http://10.136.96.114/zkyq-web/zkyq/start";
+            orderH5VC.url = url;
             [weakSelf.navigationController pushViewController:orderH5VC animated:YES];
         }else {
             [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];

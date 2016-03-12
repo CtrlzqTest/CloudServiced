@@ -96,7 +96,6 @@
     
     self.locateManager = [[CLLocationManager alloc] init];
     if (![CLLocationManager locationServicesEnabled]) {
-        NSLog(@"aaaa");
         return;
     }
     //如果没有授权则请求用户授权
@@ -146,7 +145,6 @@
         if (placemarks.count > 0) {
             placeMark = [placemarks firstObject];
             NSString *city = [NSString stringWithFormat:@"%@%@",placeMark.locality,placeMark.subLocality];
-            NSLog(@"%@",city);
             [Utility saveLocation:city];
             _isSetCity = YES;
         }
