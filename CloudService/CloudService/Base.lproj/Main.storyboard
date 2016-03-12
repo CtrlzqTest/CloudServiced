@@ -1021,6 +1021,129 @@
             </objects>
             <point key="canvasLocation" x="-224.5" y="391.5"/>
         </scene>
+        <!--我的猴运-->
+        <scene sceneID="0FD-S6-Ovc">
+            <objects>
+                <viewController title="我的猴运" id="xka-RN-hcc" customClass="ActivityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EHc-f7-n5f"/>
+                        <viewControllerLayoutGuide type="bottom" id="10z-2f-Ag0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="I9q-6w-F2v">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="card-bg" translatesAutoresizingMaskIntoConstraints="NO" id="Cq5-dW-nDI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MoM-Mo-nFO">
+                                <rect key="frame" x="0.0" y="455" width="375" height="148"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTs-lD-HSs">
+                                        <rect key="frame" x="264" y="22" width="60" height="60"/>
+                                        <state key="normal" backgroundImage="home4"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-h3-kB3">
+                                        <rect key="frame" x="160" y="22" width="60" height="60"/>
+                                        <state key="normal" backgroundImage="home4"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAB-Qv-a8T">
+                                        <rect key="frame" x="51" y="22" width="60" height="60"/>
+                                        <state key="normal" backgroundImage="home4"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMB-Eo-JBf">
+                                        <rect key="frame" x="19" y="100" width="162" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="领取" backgroundImage="card-btn"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UvJ-wT-F3W">
+                                        <rect key="frame" x="194" y="100" width="162" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="分享" backgroundImage="card-btn"/>
+                                    </button>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-Hv-mrS">
+                                        <rect key="frame" x="99" y="13" width="22" height="22"/>
+                                        <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="1"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="11"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSG-ie-5HI">
+                                        <rect key="frame" x="209" y="13" width="22" height="22"/>
+                                        <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="2"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="11"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0D-8M-rfT">
+                                        <rect key="frame" x="313" y="13" width="22" height="22"/>
+                                        <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="3"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="11"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5000元个人创业基金为您的梦想助力！！！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYm-ak-ieM">
+                                <rect key="frame" x="41" y="20" width="293" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="我的猴运" id="P08-iM-Jln"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="btnNum1" destination="WfF-Hv-mrS" id="GWM-3a-uf6"/>
+                        <outlet property="btnNum2" destination="VSG-ie-5HI" id="tWC-ZJ-lhX"/>
+                        <outlet property="btnNum3" destination="w0D-8M-rfT" id="gib-wm-nOm"/>
+                        <outlet property="button1" destination="iAB-Qv-a8T" id="gh9-Qx-ory"/>
+                        <outlet property="button2" destination="OwT-h3-kB3" id="Q12-EF-ZKf"/>
+                        <outlet property="button3" destination="fTs-lD-HSs" id="PeV-g4-8Jt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DLQ-CR-rsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="474.5" y="-1546.5"/>
+        </scene>
         <!--首页-->
         <scene sceneID="HYx-ge-Xgu">
             <objects>
@@ -1087,11 +1210,12 @@
                         <segue destination="N7k-gj-kdi" kind="push" identifier="myIntergralVC_push" id="XLB-g4-Nia"/>
                         <segue destination="t9G-r4-Ss4" kind="push" identifier="creatOrder" id="hOb-op-gAZ"/>
                         <segue destination="g2Q-wk-WsR" kind="push" identifier="getData" id="aJV-kD-afh"/>
+                        <segue destination="xka-RN-hcc" kind="push" identifier="activity" id="oCh-3y-0Yh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQW-HY-y8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5" y="-1189.5"/>
+            <point key="canvasLocation" x="1249.5" y="-1213.5"/>
         </scene>
         <!--订单管理-->
         <scene sceneID="En5-ls-5mo">
@@ -2991,10 +3115,13 @@
     <resources>
         <image name="btn-icon1" width="20" height="20"/>
         <image name="btn2" width="330" height="40"/>
+        <image name="card-bg" width="360" height="640"/>
+        <image name="card-btn" width="245" height="32"/>
         <image name="checkbox" width="19" height="19"/>
         <image name="details-arrow2" width="25" height="25"/>
         <image name="head-bg" width="360" height="137"/>
         <image name="head2" width="64" height="64"/>
+        <image name="home4" width="50" height="50"/>
         <image name="line2" width="50" height="1"/>
         <image name="login-bg" width="360" height="640"/>
         <image name="login-choose" width="25" height="25"/>
@@ -3006,7 +3133,7 @@
         <image name="youhuiquan-checkbox" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MPx-U3-8mP"/>
+        <segue reference="aJV-kD-afh"/>
         <segue reference="S4h-y3-d1W"/>
     </inferredMetricsTieBreakers>
 </document>

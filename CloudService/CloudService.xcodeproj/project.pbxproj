@@ -40,6 +40,10 @@
 		637533B61C842E2000A12932 /* OfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637533B51C842E2000A12932 /* OfferViewController.m */; };
 		637533BB1C84321500A12932 /* OfferTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 637533B91C84321500A12932 /* OfferTableViewCell.m */; };
 		637533BC1C84321500A12932 /* OfferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637533BA1C84321500A12932 /* OfferTableViewCell.xib */; };
+		63790FE61C93B12B006CB0E2 /* HoriCardFlowLayout2.m in Sources */ = {isa = PBXBuildFile; fileRef = 63790FE51C93B12B006CB0E2 /* HoriCardFlowLayout2.m */; };
+		63790FE91C93B19C006CB0E2 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63790FE81C93B19C006CB0E2 /* ActivityViewController.m */; };
+		63790FED1C93C03C006CB0E2 /* ActivityCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63790FEB1C93C03C006CB0E2 /* ActivityCollectionCell.m */; };
+		63790FEE1C93C03C006CB0E2 /* ActivityCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63790FEC1C93C03C006CB0E2 /* ActivityCollectionCell.xib */; };
 		637A62481C8EBEC60020AE5E /* CouponsDistributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */; };
 		637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 637A624A1C8EC0020020AE5E /* CouponsDistributeCell.m */; };
 		637A624D1C8EC0020020AE5E /* CouponsDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637A624B1C8EC0020020AE5E /* CouponsDistributeCell.xib */; };
@@ -176,6 +180,13 @@
 		637533B81C84321500A12932 /* OfferTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableViewCell.h; sourceTree = "<group>"; };
 		637533B91C84321500A12932 /* OfferTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableViewCell.m; sourceTree = "<group>"; };
 		637533BA1C84321500A12932 /* OfferTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfferTableViewCell.xib; sourceTree = "<group>"; };
+		63790FE41C93B12B006CB0E2 /* HoriCardFlowLayout2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoriCardFlowLayout2.h; sourceTree = "<group>"; };
+		63790FE51C93B12B006CB0E2 /* HoriCardFlowLayout2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoriCardFlowLayout2.m; sourceTree = "<group>"; };
+		63790FE71C93B19C006CB0E2 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		63790FE81C93B19C006CB0E2 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		63790FEA1C93C03C006CB0E2 /* ActivityCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCollectionCell.h; sourceTree = "<group>"; };
+		63790FEB1C93C03C006CB0E2 /* ActivityCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCollectionCell.m; sourceTree = "<group>"; };
+		63790FEC1C93C03C006CB0E2 /* ActivityCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCollectionCell.xib; sourceTree = "<group>"; };
 		637A62461C8EBEC60020AE5E /* CouponsDistributeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsDistributeViewController.h; sourceTree = "<group>"; };
 		637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsDistributeViewController.m; sourceTree = "<group>"; };
 		637A62491C8EC0020020AE5E /* CouponsDistributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsDistributeCell.h; sourceTree = "<group>"; };
@@ -500,6 +511,8 @@
 				F05732041C8584F300D88B78 /* IntergralCityViewController.m */,
 				636CD9861C884E9A0050935E /* IntergralSearchViewController.h */,
 				636CD9871C884E9A0050935E /* IntergralSearchViewController.m */,
+				63790FE71C93B19C006CB0E2 /* ActivityViewController.h */,
+				63790FE81C93B19C006CB0E2 /* ActivityViewController.m */,
 			);
 			name = "HomeController(首页)";
 			sourceTree = "<group>";
@@ -708,6 +721,8 @@
 				63ADFBE81C7F0622000D3164 /* lib1 */,
 				63508C831C86D37800505F08 /* YWBCityPickerView.h */,
 				63508C841C86D37800505F08 /* YWBCityPickerView.m */,
+				63790FE41C93B12B006CB0E2 /* HoriCardFlowLayout2.h */,
+				63790FE51C93B12B006CB0E2 /* HoriCardFlowLayout2.m */,
 				F0AB898A1C8ED04F00849E3A /* ZQCityPickerView.h */,
 				F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */,
 				63C2FB961C8022D900D48B8C /* PlaceholderTextView.h */,
@@ -798,6 +813,9 @@
 				F094B59A1C8000E500A2312D /* HomeCollectionCell.h */,
 				F094B59B1C8000E500A2312D /* HomeCollectionCell.m */,
 				F094B59C1C8000E500A2312D /* HomeCollectionCell.xib */,
+				63790FEA1C93C03C006CB0E2 /* ActivityCollectionCell.h */,
+				63790FEB1C93C03C006CB0E2 /* ActivityCollectionCell.m */,
+				63790FEC1C93C03C006CB0E2 /* ActivityCollectionCell.xib */,
 				F09A5F8C1A55BEDD008D4963 /* HomeHeaderView.h */,
 				F09A5F8D1A55BEDD008D4963 /* HomeHeaderView.m */,
 				F09A5F8E1A55BEDD008D4963 /* HomeHeaderView.xib */,
@@ -905,6 +923,7 @@
 				630EF1981C8567960059CB34 /* IntegralTableViewCell.xib in Resources */,
 				630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */,
 				F0292BBA1C7B00CD00A810A9 /* Assets.xcassets in Resources */,
+				63790FEE1C93C03C006CB0E2 /* ActivityCollectionCell.xib in Resources */,
 				F07FF9E01C81752D00EB1BB1 /* MyTeamTableViewCell.xib in Resources */,
 				F07FF9D81C8146D800EB1BB1 /* ResetPhonePopView.xib in Resources */,
 				F094B5A41C80223400A2312D /* PersonalViewCell.xib in Resources */,
@@ -1027,6 +1046,7 @@
 				637533B61C842E2000A12932 /* OfferViewController.m in Sources */,
 				637533B31C8411C800A12932 /* MyClientViewController.m in Sources */,
 				63ADFBE11C7E8E8F000D3164 /* OrderInfoViewController.m in Sources */,
+				63790FE61C93B12B006CB0E2 /* HoriCardFlowLayout2.m in Sources */,
 				63ADFBE61C7EAC52000D3164 /* ResultTableViewCell.m in Sources */,
 				63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */,
 				F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */,
@@ -1070,7 +1090,9 @@
 				F06DDBA21C7DAAE900C862A1 /* CreatOrderViewController.m in Sources */,
 				F01A61641C7D456B008CBBD5 /* SetUserInfoHeaderView.m in Sources */,
 				630EF18F1C8543900059CB34 /* PersonResultCell.m in Sources */,
+				63790FE91C93B19C006CB0E2 /* ActivityViewController.m in Sources */,
 				63C2FB981C8022D900D48B8C /* PlaceholderTextView.m in Sources */,
+				63790FED1C93C03C006CB0E2 /* ActivityCollectionCell.m in Sources */,
 				F06DDBA91C7DAB7400C862A1 /* AYCButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

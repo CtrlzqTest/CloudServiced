@@ -13,5 +13,5 @@
 @property (nonatomic,copy)NSString *carCode;
 @property (nonatomic,copy)NSString *phoneNo;
 @property (nonatomic,copy)NSString *custName;
-
+@property (nonatomic,copy)NSString *carCity;
 @end

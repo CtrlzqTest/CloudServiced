@@ -64,7 +64,7 @@ static NSString *headerView_ID = @"headerView";
     [_dataDict setValue:@"业绩查询" forKey:_dataKeyArray[4]];
     [_dataDict setValue:@"积分明细查询" forKey:_dataKeyArray[5]];
     
-    _scrollImgArray = @[@"head-bg.png",@"head-bg.png",@"head-bg.png"];
+    _scrollImgArray = @[@"banner",@"head-bg.png",@"head-bg.png"];
 
 }
 - (IBAction)my:(id)sender {
@@ -102,6 +102,7 @@ static NSString *headerView_ID = @"headerView";
     [self setNavigationBarTitleColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor = [HelperUtil
                                                             colorWithHexString:@"1FAAF2"];
+
     //隐藏导航栏黑线
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
@@ -166,7 +167,9 @@ static NSString *headerView_ID = @"headerView";
         [_headerView setDataWithDictionary:@{@"userName":userName}];
         // 轮播图开始轮播
         [_headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
-            
+            if (index == 0) {
+                [self performSegueWithIdentifier:@"activity" sender:self];
+            }
         }];
         return _headerView;
     }else {
