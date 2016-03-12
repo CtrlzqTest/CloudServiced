@@ -109,6 +109,7 @@
 		F06DDBB01C7DACDE00C862A1 /* OrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F06DDBAF1C7DACDE00C862A1 /* OrderManagerViewController.m */; };
 		F074D9321C93A756007A6A88 /* CodeNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F074D9311C93A756007A6A88 /* CodeNameModel.m */; };
 		F074D9361C93CC35007A6A88 /* province.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F074D9351C93CC35007A6A88 /* province.sqlite */; };
+		F074D93C1C93F0F5007A6A88 /* OrderH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F074D93B1C93F0F5007A6A88 /* OrderH5ViewController.m */; };
 		F07531D21C8687BB00E71796 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07531D11C8687BB00E71796 /* area.plist */; };
 		F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9D51C81469400EB1BB1 /* ResetPhonePopView.m */; };
 		F07FF9D81C8146D800EB1BB1 /* ResetPhonePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07FF9D71C8146D800EB1BB1 /* ResetPhonePopView.xib */; };
@@ -310,6 +311,8 @@
 		F074D9301C93A756007A6A88 /* CodeNameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeNameModel.h; sourceTree = "<group>"; };
 		F074D9311C93A756007A6A88 /* CodeNameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeNameModel.m; sourceTree = "<group>"; };
 		F074D9351C93CC35007A6A88 /* province.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = province.sqlite; sourceTree = "<group>"; };
+		F074D93A1C93F0F5007A6A88 /* OrderH5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderH5ViewController.h; sourceTree = "<group>"; };
+		F074D93B1C93F0F5007A6A88 /* OrderH5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderH5ViewController.m; sourceTree = "<group>"; };
 		F07531D11C8687BB00E71796 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		F07FF9D41C81469400EB1BB1 /* ResetPhonePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPhonePopView.h; sourceTree = "<group>"; };
 		F07FF9D51C81469400EB1BB1 /* ResetPhonePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPhonePopView.m; sourceTree = "<group>"; };
@@ -462,6 +465,8 @@
 				F06DDBAF1C7DACDE00C862A1 /* OrderManagerViewController.m */,
 				F06DDB9C1C7DAAE900C862A1 /* CreatOrderViewController.h */,
 				F06DDB9D1C7DAAE900C862A1 /* CreatOrderViewController.m */,
+				F074D93A1C93F0F5007A6A88 /* OrderH5ViewController.h */,
+				F074D93B1C93F0F5007A6A88 /* OrderH5ViewController.m */,
 				F06DDBA01C7DAAE900C862A1 /* SearchOrderViewController.h */,
 				F06DDBA11C7DAAE900C862A1 /* SearchOrderViewController.m */,
 				63ADFBDF1C7E8E8F000D3164 /* OrderInfoViewController.h */,
@@ -1069,6 +1074,7 @@
 				635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */,
 				F074D9321C93A756007A6A88 /* CodeNameModel.m in Sources */,
 				63C07B9E1C7B14BB0084581F /* MHUploadParam.m in Sources */,
+				F074D93C1C93F0F5007A6A88 /* OrderH5ViewController.m in Sources */,
 				63C07BA91C7B15C10084581F /* NSDictionary+AYCUnicode.m in Sources */,
 				637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */,
 				F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */,
