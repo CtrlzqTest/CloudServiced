@@ -38,6 +38,10 @@
         [MBProgressHUD showMessag:@"请输入客户手机号" toView:self.view];
     }else if ([_tfLicenseNo.text isEqualToString:@""]){
         [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
+    }else if ([_tfCarCity.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入汽车所在省市" toView:self.view];
+    }else if ([HelperUtil checkTelNumber:_tfPhone.text]){
+        [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
     }else {
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         delegate.isLogin=YES;

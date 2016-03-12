@@ -70,6 +70,12 @@
  */
 + (BOOL)checkBankCard: (NSString *) bankCard;
 
+/** 
+ 车牌号验证 MODIFIED BY HELENSONG
+ */
++ (BOOL)validateCarNo:(NSString *) carNo;
+
+
 /**
  *  根据身份证号判别男女
  */
@@ -84,6 +90,8 @@
  *  字符串转时间戳
  */
 +(NSString *)getDateWithDateStr:(NSString *)dateStr;
+
+
 
 
 @end

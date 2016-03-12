@@ -30,6 +30,18 @@
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
+    
+    self.title=@"订单搜索";
+    
+    [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
+        if (isOpen) {
+            [weakSelf upMenu];
+        }else {
+            [weakSelf downMenu];
+        }
+        
+    }];
+    [self downMenu];
    
     _blackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _blackBtn.backgroundColor = [UIColor blackColor];
@@ -41,20 +53,6 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.title=@"订单搜索";
-
-    [self setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
-        if (isOpen) {
-            [self upMenu];
-        }else {
-            [self downMenu];
-        }
-        
-    }];
-    [self downMenu];
-}
 
 
 /** 搜索菜单*/
@@ -282,6 +280,7 @@
     [btnCancel setTitle:@"取消" forState:UIControlStateNormal];
     btnCancel.titleLabel.font = [UIFont systemFontOfSize:14];
     btnCancel.backgroundColor = [UIColor lightGrayColor];
+    [btnCancel addTarget:self action:@selector(cancelClick:) forControlEvents:UIControlEventTouchUpInside];
     [_searchView addSubview:btnCancel];
     
     UIButton *btnSearch = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -290,6 +289,7 @@
     [btnSearch setTitle:@"搜索" forState:UIControlStateNormal];
     btnSearch.titleLabel.font = [UIFont systemFontOfSize:14];
     btnSearch.backgroundColor = [UIColor redColor];
+    [btnSearch addTarget:self action:@selector(sureClick:) forControlEvents:UIControlEventTouchUpInside];
     [_searchView addSubview:btnSearch];
     
     // 给左边视图添加约束
@@ -323,6 +323,14 @@
     }];
     
 
+}
+
+- (void)cancelClick:(UIButton *)sender {
+    [self upMenu];
+}
+
+- (void)sureClick:(UIButton *)sender {
+    
 }
 /** 结束码下拉*/
 -  (void)codeClick:(UITapGestureRecognizer *)tap {
