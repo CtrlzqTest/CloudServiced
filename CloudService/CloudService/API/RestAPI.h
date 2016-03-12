@@ -71,6 +71,10 @@
 
 #define kZhiKe      @"http://10.136.96.114:80/zkyq-web/platform/getInfo"              //直客
 
+#define kfindOrderByCondition     @"/app/order/findOrderByCondition"             //订单条件查询
+
+#define kfindMainOrder     @"/app/order/findMainOrder"             //订单列表查询
+
 //   常量
 /**************************************************************************************/
 
