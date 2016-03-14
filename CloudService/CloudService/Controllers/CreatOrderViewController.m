@@ -74,7 +74,6 @@
         __weak typeof(self) weakSelf = self;
         [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {
             
-            NSLog(@"%@",returnData);
             delegate.isLogin=NO;
             if ([returnData[@"state"] isEqualToString:@"0"]) {
                 NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
@@ -117,7 +116,6 @@
     
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         self.tfCarCity.text = [NSString stringWithFormat:@"%@ %@",province,city];
-        NSLog(@"%@",cityCode);
         cityPickerView = nil;
     }];
     

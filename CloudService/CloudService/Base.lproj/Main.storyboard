@@ -654,7 +654,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSv-2H-jig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="232.5" y="1545.5"/>
+            <point key="canvasLocation" x="158.5" y="1863.5"/>
         </scene>
         <!--注册-->
         <scene sceneID="Alk-RV-aEW">
@@ -1328,7 +1328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DF7-Ey-5Os" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329.5" y="-300.5"/>
+            <point key="canvasLocation" x="1283.5" y="-398.5"/>
         </scene>
         <!--订单详情-->
         <scene sceneID="f1q-sT-j2A">
@@ -1368,7 +1368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjV-52-9y1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428.5" y="-98.5"/>
+            <point key="canvasLocation" x="2420.5" y="-222.5"/>
         </scene>
         <!--预约-->
         <scene sceneID="iZT-ts-OBf">
@@ -1533,7 +1533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhB-MJ-wtw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2936.5" y="-27.5"/>
+            <point key="canvasLocation" x="2916.5" y="-239.5"/>
         </scene>
         <!--搜索订单-->
         <scene sceneID="yOl-CL-eyO">
@@ -1572,7 +1572,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5iS-I2-iuC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1873.5" y="-126.5"/>
+            <point key="canvasLocation" x="1893.5" y="-222.5"/>
         </scene>
         <!--我的客户-->
         <scene sceneID="cw4-cx-GMB">
@@ -1747,11 +1747,115 @@
                         <segue destination="0QY-Ze-2iA" kind="push" identifier="userinfoVC" id="6NP-60-9dw"/>
                         <segue destination="TCA-u7-md9" kind="push" identifier="invateFriend_push" id="hk9-Xv-JLY"/>
                         <segue destination="4pk-ih-XKo" kind="push" identifier="coupons" id="x8L-30-yr8"/>
+                        <segue destination="0gO-e7-jd7" kind="push" identifier="aboutApp_push" id="zKp-1E-Qq6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aH7-vn-Ake" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038.5" y="1574.5"/>
+            <point key="canvasLocation" x="762.5" y="1928.5"/>
+        </scene>
+        <!--About App View Controller-->
+        <scene sceneID="ZhI-u9-L9c">
+            <objects>
+                <viewController id="0gO-e7-jd7" customClass="AboutAppViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jAx-By-fGU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yq1-A3-1aE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qvR-5K-1Q9">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-0W-ztj">
+                                <rect key="frame" x="132" y="20" width="110" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="pdW-r3-egv"/>
+                                    <constraint firstAttribute="height" constant="120" id="pr5-nO-932"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For iOS V5.0.0 build27662" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-GI-TYw">
+                                <rect key="frame" x="20" y="148" width="335" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="xEm-f3-fCY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qc0-ZZ-hAA">
+                                <rect key="frame" x="102" y="199" width="170" height="170"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.35682784560000003" blue="0.36694225530000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qc0-ZZ-hAA" secondAttribute="height" id="Uiu-mm-zCy"/>
+                                    <constraint firstAttribute="width" constant="170" id="scd-Jx-j9f"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码,你的朋友也可下载E云客服客户端" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVM-qo-2kd">
+                                <rect key="frame" x="20" y="399" width="335" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="2Kl-1s-Kr3"/>
+                                    <constraint firstAttribute="height" constant="21" id="soc-wt-62B"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2Kl-1s-Kr3"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZs-dh-O30">
+                                <rect key="frame" x="20" y="470" width="335" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Z57-b4-441"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBY-Cu-fY7">
+                                <rect key="frame" x="20" y="491" width="335" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="1AN-8C-2me"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KZs-dh-O30" firstAttribute="top" secondItem="iVM-qo-2kd" secondAttribute="bottom" constant="50" id="5Pz-US-f9P"/>
+                            <constraint firstItem="jZj-0W-ztj" firstAttribute="top" secondItem="jAx-By-fGU" secondAttribute="bottom" constant="20" id="8fc-NA-Mne"/>
+                            <constraint firstItem="fBY-Cu-fY7" firstAttribute="top" secondItem="KZs-dh-O30" secondAttribute="bottom" id="8uA-Ze-VPD"/>
+                            <constraint firstAttribute="trailing" secondItem="dwy-GI-TYw" secondAttribute="trailing" constant="20" id="9Ki-7V-Owv"/>
+                            <constraint firstItem="qc0-ZZ-hAA" firstAttribute="centerX" secondItem="qvR-5K-1Q9" secondAttribute="centerX" id="Alz-ua-yfT"/>
+                            <constraint firstItem="qc0-ZZ-hAA" firstAttribute="top" secondItem="dwy-GI-TYw" secondAttribute="bottom" constant="30" id="DG9-p8-kEw"/>
+                            <constraint firstItem="dwy-GI-TYw" firstAttribute="leading" secondItem="qvR-5K-1Q9" secondAttribute="leading" constant="20" id="EDF-bt-Gqr"/>
+                            <constraint firstItem="jZj-0W-ztj" firstAttribute="centerX" secondItem="qvR-5K-1Q9" secondAttribute="centerX" id="GvH-sP-Qhm"/>
+                            <constraint firstItem="KZs-dh-O30" firstAttribute="leading" secondItem="iVM-qo-2kd" secondAttribute="leading" id="OWF-u8-jC4"/>
+                            <constraint firstItem="KZs-dh-O30" firstAttribute="trailing" secondItem="iVM-qo-2kd" secondAttribute="trailing" id="SPk-KB-86L"/>
+                            <constraint firstItem="fBY-Cu-fY7" firstAttribute="leading" secondItem="KZs-dh-O30" secondAttribute="leading" id="ZMc-dY-5o7"/>
+                            <constraint firstItem="fBY-Cu-fY7" firstAttribute="height" secondItem="KZs-dh-O30" secondAttribute="height" id="dwT-pf-Gqh"/>
+                            <constraint firstItem="dwy-GI-TYw" firstAttribute="top" secondItem="jZj-0W-ztj" secondAttribute="bottom" constant="8" id="jUE-yn-gSr"/>
+                            <constraint firstItem="iVM-qo-2kd" firstAttribute="top" secondItem="qc0-ZZ-hAA" secondAttribute="bottom" constant="30" id="mun-aC-tAv"/>
+                            <constraint firstAttribute="trailing" secondItem="iVM-qo-2kd" secondAttribute="trailing" constant="20" id="pJM-YE-yzk"/>
+                            <constraint firstItem="fBY-Cu-fY7" firstAttribute="trailing" secondItem="KZs-dh-O30" secondAttribute="trailing" id="q4f-Zn-ZFf"/>
+                            <constraint firstItem="iVM-qo-2kd" firstAttribute="leading" secondItem="qvR-5K-1Q9" secondAttribute="leading" constant="20" id="yWl-cC-dul"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="baa-xC-eQG"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="copyrightLabel1" destination="KZs-dh-O30" id="lGC-EY-k1S"/>
+                        <outlet property="copyrightLabel2" destination="fBY-Cu-fY7" id="A2h-W6-dZL"/>
+                        <outlet property="versionLabel" destination="dwy-GI-TYw" id="ezs-mm-2Kc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GNW-eh-QPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903.5" y="2739.5"/>
         </scene>
         <!--Invite Friend View Controller-->
         <scene sceneID="qAg-Lz-uuo">
@@ -1834,7 +1938,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BdQ-Hf-yYS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1551.5" y="1132.5"/>
+            <point key="canvasLocation" x="1265.5" y="1146.5"/>
         </scene>
         <!--My Team View Controller-->
         <scene sceneID="Mdt-Ks-FOE">
@@ -1895,7 +1999,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1F-8l-uTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2080.5" y="926.5"/>
+            <point key="canvasLocation" x="2096.5" y="1047.5"/>
         </scene>
         <!--积分明细-->
         <scene sceneID="Sr0-Ig-ifG">
@@ -1958,7 +2062,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhm-AB-eKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2247.5" y="2656.5"/>
+            <point key="canvasLocation" x="1683.5" y="2556.5"/>
         </scene>
         <!--优惠券派发-->
         <scene sceneID="3Dp-hs-Okd">
@@ -2019,7 +2123,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XBH-Af-Oj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="h4p-3q-x1A"/>
             </objects>
-            <point key="canvasLocation" x="2730.5" y="2646.5"/>
+            <point key="canvasLocation" x="2346.5" y="2556.5"/>
         </scene>
         <!--积分查询-->
         <scene sceneID="TFm-ND-MAv">
@@ -2089,7 +2193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hIY-YY-hN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1795.5" y="1774.5"/>
+            <point key="canvasLocation" x="1659.5" y="1841.5"/>
         </scene>
         <!--Verify Code View Controller-->
         <scene sceneID="cMG-Bv-gtP">
@@ -2178,7 +2282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49N-94-Hi6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2221.5" y="1774.5"/>
+            <point key="canvasLocation" x="2301.5" y="1818.5"/>
         </scene>
         <!--Set New Pwd View Controller-->
         <scene sceneID="3wn-N9-5U1">
@@ -2298,7 +2402,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qF-ga-3yl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2663.5" y="1774.5"/>
+            <point key="canvasLocation" x="2879.5" y="1828.5"/>
         </scene>
         <!--业绩查询-->
         <scene sceneID="HuU-F7-NKA">
@@ -2319,7 +2423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8og-qv-kWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1322.5" y="473.5"/>
+            <point key="canvasLocation" x="1265.5" y="339.5"/>
         </scene>
         <!--Base Tab Bar View Controller-->
         <scene sceneID="AOh-fO-AaT">
@@ -3230,7 +3334,7 @@
         <image name="youhuiquan-checkbox" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aJV-kD-afh"/>
-        <segue reference="S4h-y3-d1W"/>
+        <segue reference="hk9-Xv-JLY"/>
+        <segue reference="MPx-U3-8mP"/>
     </inferredMetricsTieBreakers>
 </document>
