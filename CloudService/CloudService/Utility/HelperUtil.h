@@ -74,6 +74,14 @@
  车牌号验证 MODIFIED BY HELENSONG
  */
 + (BOOL)validateCarNo:(NSString *) carNo;
+/**
+ 车架号验证 MODIFIED BY HELENSONG
+ */
++ (BOOL)validateCarFrame:(NSString *) carFrame;
+/**
+ 发动机号验证 MODIFIED BY HELENSONG
+ */
++ (BOOL)validateEngineNo:(NSString *) engineNo;
 
 
 /**

@@ -380,11 +380,28 @@
 }
 + (BOOL)validateCarNo:(NSString *) carNo
 {
-    NSString *carRegex = @"^[A-Za-z]{1}[A-Za-z_0-9]{5}$";
+    NSString *carRegex = @"^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$";
     NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
-    NSLog(@"carTest is %@",carTest);
     return [carTest evaluateWithObject:carNo];
 }
+
+/**
+ 车架号验证 MODIFIED BY HELENSONG
+ */
++ (BOOL)validateCarFrame:(NSString *) carFrame {
+    NSString *carRegex = @"^[a-zA-Z0-9]{17}$";
+    NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
+    return [carTest evaluateWithObject:carFrame];
+}
+/**
+ 发动机号验证 MODIFIED BY HELENSONG
+ */
++ (BOOL)validateEngineNo:(NSString *) engineNo {
+    NSString *carRegex = @"^[a-zA-Z0-9]{8}$";
+    NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
+    return [carTest evaluateWithObject:engineNo];
+}
+
 +(NSString *)getSexWithIdcord:(NSString *)idCord {
     
     NSRange range = NSMakeRange(idCord.length - 2, 1);

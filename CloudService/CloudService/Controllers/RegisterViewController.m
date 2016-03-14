@@ -119,7 +119,7 @@
         User *user = [[SingleHandle shareSingleHandle] getUserInfo];
         [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":user.phoneNo} successBlock:^(id returnData) {
             if ([returnData[@"flag"] isEqualToString:@"success"]) {
-                
+                [MBProgressHUD showMessag:@"已发送验证码" toView:self.view];
             }
         } failureBlock:^(NSError *error) {
             

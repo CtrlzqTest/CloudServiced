@@ -105,9 +105,26 @@ static CGFloat headerHeight = 30;
         [MBProgressHUD showError:@"信息填写不全" toView:self.view];
         return ;
     }
-    
+    if (![HelperUtil validateEngineNo:cell1.engine.text]) {
+        [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
+        return ;
+    }
+    if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
+        [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
+        return ;
+    }
+    if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
+        [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
+        return ;
+    }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kEstablishCustBySelf] params:@{@"userId":user.userId,@"custName":self.custName,@"phoneNo":self.phoneNo,@"licenseNo":self.carCode,@"engineNo":cell1.engine.text,@"frameNo":cell1.carFrameCode.text} successBlock:^(id returnData) {
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kEstablishCustBySelf] params:@{@"userId":user.userId,
+                 @"custName":self.custName,
+                 @"phoneNo":self.phoneNo,
+                 @"licenseNo":self.carCode,
+                 @"engineNo":cell1.engine.text,
+                 @"frameNo":cell1.carFrameCode.text}
+        successBlock:^(id returnData) {
         MyClientViewController *VC = self.navigationController.viewControllers[1];
         VC.isSaveCarInfo = YES;
         [self.navigationController popToViewController:VC animated:YES];
@@ -131,7 +148,18 @@ static CGFloat headerHeight = 30;
         [MBProgressHUD showError:@"信息填写不全" toView:self.view];
         return ;
     }
-    
+    if (![HelperUtil validateEngineNo:cell1.engine.text]) {
+        [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
+        return ;
+    }
+    if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
+        [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
+        return ;
+    }
+    if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
+        [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
+        return ;
+    }
     AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     delegate.isLogin=YES;
     /**
@@ -233,6 +261,8 @@ static CGFloat headerHeight = 30;
             cell = [array objectAtIndex:0];
             if (self.carCode) {
                 cell.carCode.text = self.carCode;
+            }else {
+                cell.carCode.placeholder = @"暂无车牌号";
             }
         }else{
             cell = [array objectAtIndex:1];
