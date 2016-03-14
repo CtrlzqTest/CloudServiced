@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIView *backView;
 @property (weak, nonatomic) IBOutlet UILabel *intergTotalLabel;
 @property (weak, nonatomic) IBOutlet UITextField *intergNumTextFiled;
+@property (weak, nonatomic) IBOutlet UILabel *maxChangeLabel;
 
 @end
 
@@ -33,12 +34,16 @@
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     self.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
+    self.maxChangeLabel.text = [NSString stringWithFormat:@"最多可兑换%d元",(int)user.totalNum / 1000];
+    
 }
 
 - (IBAction)changeIntergralAction:(id)sender {
     
+    if (![self checkInputMode]) {
+        return;
+    }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetExchangeIntergralAPI] params:@{@"userId":user.userId,@"cash":self.intergNumTextFiled.text} successBlock:^(id returnData) {
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -49,6 +54,21 @@
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];
+}
+
+/**
+ *  检查输入状态
+ */
+- (BOOL)checkInputMode
+{
+    int cacheNmb = [self.intergNumTextFiled.text intValue];
+    BOOL isCacheMatch = cacheNmb >= 10000 && (cacheNmb % 100 == 0);
+    if (!isCacheMatch)
+    {
+        [MBProgressHUD showError:@"现金数目不对" toView:self.view];
+        return false;
+    }
+    return true;
 }
 
 - (void)didReceiveMemoryWarning {

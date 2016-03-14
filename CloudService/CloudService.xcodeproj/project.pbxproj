@@ -118,6 +118,7 @@
 		F07FF9E01C81752D00EB1BB1 /* MyTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07FF9DE1C81752D00EB1BB1 /* MyTeamTableViewCell.xib */; };
 		F07FF9E31C8189E200EB1BB1 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */; };
 		F0906A7E1C964FD2007C3BBC /* ActifityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0906A7D1C964FD2007C3BBC /* ActifityModel.m */; };
+		F0906A811C96A9CF007C3BBC /* libFireData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0906A801C96A9CF007C3BBC /* libFireData.a */; };
 		F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DED91C89394900168BF8 /* RequestEntity.m */; };
 		F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEDF1C896B1800168BF8 /* RequestManager.m */; };
 		F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */; };
@@ -327,6 +328,8 @@
 		F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		F0906A7C1C964FD2007C3BBC /* ActifityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActifityModel.h; sourceTree = "<group>"; };
 		F0906A7D1C964FD2007C3BBC /* ActifityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActifityModel.m; sourceTree = "<group>"; };
+		F0906A7F1C96A9CF007C3BBC /* FireData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireData.h; sourceTree = "<group>"; };
+		F0906A801C96A9CF007C3BBC /* libFireData.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFireData.a; sourceTree = "<group>"; };
 		F090DED81C89394900168BF8 /* RequestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestEntity.h; sourceTree = "<group>"; };
 		F090DED91C89394900168BF8 /* RequestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestEntity.m; sourceTree = "<group>"; };
 		F090DEDE1C896B1800168BF8 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				636CD92C1C880C4E0050935E /* AVFoundation.framework in Frameworks */,
+				F0906A811C96A9CF007C3BBC /* libFireData.a in Frameworks */,
 				636CD92A1C880C4A0050935E /* MediaPlayer.framework in Frameworks */,
 				636CD9281C880C440050935E /* AudioToolbox.framework in Frameworks */,
 				636CD9261C880C3D0050935E /* SystemConfiguration.framework in Frameworks */,
@@ -795,6 +799,8 @@
 		F0292BDC1C7B015200A810A9 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				F0906A7F1C96A9CF007C3BBC /* FireData.h */,
+				F0906A801C96A9CF007C3BBC /* libFireData.a */,
 			);
 			path = Venders;
 			sourceTree = "<group>";
@@ -1226,6 +1232,10 @@
 				INFOPLIST_FILE = CloudService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CloudService/Venders",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1248,6 +1258,10 @@
 				INFOPLIST_FILE = CloudService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CloudService/Venders",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

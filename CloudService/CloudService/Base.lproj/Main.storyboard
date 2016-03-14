@@ -2938,7 +2938,7 @@
                                             <constraint firstAttribute="height" constant="30" id="SA8-cq-e2Y"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2987,6 +2987,7 @@
                         <outlet property="backView" destination="hnd-Lx-sEo" id="P4g-BC-YSd"/>
                         <outlet property="intergNumTextFiled" destination="z7m-MM-vdd" id="9jx-2w-Cm9"/>
                         <outlet property="intergTotalLabel" destination="CnL-l9-kzI" id="45C-0E-ABl"/>
+                        <outlet property="maxChangeLabel" destination="eU5-Gu-w6x" id="EO2-1h-iaS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6l-oW-KWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -49,13 +49,13 @@
 -(NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
 {
     
-    NSArray* array = [super layoutAttributesForElementsInRect:rect];
+    NSArray* array = [[super layoutAttributesForElementsInRect:rect] copy];
     CGRect visibleRect;
     visibleRect.origin = self.collectionView.contentOffset;
     visibleRect.size = self.collectionView.bounds.size;
     
     for (UICollectionViewLayoutAttributes* attributes in array) {
-
+        
         if (CGRectIntersectsRect(attributes.frame, rect)) {
             
             CGFloat distance = CGRectGetMidX(visibleRect) - attributes.center.x;
@@ -96,18 +96,17 @@
     CGFloat horizontalCenter = proposedContentOffset.x + (CGRectGetWidth(self.collectionView.frame) / 2.0);
     CGRect targetRect = CGRectMake(proposedContentOffset.x, 0.0, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
     
-    NSArray *attrs = [super layoutAttributesForElementsInRect:targetRect];
+    NSArray *attrs = [[super layoutAttributesForElementsInRect:targetRect] copy];
     //对当前屏幕中的UICollectionViewLayoutAttributes逐个与屏幕中心进行比较，找出最接近中心的一个
     for (UICollectionViewLayoutAttributes* layoutAttributes in attrs) {
         CGFloat itemHorizontalCenter = layoutAttributes.center.x;
-        if (ABS(itemHorizontalCenter - horizontalCenter) < ABS(offsetAdjustment)) {
+        if (ABS(itemHorizontalCenter - horizontalCenter) <= ABS(offsetAdjustment)) {
             offsetAdjustment = itemHorizontalCenter - horizontalCenter;
         }
     }
     NSLog(@"%f\n%f",proposedContentOffset.x,offsetAdjustment);
     return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
 }
-
 
 
 @end

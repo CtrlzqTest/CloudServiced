@@ -91,7 +91,7 @@ static NSString *cellID = @"cellID";
     [self.collectionView registerNib:[UINib nibWithNibName:@"ActivityCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
 //    self.collectionView.pagingEnabled = YES;
  
-    self.collectionView.decelerationRate = 0.5;
+    self.collectionView.decelerationRate = 0.4;
 //    self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceHorizontal = YES;
     self.collectionView.dataSource = self;
