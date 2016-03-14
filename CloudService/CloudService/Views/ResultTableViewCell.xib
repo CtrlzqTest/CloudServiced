@@ -18,16 +18,16 @@
                         <rect key="frame" x="0.0" y="10" width="375" height="92"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjp-Bb-P7B">
-                                <rect key="frame" x="27" y="14" width="46" height="21"/>
+                                <rect key="frame" x="27" y="14" width="60" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Bmd-kZ-ExO"/>
-                                    <constraint firstAttribute="width" constant="46" id="fwg-BY-BQ5"/>
+                                    <constraint firstAttribute="width" constant="60" id="fwg-BY-BQ5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1023412341" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aB0-LK-LV8">
-                                <rect key="frame" x="73" y="14" width="152" height="21"/>
+                                <rect key="frame" x="87" y="14" width="152" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="0Wt-b5-Rpx"/>
                                     <constraint firstAttribute="width" constant="152" id="51W-0T-PGf"/>

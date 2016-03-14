@@ -80,6 +80,10 @@
 		63C54E3E1C7C35AA007CE8CA /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E3D1C7C35AA007CE8CA /* ResultViewController.m */; };
 		63C54E411C7C35BA007CE8CA /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E401C7C35BA007CE8CA /* PersonalViewController.m */; };
 		63E9BFDD1C9659B200FFE0BA /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9BFDC1C9659B200FFE0BA /* Order.m */; };
+		63E9BFE01C96BBB300FFE0BA /* ButelCommonConnectSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63E9BFDE1C96BBB300FFE0BA /* ButelCommonConnectSDK.bundle */; };
+		63E9BFE11C96BBB300FFE0BA /* ButelCommonConnectSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E9BFDF1C96BBB300FFE0BA /* ButelCommonConnectSDK.framework */; };
+		63E9BFE41C96BBD600FFE0BA /* ButelHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9BFE31C96BBD600FFE0BA /* ButelHandle.m */; };
+		63E9BFE71C96BBEB00FFE0BA /* CallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9BFE61C96BBEB00FFE0BA /* CallView.m */; };
 		91A97CA728DD2D371997D3F7 /* libPods-CloudService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D96943D8DC951CBCC61FF495 /* libPods-CloudService.a */; };
 		F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F019C9D51C7BFD7900E73A2C /* LoginViewController.m */; };
 		F019C9D91C7BFD8D00E73A2C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F019C9D81C7BFD8D00E73A2C /* RegisterViewController.m */; };
@@ -256,6 +260,12 @@
 		63C54E401C7C35BA007CE8CA /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
 		63E9BFDB1C9659B200FFE0BA /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		63E9BFDC1C9659B200FFE0BA /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		63E9BFDE1C96BBB300FFE0BA /* ButelCommonConnectSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ButelCommonConnectSDK.bundle; sourceTree = "<group>"; };
+		63E9BFDF1C96BBB300FFE0BA /* ButelCommonConnectSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ButelCommonConnectSDK.framework; sourceTree = "<group>"; };
+		63E9BFE21C96BBD600FFE0BA /* ButelHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButelHandle.h; sourceTree = "<group>"; };
+		63E9BFE31C96BBD600FFE0BA /* ButelHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButelHandle.m; sourceTree = "<group>"; };
+		63E9BFE51C96BBEB00FFE0BA /* CallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallView.h; sourceTree = "<group>"; };
+		63E9BFE61C96BBEB00FFE0BA /* CallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallView.m; sourceTree = "<group>"; };
 		8080CD2CAEE01D9CB60C40F6 /* Pods-CloudService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudService/Pods-CloudService.debug.xcconfig"; sourceTree = "<group>"; };
 		AA863A4D44EB33149F738225 /* Pods-CloudService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudService.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudService/Pods-CloudService.release.xcconfig"; sourceTree = "<group>"; };
 		D96943D8DC951CBCC61FF495 /* libPods-CloudService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CloudService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -370,6 +380,7 @@
 				636CD91E1C880C140050935E /* libsqlite3.tbd in Frameworks */,
 				636CD91C1C880C0A0050935E /* libstdc++.6.tbd in Frameworks */,
 				636CD91A1C880BFD0050935E /* libc++.tbd in Frameworks */,
+				63E9BFE11C96BBB300FFE0BA /* ButelCommonConnectSDK.framework in Frameworks */,
 				636CD9181C880BF40050935E /* libz.tbd in Frameworks */,
 				636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */,
 				91A97CA728DD2D371997D3F7 /* libPods-CloudService.a in Frameworks */,
@@ -558,6 +569,8 @@
 		63F7D8FC1C894829002E56C9 /* 青牛 */ = {
 			isa = PBXGroup;
 			children = (
+				63E9BFDE1C96BBB300FFE0BA /* ButelCommonConnectSDK.bundle */,
+				63E9BFDF1C96BBB300FFE0BA /* ButelCommonConnectSDK.framework */,
 			);
 			path = "青牛";
 			sourceTree = "<group>";
@@ -741,6 +754,10 @@
 				F06DDBA81C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m */,
 				63C07B8B1C7B14BB0084581F /* MBProgressHUD+Add.h */,
 				63C07B8C1C7B14BB0084581F /* MBProgressHUD+Add.m */,
+				63E9BFE51C96BBEB00FFE0BA /* CallView.h */,
+				63E9BFE61C96BBEB00FFE0BA /* CallView.m */,
+				63E9BFE21C96BBD600FFE0BA /* ButelHandle.h */,
+				63E9BFE31C96BBD600FFE0BA /* ButelHandle.m */,
 				63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */,
 				63C07B8D1C7B14BB0084581F /* NetwrokHandle */,
 			);
@@ -896,6 +913,7 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 7PS2AH4H79;
 					};
 				};
 			};
@@ -924,6 +942,7 @@
 			files = (
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
+				63E9BFE01C96BBB300FFE0BA /* ButelCommonConnectSDK.bundle in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
 				630EF18B1C8530940059CB34 /* MyClientTableViewCell.xib in Resources */,
 				F09A5F901A55BEDD008D4963 /* HomeHeaderView.xib in Resources */,
@@ -1091,6 +1110,7 @@
 				637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */,
 				F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */,
 				6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */,
+				63E9BFE41C96BBD600FFE0BA /* ButelHandle.m in Sources */,
 				F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */,
 				F057320B1C859D2400D88B78 /* SingleHandle.m in Sources */,
 				6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */,
@@ -1100,6 +1120,7 @@
 				63C07B9C1C7B14BB0084581F /* MHAsiNetworkItem.m in Sources */,
 				F0292BAF1C7B00CD00A810A9 /* main.m in Sources */,
 				F06DDBA21C7DAAE900C862A1 /* CreatOrderViewController.m in Sources */,
+				63E9BFE71C96BBEB00FFE0BA /* CallView.m in Sources */,
 				F01A61641C7D456B008CBBD5 /* SetUserInfoHeaderView.m in Sources */,
 				630EF18F1C8543900059CB34 /* PersonResultCell.m in Sources */,
 				63790FE91C93B19C006CB0E2 /* ActivityViewController.m in Sources */,

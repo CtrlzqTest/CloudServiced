@@ -116,8 +116,7 @@
         [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
     }else {
         [self countDownTime:@60];
-        User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":user.phoneNo} successBlock:^(id returnData) {
+        [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":self.phoneNum.text} successBlock:^(id returnData) {
             if ([returnData[@"flag"] isEqualToString:@"success"]) {
                 [MBProgressHUD showMessag:@"已发送验证码" toView:self.view];
             }

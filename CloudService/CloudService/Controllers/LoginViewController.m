@@ -14,6 +14,7 @@
 #import "MHNetwrok.h"
 #import "Utility.h"
 #import "User.h"
+#import "ButelHandle.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>{
     BOOL _isRemenberPwd;
@@ -143,6 +144,8 @@
             }else {
                 [Utility remberPassWord:NO];
             }
+            [[ButelHandle shareButelHandle] initCallView];
+            [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
            
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];

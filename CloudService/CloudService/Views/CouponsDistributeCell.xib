@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,26 +15,46 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="youhuiquan-checkbox_" translatesAutoresizingMaskIntoConstraints="NO" id="RBh-GY-MSB">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youhuiquan-checkbox_" translatesAutoresizingMaskIntoConstraints="NO" id="RBh-GY-MSB">
                         <rect key="frame" x="25" y="18" width="22" height="22"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="3in-Yk-kkC"/>
+                            <constraint firstAttribute="height" constant="22" id="9hM-hQ-Y1g"/>
+                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="lUW-0P-zf2" appends="YES" id="IV9-El-dub"/>
                         </connections>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="张三" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wn3-PZ-FIm">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wn3-PZ-FIm">
                         <rect key="frame" x="65" y="19" width="111" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="mp6-aO-cnJ"/>
+                            <constraint firstAttribute="width" constant="111" id="ua2-zw-YTq"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入优惠券金额" textAlignment="center" minimumFontSize="17" background="youhuiquan-input" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-y1-YXC">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入优惠券金额" textAlignment="center" minimumFontSize="17" background="youhuiquan-input" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-y1-YXC">
                         <rect key="frame" x="226" y="14" width="130" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="FBp-lB-UmR"/>
+                            <constraint firstAttribute="width" constant="130" id="aua-Ca-63S"/>
+                        </constraints>
                         <color key="textColor" red="0.96470588235294119" green="0.2627450980392157" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="LBd-y1-YXC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="FhQ-cl-a1G"/>
+                    <constraint firstItem="wn3-PZ-FIm" firstAttribute="leading" secondItem="RBh-GY-MSB" secondAttribute="trailing" constant="18" id="InC-6L-jNx"/>
+                    <constraint firstItem="RBh-GY-MSB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="K0L-VB-aVg"/>
+                    <constraint firstItem="wn3-PZ-FIm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="Ozl-3K-MPp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LBd-y1-YXC" secondAttribute="trailing" constant="11" id="RHm-uu-Mu1"/>
+                    <constraint firstItem="RBh-GY-MSB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="WNG-QL-WpU"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="checkImg" destination="RBh-GY-MSB" id="A0R-aW-74Z"/>

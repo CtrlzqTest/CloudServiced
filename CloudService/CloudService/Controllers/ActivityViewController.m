@@ -92,7 +92,7 @@ static NSString *cellID = @"cellID";
 //    self.collectionView.pagingEnabled = YES;
  
     self.collectionView.decelerationRate = 0.5;
-//    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceHorizontal = YES;
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
