@@ -13,6 +13,7 @@
 #import "WXApi.h"
 #import "Utility.h"
 #import "MHAsiNetworkHandler.h"
+#import "FireData.h"
 
 #define MObAppKey  @"100082c56c5c0"
 #define WXAppID   @"wx125bcc153468cc36"
@@ -50,8 +51,23 @@
 //        [MBProgressHUD showMessag:@"网络不可用..." toView:self.window];
 //    }
     
-
+    [self registerFireData];
     return YES;
+}
+
+/**
+ *  数据统计
+ */
+-(void)registerFireData {
+    // 配置统计 SDK
+    [[FireData sharedInstance] initWithHost:@"139.198.0.125" AppId:@"YUNKFD3SXE" distributors:@"ios"];
+    [FireData sharedInstance].debugMode = YES;
+    [FireData sharedInstance].enableCrashReport = YES;
+    [FireData sharedInstance].enableLocationReport = YES;
+    [FireData sharedInstance].sendTimeInterval = 2;
+    [FireData sharedInstance].enableIDFA = NO;
+
+    
 }
 
 - (void)registerShareSDK {

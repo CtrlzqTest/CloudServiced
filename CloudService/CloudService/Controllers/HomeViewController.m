@@ -15,7 +15,7 @@
 #import "UserInfoViewController.h"
 #import "Utility.h"
 #import "OrderInfoViewController.h"
-
+#import "FireData.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -92,8 +92,8 @@ static NSString *headerView_ID = @"headerView";
 
 - (void)viewWillAppear:(BOOL)animated {
     //导航条滑动返回
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     [super viewWillAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     
     self.view.frame = CGRectMake(0, 0, KWidth, KHeight - 64);
     
@@ -202,6 +202,7 @@ static NSString *headerView_ID = @"headerView";
 
             break;
         case 1:
+            [[FireData sharedInstance] eventWithCategory:@"我的客户" action:@"获取数据" name:@"" value:@"" attributes:nil];
             [self performSegueWithIdentifier:@"myClient" sender:self];
             break;
         case 2:

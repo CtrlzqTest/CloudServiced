@@ -50,7 +50,26 @@
         /**
          *  dataType 01:创建订单,获取新数据 02:创建客户
          */
-        NSDictionary *params = @{@"operType":@"测试",@"msg":@"",@"sendTime":@"",@"sign":@"",@"data":@{@"proportion":@"0.8",@"customerName":@"寇凯强",@"phoneNo":@"18637092233",@"dataType":@"01",@"comeFrom":@"YPT",@"activeType":@"1",@"macAdress":@"28:f0:76:18:c1:08",@"engineNo":@"jhg345325b135",@"vehicleFrameNo":@"dg3452",@"licenseNo":@"京A46456",@"vehicleModelName":@"阿斯顿马丁",@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"accountType":@"3",@"cityCode":@"28504700"}};
+        User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+        NSDictionary *params = @{@"operType":@"测试",
+                                 @"msg":@"",
+                                 @"sendTime":@"",
+                                 @"sign":@"",
+                                 @"data":@{@"proportion":@"0.8",
+                                           @"customerName":_tfName,
+                                           @"phoneNo":_tfPhone.text,
+                                           @"dataType":@"01",
+                                           @"comeFrom":@"YPT",
+                                           @"activeType":@"1",
+                                           @"macAdress":@"28:f0:76:18:c1:08",
+                                           @"engineNo":@"jhg345325b135",
+                                           @"vehicleFrameNo":@"dg3452",
+                                           @"licenseNo":_tfLicenseNo,
+                                           @"vehicleModelName":@"阿斯顿马丁",
+                                           @"userId":user.userId,
+                                           @"accountType":@"3",
+                                           @"cityCode":@"28504700"}
+                                 };
         
         __weak typeof(self) weakSelf = self;
         [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {

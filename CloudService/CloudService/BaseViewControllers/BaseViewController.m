@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "FireData.h"
 @interface BaseViewController ()
 
 @end
@@ -17,6 +17,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[FireData sharedInstance] beginLogPageView:self.title attributes:nil cvar:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[FireData sharedInstance] endLogPageView:self.title];
 }
 
 - (void)didReceiveMemoryWarning {
