@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ActifityModel;
 
 @interface ActivityCollectionCell : UICollectionViewCell
+
 @property (nonatomic, weak)IBOutlet UIImageView *imgView;
+
+//- (void)writeDataWithActifityModel:(ActifityModel *)model;
+
 @end

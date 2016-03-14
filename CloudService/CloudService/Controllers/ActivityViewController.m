@@ -9,10 +9,14 @@
 #import "ActivityViewController.h"
 #import "HoriCardFlowLayout2.h"
 #import "ActivityCollectionCell.h"
-
+#import "ActifityModel.h"
 
 static NSString *cellID = @"cellID";
 @interface ActivityViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
+
+{
+    ActifityModel *actifityModel;
+}
 
 @property (strong, nonatomic)UICollectionView *collectionView;
 @property (weak, nonatomic)IBOutlet UIButton *button1;
@@ -21,7 +25,11 @@ static NSString *cellID = @"cellID";
 @property (weak, nonatomic)IBOutlet UIButton *btnNum1;
 @property (weak, nonatomic)IBOutlet UIButton *btnNum2;
 @property (weak, nonatomic)IBOutlet UIButton *btnNum3;
+@property (weak, nonatomic) IBOutlet UIButton *getCoupon;
+@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
+
 @end
+
 
 @implementation ActivityViewController
 
@@ -36,8 +44,25 @@ static NSString *cellID = @"cellID";
     [self setupCollectionView];
     [self setupBtnNum];
     [self setupButton];
-    // Do any additional setup after loading the view.
+    [self requestData];
 }
+
+- (void)requestData {
+    
+    __weak typeof(self) weakSelf = self;
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kActifityInfoAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
+        
+        actifityModel= [ActifityModel mj_objectWithKeyValues:returnData[@"data"]];
+        // 刷新数据
+        [weakSelf.collectionView reloadData];
+        [weakSelf reloadViews];
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+}
+
 - (void)setupButton {
     self.button1.layer.borderWidth = 1.5f;
     self.button1.layer.borderColor = [[UIColor redColor] CGColor];
@@ -86,11 +111,36 @@ static NSString *cellID = @"cellID";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     ActivityCollectionCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    if (cell==nil) {
-        NSArray *array=[[NSBundle mainBundle] loadNibNamed:@"ActivityCollectionCell" owner:self options:nil];
-        cell=[array objectAtIndex:0];
-        
+//    if (cell==nil) {
+//        NSArray *array=[[NSBundle mainBundle] loadNibNamed:@"ActivityCollectionCell" owner:self options:nil];
+//        cell=[array objectAtIndex:0];
+//    }
+    switch (indexPath.row) {
+        case 0:
+            if (![actifityModel.monkeyOne isEqualToString:@"0"]) {
+                cell.imgView.image = [UIImage imageNamed:@"card1"];
+            }else {
+                cell.imgView.image = [UIImage imageNamed:@"card1_"];
+            }
+            break;
+        case 1:
+            if (![actifityModel.monkeyTwo isEqualToString:@"0"]) {
+                cell.imgView.image = [UIImage imageNamed:@"card2"];
+            }else {
+                cell.imgView.image = [UIImage imageNamed:@"card2_"];
+            }
+            break;
+        case 2:
+            if (![actifityModel.monkeyThree isEqualToString:@"0"]) {
+                cell.imgView.image = [UIImage imageNamed:@"card3"];
+            }else {
+                cell.imgView.image = [UIImage imageNamed:@"card3_"];
+            }
+            break;
+        default:
+            break;
     }
     
     return cell;
@@ -117,10 +167,10 @@ static NSString *cellID = @"cellID";
         default:
             break;
     }
-
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     if (scrollView.contentOffset.x == 0.00f) {
         self.button1.layer.borderColor = [[UIColor redColor] CGColor];
         self.button2.layer.borderColor = [[UIColor clearColor] CGColor];
@@ -135,6 +185,43 @@ static NSString *cellID = @"cellID";
         self.button3.layer.borderColor = [[UIColor redColor] CGColor];
     }
   
+}
+
+// 刷新数据
+- (void)reloadViews {
+    
+    if (![actifityModel.monkeyOne isEqualToString:@"0"]) {
+        [self.button1 setBackgroundImage:[UIImage imageNamed:@"home4"] forState:(UIControlStateNormal)];
+        [self.btnNum1 setTitle:actifityModel.monkeyOne forState:(UIControlStateNormal)];
+        self.btnNum1.hidden = NO;
+    }else {
+        [self.button1 setBackgroundImage:[UIImage imageNamed:@"home4_"] forState:(UIControlStateNormal)];
+        self.btnNum1.hidden = YES;
+    }
+    
+    if (![actifityModel.monkeyTwo isEqualToString:@"0"]) {
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home5"] forState:(UIControlStateNormal)];
+        self.btnNum2.hidden = NO;
+        [self.btnNum2 setTitle:actifityModel.monkeyTwo forState:(UIControlStateNormal)];
+    }else {
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home5_"] forState:(UIControlStateNormal)];
+        self.btnNum2.hidden = YES;
+    }
+    
+    if (![actifityModel.monkeyThree isEqualToString:@"0"]) {
+        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home6"] forState:(UIControlStateNormal)];
+        self.btnNum3.hidden = NO;
+        [self.btnNum3 setTitle:actifityModel.monkeyThree forState:(UIControlStateNormal)];
+    }else {
+        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home6_"] forState:(UIControlStateNormal)];
+        self.btnNum3.hidden = YES;
+    }
+    
+    if (![actifityModel.sendCoupon isEqualToString:@"0"]) {
+        self.getCoupon.enabled = NO;
+//        [self.getCoupon setBackgroundColor:[UIColor grayColor]];
+    }
+    
 }
 
 - (void)button1:(UIButton *)sender {
@@ -158,6 +245,27 @@ static NSString *cellID = @"cellID";
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
+
+- (IBAction)getCouponAction:(id)sender {
+    
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kActifityCouponAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
+        
+        if ([returnData[@"flag"] isEqualToString:@"success"]) {
+            [MBProgressHUD showSuccess:@"成功领取优惠券,请到个人中心查看" toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+    
+}
+
+- (IBAction)shareAction:(id)sender {
+    
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
  
