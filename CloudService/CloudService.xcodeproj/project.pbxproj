@@ -1262,7 +1262,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CloudService/Venders",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1288,7 +1288,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CloudService/Venders",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

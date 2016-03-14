@@ -2761,7 +2761,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEI-e1-eG5">
                                 <rect key="frame" x="217" y="260" width="108" height="30"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point2" translatesAutoresizingMaskIntoConstraints="NO" id="5Qp-rF-ITq">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="point2" translatesAutoresizingMaskIntoConstraints="NO" id="5Qp-rF-ITq">
                                         <rect key="frame" x="0.0" y="10" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Qp-rF-ITq" secondAttribute="height" id="QqV-Bo-Vz3"/>
@@ -3057,7 +3057,7 @@
                                         <rect key="frame" x="15" y="168" width="360" height="1"/>
                                         <color key="backgroundColor" red="0.85284485480000005" green="0.85284485480000005" blue="0.85284485480000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="oqs-OG-79G"/>
+                                            <constraint firstAttribute="height" constant="1" id="66x-oy-Cux"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Lx-IQ-Bsi">
@@ -3098,7 +3098,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入客户姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsf-Uz-RpB">
-                                        <rect key="frame" x="115" y="11" width="217" height="30"/>
+                                        <rect key="frame" x="115" y="11" width="250" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="sWj-Vm-iAr"/>
                                         </constraints>
@@ -3106,20 +3106,12 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cm-Z1-KyK">
-                                        <rect key="frame" x="115" y="66" width="217" height="30"/>
+                                        <rect key="frame" x="115" y="66" width="240" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="WYV-Ml-evQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车牌号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M5o-Oe-6E1">
-                                        <rect key="frame" x="115" y="123" width="217" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="KwZ-hc-fkG"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMB-5i-8sg" userLabel="lineView1">
                                         <rect key="frame" x="0.0" y="226" width="375" height="1"/>
@@ -3131,64 +3123,96 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="汽车省市" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIe-EE-mJj">
                                         <rect key="frame" x="17" y="186" width="78" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="XT7-HU-85E"/>
-                                            <constraint firstAttribute="width" constant="78" id="eWP-JI-d8K"/>
+                                            <constraint firstAttribute="height" constant="21" id="0ac-zY-zvw"/>
+                                            <constraint firstAttribute="width" constant="78" id="Zdj-Ag-JDa"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入汽车所在省市" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J78-As-faK">
-                                        <rect key="frame" x="115" y="181" width="217" height="30"/>
+                                        <rect key="frame" x="115" y="181" width="250" height="30"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="T6B-kW-2sz"/>
+                                            <constraint firstAttribute="height" constant="30" id="dx1-FZ-Hb6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RE1-nB-SZT">
-                                        <rect key="frame" x="115" y="180" width="217" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RE1-nB-SZT">
+                                        <rect key="frame" x="115" y="180" width="250" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="saB-pd-UbZ"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="showCityPickerView:" destination="t9G-r4-Ss4" eventType="touchUpInside" id="DSt-8W-Ypk"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车牌号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJE-b5-QWH">
+                                        <rect key="frame" x="115" y="124" width="185" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1SN-2w-9dt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMU-2j-0pN">
+                                        <rect key="frame" x="300" y="124" width="60" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="4dx-G4-uKa"/>
+                                            <constraint firstAttribute="height" constant="30" id="Lbh-pG-Ti7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="新车" image="checkbox">
+                                            <color key="titleColor" red="1" green="0.51000831260000001" blue="0.5243881199" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newCarAction:" destination="t9G-r4-Ss4" eventType="touchUpInside" id="Bey-5G-3wW"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="FqI-3h-EXP" firstAttribute="top" secondItem="M5o-Oe-6E1" secondAttribute="bottom" constant="15" id="1YY-93-GSs"/>
+                                    <constraint firstItem="IMU-2j-0pN" firstAttribute="top" secondItem="ExD-f8-PzX" secondAttribute="bottom" constant="12" id="1yI-Qg-d7B"/>
                                     <constraint firstAttribute="bottom" secondItem="hMB-5i-8sg" secondAttribute="bottom" id="2ha-gf-sGN"/>
                                     <constraint firstItem="9Lx-IQ-Bsi" firstAttribute="top" secondItem="hud-bB-mVt" secondAttribute="bottom" constant="15" id="3yd-C2-aWc"/>
+                                    <constraint firstAttribute="trailing" secondItem="FqI-3h-EXP" secondAttribute="trailing" id="4wp-N3-CqP"/>
+                                    <constraint firstItem="nIe-EE-mJj" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="17" id="A2a-9E-Sew"/>
                                     <constraint firstItem="hud-bB-mVt" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" id="CIk-xr-Ds6"/>
-                                    <constraint firstItem="M5o-Oe-6E1" firstAttribute="leading" secondItem="j7v-lk-M7t" secondAttribute="trailing" constant="20" id="CNB-M0-gFj"/>
+                                    <constraint firstItem="nIe-EE-mJj" firstAttribute="top" secondItem="FqI-3h-EXP" secondAttribute="bottom" constant="17" id="Day-UA-oen"/>
                                     <constraint firstItem="j7v-lk-M7t" firstAttribute="top" secondItem="ExD-f8-PzX" secondAttribute="bottom" constant="16" id="Es9-PJ-THj"/>
                                     <constraint firstItem="3cm-Z1-KyK" firstAttribute="leading" secondItem="FVU-xx-aVc" secondAttribute="trailing" constant="20" id="Gba-In-s6R"/>
-                                    <constraint firstAttribute="trailing" secondItem="M5o-Oe-6E1" secondAttribute="trailing" constant="43" id="GwQ-X6-aBL"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wsf-Uz-RpB" secondAttribute="trailing" constant="43" id="JHT-Yx-l8R"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wsf-Uz-RpB" secondAttribute="trailing" constant="10" id="JHT-Yx-l8R"/>
+                                    <constraint firstItem="J78-As-faK" firstAttribute="top" secondItem="FqI-3h-EXP" secondAttribute="bottom" constant="12" id="Me2-4y-wz6"/>
                                     <constraint firstItem="ExD-f8-PzX" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="15" id="N2T-TT-njO"/>
                                     <constraint firstItem="2h0-CS-cWY" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="15" id="NaM-pf-6XE"/>
                                     <constraint firstAttribute="trailing" secondItem="2h0-CS-cWY" secondAttribute="trailing" id="NnW-ny-goc"/>
-                                    <constraint firstAttribute="trailing" secondItem="J78-As-faK" secondAttribute="trailing" constant="43" id="Sva-Bz-048"/>
+                                    <constraint firstItem="J78-As-faK" firstAttribute="leading" secondItem="nIe-EE-mJj" secondAttribute="trailing" constant="20" id="Och-hW-PqW"/>
+                                    <constraint firstItem="EJE-b5-QWH" firstAttribute="leading" secondItem="j7v-lk-M7t" secondAttribute="trailing" constant="20" id="QjA-5s-vz6"/>
+                                    <constraint firstItem="IMU-2j-0pN" firstAttribute="leading" secondItem="EJE-b5-QWH" secondAttribute="trailing" id="S1k-Tm-iIE"/>
                                     <constraint firstItem="FVU-xx-aVc" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="17" id="Ubr-ay-yIc"/>
-                                    <constraint firstItem="J78-As-faK" firstAttribute="leading" secondItem="nIe-EE-mJj" secondAttribute="trailing" constant="20" id="Uct-xq-G62"/>
-                                    <constraint firstItem="nIe-EE-mJj" firstAttribute="top" secondItem="FqI-3h-EXP" secondAttribute="bottom" constant="17" id="VDD-QQ-0s9"/>
-                                    <constraint firstItem="J78-As-faK" firstAttribute="top" secondItem="FqI-3h-EXP" secondAttribute="bottom" constant="12" id="Vaa-ph-va1"/>
-                                    <constraint firstItem="nIe-EE-mJj" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="17" id="ZN7-dz-Giv"/>
+                                    <constraint firstAttribute="trailing" secondItem="RE1-nB-SZT" secondAttribute="trailing" constant="10" id="VIu-xH-V0u"/>
+                                    <constraint firstAttribute="trailing" secondItem="IMU-2j-0pN" secondAttribute="trailing" constant="15" id="XKl-Vu-hld"/>
+                                    <constraint firstItem="RE1-nB-SZT" firstAttribute="leading" secondItem="nIe-EE-mJj" secondAttribute="trailing" constant="20" id="a3J-IQ-jsd"/>
                                     <constraint firstItem="FVU-xx-aVc" firstAttribute="top" secondItem="2h0-CS-cWY" secondAttribute="bottom" constant="16" id="b10-X1-y75"/>
-                                    <constraint firstItem="M5o-Oe-6E1" firstAttribute="top" secondItem="ExD-f8-PzX" secondAttribute="bottom" constant="11" id="bCs-vG-aB4"/>
                                     <constraint firstItem="hud-bB-mVt" firstAttribute="top" secondItem="k7I-XR-eL6" secondAttribute="top" id="ctX-y9-fTH"/>
+                                    <constraint firstItem="FqI-3h-EXP" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="15" id="cwV-Pj-RDR"/>
                                     <constraint firstItem="hMB-5i-8sg" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" id="dfy-Vv-wIk"/>
                                     <constraint firstAttribute="trailing" secondItem="ExD-f8-PzX" secondAttribute="trailing" id="dpI-g0-JB7"/>
                                     <constraint firstItem="ExD-f8-PzX" firstAttribute="top" secondItem="3cm-Z1-KyK" secondAttribute="bottom" constant="15" id="f7I-4j-Mqg"/>
                                     <constraint firstItem="2h0-CS-cWY" firstAttribute="top" secondItem="Wsf-Uz-RpB" secondAttribute="bottom" constant="13" id="ivh-ii-pvN"/>
                                     <constraint firstItem="Wsf-Uz-RpB" firstAttribute="top" secondItem="hud-bB-mVt" secondAttribute="bottom" constant="10" id="jVj-mF-yYB"/>
-                                    <constraint firstAttribute="trailing" secondItem="FqI-3h-EXP" secondAttribute="trailing" id="lVQ-U4-AiN"/>
                                     <constraint firstItem="9Lx-IQ-Bsi" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="17" id="mGj-K9-Ngf"/>
+                                    <constraint firstAttribute="trailing" secondItem="J78-As-faK" secondAttribute="trailing" constant="10" id="nFj-ld-ase"/>
                                     <constraint firstItem="Wsf-Uz-RpB" firstAttribute="leading" secondItem="9Lx-IQ-Bsi" secondAttribute="trailing" constant="20" id="nWS-Xf-M71"/>
+                                    <constraint firstItem="EJE-b5-QWH" firstAttribute="top" secondItem="ExD-f8-PzX" secondAttribute="bottom" constant="12" id="o63-46-a7t"/>
+                                    <constraint firstItem="RE1-nB-SZT" firstAttribute="top" secondItem="FqI-3h-EXP" secondAttribute="bottom" constant="11" id="oTH-SN-5zq"/>
                                     <constraint firstItem="j7v-lk-M7t" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="17" id="owp-LS-Wbh"/>
+                                    <constraint firstItem="FqI-3h-EXP" firstAttribute="top" secondItem="IMU-2j-0pN" secondAttribute="bottom" constant="14" id="pNj-p1-3WZ"/>
                                     <constraint firstAttribute="trailing" secondItem="hud-bB-mVt" secondAttribute="trailing" id="pSR-20-2zX"/>
-                                    <constraint firstAttribute="trailing" secondItem="3cm-Z1-KyK" secondAttribute="trailing" constant="43" id="sc7-C7-mhR"/>
-                                    <constraint firstItem="FqI-3h-EXP" firstAttribute="leading" secondItem="k7I-XR-eL6" secondAttribute="leading" constant="15" id="uDA-WP-f9w"/>
+                                    <constraint firstAttribute="trailing" secondItem="3cm-Z1-KyK" secondAttribute="trailing" constant="20" id="sc7-C7-mhR"/>
                                     <constraint firstItem="3cm-Z1-KyK" firstAttribute="top" secondItem="2h0-CS-cWY" secondAttribute="bottom" constant="11" id="ukj-NH-wPC"/>
                                     <constraint firstAttribute="trailing" secondItem="hMB-5i-8sg" secondAttribute="trailing" id="xpo-t2-ZBJ"/>
                                     <constraint firstAttribute="height" constant="227" id="xt8-KH-oiO"/>
@@ -3226,8 +3250,9 @@
                     <navigationItem key="navigationItem" title="创建订单" id="e4N-bI-28e"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="isNewCarBtn" destination="IMU-2j-0pN" id="ulq-f9-duu"/>
                         <outlet property="tfCarCity" destination="J78-As-faK" id="oZK-iO-tZT"/>
-                        <outlet property="tfLicenseNo" destination="M5o-Oe-6E1" id="5Lb-kM-1Cs"/>
+                        <outlet property="tfLicenseNo" destination="EJE-b5-QWH" id="Ljc-Jp-v23"/>
                         <outlet property="tfName" destination="Wsf-Uz-RpB" id="DQx-Ik-l8B"/>
                         <outlet property="tfPhone" destination="3cm-Z1-KyK" id="Mty-gy-h45"/>
                     </connections>

@@ -166,6 +166,10 @@ static CGFloat headerHeight = 30;
      *  dataType 01:创建订单,获取新数据 02:创建客户
      */
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    NSString *licenseNo = self.carCode;
+    if ([self.carCode isEqualToString:@""]) {
+        licenseNo = @"新车";
+    }
     NSDictionary *params = @{@"operType":@"测试",
                              @"msg":@"",
                              @"sendTime":@"",
@@ -179,7 +183,7 @@ static CGFloat headerHeight = 30;
                                        @"macAdress":@"",
                                        @"engineNo":cell1.engine.text,
                                        @"vehicleFrameNo":cell1.carFrameCode.text,
-                                       @"licenseNo":cell1.carCode.text,
+                                       @"licenseNo":licenseNo,
                                        @"vehicleModelName":cell1.engineType.text,
                                        @"userId":user.userId,
                                        @"accountType":@"3",
@@ -259,13 +263,15 @@ static CGFloat headerHeight = 30;
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OfferTableViewCell" owner:self options:nil];
         if (indexPath.section == 0) {
             cell = [array objectAtIndex:0];
-            if (self.carCode) {
+            if (![self.carCode isEqualToString:@""]) {
                 cell.carCode.text = self.carCode;
             }else {
                 cell.carCode.placeholder = @"暂无车牌号";
             }
+            
         }else{
             cell = [array objectAtIndex:1];
+            cell.carUserName.text = self.custName;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
