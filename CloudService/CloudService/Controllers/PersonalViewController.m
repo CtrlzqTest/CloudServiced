@@ -41,7 +41,7 @@ static NSString *cell_id = @"personalCell";
     
     NSArray *array1 = @[@"我的团队",@"积分管理",@"用户认证",@"团队成员邀请",@"好友邀请"];
     NSArray *array2 = @[@"我的优惠券"];
-    NSArray *array3 = @[@"关于应用",@"版本更新"];
+    NSArray *array3 = @[@"关于应用"];
     
     _dataArray = [NSArray arrayWithObjects:array1,array2,array3, nil];
     
@@ -53,7 +53,7 @@ static NSString *cell_id = @"personalCell";
     [_dataDict setValue:@"user-icon5" forKey:array1[4]];
     [_dataDict setValue:@"user-icon6" forKey:array2[0]];
     [_dataDict setValue:@"user-icon7" forKey:array3[0]];
-    [_dataDict setValue:@"user-icon8" forKey:array3[1]];
+//    [_dataDict setValue:@"user-icon8" forKey:array3[1]];
     
 }
 
@@ -212,6 +212,9 @@ static NSString *cell_id = @"personalCell";
     }
     if (indexPath.section == 1) {
         [self performSegueWithIdentifier:@"coupons" sender:self];
+    }
+    if (indexPath.section == 2) {
+        [self performSegueWithIdentifier:@"aboutApp_push" sender:self];
     }
 }
 
