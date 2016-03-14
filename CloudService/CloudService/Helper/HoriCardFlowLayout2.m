@@ -104,9 +104,10 @@
             offsetAdjustment = itemHorizontalCenter - horizontalCenter;
         }
     }
-    
+    NSLog(@"%f\n%f",proposedContentOffset.x,offsetAdjustment);
     return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
-
 }
+
+
 
 @end

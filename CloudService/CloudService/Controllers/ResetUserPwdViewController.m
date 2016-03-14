@@ -47,8 +47,11 @@
 
 - (IBAction)resetPwdAction:(id)sender {
     
+    if (![self checkInputMode]) {
+        return;
+    }
     NSDictionary *dict = @{@"phoneNo":self.phoneNum.text,@"code":self.codeTextFiled.text,@"password":self.pwdTextFiled.text};
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kForgetPwdAPI] params:@{@"phoneNo":@"15910620512",@"code":@"",@"password":@"111111"} successBlock:^(id returnData) {
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kForgetPwdAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -59,6 +62,7 @@
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];
+    
 }
 
 - (IBAction)getCodeAction:(id)sender {

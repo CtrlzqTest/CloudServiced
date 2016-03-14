@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1045,7 +1045,7 @@
                                             <constraint firstAttribute="height" constant="60" id="5bq-Zm-Q5a"/>
                                             <constraint firstAttribute="width" constant="60" id="aw5-VZ-Ntc"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="home4"/>
+                                        <state key="normal" backgroundImage="home6_"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="5"/>
@@ -1059,7 +1059,7 @@
                                             <constraint firstAttribute="height" constant="60" id="gNl-ah-Iy9"/>
                                             <constraint firstAttribute="width" constant="60" id="m7G-Rf-Usz"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="home4"/>
+                                        <state key="normal" backgroundImage="home5_"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="5"/>
@@ -1073,7 +1073,7 @@
                                             <constraint firstAttribute="height" constant="60" id="64P-7t-HUX"/>
                                             <constraint firstAttribute="width" constant="60" id="ceX-km-D8L"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="home4"/>
+                                        <state key="normal" backgroundImage="home4_"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="5"/>
@@ -1088,13 +1088,19 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="领取" backgroundImage="card-btn"/>
+                                        <connections>
+                                            <action selector="getCouponAction:" destination="xka-RN-hcc" eventType="touchUpInside" id="4u7-VR-uYr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UvJ-wT-F3W">
                                         <rect key="frame" x="194" y="100" width="162" height="31"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="分享" backgroundImage="card-btn"/>
+                                        <connections>
+                                            <action selector="shareAction:" destination="xka-RN-hcc" eventType="touchUpInside" id="rsv-aD-86H"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-Hv-mrS">
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-Hv-mrS">
                                         <rect key="frame" x="99" y="13" width="22" height="22"/>
                                         <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1110,7 +1116,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSG-ie-5HI">
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSG-ie-5HI">
                                         <rect key="frame" x="207" y="13" width="22" height="22"/>
                                         <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1126,7 +1132,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0D-8M-rfT">
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0D-8M-rfT">
                                         <rect key="frame" x="313" y="13" width="22" height="22"/>
                                         <color key="backgroundColor" red="0.99215686270000003" green="0.60392156860000001" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1205,6 +1211,8 @@
                         <outlet property="button1" destination="iAB-Qv-a8T" id="gh9-Qx-ory"/>
                         <outlet property="button2" destination="OwT-h3-kB3" id="Q12-EF-ZKf"/>
                         <outlet property="button3" destination="fTs-lD-HSs" id="PeV-g4-8Jt"/>
+                        <outlet property="getCoupon" destination="jMB-Eo-JBf" id="1GK-Vo-cR8"/>
+                        <outlet property="shareBtn" destination="UvJ-wT-F3W" id="37N-7b-wAw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DLQ-CR-rsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1777,14 +1785,14 @@
                                     <action selector="shareAction:" destination="TCA-u7-md9" eventType="touchUpInside" id="NB6-wp-DPl"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
                                 <rect key="frame" x="93" y="232" width="188" height="188"/>
                                 <color key="backgroundColor" red="1" green="0.26188047339999998" blue="0.28042493629999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bmO-QB-zPa" secondAttribute="height" id="dq7-v2-Q4k"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
                                 <rect key="frame" x="93" y="428" width="188" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0z4-W7-1GS"/>
@@ -3207,7 +3215,9 @@
         <image name="details-arrow2" width="25" height="25"/>
         <image name="head-bg" width="360" height="137"/>
         <image name="head2" width="64" height="64"/>
-        <image name="home4" width="50" height="50"/>
+        <image name="home4_" width="50" height="50"/>
+        <image name="home5_" width="50" height="50"/>
+        <image name="home6_" width="50" height="50"/>
         <image name="line2" width="50" height="1"/>
         <image name="login-bg" width="360" height="640"/>
         <image name="login-choose" width="25" height="25"/>

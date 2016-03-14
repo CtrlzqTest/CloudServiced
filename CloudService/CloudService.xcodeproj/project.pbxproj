@@ -118,6 +118,7 @@
 		F07FF9DF1C81752D00EB1BB1 /* MyTeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9DD1C81752D00EB1BB1 /* MyTeamTableViewCell.m */; };
 		F07FF9E01C81752D00EB1BB1 /* MyTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07FF9DE1C81752D00EB1BB1 /* MyTeamTableViewCell.xib */; };
 		F07FF9E31C8189E200EB1BB1 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */; };
+		F0906A7E1C964FD2007C3BBC /* ActifityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0906A7D1C964FD2007C3BBC /* ActifityModel.m */; };
 		F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DED91C89394900168BF8 /* RequestEntity.m */; };
 		F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEDF1C896B1800168BF8 /* RequestManager.m */; };
 		F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */; };
@@ -327,6 +328,8 @@
 		F07FF9DE1C81752D00EB1BB1 /* MyTeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTeamTableViewCell.xib; sourceTree = "<group>"; };
 		F07FF9E11C8189E200EB1BB1 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		F07FF9E21C8189E200EB1BB1 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		F0906A7C1C964FD2007C3BBC /* ActifityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActifityModel.h; sourceTree = "<group>"; };
+		F0906A7D1C964FD2007C3BBC /* ActifityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActifityModel.m; sourceTree = "<group>"; };
 		F090DED81C89394900168BF8 /* RequestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestEntity.h; sourceTree = "<group>"; };
 		F090DED91C89394900168BF8 /* RequestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestEntity.m; sourceTree = "<group>"; };
 		F090DEDE1C896B1800168BF8 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
@@ -751,6 +754,8 @@
 				F0292BD61C7B015200A810A9 /* User.m */,
 				F074D9301C93A756007A6A88 /* CodeNameModel.h */,
 				F074D9311C93A756007A6A88 /* CodeNameModel.m */,
+				F0906A7C1C964FD2007C3BBC /* ActifityModel.h */,
+				F0906A7D1C964FD2007C3BBC /* ActifityModel.m */,
 				6320B73A1C89A2CE0076FC7E /* Coupons.h */,
 				6320B73B1C89A2CE0076FC7E /* Coupons.m */,
 				63AA2BD81C8A8E1E00D7CF04 /* Integral.h */,
@@ -1057,6 +1062,7 @@
 				63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */,
 				F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */,
 				63C07B9B1C7B14BB0084581F /* MHAsiNetworkHandler.m in Sources */,
+				F0906A7E1C964FD2007C3BBC /* ActifityModel.m in Sources */,
 				F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */,
 				F09A5F8F1A55BEDD008D4963 /* HomeHeaderView.m in Sources */,
 				F01A616D1C7D860E008CBBD5 /* LoginInputView.m in Sources */,

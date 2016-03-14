@@ -75,6 +75,10 @@
 
 #define kfindMainOrder     @"/app/order/findMainOrder"             //订单列表查询
 
+#define kActifityInfoAPI     @"/app/activity/findUserActivity"       // 查看活动信息
+
+#define kActifityCouponAPI      @"/app/activity/assignActivityCoupon"   // 下发活动优惠券
+
 //   常量
 /**************************************************************************************/
 
