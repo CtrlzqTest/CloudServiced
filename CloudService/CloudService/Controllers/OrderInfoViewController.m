@@ -9,6 +9,7 @@
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
 #import "ClientData.h"
+#import "ButelHandle.h"
 
 
 @interface OrderInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -35,6 +36,7 @@
     
     [super viewWillAppear:animated];
     self.title=@"订单详情";
+    [[ButelHandle shareButelHandle] isHidden:NO tel:@"18701564714"];
     
 }
 

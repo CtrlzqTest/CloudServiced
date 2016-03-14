@@ -24,8 +24,8 @@ static ButelHandle *singleHandle = nil;
     });
     return singleHandle;
 }
-- (void)initCallViewWithFrame:(CGRect )frame {
-    callView = [[CallView alloc] initWithFrame:frame];
+- (void)initCallView{
+    callView = [[CallView alloc] initWithFrame:CGRectMake(KWidth-170, KHeight/2, 220, 80)];
 }
 - (void)isHidden:(BOOL)hidden tel:(NSString *)telNum {
     [callView isHidden:hidden tel:telNum];

@@ -159,7 +159,15 @@
                     <constraint firstAttribute="trailing" secondItem="A0z-4k-SI8" secondAttribute="trailing" id="ifb-XS-miU"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="304.5" y="334.5"/>
+            <connections>
+                <outlet property="btnOrderStatus" destination="GwT-3t-CUc" id="v1j-nn-m9L"/>
+                <outlet property="lbBiPremium" destination="7Bq-5Y-ecX" id="rJT-PU-4c1"/>
+                <outlet property="lbCiPremium" destination="c4B-Cj-Tqc" id="feY-ef-QdG"/>
+                <outlet property="lbCustomerName" destination="aHS-iY-3ak" id="zAu-HF-gDf"/>
+                <outlet property="lbLicenseNo" destination="ggQ-1Q-x2o" id="6Vj-PR-6cW"/>
+                <outlet property="lbVehicleTaxPremium" destination="JfG-Gz-lmw" id="Iak-Es-tKA"/>
+            </connections>
+            <point key="canvasLocation" x="272.5" y="252.5"/>
         </tableViewCell>
     </objects>
     <resources>

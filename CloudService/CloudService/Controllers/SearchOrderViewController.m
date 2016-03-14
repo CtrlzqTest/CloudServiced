@@ -11,6 +11,7 @@
 #import "PellTableViewSelect.h"
 #import <MJRefresh.h>
 #import "OrderManagerCell.h"
+#import "Order.h"
 
 @interface SearchOrderViewController ()<HZQDatePickerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -527,7 +528,7 @@
             }
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
-//            [_orderArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+            [_orderArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_orderArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -574,7 +575,7 @@
         }
         
         NSArray *listArray = [dataDic objectForKey:@"list"];
-//        [_orderArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
+        [_orderArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
         NSLog(@"%@",_orderArray);
         [self.tableView reloadData];
         [self.tableView.mj_footer endRefreshing];
@@ -586,7 +587,7 @@
 }
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _orderArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"cell";
@@ -596,7 +597,14 @@
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OrderManagerCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
     }
-    
+    Order *order = [_orderArray objectAtIndex:indexPath.row];
+    cell.lbLicenseNo.text = [NSString stringWithFormat:@"车牌号：%@",order.licenseNo];
+    [cell.btnOrderStatus setTitle:order.orderStatus forState:UIControlStateNormal];
+    cell.lbCustomerName.text = [NSString stringWithFormat:@"客户姓名：%@",order.customerName];
+    cell.lbBiPremium.text = order.biPremium;
+    cell.lbCiPremium.text = order.ciPremium;
+    cell.lbVehicleTaxPremium.text = order.vehicleTaxPremium;
+
     return cell;
 }
 

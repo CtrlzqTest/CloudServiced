@@ -10,6 +10,7 @@
 #import "OrderManagerCell.h"
 #import <MJRefresh.h>
 #import "Order.h"
+#import "ButelHandle.h"
 
 @interface OrderManagerViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -43,6 +44,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
     self.tabBarController.title = @"订单管理";
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.view.frame = CGRectMake(0, 0, KWidth, KHeight - 64);
@@ -228,9 +230,9 @@
     }else if ([tableView isEqual:_tableView3]){
         order = [_alreadyPayArray objectAtIndex:indexPath.row];
     }
-    cell.lbLicenseNo.text = order.licenseNo;
+    cell.lbLicenseNo.text = [NSString stringWithFormat:@"车牌号：%@",order.licenseNo];
     [cell.btnOrderStatus setTitle:order.orderStatus forState:UIControlStateNormal];
-    cell.lbCustomerName.text = order.customerName;
+    cell.lbCustomerName.text = [NSString stringWithFormat:@"客户姓名：%@",order.customerName];
     cell.lbBiPremium.text = order.biPremium;
     cell.lbCiPremium.text = order.ciPremium;
     cell.lbVehicleTaxPremium.text = order.vehicleTaxPremium;

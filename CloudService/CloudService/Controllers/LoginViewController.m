@@ -14,7 +14,7 @@
 #import "MHNetwrok.h"
 #import "Utility.h"
 #import "User.h"
-#import "FireData.h"
+#import "ButelHandle.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>{
     BOOL _isRemenberPwd;
@@ -144,8 +144,9 @@
             }else {
                 [Utility remberPassWord:NO];
             }
-            // 用户登录信息,
-            [[FireData sharedInstance] loginWithUserid:user.userId uvar:@"UvarsJson"];
+            [[ButelHandle shareButelHandle] initCallView];
+            [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
+           
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }else if([[returnData valueForKey:@"flag"] isEqualToString:@"error"]){
