@@ -1360,7 +1360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjV-52-9y1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460.5" y="-82.5"/>
+            <point key="canvasLocation" x="2428.5" y="-98.5"/>
         </scene>
         <!--预约-->
         <scene sceneID="iZT-ts-OBf">
@@ -1564,7 +1564,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5iS-I2-iuC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1903.5" y="-226.5"/>
+            <point key="canvasLocation" x="1873.5" y="-126.5"/>
         </scene>
         <!--我的客户-->
         <scene sceneID="cw4-cx-GMB">

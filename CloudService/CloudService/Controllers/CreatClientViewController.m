@@ -32,16 +32,32 @@
 - (IBAction)nextAction:(id)sender {
     if ([_tfName.text isEqualToString:@""]) {
         [MBProgressHUD showMessag:@"请输入客户姓名" toView:self.view];
-    }else if ([_tfPhone.text isEqualToString:@""]){
+        return ;
+    }
+    if ([_tfPhone.text isEqualToString:@""]){
         [MBProgressHUD showMessag:@"请输入客户手机号" toView:self.view];
-    }else if ([_tfLicenseNo.text isEqualToString:@""]){
-        [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
-    }else if ([_tfCarCity.text isEqualToString:@""]){
+        return ;
+    }
+    if (!self.isNewCarBtn.selected && [_tfLicenseNo.text isEqualToString:@""]){
+            [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
+        return ;
+    }
+    if ([_tfCarCity.text isEqualToString:@""]){
         [MBProgressHUD showMessag:@"请输入汽车所在城市" toView:self.view];
-    }else {
+        return ;
+    }
+    if (![HelperUtil checkTelNumber:_tfPhone.text]){
+        [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
+        return ;
+    }
+    if (![_tfLicenseNo.text isEqualToString:@""] && ![HelperUtil validateCarNo:_tfLicenseNo.text]){
+            [MBProgressHUD showMessag:@"车牌号格式不正确" toView:self.view];
+            return ;
+    }
+    
         [self performSegueWithIdentifier:@"offer" sender:self];
         
-    }
+    
 }
 
 - (IBAction)newCarAction:(id)sender {

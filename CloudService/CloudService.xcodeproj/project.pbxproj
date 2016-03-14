@@ -79,6 +79,7 @@
 		63C54E3B1C7C359A007CE8CA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E3A1C7C359A007CE8CA /* HomeViewController.m */; };
 		63C54E3E1C7C35AA007CE8CA /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E3D1C7C35AA007CE8CA /* ResultViewController.m */; };
 		63C54E411C7C35BA007CE8CA /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E401C7C35BA007CE8CA /* PersonalViewController.m */; };
+		63E9BFDD1C9659B200FFE0BA /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9BFDC1C9659B200FFE0BA /* Order.m */; };
 		91A97CA728DD2D371997D3F7 /* libPods-CloudService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D96943D8DC951CBCC61FF495 /* libPods-CloudService.a */; };
 		F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F019C9D51C7BFD7900E73A2C /* LoginViewController.m */; };
 		F019C9D91C7BFD8D00E73A2C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F019C9D81C7BFD8D00E73A2C /* RegisterViewController.m */; };
@@ -252,6 +253,8 @@
 		63C54E3D1C7C35AA007CE8CA /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
 		63C54E3F1C7C35BA007CE8CA /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		63C54E401C7C35BA007CE8CA /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
+		63E9BFDB1C9659B200FFE0BA /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		63E9BFDC1C9659B200FFE0BA /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		8080CD2CAEE01D9CB60C40F6 /* Pods-CloudService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudService/Pods-CloudService.debug.xcconfig"; sourceTree = "<group>"; };
 		AA863A4D44EB33149F738225 /* Pods-CloudService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudService.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudService/Pods-CloudService.release.xcconfig"; sourceTree = "<group>"; };
 		D96943D8DC951CBCC61FF495 /* libPods-CloudService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CloudService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -760,6 +763,8 @@
 				6392CFF31C8D8F8200D84F38 /* Achievement.m */,
 				637A624E1C8ED5A00020AE5E /* CouponsDistributed.h */,
 				637A624F1C8ED5A00020AE5E /* CouponsDistributed.m */,
+				63E9BFDB1C9659B200FFE0BA /* Order.h */,
+				63E9BFDC1C9659B200FFE0BA /* Order.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -886,7 +891,6 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = LH28XA7T22;
 					};
 				};
 			};
@@ -1010,6 +1014,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E9BFDD1C9659B200FFE0BA /* Order.m in Sources */,
 				63AA2BD51C8A70ED00D7CF04 /* DataSource.m in Sources */,
 				630EF19B1C856CD00059CB34 /* CouponsViewController.m in Sources */,
 				F0292BE21C7B015200A810A9 /* BaseViewController.m in Sources */,
@@ -1160,7 +1165,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f723f408-fa61-4925-8a41-66f08da18ecc";
+				PROVISIONING_PROFILE = "7f406056-328a-4e45-8426-62d38de93dd1";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1198,7 +1203,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "f723f408-fa61-4925-8a41-66f08da18ecc";
+				PROVISIONING_PROFILE = "7f406056-328a-4e45-8426-62d38de93dd1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

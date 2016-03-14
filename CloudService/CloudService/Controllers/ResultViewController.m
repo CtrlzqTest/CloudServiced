@@ -169,17 +169,34 @@
 }
 
 - (void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn {
+    [self removeNoData];
+    if (index == 0) {
+        if (_dayArray.count == 0) {
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
+        }
+        
+    }
     if (index == 1) {
         
         if (!_isLoad2) {
             [_tableView2.mj_header beginRefreshing];
             _isLoad2 = YES;
         }
+        if (_weekArray.count == 0) {
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
+        }
     }
     if (index == 2) {
         if (!_isLoad3) {
             [_tableView3.mj_header beginRefreshing];
             _isLoad3 = YES;
+        }
+        if (_monthArray.count == 0) {
+
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
         }
     }
     NSLog(@"之前下标：%ld 当前下标：%ld",preIndex,index);

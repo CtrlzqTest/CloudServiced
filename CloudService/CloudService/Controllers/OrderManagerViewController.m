@@ -9,6 +9,7 @@
 #import "OrderManagerViewController.h"
 #import "OrderManagerCell.h"
 #import <MJRefresh.h>
+#import "Order.h"
 
 @interface OrderManagerViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -69,11 +70,11 @@
 - (void)initPageView {
     
     _page1=1;
-    _pageSize1=6;
+    _pageSize1=4;
     _page2=1;
-    _pageSize2=6;
+    _pageSize2=4;
     _page3=1;
-    _pageSize3=6;
+    _pageSize3=4;
     [self.view addSubview:self.pageView];
     _pageView.delegate=self;
     [_pageView initTab:YES Gap:38 TabHeight:38 VerticalDistance:0 BkColor:[UIColor whiteColor]];
@@ -158,17 +159,32 @@
 }
 
 - (void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn {
+    [self removeNoData];
+    if (index == 0) {
+        if (_unfinishedArray.count == 0) {
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
+        }
+    }
     if (index == 1) {
         
         if (!_isLoad2) {
             [_tableView2.mj_header beginRefreshing];
             _isLoad2 = YES;
         }
+        if (_waitPayArray.count == 0) {
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
+        }
     }
     if (index == 2) {
         if (!_isLoad3) {
             [_tableView3.mj_header beginRefreshing];
             _isLoad3 = YES;
+        }
+        if (_alreadyPayArray.count == 0) {
+            [self.pageView addSubview:_noDataImg];
+            [self.pageView addSubview:_lbNoData];
         }
     }
 
@@ -204,6 +220,20 @@
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OrderManagerCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
     }
+    Order *order;
+    if ([tableView isEqual:_tableView1]) {
+        order= [_unfinishedArray objectAtIndex:indexPath.row];
+    }else if ([tableView isEqual:_tableView2]) {
+        order = [_waitPayArray objectAtIndex:indexPath.row];
+    }else if ([tableView isEqual:_tableView3]){
+        order = [_alreadyPayArray objectAtIndex:indexPath.row];
+    }
+    cell.lbLicenseNo.text = order.licenseNo;
+    [cell.btnOrderStatus setTitle:order.orderStatus forState:UIControlStateNormal];
+    cell.lbCustomerName.text = order.customerName;
+    cell.lbBiPremium.text = order.biPremium;
+    cell.lbCiPremium.text = order.ciPremium;
+    cell.lbVehicleTaxPremium.text = order.vehicleTaxPremium;
     
     return cell;
 }
@@ -268,7 +298,7 @@
                     [_tableView1.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
-//                [_unfinishedArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+                [_unfinishedArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"待支付"]) {
                 if (totalCount-_pageSize2*_page2<=0) {
                     //没有数据，直接提示没有更多数据
@@ -278,7 +308,7 @@
                     [_tableView2.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
-//                [_waitPayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+                [_waitPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"已支付"]) {
                 if (totalCount-_pageSize3*_page3<=0) {
                     //没有数据，直接提示没有更多数据
@@ -288,7 +318,7 @@
                     [_tableView3.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
-//                [_alreadyPayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+                [_alreadyPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }
             
         }else {
@@ -365,7 +395,7 @@
                     [_tableView1.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
-//                [_unfinishedArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+                [_unfinishedArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"待支付"]) {
                 if (totalCount-_pageSize2*_page2<=0) {
                     //没有数据，直接提示没有更多数据
@@ -375,7 +405,7 @@
                     [_tableView2.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
-//                [_waitPayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+                [_waitPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"已支付"]) {
                 if (totalCount-_pageSize3*_page3<=0) {
                     //没有数据，直接提示没有更多数据
@@ -385,7 +415,7 @@
                     [_tableView3.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
-//                [_alreadyPayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
+                [_alreadyPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }
             
         }else {
