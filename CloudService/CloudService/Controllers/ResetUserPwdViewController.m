@@ -47,7 +47,9 @@
 
 - (IBAction)resetPwdAction:(id)sender {
     
-    
+    if (![self checkInputMode]) {
+        return;
+    }
     NSDictionary *dict = @{@"phoneNo":self.phoneNum.text,@"code":self.codeTextFiled.text,@"password":self.pwdTextFiled.text};
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kForgetPwdAPI] params:dict successBlock:^(id returnData) {
         

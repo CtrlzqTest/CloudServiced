@@ -89,10 +89,11 @@ static NSString *cellID = @"cellID";
     HoriCardFlowLayout2 *layout = [[HoriCardFlowLayout2 alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 55, KWidth, KHeight - 250) collectionViewLayout:layout];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ActivityCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    //    self.collectionView.pagingEnabled = YES;
+//    self.collectionView.pagingEnabled = YES;
  
-    self.collectionView.decelerationRate = 0.4;
-    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.decelerationRate = 0.5;
+//    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.alwaysBounceHorizontal = YES;
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor clearColor];
@@ -106,6 +107,7 @@ static NSString *cellID = @"cellID";
   
 }
 #pragma mark collection
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 3;
 }
@@ -168,6 +170,7 @@ static NSString *cellID = @"cellID";
             break;
     }
 }
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
@@ -253,6 +256,8 @@ static NSString *cellID = @"cellID";
         
         if ([returnData[@"flag"] isEqualToString:@"success"]) {
             [MBProgressHUD showSuccess:@"成功领取优惠券,请到个人中心查看" toView:self.view];
+        }else {
+            [MBProgressHUD showMessag:returnData[@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
