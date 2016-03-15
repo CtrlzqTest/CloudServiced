@@ -10,7 +10,7 @@
 #import "OrderManagerCell.h"
 #import <MJRefresh.h>
 #import "Order.h"
-#import "ButelHandle.h"
+//#import "ButelHandle.h"
 
 @interface OrderManagerViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -44,7 +44,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
     self.tabBarController.title = @"订单管理";
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.view.frame = CGRectMake(0, 0, KWidth, KHeight - 64);

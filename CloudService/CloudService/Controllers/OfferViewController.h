@@ -6,9 +6,9 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface OfferViewController : UIViewController
+@interface OfferViewController : BaseViewController
 
 @property (nonatomic,copy)NSString *carCode;
 @property (nonatomic,copy)NSString *phoneNo;

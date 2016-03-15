@@ -6,8 +6,8 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface CreatClientViewController : UIViewController
+@interface CreatClientViewController : BaseViewController
 
 @end

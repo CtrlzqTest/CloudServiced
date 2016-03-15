@@ -6,8 +6,8 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface AppointmentViewController : UIViewController
+@interface AppointmentViewController : BaseViewController
 
 @end

@@ -271,7 +271,7 @@
 - (void)getSelectDate:(NSDate *)date type:(DateType)type {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
     
     switch (type) {

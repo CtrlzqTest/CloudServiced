@@ -170,13 +170,13 @@
     }else {
         if (isCanCall) {
             AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-            delegate.isLogin=YES;
+            delegate.isThird=YES;
             [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/makeCall" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"number":@"15910620512", @"ani":@"12345", @"uuid":self.deviceId, @"requestType":@"test" } successBlock:^(NSDictionary *returnData) {
                 NSDictionary *dic = returnData;
                 NSLog(@"%@",dic);
-                delegate.isLogin = NO;
+                delegate.isThird = NO;
             } failureBlock:^(NSError *error) {
-                delegate.isLogin = NO;
+                delegate.isThird = NO;
                 NSLog(@"%@",error);
             } showHUD:NO];
             
@@ -246,20 +246,20 @@
     if (reason == 0) {
         //http登陆
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        delegate.isLogin=YES;
-        [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/login4yg" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"passWord":@"1001"} successBlock:^(NSDictionary *returnData) {
-            delegate.isLogin = NO;
+        delegate.isThird=YES;
+        [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/login4butel" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"passWord":@"1001"} successBlock:^(NSDictionary *returnData) {
+            delegate.isThird = NO;
             NSDictionary *dic = returnData;
             NSDictionary *extDic = [dic objectForKey:@"ext"];
             NSString *str = [extDic objectForKey:@"dn"];
-//            NSArray *array = [str componentsSeparatedByString:@":"];
-//            self.nuber = [array objectAtIndex:1];
+            NSArray *array = [str componentsSeparatedByString:@":"];
+            self.nuber = [array objectAtIndex:1];
             self.deviceId = [extDic objectForKey:@"nubeUUID"];
             NSString *UUID = [extDic objectForKey:@"nubeAppKey"];
             NSLog(@"%@",dic);
             [self.connect Login:UUID number:self.nuber deviceId:self.deviceId nickname:@"CONNECT" userUniqueIdentifer:self.deviceId];
         } failureBlock:^(NSError *error) {
-            delegate.isLogin = NO;
+            delegate.isThird = NO;
             NSLog(@"%@",error);
         } showHUD:NO];
         

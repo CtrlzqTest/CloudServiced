@@ -27,7 +27,7 @@
 @implementation AppDelegate
 @synthesize window =_window;
 
-@synthesize isLogin;
+@synthesize isThird;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
@@ -44,13 +44,7 @@
     
     //设置状态栏为白色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    //初始化青牛SDK
-//    self.connect = [ButelEventConnectSDK CreateButelCommonConn:self];
-//    if ([self.connect Init] == -50006) {
-//        [MBProgressHUD showMessag:@"网络不可用..." toView:self.window];
-//    }
-    
+
     [self registerFireData];
     return YES;
 }
@@ -61,7 +55,7 @@
 -(void)registerFireData {
     // 配置统计 SDK
     [[FireData sharedInstance] initWithHost:@"139.198.0.125" AppId:@"YUNKFD3SXE" distributors:@"ios"];
-    [FireData sharedInstance].debugMode = YES;
+    [FireData sharedInstance].debugMode = NO;
     [FireData sharedInstance].enableCrashReport = YES;
     [FireData sharedInstance].enableLocationReport = YES;
     [FireData sharedInstance].sendTimeInterval = 2;
