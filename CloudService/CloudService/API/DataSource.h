@@ -30,6 +30,16 @@
 +(NSArray *)insureCommpanyCodeArray;
 
 /**
+ *  公司名转编码
+ */
++ (NSString *)changeCompanyCodeToText:(NSString *)code;
+
+/**
+ *  编码转公司名
+ */
++ (NSString *)changeCompanyTextToCode:(NSString *)name;
+
+/**
  *  所有省
  */
 +(NSArray *)provinceArray;

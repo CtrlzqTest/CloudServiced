@@ -79,6 +79,7 @@ static NSString *const select_CellID = @"selectCell";
     // 编辑
     if (self.notEnable) {
         self.notEnable = NO;
+        [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
         [self.tableView reloadData];
         return;
 //        typeof(self) weakSelf = self;
@@ -169,7 +170,7 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_User[0] = user.realName;
     _valueArray_User[1] = user.idCard;
     _valueArray_User[2] = user.roleName;
-    _valueArray_User[3] = user.oldCompany;
+    _valueArray_User[3] = [DataSource changeCompanyCodeToText:user.oldCompany];
     _valueArray_User[4] = user.oldPost.length > 0 ? user.oldPost : @"销售职";
     NSString *workDate = user.workStartDate.length > 0 ? [HelperUtil timeFormat:user.workStartDate format:@"yyyy-MM-dd"] : @"2015-01-01";
     _valueArray_User[5] = workDate;
@@ -188,15 +189,15 @@ static NSString *const select_CellID = @"selectCell";
     
     _companyArray = [NSMutableArray array];
     int i = 0;
-    for (NSString *companyName in [DataSource changeSaleCompanyWithString:user.applySaleCompany]) {
+    for (NSString *companyCode in [DataSource changeSaleCompanyWithString:user.applySaleCompany]) {
         CodeNameModel *model = [[CodeNameModel alloc] init];
-        model.companyName = companyName;
-        model.companyCode = [DataSource insureCommpanyCodeArray][i];
+        model.companyName = [DataSource changeCompanyCodeToText:companyCode];
+        model.companyCode = companyCode;
         [_companyArray addObject:model];
-        i ++;
     }
     _saleCityArray = [NSMutableArray array];
     i = 0;
+    // saleCityValue 是城市名,不是编码,对应后台传了saleCity编码
     for (NSString *provinceName in [DataSource changeSaleCompanyWithString:user.saleCityValue]) {
         CodeNameModel *model = [[CodeNameModel alloc] init];
         model.provinceName = provinceName;
@@ -516,10 +517,10 @@ static NSString *const select_CellID = @"selectCell";
 //
     [dict setValue:_valueArray_User[5] forKey:@"workStartDate"];
     [dict setValue:_valueArray_User[4] forKey:@"oldPost"];
-    [dict setValue:_valueArray_User[3] forKey:@"oldCompany"];
+    [dict setValue:[DataSource changeCompanyTextToCode:_valueArray_User[3]] forKey:@"oldCompany"];
     NSString *saleCity = _saleCityArray.count > 0 ? [self changeStrArraytoCodeString:_saleCityArray] : user.saleCity;
     [dict setValue:saleCity forKey:@"saleCity"];
-    [dict setValue:[self changeStrArraytoTextString:_companyArray] forKey:@"applySaleCompany"];
+    [dict setValue:[self changeStrArraytoCodeString:_companyArray] forKey:@"applySaleCompany"];
     [dict setValue:idCord forKey:@"idCard"];
 
     // 银行信息
@@ -590,7 +591,6 @@ static NSString *const select_CellID = @"selectCell";
             _valueArray_Bank[4] = province;
             _valueArray_Bank[5] = city;
         }
-        NSLog(@"%@",cityCode);
         [self.tableView reloadData];
         cityPickerView = nil;
     }];

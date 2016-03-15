@@ -43,6 +43,7 @@
     if (![self checkInputMode]) {
         return;
     }
+    
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetExchangeIntergralAPI] params:@{@"userId":user.userId,@"cash":self.intergNumTextFiled.text} successBlock:^(id returnData) {
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
