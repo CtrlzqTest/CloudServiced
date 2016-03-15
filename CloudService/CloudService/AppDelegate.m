@@ -62,6 +62,8 @@
     [FireData sharedInstance].enableIDFA = NO;
 
     
+    [[FireData sharedInstance] loginWithUserid:@"user1" uvar:@"UvarsJson"];
+    [FireData sharedInstance].refcode = @"refcode100000";
 }
 
 - (void)registerShareSDK {
@@ -131,13 +133,19 @@
     BaseNaviViewController *menuVC = [storyBoard instantiateViewControllerWithIdentifier:@"MenuNavi"];
 //    [UIView transitionFromView:self.window.rootViewController.view toView:menuVC.view duration:0.3 options:UIViewAnimationOptionTransitionCurlUp completion:^(BOOL finished) {
 //    }];
+    UIViewController *oldVC = self.window.rootViewController;
+    oldVC = nil;
     self.window.rootViewController = menuVC;
+    
 }
 
 - (void)logOut {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavi"];
+    UIViewController *oldVC = self.window.rootViewController;
+    oldVC = nil;
     self.window.rootViewController = loginVC;
+    
 }
 
 #pragma mark -- CLLocationManagerDelegate

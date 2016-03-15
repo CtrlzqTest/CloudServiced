@@ -78,28 +78,32 @@ static NSString *const select_CellID = @"selectCell";
     
     // 编辑
     if (self.notEnable) {
-        typeof(self) weakSelf = self;
-        ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
-        popView.frame = [UIScreen mainScreen].bounds;
-        
-        [popView showViewWithCallBack:^(NSInteger btnIndex) {
-            if (btnIndex == 1) {
-                
-                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":popView.phoneNum,@"code":@"123456"} successBlock:^(id returnData) {
-                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-                        weakSelf.notEnable = NO;
-                        [weakSelf.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
-                        [weakSelf.tableView reloadData];
-                    }else {
-                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
-                    }
-                    
-                } failureBlock:^(NSError *error) {
-                    
-                } showHUD:YES];
-            }
-        }];
+        self.notEnable = NO;
+        [self.tableView reloadData];
         return;
+//        typeof(self) weakSelf = self;
+//        
+//        User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+//        __block ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
+//        popView.frame = [UIScreen mainScreen].bounds;
+//        [popView showViewWithCallBack:^(NSInteger btnIndex) {
+//
+//            if (btnIndex == 1) {
+//                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":user.phoneNo,@"code":popView.phoneNum} successBlock:^(id returnData) {
+//                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
+//                        
+//                        [weakSelf.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
+//                        [weakSelf.tableView reloadData];
+//                        popView = nil;
+//                    }else {
+//                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
+//                    }
+//                    
+//                } failureBlock:^(NSError *error) {
+//                    
+//                } showHUD:YES];
+//            }
+//        }];
     }
     [self resignKeyBoardInView:self.view];
     NSDictionary *dict = [self getParam];
@@ -184,10 +188,10 @@ static NSString *const select_CellID = @"selectCell";
     
     _companyArray = [NSMutableArray array];
     int i = 0;
-    for (NSString *companyCode in [DataSource changeSaleCompanyWithString:user.applySaleCompany]) {
+    for (NSString *companyName in [DataSource changeSaleCompanyWithString:user.applySaleCompany]) {
         CodeNameModel *model = [[CodeNameModel alloc] init];
-        model.companyName = [DataSource insureCommpanyNameArray][i];
-        model.companyCode = companyCode;
+        model.companyName = companyName;
+        model.companyCode = [DataSource insureCommpanyCodeArray][i];
         [_companyArray addObject:model];
         i ++;
     }
@@ -333,6 +337,9 @@ static NSString *const select_CellID = @"selectCell";
         return cell;
     }
     if (indexPath.section == 0) {
+        if (indexPath.row == 1) {
+            cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
+        }
         if (indexPath.row == 4 || indexPath.row == 3)
         {
             [cell isPullDown:YES];
@@ -349,7 +356,7 @@ static NSString *const select_CellID = @"selectCell";
             }
         }
     }else if(indexPath.row == 1){
-        cell.textFiled.keyboardType = UIKeyboardTypeNumberPad;
+        cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
     }
     if (indexPath.section == 1)
     {
