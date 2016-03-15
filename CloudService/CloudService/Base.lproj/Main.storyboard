@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1021,6 +1021,44 @@
             </objects>
             <point key="canvasLocation" x="-224.5" y="391.5"/>
         </scene>
+        <!--活动规则-->
+        <scene sceneID="16f-Yi-UWa">
+            <objects>
+                <viewController title="活动规则" id="glp-MJ-rqP" customClass="ActivityRuleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iBI-Cl-wHJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ori-OC-xqU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wzH-7l-lBf">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dU-h1-rbF">
+                                <rect key="frame" x="20" y="20" width="335" height="563"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6dU-h1-rbF" secondAttribute="trailing" constant="20" id="7ag-Ns-cau"/>
+                            <constraint firstItem="6dU-h1-rbF" firstAttribute="top" secondItem="iBI-Cl-wHJ" secondAttribute="bottom" constant="20" id="9kV-kq-nfE"/>
+                            <constraint firstItem="ori-OC-xqU" firstAttribute="top" secondItem="6dU-h1-rbF" secondAttribute="bottom" constant="20" id="bTa-XY-PQk"/>
+                            <constraint firstItem="6dU-h1-rbF" firstAttribute="leading" secondItem="wzH-7l-lBf" secondAttribute="leading" constant="20" id="i8H-FW-DPT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="活动规则" id="3Ce-1v-qn2"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tvConent" destination="6dU-h1-rbF" id="2bj-25-cF3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SyZ-ZX-BWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-159.5" y="-1568.5"/>
+        </scene>
         <!--我的猴运-->
         <scene sceneID="0FD-S6-Ovc">
             <objects>
@@ -1213,6 +1251,7 @@
                         <outlet property="button3" destination="fTs-lD-HSs" id="PeV-g4-8Jt"/>
                         <outlet property="getCoupon" destination="jMB-Eo-JBf" id="1GK-Vo-cR8"/>
                         <outlet property="shareBtn" destination="UvJ-wT-F3W" id="37N-7b-wAw"/>
+                        <segue destination="glp-MJ-rqP" kind="push" identifier="rule" id="ypN-un-uD7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DLQ-CR-rsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1787,8 +1826,8 @@
                                     <constraint firstAttribute="width" secondItem="qc0-ZZ-hAA" secondAttribute="height" multiplier="1:1" id="F7d-xD-iq3"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码,你的朋友也可下载E云客服客户端" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVM-qo-2kd">
-                                <rect key="frame" x="20" y="416.5" width="335" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="扫描二维码,你的朋友也可下载E云客服客户端" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVM-qo-2kd">
+                                <rect key="frame" x="20" y="417" width="335" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="2Kl-1s-Kr3"/>
                                     <constraint firstAttribute="height" constant="21" id="uuh-3J-Eq7"/>
@@ -1873,14 +1912,14 @@
                                     <action selector="shareAction:" destination="TCA-u7-md9" eventType="touchUpInside" id="NB6-wp-DPl"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
                                 <rect key="frame" x="93" y="232" width="188" height="188"/>
                                 <color key="backgroundColor" red="1" green="0.26188047339999998" blue="0.28042493629999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bmO-QB-zPa" secondAttribute="height" id="dq7-v2-Q4k"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
                                 <rect key="frame" x="93" y="428" width="188" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0z4-W7-1GS"/>
@@ -2718,7 +2757,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAN-tt-IbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2373.5" y="-996.5"/>
+            <point key="canvasLocation" x="2358.5" y="-905.5"/>
         </scene>
         <!--立即报价-->
         <scene sceneID="iak-uT-QYf">

@@ -54,7 +54,7 @@
 {
     //可以把你要使用的信息加进去生成二维码
     UIImage *qrImg = [LBXScanWrapper createQRWithString:linkUrl size:_qrImgView.bounds.size];
-    UIImage *newImage= [LBXScanWrapper addImageLogo:qrImg centerLogoImage:[UIImage imageNamed:@"pix"] logoSize:CGSizeMake(50, 50)];
+    UIImage *newImage= [LBXScanWrapper addImageLogo:qrImg centerLogoImage:[UIImage imageNamed:@"sharLogo"] logoSize:CGSizeMake(50, 50)];
     
     _qrImgView.image = newImage;
     
@@ -63,7 +63,7 @@
 }
 - (IBAction)shareAction:(id)sender {
     //1、创建分享参数
-    NSArray* imageArray = @[[UIImage imageNamed:@"logo"]];
+    NSArray* imageArray = @[[UIImage imageNamed:@"sharLogo"]];
         if (imageArray) {
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];

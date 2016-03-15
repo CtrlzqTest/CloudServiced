@@ -51,8 +51,8 @@ static NSString *headerView_ID = @"headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyintegralData) name:ExchangeIntegralSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollectionView:) name:ReloadHomeData object:nil];
     
-    [[ButelHandle shareButelHandle] initCallViewWithFrame:CGRectMake(KWidth-20, KHeight/2, 220, 80)];
-    [[ButelHandle shareButelHandle] isHidden:NO tel:nil];
+    [[ButelHandle shareButelHandle] initCallView];
+    [[ButelHandle shareButelHandle] isHidden:NO tel:@""];
 }
 
 - (void)initData {
