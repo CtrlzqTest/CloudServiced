@@ -42,7 +42,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-//        self.backgroundColor = [HelperUtil colorWithHexString:@"2E2D2F"];
+        self.backgroundColor = [HelperUtil colorWithHexString:@"2E2D2F"];
         self.layer.cornerRadius = 40;
         self.layer.masksToBounds = YES;
         [self setContentView];
@@ -153,7 +153,7 @@
     [self addSubview:_imgMute];
     [self addSubview:_lbMute];
     [self addGestureRecognizer:oneFingerSwipeleft];
-
+    self.hidden = YES;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     
@@ -252,10 +252,11 @@
             NSDictionary *dic = returnData;
             NSDictionary *extDic = [dic objectForKey:@"ext"];
             NSString *str = [extDic objectForKey:@"dn"];
-            NSArray *array = [str componentsSeparatedByString:@":"];
-            self.nuber = [array objectAtIndex:1];
+//            NSArray *array = [str componentsSeparatedByString:@":"];
+//            self.nuber = [array objectAtIndex:1];
             self.deviceId = [extDic objectForKey:@"nubeUUID"];
             NSString *UUID = [extDic objectForKey:@"nubeAppKey"];
+            NSLog(@"%@",dic);
             [self.connect Login:UUID number:self.nuber deviceId:self.deviceId nickname:@"CONNECT" userUniqueIdentifer:self.deviceId];
         } failureBlock:^(NSError *error) {
             delegate.isLogin = NO;

@@ -16,6 +16,7 @@
 @property (weak, nonatomic)IBOutlet UITextField *tfPhone;
 @property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
 @property (weak, nonatomic)IBOutlet UITextField *tfCarCity;
+@property (weak, nonatomic)IBOutlet UIButton *isNewCarBtn;
 
 @end
 
@@ -31,32 +32,49 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)nextAction:(id)sender {
-    
     if ([_tfName.text isEqualToString:@""]) {
         [MBProgressHUD showMessag:@"请输入客户姓名" toView:self.view];
-    }else if ([_tfPhone.text isEqualToString:@""]){
+        return ;
+    }
+    if ([_tfPhone.text isEqualToString:@""]){
         [MBProgressHUD showMessag:@"请输入客户手机号" toView:self.view];
-    }else if ([_tfLicenseNo.text isEqualToString:@""]){
+        return ;
+    }
+    if (!self.isNewCarBtn.selected && [_tfLicenseNo.text isEqualToString:@""]){
         [MBProgressHUD showMessag:@"请输入车牌号" toView:self.view];
-    }else if ([_tfCarCity.text isEqualToString:@""]){
-        [MBProgressHUD showMessag:@"请输入汽车所在省市" toView:self.view];
-    }else if (![HelperUtil checkTelNumber:_tfPhone.text]){
+        return ;
+    }
+    if ([_tfCarCity.text isEqualToString:@""]){
+        [MBProgressHUD showMessag:@"请输入汽车所在城市" toView:self.view];
+        return ;
+    }
+    if (![HelperUtil checkTelNumber:_tfPhone.text]){
         [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
-    }else if (![HelperUtil validateCarNo:_tfLicenseNo.text]){
+        return ;
+    }
+    if (![_tfLicenseNo.text isEqualToString:@""] && ![HelperUtil validateCarNo:_tfLicenseNo.text]){
         [MBProgressHUD showMessag:@"车牌号格式不正确" toView:self.view];
-    }else {
+        return ;
+    }
+
+    
+    
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         delegate.isLogin=YES;
         /**
          *  dataType 01:创建订单,获取新数据 02:创建客户
          */
         User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    NSString *licenseNo = self.tfLicenseNo.text;
+    if ([self.tfLicenseNo.text isEqualToString:@""]) {
+        licenseNo = @"新车";
+    }
         NSDictionary *params = @{@"operType":@"测试",
                                  @"msg":@"",
                                  @"sendTime":@"",
                                  @"sign":@"",
                                  @"data":@{@"proportion":@"0.8",
-                                           @"customerName":_tfName,
+                                           @"customerName":_tfName.text,
                                            @"phoneNo":_tfPhone.text,
                                            @"dataType":@"01",
                                            @"comeFrom":@"YPT",
@@ -64,7 +82,7 @@
                                            @"macAdress":@"28:f0:76:18:c1:08",
                                            @"engineNo":@"jhg345325b135",
                                            @"vehicleFrameNo":@"dg3452",
-                                           @"licenseNo":_tfLicenseNo,
+                                           @"licenseNo":licenseNo,
                                            @"vehicleModelName":@"阿斯顿马丁",
                                            @"userId":user.userId,
                                            @"accountType":@"3",
@@ -85,7 +103,7 @@
             delegate.isLogin=NO;
             
         } showHUD:YES];
-    }
+    
 }
 
 - (void)createOrderWithBaseId:(NSString *)baseId pushUrl:(NSString *)url{
@@ -107,7 +125,18 @@
         
     } showHUD:NO];
 }
-
+- (IBAction)newCarAction:(id)sender {
+    NSLog(@"%d",self.isNewCarBtn.selected);
+    if (self.isNewCarBtn.selected)
+    {
+        [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox"] forState:(UIControlStateNormal)];
+    }else
+    {
+        [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox_"] forState:(UIControlStateNormal)];
+    }
+    self.isNewCarBtn.selected = !self.isNewCarBtn.selected;
+    
+}
 - (IBAction)showCityPickerView:(id)sender {
     
     [self resignKeyBoardInView:self.view];
