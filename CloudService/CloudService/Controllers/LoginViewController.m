@@ -144,8 +144,8 @@
             }else {
                 [Utility remberPassWord:NO];
             }
-            [[ButelHandle shareButelHandle] initCallView];
-            [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
+//            [[ButelHandle shareButelHandle] initCallView];
+//            [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
            
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];

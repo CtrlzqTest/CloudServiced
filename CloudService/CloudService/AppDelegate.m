@@ -67,7 +67,6 @@
     [FireData sharedInstance].sendTimeInterval = 2;
     [FireData sharedInstance].enableIDFA = NO;
 
-    
 }
 
 - (void)registerShareSDK {

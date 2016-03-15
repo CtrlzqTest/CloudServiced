@@ -21,12 +21,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[FireData sharedInstance] beginLogPageView:self.title attributes:nil cvar:nil];
+//    [[FireData sharedInstance] beginLogPageView:self.title attributes:nil cvar:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[FireData sharedInstance] endLogPageView:self.title];
+//    [[FireData sharedInstance] endLogPageView:self.title];
 }
 
 - (void)didReceiveMemoryWarning {

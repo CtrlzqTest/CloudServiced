@@ -126,13 +126,17 @@ static NSString *headerView_ID = @"headerView";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:user.userId forKey:@"userId"];
     [dict setValue:[Utility location] forKey:@"address"];
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kSignedAPI] params:dict successBlock:^(id returnData) {
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kSignedAPI]
+                                  params:dict
+                            successBlock:^(id returnData) {
+                                
             if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
                 [sender setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
                 [sender setTitle:@"已签到" forState:(UIControlStateNormal)];
                 sender.enabled = NO;
                 user.sign = @"1";
                 [[SingleHandle shareSingleHandle] saveUserInfo:user];
+                
             }
     } failureBlock:^(NSError *error) {
     
@@ -151,6 +155,7 @@ static NSString *headerView_ID = @"headerView";
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        
         _headerView = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID forIndexPath:indexPath];
         if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"1"]) {
             [_headerView.sginBtn setBackgroundImage:[UIImage imageNamed:@"home-icon7_"] forState:(UIControlStateNormal)];
@@ -248,7 +253,9 @@ static NSString *headerView_ID = @"headerView";
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     __weak typeof(self) weakSelf = self;
     NSLog(@"%@",user.userId);
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI]
+                                  params:@{@"userId":user.userId}
+                            successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             NSString *str = [returnData[@"data"] valueForKey:@"totalNum"];
@@ -263,10 +270,16 @@ static NSString *headerView_ID = @"headerView";
 
 /** 获取数据*/
 - (void)getData {
+    
     if ([[[SingleHandle shareSingleHandle] getUserInfo].sign isEqualToString:@"1"]) {
+        
         NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
         NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyCustomerData];
-        [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
+        
+        [MHNetworkManager postReqeustWithURL:url
+                                      params:paramsDic
+                                successBlock:^(id returnData) {
+                                    
             NSDictionary *dic = returnData;
             if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
                 NSDictionary *dataDic = [dic objectForKey:@"data"];
@@ -275,9 +288,7 @@ static NSString *headerView_ID = @"headerView";
                 
             }else {
                 [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
-                
             }
-            
             
         } failureBlock:^(NSError *error) {
             
