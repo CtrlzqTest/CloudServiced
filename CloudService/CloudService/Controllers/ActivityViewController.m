@@ -125,6 +125,10 @@ static NSString *cellID = @"cellID";
 //        NSArray *array=[[NSBundle mainBundle] loadNibNamed:@"ActivityCollectionCell" owner:self options:nil];
 //        cell=[array objectAtIndex:0];
 //    }
+    
+    if (!actifityModel) {
+        return cell;
+    }
     switch (indexPath.row) {
         case 0:
             if (![actifityModel.monkeyOne isEqualToString:@"0"]) {
@@ -150,7 +154,6 @@ static NSString *cellID = @"cellID";
         default:
             break;
     }
-    
     return cell;
 }
 

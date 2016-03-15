@@ -114,7 +114,7 @@ static NSString *const select_CellID = @"selectCell";
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetUserInfoAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-            
+            [self saveUserInfo:dict];
             [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
             UIViewController *VC = [self.navigationController.viewControllers firstObject];
             if ([[VC class] isSubclassOfClass:[LoginViewController class]]) {
@@ -710,8 +710,12 @@ static NSString *const select_CellID = @"selectCell";
     return [resultStr substringToIndex:resultStr.length - 1];
 }
 
+// 提交后保存用户信息到本地
+- (void)saveUserInfo:(NSDictionary *)dict {
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    [user setValuesForKeysWithDictionary:dict];
+}
 /*
- User *user = [[SingleHandle shareSingleHandle] getUserInfo];
  [[SingleHandle shareSingleHandle] saveUserInfo:user];
  user.realName = _valueArray_User[0];
  user.workStartDate = _valueArray_User[5];
@@ -732,6 +736,7 @@ static NSString *const select_CellID = @"selectCell";
  user.subbranchName = _valueArray_Bank[3];
  user.accountProvinces = _valueArray_Bank[4];
  user.accountCity = _valueArray_Bank[5];
+
  */
 
 /*

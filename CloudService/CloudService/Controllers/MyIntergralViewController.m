@@ -51,9 +51,10 @@
             weakSelf.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
             weakSelf.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
         }
-    } failureBlock:^(NSError *error) {
         
-    } showHUD:YES];
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD showMessag:@"数据刷新失败" toView:self.view];
+    } showHUD:NO];
 }
 
 - (void)setupLayoutConstranints {
