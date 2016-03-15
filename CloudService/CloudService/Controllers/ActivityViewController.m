@@ -205,20 +205,20 @@ static NSString *cellID = @"cellID";
     }
     
     if (![actifityModel.monkeyTwo isEqualToString:@"0"]) {
-        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home5"] forState:(UIControlStateNormal)];
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home6"] forState:(UIControlStateNormal)];
         self.btnNum2.hidden = NO;
         [self.btnNum2 setTitle:actifityModel.monkeyTwo forState:(UIControlStateNormal)];
     }else {
-        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home5_"] forState:(UIControlStateNormal)];
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home6_"] forState:(UIControlStateNormal)];
         self.btnNum2.hidden = YES;
     }
     
     if (![actifityModel.monkeyThree isEqualToString:@"0"]) {
-        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home6"] forState:(UIControlStateNormal)];
+        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home5"] forState:(UIControlStateNormal)];
         self.btnNum3.hidden = NO;
         [self.btnNum3 setTitle:actifityModel.monkeyThree forState:(UIControlStateNormal)];
     }else {
-        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home6_"] forState:(UIControlStateNormal)];
+        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home5_"] forState:(UIControlStateNormal)];
         self.btnNum3.hidden = YES;
     }
     

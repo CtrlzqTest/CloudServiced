@@ -131,7 +131,6 @@
 //        [MBProgressHUD showMessag:@"无法获取定位信息,系统默认您的的登录城市为北京市" toView:self.view];
         [dict setValue:@"北京市" forKey:@"address"];
     }
-    
 
     __weak typeof(self) weakSelf = self;
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kLoginAPI] params:dict successBlock:^(id returnData) {
@@ -144,9 +143,6 @@
             }else {
                 [Utility remberPassWord:NO];
             }
-//            [[ButelHandle shareButelHandle] initCallView];
-//            [[ButelHandle shareButelHandle] isHidden:YES tel:nil];
-           
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }else if([[returnData valueForKey:@"flag"] isEqualToString:@"error"]){
@@ -181,6 +177,16 @@
         return false;
     }
     return true;
+}
+
+-(void)dealloc {
+    _inputView = nil;
+    _loginBtn = nil;
+    _UserTextFiled = nil;
+    _backImg = nil;
+    _pwdTextFiled = nil;
+    _choseBtn = nil;
+    _eyeImg = nil;
 }
 
 - (void)didReceiveMemoryWarning {

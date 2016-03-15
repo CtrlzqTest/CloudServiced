@@ -34,9 +34,9 @@
                             <color key="textColor" red="0.62464488636363635" green="0.62464488636363635" blue="0.62464488636363635" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avp-Za-3JT">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avp-Za-3JT">
                             <rect key="frame" x="182" y="78" width="111.5" height="21"/>
-                            <state key="normal" title="重新发送">
+                            <state key="normal" title="发送验证码">
                                 <color key="titleColor" red="1" green="0.17007582060000001" blue="0.18900344620000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>

@@ -73,7 +73,7 @@
     self.pickerView.delegate = self;
     
     _accessInputView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.pickerView.frame) - 30, KWidth, 30)];
-    _accessInputView.hidden = YES;
+//    _accessInputView.hidden = YES;
     _accessInputView.backgroundColor = [UIColor whiteColor];
     
     UIButton *cancleBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];

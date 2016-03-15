@@ -48,7 +48,9 @@
     if (pullDown) {
         self.textFiled.enabled = NO;
         self.imageBtn.hidden = NO;
+        self.imageBtn.image = [UIImage imageNamed:@"details-arrow2"];
     }else {
+        self.textFiled.keyboardType = UIKeyboardTypeDefault;
         self.textFiled.enabled = YES;
         self.imageBtn.hidden = YES;
     }
