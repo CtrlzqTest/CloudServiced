@@ -163,15 +163,12 @@
     if (isCall) {
         //挂断
         [self.connect HangupCall:0];
-        [_btnCall setBackgroundImage:[UIImage imageNamed:@"pop2-btn1"] forState:UIControlStateNormal];
-        _imgCall.hidden = NO;
-        _lbCall.text = @"拨号";
-        isCall = !isCall;
+        
     }else {
         if (isCanCall) {
             AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
             delegate.isThird=YES;
-            [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/makeCall" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"number":@"15910620512", @"ani":@"12345", @"uuid":self.deviceId, @"requestType":@"test" } successBlock:^(NSDictionary *returnData) {
+            [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/makeCall" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"number":@"13701165874", @"ani":@"12345", @"uuid":self.deviceId, @"requestType":@"test" } successBlock:^(NSDictionary *returnData) {
                 NSDictionary *dic = returnData;
                 NSLog(@"%@",dic);
                 delegate.isThird = NO;
@@ -247,7 +244,7 @@
         //http登陆
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         delegate.isThird=YES;
-        [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/login4butel" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"passWord":@"1001"} successBlock:^(NSDictionary *returnData) {
+        [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/login4Butel" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"passWord":@"1001"} successBlock:^(NSDictionary *returnData) {
             delegate.isThird = NO;
             NSDictionary *dic = returnData;
             NSDictionary *extDic = [dic objectForKey:@"ext"];
@@ -337,9 +334,13 @@
 - (void)OnNewcall:(NSString*)szCallerNum szCallerNickname:(NSString*)szCallerNickname Sid:(NSString*)Sid  nCallType:(int) nCallType  szExtendSignalInfo:(NSString*)szExtendSignalInfo{
     NSLog(@"%@",szCallerNum);
 }
+//挂断回调
 - (void)OnDisconnect:(int) nReason Sid:(NSString*)Sid{
     _labelCallDuration.hidden = YES;
     _imgCall.hidden = NO;
+    [_btnCall setBackgroundImage:[UIImage imageNamed:@"pop2-btn1"] forState:UIControlStateNormal];
+    _lbCall.text = @"拨号";
+    isCall = !isCall;
     if (self.timerForDuration) {
         NSLog(@"取消通话计时器");
         _callDuration = 0;

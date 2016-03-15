@@ -16,10 +16,7 @@
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 @interface AppointmentViewController ()<HZQDatePickerViewDelegate,UITextViewDelegate>
-{
 
-    NSDate *_date;
-}
 @property (nonatomic, strong) PlaceholderTextView * textView;
 @property (weak, nonatomic)IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *lbCode;
@@ -93,11 +90,11 @@
 - (void)getSelectDate:(NSDate *)date type:(DateType)type {
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
     switch (type) {
         case DateTypeOfStart:
-            _date = date;
+    
             self.lbDate.text = currentOlderOneDateStr;
             
             break;
@@ -150,7 +147,7 @@
 }
 - (IBAction)save:(id)sender {
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kaddReserve];
-    NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"customerId":@"",@"reserveTime":[NSString stringWithFormat:@"%ld",(long)[_date timeIntervalSince1970]*1000],@"comment":self.textView.text,@"endCode":_lbCode.text};
+    NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"customerId":@"",@"time":self.lbDate.text,@"comment":self.textView.text,@"endCode":_lbCode.text};
     [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {

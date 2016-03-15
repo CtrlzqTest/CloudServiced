@@ -41,6 +41,10 @@ static NSString *cellID = @"cellID";
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
+    
+    [weakSelf setRightTextBarButtonItemWithFrame:CGRectMake(0, 0, 70, 25) title:@"活动规则" titleColor:[UIColor whiteColor] backImage:@"" selectBackImage:@"" action:^(AYCButton *button) {
+        [weakSelf performSegueWithIdentifier:@"rule" sender:self];
+    }];
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg"] forBarMetrics:UIBarMetricsCompact];
     [self setupCollectionView];
@@ -271,7 +275,7 @@ static NSString *cellID = @"cellID";
 
 - (IBAction)shareAction:(id)sender {
     //1、创建分享参数
-    NSArray* imageArray = @[[UIImage imageNamed:@"logo"]];
+    NSArray* imageArray = @[[UIImage imageNamed:@"sharLogo"]];
     if (imageArray) {
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];

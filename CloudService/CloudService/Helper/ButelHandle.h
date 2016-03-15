@@ -11,6 +11,6 @@
 @interface ButelHandle : NSObject
 
 + (ButelHandle *)shareButelHandle;
-- (void)initCallViewWithFrame:(CGRect )frame;
+- (void)initCallView;
 - (void)isHidden:(BOOL)hidden tel:(NSString *)telNum;
 @end
