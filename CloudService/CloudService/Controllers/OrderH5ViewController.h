@@ -6,9 +6,9 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface OrderH5ViewController : UIViewController
+@interface OrderH5ViewController : BaseViewController
 
 @property (nonatomic,copy)NSString *url;
 

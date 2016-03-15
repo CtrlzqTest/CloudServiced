@@ -67,7 +67,7 @@
         //设置请求超时时长
         [manager.requestSerializer setTimeoutInterval:10];
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-        if (delegate.isLogin) {
+        if (delegate.isThird) {
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
         }
         if (networkType==MHAsiNetWorkGET)

@@ -6,9 +6,9 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 @class Coupons;
-@interface CouponsDistributeViewController : UIViewController
+@interface CouponsDistributeViewController : BaseViewController
 
 @property (nonatomic, strong)Coupons *coupons;
 @end

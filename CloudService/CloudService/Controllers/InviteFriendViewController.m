@@ -63,7 +63,7 @@
 }
 - (IBAction)shareAction:(id)sender {
     //1、创建分享参数
-    NSArray* imageArray = @[[UIImage imageNamed:@"card-icon1"]];
+    NSArray* imageArray = @[[UIImage imageNamed:@"logo"]];
         if (imageArray) {
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];

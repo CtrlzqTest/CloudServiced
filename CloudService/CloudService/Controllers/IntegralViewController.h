@@ -6,8 +6,8 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface IntegralViewController : UIViewController
+@interface IntegralViewController : BaseViewController
 
 @end

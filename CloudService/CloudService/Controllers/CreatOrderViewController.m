@@ -60,7 +60,7 @@
     
     
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-        delegate.isLogin=YES;
+        delegate.isThird=YES;
         /**
          *  dataType 01:创建订单,获取新数据 02:创建客户
          */
@@ -92,7 +92,7 @@
         __weak typeof(self) weakSelf = self;
         [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {
             
-            delegate.isLogin=NO;
+            delegate.isThird=NO;
             if ([returnData[@"state"] isEqualToString:@"0"]) {
                 NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
                 NSString *baseId = [returnData[@"data"] valueForKey:@"baseId"];
@@ -100,7 +100,7 @@
             }
             
         } failureBlock:^(NSError *error) {
-            delegate.isLogin=NO;
+            delegate.isThird=NO;
             
         } showHUD:YES];
     

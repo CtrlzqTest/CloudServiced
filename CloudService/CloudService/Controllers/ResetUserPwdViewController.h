@@ -6,8 +6,8 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ResetUserPwdViewController : UIViewController
+@interface ResetUserPwdViewController : BaseViewController
 
 @end

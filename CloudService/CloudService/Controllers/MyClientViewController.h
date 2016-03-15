@@ -6,9 +6,9 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface MyClientViewController : UIViewController
+@interface MyClientViewController : BaseViewController
 
 @property (nonatomic,assign)BOOL isSaveCarInfo;
 

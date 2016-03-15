@@ -6,8 +6,8 @@
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface CouponsViewController : UIViewController
+@interface CouponsViewController : BaseViewController
 
 @end
