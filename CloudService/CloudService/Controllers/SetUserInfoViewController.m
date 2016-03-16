@@ -190,7 +190,7 @@ static NSString *const select_CellID = @"selectCell";
     _valueArray_User[8] = user.saleCityValue;
     
     _valueArray_Bank = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@""]];
-    _valueArray_Bank[0] = user.realName;
+    _valueArray_Bank[0] = user.bankAccountName;
     _valueArray_Bank[1] = user.bankNum;
     _valueArray_Bank[2] = user.bankName;
     _valueArray_Bank[3] = user.subbranchName;
@@ -247,6 +247,7 @@ static NSString *const select_CellID = @"selectCell";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
+    NSLog(@"%ld",(long)_indexPath.row);
     _valueArray_User[_indexPath.row] = currentOlderOneDateStr;
     [self.tableView reloadData];
     _pickerView = nil;
@@ -338,7 +339,10 @@ static NSString *const select_CellID = @"selectCell";
         return cell;
     }
     
-    SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id forIndexPath:indexPath];
+    SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
+    if (cell == nil) {
+        cell = [[SetUserInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_id];
+    }
     cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     
@@ -468,6 +472,7 @@ static NSString *const select_CellID = @"selectCell";
     if ([tableView isEqual:self.selectTableView]) {
         return 30;
     }
+    
     return 50;
 }
 
@@ -729,6 +734,8 @@ static NSString *const select_CellID = @"selectCell";
 - (void)saveUserInfo:(NSDictionary *)dict {
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     [user setValuesForKeysWithDictionary:dict];
+    user.workStartDate = [HelperUtil getDateWithDateStr:user.workStartDate];
+    [[SingleHandle shareSingleHandle] saveUserInfo:user];
 }
 /*
  [[SingleHandle shareSingleHandle] saveUserInfo:user];

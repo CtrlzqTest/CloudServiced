@@ -63,7 +63,11 @@
 //    } showHUD:YES];
     
     _valueArray[0] = @"";
-    _valueArray[1] = user.userName;
+    if (user.realName.length > 0) {
+        _valueArray[1] = user.realName;
+    }else {
+        _valueArray[1] = user.userName;
+    }
     _valueArray[2] = user.phoneNo;
     _valueArray[3] = user.idCard;
     _valueArray[4] = user.chatName;
@@ -76,6 +80,7 @@
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     __weak typeof(self) weakSelf = self;
+    
     [self setRightTextBarButtonItemWithFrame:CGRectMake(10, 0, 40, 30) title:@"更多" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];

@@ -87,9 +87,11 @@
     self.pwdTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                initWithString:@"请输入密码"
                                                attributes:@{NSForegroundColorAttributeName:color}];
+    
+    self.UserTextFiled.text = [Utility userName];
+    NSLog(@"%d",[Utility isRemberPassWord]);
     if ([Utility isRemberPassWord]) {
         self.pwdTextFiled.text = [Utility passWord];
-        self.UserTextFiled.text = [Utility userName];
         self.choseBtn.selected = YES;
         [self.choseBtn setBackgroundImage:[UIImage imageNamed:@"login-choose_"] forState:(UIControlStateNormal)];
     }

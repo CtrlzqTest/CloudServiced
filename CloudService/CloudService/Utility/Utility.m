@@ -68,7 +68,7 @@ static User *user = nil;
 }
 
 + (BOOL)isRemberPassWord {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:@"remberPassWord"];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"remberPassWord"];
 }
 
 +(void)remberPassWord:(BOOL )isRemberPwd {
