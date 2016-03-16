@@ -117,6 +117,7 @@
         {
             case ImageTypeNet:
                 [self.frontImgView sd_setImageWithURL:[NSURL URLWithString:[_imageArray lastObject]] placeholderImage:nil];
+                [self.frontImgView setContentMode:UIViewContentModeScaleAspectFill];
                 [self.lastImgView sd_setImageWithURL:[NSURL URLWithString:_imageArray[_currenIndex + 1]] placeholderImage:nil];
                 break;
             case ImageTypeBundle:
