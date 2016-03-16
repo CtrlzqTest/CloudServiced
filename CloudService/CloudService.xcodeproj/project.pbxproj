@@ -94,6 +94,8 @@
 		F01A61611C7D3D3E008CBBD5 /* SetUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01A615F1C7D3D3E008CBBD5 /* SetUserInfoCell.xib */; };
 		F01A61641C7D456B008CBBD5 /* SetUserInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F01A61631C7D456B008CBBD5 /* SetUserInfoHeaderView.m */; };
 		F01A616D1C7D860E008CBBD5 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = F01A616C1C7D860E008CBBD5 /* LoginInputView.m */; };
+		F01FD4551C98270300C87B88 /* ChooseCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F01FD4531C98270300C87B88 /* ChooseCompanyViewController.m */; };
+		F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01FD4541C98270300C87B88 /* ChooseCompanyViewController.xib */; };
 		F0292BAF1C7B00CD00A810A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F0292BAE1C7B00CD00A810A9 /* main.m */; };
 		F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0292BB11C7B00CD00A810A9 /* AppDelegate.m */; };
 		F0292BB81C7B00CD00A810A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0292BB61C7B00CD00A810A9 /* Main.storyboard */; };
@@ -289,6 +291,9 @@
 		F01A61631C7D456B008CBBD5 /* SetUserInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUserInfoHeaderView.m; sourceTree = "<group>"; };
 		F01A616B1C7D860E008CBBD5 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
 		F01A616C1C7D860E008CBBD5 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
+		F01FD4521C98270300C87B88 /* ChooseCompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCompanyViewController.h; sourceTree = "<group>"; };
+		F01FD4531C98270300C87B88 /* ChooseCompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCompanyViewController.m; sourceTree = "<group>"; };
+		F01FD4541C98270300C87B88 /* ChooseCompanyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCompanyViewController.xib; sourceTree = "<group>"; };
 		F0292BAA1C7B00CD00A810A9 /* CloudService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0292BAE1C7B00CD00A810A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F0292BB01C7B00CD00A810A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -622,6 +627,9 @@
 				F019C9E41C7C7BB700E73A2C /* SetUserInfoViewController.m */,
 				F0DF32101C87E612008D098F /* ResetUserPwdViewController.h */,
 				F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */,
+				F01FD4521C98270300C87B88 /* ChooseCompanyViewController.h */,
+				F01FD4531C98270300C87B88 /* ChooseCompanyViewController.m */,
+				F01FD4541C98270300C87B88 /* ChooseCompanyViewController.xib */,
 			);
 			name = "LoginRegisterControllers(登录注册)";
 			sourceTree = "<group>";
@@ -929,7 +937,7 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7PS2AH4H79;
+						DevelopmentTeam = 2936LQZ357;
 					};
 				};
 			};
@@ -957,6 +965,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
+				F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
 				63FE2FFB1C97F3BE00537876 /* ButelCommonConnectSDK.bundle in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
@@ -1129,6 +1138,7 @@
 				637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */,
 				F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */,
 				6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */,
+				F01FD4551C98270300C87B88 /* ChooseCompanyViewController.m in Sources */,
 				F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */,
 				F057320B1C859D2400D88B78 /* SingleHandle.m in Sources */,
 				6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */,
@@ -1210,7 +1220,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4acb4f61-b0d9-4a94-b264-f35e158c8de1";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1248,7 +1258,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4acb4f61-b0d9-4a94-b264-f35e158c8de1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

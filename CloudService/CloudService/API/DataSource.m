@@ -18,7 +18,7 @@
 }
 
 +(NSArray *)insureCommpanyNameArray {
-    return @[@"平安",@"太保",@"天安",@"中华",@"大地",@"阳光",@"安盛",@"其他"];
+    return @[@"平安保险",@"太保保险",@"天安保险",@"中华保险",@"大地保险",@"阳光保险",@"安盛保险",@"其他"];
 }
 
 +(NSArray *)insureCommpanyCodeArray {
@@ -57,4 +57,20 @@
     }
 }
 
++ (NSString *)changeCompanyCodeToText:(NSString *)code {
+    
+    NSInteger index = [[DataSource insureCommpanyCodeArray] indexOfObject:code];
+    if (index > GID_MAX) {
+        return @"";
+    }
+    return [[DataSource insureCommpanyNameArray] objectAtIndex:index];
+    
+}
+
++ (NSString *)changeCompanyTextToCode:(NSString *)name {
+    
+    NSInteger index = [[DataSource insureCommpanyNameArray] indexOfObject:name];
+    return [[DataSource insureCommpanyCodeArray] objectAtIndex:index];
+    
+}
 @end
