@@ -168,9 +168,14 @@
         if (isCanCall) {
             AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
             delegate.isThird=YES;
-            [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/makeCall" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"number":@"13701165874", @"ani":@"12345", @"uuid":self.deviceId, @"requestType":@"test" } successBlock:^(NSDictionary *returnData) {
+            [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/makeCall" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"number":@"18637092233", @"ani":@"12345", @"uuid":self.deviceId, @"requestType":@"test" } successBlock:^(NSDictionary *returnData) {
                 NSDictionary *dic = returnData;
                 NSLog(@"%@",dic);
+                if ([[dic objectForKey:@"code"] isEqualToString:@"000"]) {
+                    NSLog(@"拨打电话成功");
+                }else {
+                    [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:nil];
+                }
                 delegate.isThird = NO;
             } failureBlock:^(NSError *error) {
                 delegate.isThird = NO;
@@ -247,14 +252,19 @@
         [MHNetworkManager postReqeustWithURL:@"http://221.4.250.108:8088/apHttpService/agent/login4Butel" params:@{@"entId":@"7593111023", @"agentId":@"1001",@"passWord":@"1001"} successBlock:^(NSDictionary *returnData) {
             delegate.isThird = NO;
             NSDictionary *dic = returnData;
-            NSDictionary *extDic = [dic objectForKey:@"ext"];
-            NSString *str = [extDic objectForKey:@"dn"];
-            NSArray *array = [str componentsSeparatedByString:@":"];
-            self.nuber = [array objectAtIndex:1];
-            self.deviceId = [extDic objectForKey:@"nubeUUID"];
-            NSString *UUID = [extDic objectForKey:@"nubeAppKey"];
-            NSLog(@"%@",dic);
-            [self.connect Login:UUID number:self.nuber deviceId:self.deviceId nickname:@"CONNECT" userUniqueIdentifer:self.deviceId];
+            if ([[dic objectForKey:@"code"] isEqualToString:@"000"]) {
+                NSDictionary *extDic = [dic objectForKey:@"ext"];
+                NSString *str = [extDic objectForKey:@"dn"];
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                self.nuber = [array objectAtIndex:1];
+                self.deviceId = [extDic objectForKey:@"nubeUUID"];
+                NSString *UUID = [extDic objectForKey:@"nubeAppKey"];
+                NSLog(@"%@",dic);
+                [self.connect Login:UUID number:self.nuber deviceId:self.deviceId nickname:@"CONNECT" userUniqueIdentifer:self.deviceId];
+            }else {
+                [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:nil];
+            }
+            
         } failureBlock:^(NSError *error) {
             delegate.isThird = NO;
             NSLog(@"%@",error);
@@ -277,6 +287,7 @@
     NSLog(@"%@",Sid);
     
 }
+//打电话成功回调
 - (void)OnConnect:(int)mediaFormat Sid:(NSString*)Sid {
     _labelCallDuration.hidden = NO;
     _imgCall.hidden = YES;

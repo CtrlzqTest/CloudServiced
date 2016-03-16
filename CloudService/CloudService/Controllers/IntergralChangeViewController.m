@@ -58,7 +58,7 @@
         }
     } failureBlock:^(NSError *error) {
         
-    } showHUD:YES];
+    } showHUD:NO];
 }
 
 /**

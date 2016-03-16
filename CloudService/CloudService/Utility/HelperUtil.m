@@ -331,7 +331,7 @@
         flag = NO;
         return flag;
     }
-    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[X])$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
     BOOL isMatch = [pred evaluateWithObject:idCard];
     return isMatch;
