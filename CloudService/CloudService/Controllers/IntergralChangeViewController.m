@@ -33,8 +33,12 @@
     self.backView.layer.cornerRadius = KWidth * 3 / 7 / 2.0;
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    self.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
-    self.maxChangeLabel.text = [NSString stringWithFormat:@"最多可兑换%d元",(int)user.totalNum / 1000];
+    if ([user.totalNum floatValue] >= 100000) {
+        self.intergTotalLabel.text = [NSString stringWithFormat:@"%.1lf万",[user.totalNum floatValue] / 10000.0];
+    }else {
+        self.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
+    }
+    self.maxChangeLabel.text = [NSString stringWithFormat:@"最多可兑换%.0f元",[user.totalNum floatValue] / 1000];
     
 }
 

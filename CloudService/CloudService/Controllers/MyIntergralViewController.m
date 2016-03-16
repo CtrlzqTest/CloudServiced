@@ -46,10 +46,7 @@
             user.frozenNum = dict[@"frozenNum"];
             user.usableNum = dict[@"usableNum"];
             [[SingleHandle shareSingleHandle] saveUserInfo:user];
-//
-            weakSelf.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
-            weakSelf.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
-            weakSelf.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
+            [weakSelf reloadViews];
         }
         
     } failureBlock:^(NSError *error) {
@@ -77,6 +74,28 @@
         [weakSelf performSegueWithIdentifier:@"integral" sender:weakSelf];
        
     }];
+}
+
+- (void)reloadViews {
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    if ([user.totalNum floatValue] >= 100000) {
+        self.intergTotalLabel.text = [NSString stringWithFormat:@"%.1lf万",[user.totalNum floatValue] / 10000.0];
+    }else {
+        self.intergTotalLabel.text = [NSString stringWithFormat:@"%@",user.totalNum];
+    }
+    if ([user.usableNum floatValue] >= 100000) {
+        self.intergUseLabel.text = [NSString stringWithFormat:@"%.1lf万",[user.usableNum floatValue] / 10000.0];
+    }else {
+        self.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
+    }
+    if ([user.frozenNum floatValue] >= 100000) {
+        self.intergUnuseLabel.text = [NSString stringWithFormat:@"%.1lf万",[user.frozenNum floatValue] / 10000.0];
+    }else {
+        self.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
+    }
+    
+//    self.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
+//    self.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
 }
 
 - (IBAction)intergralCityAction:(id)sender {
