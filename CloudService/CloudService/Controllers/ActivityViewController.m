@@ -18,6 +18,7 @@ static NSString *cellID = @"cellID";
 
 {
     ActifityModel *actifityModel;
+    NSString *_linkUrl;
 }
 
 @property (strong, nonatomic)UICollectionView *collectionView;
@@ -47,6 +48,7 @@ static NSString *cellID = @"cellID";
     }];
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg"] forBarMetrics:UIBarMetricsCompact];
+    [self setUpInviteLink];
     [self setupCollectionView];
     [self setupBtnNum];
     [self setupButton];
@@ -275,17 +277,39 @@ static NSString *cellID = @"cellID";
     } showHUD:YES];
     
 }
-
+- (void)setUpInviteLink {
+    NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindInviteLink];
+    
+    [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
+        
+        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+            _linkUrl = [returnData objectForKey:@"data"];
+        
+            
+        }else {
+            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+        
+    } showHUD:NO];
+    
+}
 - (IBAction)shareAction:(id)sender {
+    if (!_linkUrl) {
+        [MBProgressHUD showError:@"生成邀请url失败" toView:self.view];
+        return;
+    }
     //1、创建分享参数
     NSArray* imageArray = @[[UIImage imageNamed:@"sharLogo"]];
     if (imageArray) {
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"云客服"
-                                         images:@""
+        [shareParams SSDKSetupShareParamsByText:@"诚心邀请您加入云客服，参加集猴纳财活动，送万元梦想基金"
+                                         images:imageArray
                                             url:[NSURL URLWithString:@"www.baidu.com"]
-                                          title:@"注册我的邀请码：5234"
+                                          title:@"云客服"
                                            type:SSDKContentTypeAuto];
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响

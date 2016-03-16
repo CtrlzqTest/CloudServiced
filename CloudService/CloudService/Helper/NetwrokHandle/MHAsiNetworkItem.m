@@ -139,7 +139,7 @@
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [MBProgressHUD hideAllHUDsForView:(UIView*)[[[UIApplication sharedApplication]delegate]window] animated:YES];
                 DTLog(@"---error==%@\n",error.localizedDescription);
-                [MBProgressHUD showMessag:@"网络异常" toView:nil];
+                [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@",error.localizedDescription] toView:nil];
                 if (failureBlock) {
                     failureBlock(error);
                 }

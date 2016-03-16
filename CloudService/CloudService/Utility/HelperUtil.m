@@ -397,7 +397,7 @@
  发动机号验证 MODIFIED BY HELENSONG
  */
 + (BOOL)validateEngineNo:(NSString *) engineNo {
-    NSString *carRegex = @"^[a-zA-Z0-9]{6,8}$";
+    NSString *carRegex = @"^[a-zA-Z0-9]{6+}$";
     NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
     return [carTest evaluateWithObject:engineNo];
 }
