@@ -17,6 +17,9 @@ typedef void(^ClickBlock)(NSInteger index);
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sginBtn;
 @property (weak, nonatomic) IBOutlet UILabel *integralLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgSize;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoViewHeght;
+
 
 - (void)playWithImageArray:(NSArray *)imgStrArray clickAtIndex:(ClickBlock )tapIndex;
 - (void)setDataWithDictionary:(NSDictionary *)dict;

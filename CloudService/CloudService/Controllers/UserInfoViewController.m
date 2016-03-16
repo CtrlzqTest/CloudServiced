@@ -81,6 +81,7 @@
         SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
         _isTosetUserInfo = YES;
         setUserInfoVC.notEnable = YES;
+        setUserInfoVC.rightBtnTitle = @"保存";
         [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
     }];
 
