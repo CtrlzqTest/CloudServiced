@@ -272,7 +272,7 @@ static NSString *headerView_ID = @"headerView";
         
     } failureBlock:^(NSError *error) {
         
-    } showHUD:YES];
+    } showHUD:NO];
 }
 
 /** 获取数据*/

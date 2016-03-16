@@ -16,9 +16,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISD-1P-NY7">
-                        <rect key="frame" x="38" y="14" width="87" height="21"/>
+                        <rect key="frame" x="38" y="14" width="150" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="87" id="fte-Un-a24"/>
+                            <constraint firstAttribute="width" constant="150" id="fte-Un-a24"/>
                             <constraint firstAttribute="height" constant="21" id="rYr-Ue-51L"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -36,10 +36,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="京A13414" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGU-Te-tcu">
-                        <rect key="frame" x="88" y="43" width="93" height="21"/>
+                        <rect key="frame" x="88" y="43" width="100" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="CHn-ks-KNJ"/>
-                            <constraint firstAttribute="width" constant="93" id="k4p-kV-dOZ"/>
+                            <constraint firstAttribute="width" constant="100" id="k4p-kV-dOZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

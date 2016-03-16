@@ -10,10 +10,12 @@
 #import "Utility.h"
 
 @interface SetNewPwdViewController ()
-
+{
+    BOOL _isEye;
+}
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextFiled;
 @property (weak, nonatomic) IBOutlet UITextField *enSurePwdTextFiled;
-
+@property (strong, nonatomic)UIImageView *eyeImg;
 @end
 
 @implementation SetNewPwdViewController
@@ -21,7 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"设置新密码";
-    self.pwdTextFiled.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
+    self.eyeImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
+    
+    self.pwdTextFiled.rightView = self.eyeImg;
+    self.pwdTextFiled.rightView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(eyeTap:)];
+    [self.pwdTextFiled.rightView addGestureRecognizer:tap];
+
     self.pwdTextFiled.rightViewMode = UITextFieldViewModeAlways;
     
     self.enSurePwdTextFiled.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
@@ -33,19 +41,32 @@
     }];
     
 }
-
+- (void)eyeTap:(UITapGestureRecognizer *)sender {
+    _isEye = !_isEye;
+    if (_isEye) {
+        
+        self.eyeImg.image = [UIImage imageNamed:@"login-line_"];
+        self.pwdTextFiled.secureTextEntry = NO;
+    }else {
+        
+        self.eyeImg.image = [UIImage imageNamed:@"login-line"];
+        self.pwdTextFiled.secureTextEntry = YES;
+    }
+}
 - (IBAction)resetPwdAction:(id)sender {
     
     if (![self checkInputMode]) {
         return;
     }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSDictionary *dict = @{@"password":@"111111" ,@"newPwd":self.pwdTextFiled.text,@"userId":user.userId};
+    NSDictionary *dict = @{@"password":[Utility passWord] ,@"newPwd":self.pwdTextFiled.text,@"userId":user.userId};
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetPwdAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"])
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [Utility saveUserName:[Utility userName] passWord:self.pwdTextFiled.text];
+            NSArray *VCArrary = self.navigationController.viewControllers;
+            [self.navigationController popToViewController:[VCArrary objectAtIndex:1] animated:YES];
         }else
         {
             [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
