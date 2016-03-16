@@ -60,7 +60,7 @@
 + (NSString *)changeCompanyCodeToText:(NSString *)code {
     
     NSInteger index = [[DataSource insureCommpanyCodeArray] indexOfObject:code];
-    if (index > GID_MAX) {
+    if (index > [[DataSource insureCommpanyNameArray] count]) {
         return @"";
     }
     return [[DataSource insureCommpanyNameArray] objectAtIndex:index];

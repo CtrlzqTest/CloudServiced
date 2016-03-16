@@ -14,11 +14,11 @@
 -(void)textFiledShouldBeginEditAtCell:(SetUserInfoCell *)cell;
 -(void)textFiledDidEndEdit:(NSString *)text;
 -(void)didDeleteText:(SetUserInfoCell *)cell;
-
 @end
 
 @interface SetUserInfoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelWidth;
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITextField *textFiled;

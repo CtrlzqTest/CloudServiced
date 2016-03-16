@@ -13,6 +13,7 @@ static NSString *cell_Id = @"cell_Id";
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+
 @end
 
 @implementation ChooseCompanyViewController
@@ -20,9 +21,7 @@ static NSString *cell_Id = @"cell_Id";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cell_Id];
-    // Do any additional setup after loading the view from its nib.
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

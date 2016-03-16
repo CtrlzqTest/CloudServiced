@@ -56,13 +56,15 @@ static NSString *const select_CellID = @"selectCell";
     [self setupTableView];
     [self initData];
     [self setupSelectTableView];
+    
+    if (self.notEnable) {
+        [self.rightBtn setTitle:@"修改" forState:(UIControlStateNormal)];
+        return;
+    }
     if (self.rightBtnTitle) {
         [self.rightBtn setTitle:self.rightBtnTitle forState:(UIControlStateNormal)];
     }else {
         [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
-    }
-    if (self.notEnable) {
-        [self.rightBtn setTitle:@"编辑" forState:(UIControlStateNormal)];
     }
 }
 
@@ -70,7 +72,6 @@ static NSString *const select_CellID = @"selectCell";
     
     if (_selectArray != selectArray) {
         _selectArray = [selectArray copy];
-        
     }
 }
 
@@ -79,7 +80,11 @@ static NSString *const select_CellID = @"selectCell";
     // 编辑
     if (self.notEnable) {
         self.notEnable = NO;
-        [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
+        if (self.rightBtnTitle) {
+            [self.rightBtn setTitle:self.rightBtnTitle forState:(UIControlStateNormal)];
+        }else {
+            [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
+        }
         [self.tableView reloadData];
         return;
 //        typeof(self) weakSelf = self;
@@ -115,7 +120,11 @@ static NSString *const select_CellID = @"selectCell";
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             [self saveUserInfo:dict];
-            [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
+            if ([self.rightBtn.titleLabel.text isEqualToString:@"提交"]) {
+                [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
+            }else {
+                [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+            }
             UIViewController *VC = [self.navigationController.viewControllers firstObject];
             if ([[VC class] isSubclassOfClass:[LoginViewController class]]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
@@ -169,7 +178,8 @@ static NSString *const select_CellID = @"selectCell";
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     _valueArray_User[0] = user.realName;
     _valueArray_User[1] = user.idCard;
-    _valueArray_User[2] = user.roleName;
+    _valueArray_User[2] = user.roleName.length <= 0 ? @"普通用户" : user.roleName;
+    
     _valueArray_User[3] = [DataSource changeCompanyCodeToText:user.oldCompany];
     _valueArray_User[4] = user.oldPost.length > 0 ? user.oldPost : @"销售职";
     NSString *workDate = user.workStartDate.length > 0 ? [HelperUtil timeFormat:user.workStartDate format:@"yyyy-MM-dd"] : @"2015-01-01";
@@ -329,12 +339,18 @@ static NSString *const select_CellID = @"selectCell";
     }
     
     SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id forIndexPath:indexPath];
-    cell.delegate = self;
     cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
+    
+    cell.titleLabelWidth.constant = 80;
+    cell.delegate = self;
     [cell isPullDown:NO];
+    
     if (self.notEnable) {
         cell.textFiled.enabled = NO;
+        if(indexPath.row == 8 || indexPath.row == 7) {
+            cell.titleLabelWidth.constant = 120;
+        }
         return cell;
     }
     if (indexPath.section == 0) {
@@ -349,6 +365,7 @@ static NSString *const select_CellID = @"selectCell";
             cell.textFiled.enabled = NO;
         }else if(indexPath.row == 8 || indexPath.row == 7)
         {
+            cell.titleLabelWidth.constant = 120;
             [cell isPullDown:YES];
             if (cell.textFiled.text.length > 0) {
                 [cell setDeleteImage:YES];
@@ -563,7 +580,6 @@ static NSString *const select_CellID = @"selectCell";
 - (void)showCityPickerViewWithCount:(NSInteger )count {
     
     [self resignKeyBoardInView:self.view];
-    
     __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil componentsCount:count];
     
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
@@ -634,12 +650,11 @@ static NSString *const select_CellID = @"selectCell";
         self.maskBtn.hidden = YES;
         _isAnimating = NO;
     }];
-    //    // 收回列表
-    //    SetUserInfoCell *cell = [self.tableView cellForRowAtIndexPath:_indexPath];
-    //    cell.imageBtn.image = [UIImage imageNamed:@"details-arrow2"];
-    //    [cell reloadInputViews];
 }
 
+/**
+ *  时间选择
+ */
 - (void)showDataPickerView {
     
     _pickerView = [HZQDatePickerView instanceDatePickerView];

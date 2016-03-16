@@ -78,6 +78,7 @@ static NSString *headerView_ID = @"headerView";
 - (void)setupViews {
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.collectionView.scrollEnabled = NO;
     self.collectionView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HomeCollectionCell" bundle:nil] forCellWithReuseIdentifier:cell_id];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HomeHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID];
@@ -155,6 +156,8 @@ static NSString *headerView_ID = @"headerView";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _dataKeyArray.count;
 }
+
+
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     

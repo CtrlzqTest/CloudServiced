@@ -25,7 +25,9 @@
 
 - (void)awakeFromNib {
     
-    _scrollPageView = [[ZQScrollPageView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 240 * KHeight / 667.0 - 75)];
+    _scrollPageView = [[ZQScrollPageView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 240 * KHeight / 667.0 - 75 * KHeight / 667.0)];
+    self.imgSize.constant = 55 / 667.0 * KHeight;
+    self.infoViewHeght.constant = 75 * KHeight / 667.0;
     [self.pageScrBackView addSubview:_scrollPageView];
     
 }
