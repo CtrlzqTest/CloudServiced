@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *intergTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *inset;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *usableLeadIng;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailing;
 
 @end
 
@@ -59,6 +61,8 @@
     self.intergTop.constant = 70.0 * KHeight / 640;
     self.inset.constant = 50.0 * KHeight / 640;
     self.btnBottom.constant = 35.0 * KHeight / 640;
+    self.usableLeadIng.constant = 80 * KWidth / 414.0;
+    self.trailing.constant = 50 * KWidth / 414.0;
 }
 
 - (void)setupViews {

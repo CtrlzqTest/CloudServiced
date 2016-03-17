@@ -3044,6 +3044,8 @@
                         <outlet property="intergTotalLabel" destination="y9A-Xy-mFA" id="VEI-hC-btP"/>
                         <outlet property="intergUnuseLabel" destination="ivn-d0-XlP" id="LfV-Kd-Obh"/>
                         <outlet property="intergUseLabel" destination="zVU-fd-sqr" id="CsY-7H-iwi"/>
+                        <outlet property="trailing" destination="OTb-uW-Miz" id="gsa-l2-6LH"/>
+                        <outlet property="usableLeadIng" destination="B71-EX-E4l" id="bdD-ke-3c7"/>
                         <segue destination="qBh-L6-8N8" kind="push" identifier="integral" id="I8G-zz-tko"/>
                     </connections>
                 </viewController>
