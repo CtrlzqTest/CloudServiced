@@ -11,13 +11,13 @@
 #import "HomeHeaderView.h"
 #import "IntergralCityViewController.h"
 #import "SingleHandle.h"
-#import "ClientData.h"
 #import "UserInfoViewController.h"
 #import "Utility.h"
 #import "OrderInfoViewController.h"
 #import "FireData.h"
 #import "ButelHandle.h"
 #import "RuleViewController.h"
+#import "Order.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -27,8 +27,7 @@
     NSArray *_scrollImgArray;
     NSString *_integral;
     BOOL _isHide;
-    ClientData *_clientData;//用户数据
-    
+    Order *_order;//获取数据
     HomeHeaderView *_headerView;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -64,10 +63,10 @@ static NSString *headerView_ID = @"headerView";
     _dataDict = [NSMutableDictionary dictionary];
     [_dataDict setValue:@"获取客户数据" forKey:_dataKeyArray[0]];
     [_dataDict setValue:@"我的客户内容" forKey:_dataKeyArray[1]];
-    [_dataDict setValue:@"联系我的订单" forKey:_dataKeyArray[2]];
-    [_dataDict setValue:@"商城自选内容" forKey:_dataKeyArray[3]];
-    [_dataDict setValue:@"业绩查询" forKey:_dataKeyArray[4]];
-    [_dataDict setValue:@"积分明细查询" forKey:_dataKeyArray[5]];
+    [_dataDict setValue:@"创建我的订单" forKey:_dataKeyArray[2]];
+    [_dataDict setValue:@"积分自选商城" forKey:_dataKeyArray[3]];
+    [_dataDict setValue:@"邀请我的好友" forKey:_dataKeyArray[4]];
+    [_dataDict setValue:@"积分明细查看" forKey:_dataKeyArray[5]];
     
     _scrollImgArray = @[@"banner",@"activity3",@"activity2"];
 
@@ -307,7 +306,7 @@ static NSString *headerView_ID = @"headerView";
             NSDictionary *dic = returnData;
             if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
                 NSDictionary *dataDic = [dic objectForKey:@"data"];
-                _clientData = [ClientData mj_objectWithKeyValues:dataDic];
+                _order = [Order mj_objectWithKeyValues:dataDic];
                 [self performSegueWithIdentifier:@"getData" sender:self];
                 
             }else {
@@ -329,7 +328,7 @@ static NSString *headerView_ID = @"headerView";
     if ([segue.identifier isEqualToString:@"getData"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OrderInfoViewController *receive = segue.destinationViewController;
-        receive.clientData = _clientData;
+        receive.order = _order;
     }
 }
 

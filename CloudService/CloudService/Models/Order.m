@@ -9,12 +9,6 @@
 #import "Order.h"
 
 @implementation Order
-+ (NSDictionary *)replacedKeyFromPropertyName
-{
-    return @{
-             @"orderId" : @"id",
-             
-             };
-}
+
 
 @end

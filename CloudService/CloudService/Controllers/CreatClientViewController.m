@@ -9,7 +9,7 @@
 #import "CreatClientViewController.h"
 #import "OfferViewController.h"
 #import "ZQCityPickerView.h"
-#import "ClientData.h"
+#import "Order.h"
 
 @interface CreatClientViewController ()<UITextFieldDelegate>
 {
@@ -109,16 +109,16 @@
     if ([segue.identifier isEqualToString:@"offer"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OfferViewController *offerVC = segue.destinationViewController;
-        ClientData *clientData = [[ClientData alloc] init];
+        Order *order = [[Order alloc] init];
         if ([_tfLicenseNo.text isEqualToString:@""]) {
-           clientData.licenseNo = @"";
+           order.licenseNo = @"";
         }else {
-           clientData.licenseNo = _tfLicenseNo.text;
+           order.licenseNo = _tfLicenseNo.text;
         }
-        clientData.phoneNo = _tfPhone.text;
-        clientData.custName = _tfName.text;
-        clientData.cityCode = _cityCode;
-        offerVC.clientData = clientData;
+        order.phoneNo = _tfPhone.text;
+        order.customerName = _tfName.text;
+        order.cityCode = _cityCode;
+        offerVC.order = order;
     }
 }
 /** 消失键盘*/
