@@ -35,8 +35,8 @@
 }
 - (void)setUpInviteLink {
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindInviteLink];
-
-    [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    [MHNetworkManager postReqeustWithURL:url params:@{@"userId":user.userId} successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
             NSDictionary *dataDic = [returnData objectForKey:@"data"];
@@ -63,16 +63,24 @@
     
     _qrImgView.image = newImage;
     
-    
-    
 }
 - (IBAction)shareAction:(id)sender {
+    
+    if (_teamInviteCode.length <= 0) {
+        [MBProgressHUD showError:@"生成邀请url失败" toView:self.view];
+        return;
+    }
     //1、创建分享参数
     NSArray* imageArray = @[[UIImage imageNamed:@"sharLogo"]];
         if (imageArray) {
-        
+            NSString *content = nil;
+            if (self.isTeamInvite) {
+                content = [NSString stringWithFormat:@"诚心邀请您加入云客服，送万元梦想基金\n团队邀请码:%@",_teamInviteCode];
+            }else {
+                content = [NSString stringWithFormat:@"诚心邀请您加入云客服，送万元梦想基金\n个人邀请码:%@",_teamInviteCode];
+            }
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"诚心邀请您加入云客服，送万元梦想基金"
+        [shareParams SSDKSetupShareParamsByText:content
                                          images:imageArray
                                             url:[NSURL URLWithString:_linkUrl]
                                           title:@"云客服"

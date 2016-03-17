@@ -10,6 +10,7 @@
 #import "MyTeamTableViewCell.h"
 #import <MJRefresh.h>
 #import "TeamMember.h"
+#import "InviteFriendViewController.h"
 
 @interface MyTeamViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -149,7 +150,12 @@ static NSString *cell_id = @"myTeamCell";
 
 - (IBAction)inviteAction:(id)sender {
     if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
-        [self performSegueWithIdentifier:@"invite" sender:self];
+        
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        InviteFriendViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"InviteFriendsVC"];
+        vc.isTeamInvite = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+//        [self performSegueWithIdentifier:@"invite" sender:self];
     }else{
         NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kapplyTeamLeader];
         

@@ -11,6 +11,7 @@
 #import "SingleHandle.h"
 #import "UserInfoViewController.h"
 #import "SetUserInfoViewController.h"
+#import "InviteFriendViewController.h"
 
 @interface PersonalViewController ()<UITableViewDataSource,UITableViewDelegate> {
     NSArray *_dataArray;
@@ -199,7 +200,10 @@ static NSString *cell_id = @"personalCell";
             case 3:
             {
                 if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
-                    [self performSegueWithIdentifier:@"invateFriend_push" sender:self];
+                    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    InviteFriendViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"InviteFriendsVC"];
+                    vc.isTeamInvite = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
                 }else{
                     [MBProgressHUD showMessag:@"您不是团队长" toView:self.view];
                 }
