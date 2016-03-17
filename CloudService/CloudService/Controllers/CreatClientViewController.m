@@ -55,13 +55,10 @@
             return ;
     }
     
-        [self performSegueWithIdentifier:@"offer" sender:self];
-        
-    
+    [self performSegueWithIdentifier:@"offer" sender:self];
 }
 
 - (IBAction)newCarAction:(id)sender {
-    NSLog(@"%d",self.isNewCarBtn.selected);
     if (self.isNewCarBtn.selected)
     {
         [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox"] forState:(UIControlStateNormal)];
