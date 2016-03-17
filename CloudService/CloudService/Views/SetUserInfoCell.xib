@@ -31,7 +31,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details-arrow2" translatesAutoresizingMaskIntoConstraints="NO" id="H2Y-Hb-TBc">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H2Y-Hb-TBc">
                         <rect key="frame" x="280" y="27" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Y9r-af-QtA"/>
@@ -74,10 +74,7 @@
                 <outlet property="textFiled" destination="bzp-ED-hhq" id="P9G-V8-bnf"/>
                 <outlet property="titleLabelWidth" destination="LQY-K6-Si0" id="fWb-tt-9ak"/>
             </connections>
-            <point key="canvasLocation" x="340" y="325"/>
+            <point key="canvasLocation" x="210" y="254"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="details-arrow2" width="25" height="25"/>
-    </resources>
 </document>

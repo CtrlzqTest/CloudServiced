@@ -18,13 +18,16 @@
 #import "LoginViewController.h"
 #import "CodeNameModel.h"
 #import "ResetPhonePopView.h"
+#import "SetUserInfoCell2.h"
+#import "PellTableViewSelect.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
+static NSString *const cell_Id2 = @"setUserInfoCell2";
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
 static NSString *const select_CellID = @"selectCell";
 
-@interface SetUserInfoViewController ()<SetUserInfoCellDelegate,HZQDatePickerViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SetUserInfoViewController ()<SetUserInfoCell2Delegate,SetUserInfoCellDelegate,HZQDatePickerViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *_keyArray_User;
     NSArray *_keyArray_Bank;
@@ -40,11 +43,9 @@ static NSString *const select_CellID = @"selectCell";
 
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic,strong) UITableView *selectTableView;
 @property(nonatomic,strong) NSArray *selectArray;
 @property(nonatomic,strong) UIButton *maskBtn;
 @property (nonatomic,strong)HZQDatePickerView *pickerView;
-@property (nonatomic,strong)UIView *maskView;
 
 @end
 
@@ -55,7 +56,6 @@ static NSString *const select_CellID = @"selectCell";
 
     [self setupTableView];
     [self initData];
-    [self setupSelectTableView];
     
     if (self.notEnable) {
         [self.rightBtn setTitle:@"修改" forState:(UIControlStateNormal)];
@@ -66,6 +66,12 @@ static NSString *const select_CellID = @"selectCell";
     }else {
         [self.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
 }
 
 -(void)setSelectArray:(NSArray *)selectArray {
@@ -142,12 +148,6 @@ static NSString *const select_CellID = @"selectCell";
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-}
-
 // 设置tableView样式
 - (void)setupTableView {
     
@@ -158,7 +158,10 @@ static NSString *const select_CellID = @"selectCell";
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SetUserInfoCell" bundle:nil] forCellReuseIdentifier:cell_id];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SetUserInfoCell2" bundle:nil] forCellReuseIdentifier:cell_Id2];
     [self.tableView registerClass:[SetUserInfoHeaderView class] forHeaderFooterViewReuseIdentifier:header_id];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidHidden) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)initData {
@@ -217,52 +220,19 @@ static NSString *const select_CellID = @"selectCell";
     }
 }
 
-- (void)setupSelectTableView {
-    
-    // 现加上蒙版
-    self.maskBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.maskBtn.frame = self.view.bounds;
-    [self.maskBtn addTarget:self action:@selector(hidePullDownView) forControlEvents:UIControlEventTouchUpInside];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.maskBtn.hidden = YES;
-    [self.view addSubview:self.maskBtn];
-    
-    self.selectTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStylePlain)];
-    self.selectTableView.dataSource = self;
-    self.selectTableView.delegate = self;
-    self.selectTableView.backgroundColor = [UIColor grayColor];
-    [self.selectTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:select_CellID];
-    self.selectTableView.layer.shadowOpacity = 1;
-    self.selectTableView.layer.shadowColor = [UIColor grayColor].CGColor;
-    self.tableView.clipsToBounds = NO;
-    self.selectTableView.layer.shadowOffset = CGSizeMake(3, 1);
-    [self.maskBtn addSubview:self.selectTableView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidHidden) name:UIKeyboardDidHideNotification object:nil];
-}
-
 #pragma mark -- HZQDatePickerViewDelegate
 - (void)getSelectDate:(NSDate *)date type:(DateType)type {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
-    NSLog(@"%ld",(long)_indexPath.row);
     _valueArray_User[_indexPath.row] = currentOlderOneDateStr;
     [self.tableView reloadData];
     _pickerView = nil;
 }
 
-#pragma mark -- SetUserInfoCellDelegate
-// 确定编辑在哪个cell上
--(void)textFiledShouldBeginEditAtCell:(SetUserInfoCell *)cell {
-    
-    _indexPath = [self.tableView indexPathForCell:cell];
-    
-}
-
--(void)didDeleteText:(SetUserInfoCell *)cell {
-    
+#pragma mark -- SetUserInfoCell2Delegate
+-(void)didDeleteTextForCompany:(SetUserInfoCell2 *)cell {
     [self resignKeyBoardInView:self.view];
     _indexPath = [self.tableView indexPathForCell:cell];
     if (_indexPath.row == 7)
@@ -275,6 +245,14 @@ static NSString *const select_CellID = @"selectCell";
     }
     _valueArray_User[_indexPath.row] = @"";
     [self.tableView reloadData];
+}
+
+#pragma mark -- SetUserInfoCellDelegate
+// 确定编辑在哪个cell上
+-(void)textFiledShouldBeginEditAtCell:(SetUserInfoCell *)cell {
+    
+    _indexPath = [self.tableView indexPathForCell:cell];
+    
 }
 
 -(void)textFiledDidEndEdit:(NSString *)text {
@@ -317,10 +295,7 @@ static NSString *const select_CellID = @"selectCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if ([tableView isEqual:self.selectTableView]) {
-        return _selectArray.count;
-    }
+
     if (section == 0) {
         return _valueArray_User.count;
     }else {
@@ -330,58 +305,61 @@ static NSString *const select_CellID = @"selectCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // 下拉的tableView
-    if ([tableView isEqual:self.selectTableView]) {
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:select_CellID];
-        cell.textLabel.text = _selectArray[indexPath.row];
-        cell.backgroundColor = [UIColor grayColor];
-        return cell;
+    BOOL isCell2 = (indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 8) ? 1 : 0;
+    // 个人信息,带下拉框
+    if (indexPath.section == 0) {
+        if (isCell2) {
+            SetUserInfoCell2 *cell2 = [tableView dequeueReusableCellWithIdentifier:cell_Id2 forIndexPath:indexPath];
+            cell2.titleLabelWidth.constant = 80;
+            cell2.titleLabel.text = _keyArray_User[indexPath.row];
+            cell2.delegate = self;
+            cell2.contentLabel.text = _valueArray_User[indexPath.row];
+            [cell2 isPullDown:NO];
+            
+            if (self.notEnable) {
+                if(indexPath.row == 8 || indexPath.row == 7) {
+                    cell2.titleLabelWidth.constant = 120;
+                }
+                return cell2;
+            }
+            [cell2 isPullDown:YES];
+            if (indexPath.row == 7 || indexPath.row == 8) {
+                cell2.titleLabelWidth.constant = 120;
+                if (cell2.contentLabel.text.length > 0) {
+                    [cell2 setDeleteImage:YES];
+                }else{
+                    [cell2 setDeleteImage:NO];
+                }
+            }
+            return cell2;
+        }
     }
-    
+    // 个人信息，不带下拉框
     SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
     if (cell == nil) {
         cell = [[SetUserInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_id];
     }
     cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
-    
-    cell.titleLabelWidth.constant = 80;
     cell.delegate = self;
-    [cell isPullDown:NO];
     
     if (self.notEnable) {
         cell.textFiled.enabled = NO;
-        if(indexPath.row == 8 || indexPath.row == 7) {
-            cell.titleLabelWidth.constant = 120;
-        }
         return cell;
     }
-    if (indexPath.section == 0) {
-        if (indexPath.row == 1) {
-            cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
-        }
-        if (indexPath.row == 4 || indexPath.row == 3)
-        {
-            [cell isPullDown:YES];
-        }else if(indexPath.row == 2 || indexPath.row == 5)
-        {
+    if (indexPath.row == 1) {
+            cell.textFiled.keyboardType = UIKeyboardTypeNumberPad;
+    }else if(indexPath.row == 2 || indexPath.row == 5)
+    {
             cell.textFiled.enabled = NO;
-        }else if(indexPath.row == 8 || indexPath.row == 7)
-        {
-            cell.titleLabelWidth.constant = 120;
-            [cell isPullDown:YES];
-            if (cell.textFiled.text.length > 0) {
-                [cell setDeleteImage:YES];
-            }else{
-                [cell setDeleteImage:NO];
-            }
-        }
-    }else if(indexPath.row == 1){
-        cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
     }
+    
+//  银行信息
     if (indexPath.section == 1)
     {
+        if(indexPath.row == 1){
+            cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
+        }
         if (indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 5)
         {
             cell.textFiled.enabled = NO;
@@ -395,59 +373,74 @@ static NSString *const select_CellID = @"selectCell";
     if (self.notEnable) {
         return ;
     }
-    if ([tableView isEqual:self.selectTableView]) {
-        [self hidePullDownView];
-        if (_indexPath.row == 3 || _indexPath.row == 4) {
-            _valueArray_User[_indexPath.row] = _selectArray[indexPath.row];
-        }else{
-            
-            NSString *code = [[DataSource insureCommpanyCodeArray] objectAtIndex:indexPath.row];
-            // 可以用二分查找
-            for (CodeNameModel *model in _companyArray) {
-                if ([model.companyCode isEqualToString:code]) {
-                    return;
-                }
-            }
-            CodeNameModel *model = [[CodeNameModel alloc] init];
-            model.companyName = _selectArray[indexPath.row];
-            model.companyCode = code;
-            [_companyArray addObject:model];
-            _valueArray_User[_indexPath.row] = [self changeStrArraytoTextString:_companyArray];
-        }
-        [self.tableView reloadData];
-        return;
-    }
     [self resignKeyBoardInView:self.view];
     _indexPath = indexPath;
-    SetUserInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    CGRect tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
+    BOOL isCell2 = (indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 8) ? 1 : 0;
+    CGRect tempRect = CGRectZero;
+    CGRect cellFrame = CGRectZero;
+    if (!isCell2) {
+        SetUserInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
+        cellFrame = cell.frame;
+    }else {
+        SetUserInfoCell2 *cell = [tableView cellForRowAtIndexPath:indexPath];
+        tempRect = [cell.contentView convertRect:cell.contentLabel.frame fromView:self.view];
+        cellFrame = cell.frame;
+    }
     if (indexPath.section == 0)
     {
         switch (indexPath.row)
         {
-            case 3:     _selectArray = [DataSource insureCommpanyNameArray];
-                        CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
-                        [self showPullDownViewWithRect:rect3];
+            case 3:{
+                        _selectArray = [DataSource insureCommpanyNameArray];
+                        CGRect rect3 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cellFrame) - self.tableView.contentOffset.y + 64, tempRect.size.width, 4 * 40);
+//                        [self showPullDownViewWithRect:rect3];
+                
+                        [PellTableViewSelect addPellTableViewSelectWithWindowFrame:rect3 selectData:_selectArray action:^(NSInteger index) {
+                            _valueArray_User[_indexPath.row] = _selectArray[index];
+                            [self.tableView reloadData];
+                        } animated:YES];
+                    }
                         break;
             case 5:
                         [self showDataPickerView];
                         break;
-            case 4:     _selectArray = @[@"销售职",@"销售管理职",@"其他"];
-                        CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 3 * 30);
-                        [self showPullDownViewWithRect:rect4];
+            case 4:{
+                        _selectArray = @[@"销售职",@"销售管理职",@"其他"];
+                        CGRect rect4 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cellFrame) - self.tableView.contentOffset.y + 64, tempRect.size.width, 3 * 40);
+//                        [self showPullDownViewWithRect:rect4];
+                            [PellTableViewSelect addPellTableViewSelectWithWindowFrame:rect4 selectData:_selectArray action:^(NSInteger index) {
+                                _valueArray_User[_indexPath.row] = _selectArray[index];
+                                [self.tableView reloadData];
+                            } animated:YES];
+                    }
                         break;
-            case 7:     _selectArray = [DataSource insureCommpanyNameArray];
-                        CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cell.frame) - self.tableView.contentOffset.y, 150, 4 * 30);
-                        [self showPullDownViewWithRect:rect7];
+            case 7:{     _selectArray = [DataSource insureCommpanyNameArray];
+                        CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cellFrame) - self.tableView.contentOffset.y + 64, tempRect.size.width, 4 * 40);
+//                        [self showPullDownViewWithRect:rect7];
+                            [PellTableViewSelect addPellTableViewSelectWithWindowFrame:rect7 selectData:_selectArray action:^(NSInteger index) {
+                                NSString *code = [[DataSource insureCommpanyCodeArray] objectAtIndex:index];
+                                // 可以用二分查找
+                                for (CodeNameModel *model in _companyArray) {
+                                    if ([model.companyCode isEqualToString:code]) {
+                                        return;
+                                    }
+                                }
+                                CodeNameModel *model = [[CodeNameModel alloc] init];
+                                model.companyName = _selectArray[index];
+                                model.companyCode = code;
+                                [_companyArray addObject:model];
+                                _valueArray_User[_indexPath.row] = [self changeStrArraytoTextString:_companyArray];
+                                [self.tableView reloadData];
+                            } animated:YES];
                         break;
-                
+                    }
             case 8:     [self showCityPickerViewWithCount:1];
                         break;
             default:
                 break;
         }
     }
-    
     if (indexPath.section == 1) {
         if (indexPath.row == 4 || indexPath.row == 5)
         {
@@ -469,43 +462,19 @@ static NSString *const select_CellID = @"selectCell";
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView isEqual:self.selectTableView]) {
-        return 30;
-    }
     
-    return 50;
+    if (indexPath.section == 0 && indexPath.row == 7) {
+        return 50;
+    }else {
+        return 50;
+    }
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if ([tableView isEqual:self.selectTableView]) {
-        return 0.1;
-    }
+
     return headerHeight;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPat{
-    
-    if ([tableView isEqual:self.selectTableView]) {
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            [cell setLayoutMargins:UIEdgeInsetsZero];
-        }
-        if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
-            [cell setSeparatorInset:UIEdgeInsetsZero];
-        }
-    }
-}
-
--(void)viewDidLayoutSubviews {
-    
-    if ([self.selectTableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.selectTableView setSeparatorInset:UIEdgeInsetsZero];
-        
-    }
-    if ([self.selectTableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.selectTableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
-}
 #pragma mark -- 私有方法
 - (NSDictionary *)getParam {
     
@@ -618,45 +587,6 @@ static NSString *const select_CellID = @"selectCell";
     
 }
 
-// 显示下拉列表
-- (void)showPullDownViewWithRect:(CGRect )rect {
-    
-    if (_isAnimating) {
-        return ;
-    }
-    _isAnimating = YES;
-    self.maskBtn.hidden = NO;
-    [self.selectTableView reloadData];
-    CGRect tempRect = rect;
-    tempRect.size.height = 0.1;
-    self.selectTableView.frame = tempRect;
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        self.selectTableView.frame = rect;
-    } completion:^(BOOL finished) {
-        self.selectTableView.frame = rect;
-        _isAnimating = NO;
-    }];
-    
-}
-
-
-// 隐藏下拉列表
-- (void)hidePullDownView {
-    if (_isAnimating) {
-        return;
-    }
-    CGRect tempRext = self.selectTableView.frame;
-    tempRext.size.height = 0.1;
-    _isAnimating = YES;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.selectTableView.frame = tempRext;
-    } completion:^(BOOL finished) {
-        self.maskBtn.hidden = YES;
-        _isAnimating = NO;
-    }];
-}
-
 /**
  *  时间选择
  */
@@ -682,6 +612,7 @@ static NSString *const select_CellID = @"selectCell";
     }
 }
 
+// 填写银行卡号后,自动显示银行卡信息
 - (void)keyBoardDidHidden {
     if ([_valueArray_Bank[2] length] <= 0) {
         return;
