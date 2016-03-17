@@ -20,6 +20,8 @@ static NSString *cellID = @"cellID";
 {
     ActifityModel *actifityModel;
     NSString *_linkUrl;
+
+    NSString *_personInviteCode;
 }
 
 @property (strong, nonatomic)UICollectionView *collectionView;
@@ -67,6 +69,20 @@ static NSString *cellID = @"cellID";
         [weakSelf.collectionView reloadData];
         [weakSelf reloadViews];
         
+    } failureBlock:^(NSError *error) {
+        
+    } showHUD:YES];
+    
+    // 获取邀请码
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kfindInviteLink] params:@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId} successBlock:^(id returnData) {
+        if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dataDic = [returnData objectForKey:@"data"];
+            _linkUrl = [dataDic objectForKey:@"inviteLink"];
+            _personInviteCode = [dataDic objectForKey:@"personInviteCode"];
+            
+        }else {
+            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+        }
     } failureBlock:^(NSError *error) {
         
     } showHUD:YES];
@@ -305,9 +321,9 @@ static NSString *cellID = @"cellID";
     //1、创建分享参数
     NSArray* imageArray = @[[UIImage imageNamed:@"sharLogo"]];
     if (imageArray) {
-        
+        NSString *content = [NSString stringWithFormat:@"诚心邀请您加入云客服，参加集猴纳财活动，送万元梦想基金\n邀请码:%@",_personInviteCode];
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"诚心邀请您加入云客服，参加集猴纳财活动，送万元梦想基金"
+        [shareParams SSDKSetupShareParamsByText:content
                                          images:imageArray
                                             url:[NSURL URLWithString:@"www.baidu.com"]
                                           title:@"云客服"

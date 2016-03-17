@@ -10,4 +10,6 @@
 
 @interface InviteFriendViewController : BaseViewController
 
+@property(nonatomic,assign)BOOL isTeamInvite;
+
 @end

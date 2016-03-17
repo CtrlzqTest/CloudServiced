@@ -89,7 +89,6 @@
                                                attributes:@{NSForegroundColorAttributeName:color}];
     
     self.UserTextFiled.text = [Utility userName];
-    NSLog(@"%d",[Utility isRemberPassWord]);
     if ([Utility isRemberPassWord]) {
         self.pwdTextFiled.text = [Utility passWord];
         self.choseBtn.selected = YES;
