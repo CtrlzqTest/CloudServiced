@@ -14,6 +14,8 @@
 @interface InviteFriendViewController ()
 {
     NSString *_linkUrl;
+    NSString *_personInviteCode;
+    NSString *_teamInviteCode;
 }
 @property (weak, nonatomic)IBOutlet UIImageView *qrImgView;
 @end
@@ -37,7 +39,10 @@
     [MHNetworkManager postReqeustWithURL:url params:nil successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
-            _linkUrl = [returnData objectForKey:@"data"];
+            NSDictionary *dataDic = [returnData objectForKey:@"data"];
+            _linkUrl = [dataDic objectForKey:@"inviteLink"];
+            _personInviteCode = [dataDic objectForKey:@"personInviteCode"];
+            _teamInviteCode = [dataDic objectForKey:@"teamInviteCode"];
             [self createQR1:_linkUrl];
             
         }else {

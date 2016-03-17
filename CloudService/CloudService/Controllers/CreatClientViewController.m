@@ -9,8 +9,9 @@
 #import "CreatClientViewController.h"
 #import "OfferViewController.h"
 #import "ZQCityPickerView.h"
+#import "ClientData.h"
 
-@interface CreatClientViewController ()
+@interface CreatClientViewController ()<UITextFieldDelegate>
 {
     NSString *_cityCode;
 }
@@ -27,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weak typeof(self) weakSelf = self;
+    self.tfLicenseNo.delegate = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
@@ -93,7 +95,11 @@
     
     
 }
-
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField isEqual:self.tfLicenseNo]) {
+        self.tfLicenseNo.text = [textField.text uppercaseString];
+    }
+}
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -106,10 +112,14 @@
     if ([segue.identifier isEqualToString:@"offer"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OfferViewController *offerVC = segue.destinationViewController;
-        offerVC.carCode = _tfLicenseNo.text;
-        offerVC.phoneNo = _tfPhone.text;
+//        offerVC.carCode = _tfLicenseNo.text;
+//        offerVC.phoneNo = _tfPhone.text;
+//        offerVC.custName = _tfName.text;
+//        offerVC.carCity = _cityCode;
+        offerVC.clientData.licenseNo = _tfLicenseNo.text;
+        offerVC.clientData.phoneNo = _tfPhone.text;
         offerVC.custName = _tfName.text;
-        offerVC.carCity = _cityCode;
+        offerVC.carCode = _cityCode;
     }
 }
 /** 消失键盘*/

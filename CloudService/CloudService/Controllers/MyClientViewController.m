@@ -83,7 +83,9 @@
 }
 
 - (void)requestData:(NSString *)condition{
-    [_clientArray removeAllObjects];
+//    [_clientArray removeAllObjects];
+    _clientArray = nil;
+    _clientArray = [NSMutableArray array];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"condition":condition};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
