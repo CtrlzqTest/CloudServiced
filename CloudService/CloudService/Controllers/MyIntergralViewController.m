@@ -10,6 +10,7 @@
 #import "IntergralCityViewController.h"
 
 @interface MyIntergralViewController ()
+
 @property (weak, nonatomic) IBOutlet UIView *backView;
 @property (weak, nonatomic) IBOutlet UILabel *intergTotalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *intergUseLabel;
@@ -61,8 +62,12 @@
     self.intergTop.constant = 70.0 * KHeight / 640;
     self.inset.constant = 50.0 * KHeight / 640;
     self.btnBottom.constant = 35.0 * KHeight / 640;
-    self.usableLeadIng.constant = 80 * KWidth / 414.0;
-    self.trailing.constant = 50 * KWidth / 414.0;
+    self.usableLeadIng.constant = 80 * KWidth / 414.0 - 10;
+    self.trailing.constant = 50 * KWidth / 414.0 - 10;
+    self.intergTotalLabel.font = [UIFont systemFontOfSize:45 * KWidth / 414.0];
+    self.intergUseLabel.font = [UIFont systemFontOfSize:19 * KWidth / 414.0];
+    self.intergUnuseLabel.font = [UIFont systemFontOfSize:19 * KWidth / 414.0];
+    
 }
 
 - (void)setupViews {
@@ -97,9 +102,6 @@
     }else {
         self.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
     }
-    
-//    self.intergUseLabel.text = [NSString stringWithFormat:@"%@",user.usableNum];
-//    self.intergUnuseLabel.text = [NSString stringWithFormat:@"%@",user.frozenNum];
 }
 
 - (IBAction)intergralCityAction:(id)sender {

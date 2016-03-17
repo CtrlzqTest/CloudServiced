@@ -48,7 +48,7 @@
     
     [super viewWillAppear:animated];
     self.title = @"我的客户";
-    [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
+    [[ButelHandle shareButelHandle] hideCallView];
     __weak typeof(self) weakSelf = self;
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"head-add" selectImage:@"head-add" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];

@@ -10,6 +10,7 @@
 #import "OfferViewController.h"
 #import "ZQCityPickerView.h"
 #import "ClientData.h"
+#import "ButelHandle.h"
 
 @interface CreatClientViewController ()<UITextFieldDelegate>
 {
@@ -101,7 +102,8 @@
     
     [super viewWillAppear:animated];
     self.title = @"创建客户";
-   
+    [[ButelHandle shareButelHandle] showCallView];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -121,6 +123,7 @@
         offerVC.clientData = clientData;
     }
 }
+
 /** 消失键盘*/
 - (void)resignKeyBoardInView:(UIView *)view
 

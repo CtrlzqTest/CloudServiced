@@ -9,5 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface CallView : UIView
-- (void)isHidden:(BOOL)hidden tel:(NSString *)telNum ;
+
+@property (nonatomic,copy)NSString *telNumStr;
+
+- (void)isHidden:(BOOL)hidden tel:(NSString *)telNum;
+/**
+ *  释放拨打界面,同时退出青牛
+ */
+- (void)dismissCallView;
+
+/**
+ *  拨号
+ */
+
 @end
