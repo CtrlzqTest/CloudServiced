@@ -67,7 +67,7 @@
         NSString *location = self.locateBtn.titleLabel.text;
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setValue:self.phoneNum.text forKey:@"phoneNo"];
-        [dict setValue:self.pwdText.text forKey:@"password"];
+        [dict setValue:[Utility sha256WithString:self.pwdText.text] forKey:@"password"];
         [dict setValue:location forKey:@"address"];
         [dict setValue:self.codeText.text forKey:@"code"];
         [dict setValue:self.invateCode.text forKey:@"inviteCode"];

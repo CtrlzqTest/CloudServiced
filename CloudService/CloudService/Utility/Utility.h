@@ -11,6 +11,11 @@
 @interface Utility : NSObject
 
 /**
+ *  SHA-256加密算法
+ */
++ (NSString*)sha256WithString:(NSString *)string;
+
+/**
  *  获取用户信息
  *
  *  @return 用户信息

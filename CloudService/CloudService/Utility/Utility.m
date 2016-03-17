@@ -9,7 +9,8 @@
 #import "Utility.h"
 #import "User.h"
 #import <MJExtension.h>
-
+#import <CommonCrypto/CommonDigest.h>
+#import "CommonCrypto/CommonCryptor.h"
 static User *user = nil;
 
 @implementation Utility
@@ -22,6 +23,24 @@ static User *user = nil;
         user = [User mj_objectWithKeyValues:infoDict];
     });
     return user;
+}
+
++ (NSString*)sha256WithString:(NSString *)string
+{
+    const char *cstr = [string cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cstr length:string.length];
+    
+    
+    uint8_t digest[CC_SHA256_DIGEST_LENGTH];
+    
+    CC_SHA256(data.bytes,(uint32_t)data.length, digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
 }
 
 + (BOOL)isFirstLoadding {

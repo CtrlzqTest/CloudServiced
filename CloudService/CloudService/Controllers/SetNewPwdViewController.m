@@ -59,7 +59,7 @@
         return;
     }
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSDictionary *dict = @{@"password":[Utility passWord] ,@"newPwd":self.pwdTextFiled.text,@"userId":user.userId};
+    NSDictionary *dict = @{@"password":[Utility sha256WithString:[Utility passWord]] ,@"newPwd":[Utility sha256WithString:self.pwdTextFiled.text],@"userId":user.userId};
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kResetPwdAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"])

@@ -7,6 +7,7 @@
 //
 
 #import "ResetUserPwdViewController.h"
+#import "Utility.h"
 
 @interface ResetUserPwdViewController ()
 
@@ -50,7 +51,7 @@
     if (![self checkInputMode]) {
         return;
     }
-    NSDictionary *dict = @{@"phoneNo":self.phoneNum.text,@"code":self.codeTextFiled.text,@"password":self.pwdTextFiled.text};
+    NSDictionary *dict = @{@"phoneNo":self.phoneNum.text,@"code":self.codeTextFiled.text,@"password":[Utility sha256WithString:self.pwdTextFiled.text]};
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kForgetPwdAPI] params:dict successBlock:^(id returnData) {
         
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {

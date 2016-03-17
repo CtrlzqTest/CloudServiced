@@ -125,7 +125,7 @@
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:self.UserTextFiled.text forKey:@"userName"];
-    [dict setValue:self.pwdTextFiled.text forKey:@"password"];
+    [dict setValue:[Utility sha256WithString:self.pwdTextFiled.text] forKey:@"password"];
     NSString *address = [Utility location];
     if (address) {
         [dict setValue:address forKey:@"address"];

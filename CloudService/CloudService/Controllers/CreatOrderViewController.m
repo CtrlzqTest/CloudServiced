@@ -12,6 +12,9 @@
 #import "OrderH5ViewController.h"
 // baseId 25961588
 @interface CreatOrderViewController ()
+{
+    NSString *_cityCode;
+}
 @property (weak, nonatomic)IBOutlet UITextField *tfName;
 @property (weak, nonatomic)IBOutlet UITextField *tfPhone;
 @property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
@@ -56,8 +59,6 @@
         [MBProgressHUD showMessag:@"车牌号格式不正确" toView:self.view];
         return ;
     }
-
-    
     
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         delegate.isThird=YES;
@@ -86,7 +87,7 @@
                                            @"vehicleModelName":@"阿斯顿马丁",
                                            @"userId":user.userId,
                                            @"accountType":@"3",
-                                           @"cityCode":@"28504700"}
+                                           @"cityCode":_cityCode}
                                  };
         
         __weak typeof(self) weakSelf = self;
@@ -145,6 +146,7 @@
     
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         self.tfCarCity.text = [NSString stringWithFormat:@"%@ %@",province,city];
+        _cityCode = cityCode;
         cityPickerView = nil;
     }];
     
