@@ -101,6 +101,7 @@
     _tfName = [UITextField new];
     _tfName.placeholder = @"请输入客户姓名";
     [_tfName setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [_tfName setFont:[UIFont systemFontOfSize:14]];
     _tfName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _tfName.borderStyle = UITextBorderStyleRoundedRect;
     [_searchView addSubview:_tfName];
@@ -135,6 +136,7 @@
     _tfTel = [UITextField new];
     _tfTel.placeholder = @"请输入客户手机号";
     [_tfTel setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [_tfTel setFont:[UIFont systemFontOfSize:14]];
     _tfTel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _tfTel.borderStyle = UITextBorderStyleRoundedRect;
     [_searchView addSubview:_tfTel];
@@ -168,6 +170,7 @@
     _tfCar = [UITextField new];
     _tfCar.placeholder = @"请输入车牌号";
     [_tfCar setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [_tfCar setFont:[UIFont systemFontOfSize:14]];
     _tfCar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _tfCar.borderStyle = UITextBorderStyleRoundedRect;
     [_searchView addSubview:_tfCar];
@@ -202,7 +205,7 @@
 //    _lbCode.textAlignment = NSTextAlignmentCenter;
     _lbCode.textColor = [UIColor lightGrayColor];
     _lbCode.font = [UIFont systemFontOfSize:14];
-    _lbCode.text = @"未报价";
+    _lbCode.text = @"初始";
     _lbCode.userInteractionEnabled = YES;
     UITapGestureRecognizer *startTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(codeClick:)];
     [_lbCode addGestureRecognizer:startTap];
@@ -358,12 +361,13 @@
 }
 /** 结束码下拉*/
 -  (void)codeClick:(UITapGestureRecognizer *)tap {
+    [HelperUtil resignKeyBoardInView:self.view];
     NSArray *array = [[SingleHandle shareSingleHandle] getEndCodeArray];
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(80, 260, 200, 200) selectData:
      
      array
                                                         action:^(NSInteger index) {
-                                                            
+                                                            _lbCode.textColor = [UIColor blackColor];
                                                             _lbCode.text = [array objectAtIndex:index];
                                                             _codeStr = [array objectAtIndex:index];
                                                         } animated:YES];
@@ -380,7 +384,7 @@
 }
 /** 收回菜单*/
 - (void)upMenu {
-    [self resignKeyBoardInView:self.view];
+    [HelperUtil resignKeyBoardInView:self.view];
     isOpen = !isOpen;
     [UIView animateWithDuration:0.5 animations:^{
         _searchView.frame = CGRectMake(0, -310, KWidth, 310);
@@ -389,14 +393,14 @@
 }
 // 开始时间
 - (void)startDateClick:(UITapGestureRecognizer *)tap {
-    [self resignKeyBoardInView:self.view];
+    [HelperUtil resignKeyBoardInView:self.view];
     [self setupDateView:DateTypeOfStart];
     
 }
 
 // 结束时间
 - (void)endDateClick:(UITapGestureRecognizer *)tap {
-    [self resignKeyBoardInView:self.view];
+    [HelperUtil resignKeyBoardInView:self.view];
     [self setupDateView:DateTypeOfEnd];
     
 }
@@ -421,11 +425,13 @@
 
     switch (type) {
         case DateTypeOfStart:
+            _lbStart.textColor = [UIColor blackColor];
             _lbStart.text = currentOlderOneDateStr;
             _startTime = currentOlderOneDateStr;
             break;
             
         case DateTypeOfEnd:
+            _lbEnd.textColor = [UIColor blackColor];
             _lbEnd.text = currentOlderOneDateStr;
             _endTime = currentOlderOneDateStr;
             break;
@@ -435,28 +441,7 @@
     }
 }
 
-/** 消失键盘*/
-- (void)resignKeyBoardInView:(UIView *)view
 
-{
-    
-    for (UIView *v in view.subviews) {
-        
-        if ([v.subviews count] > 0) {
-            
-            [self resignKeyBoardInView:v];
-            
-        }
-        
-        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
-            
-            [v resignFirstResponder];
-            
-        }
-        
-    }
-    
-}
 - (void)setupNoData {
     _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
     _noDataImg.image = [UIImage imageNamed:@"pix2"];

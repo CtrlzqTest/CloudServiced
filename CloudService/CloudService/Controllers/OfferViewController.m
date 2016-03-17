@@ -95,29 +95,36 @@ static CGFloat headerHeight = 30;
     
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
     OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
-    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
-        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-        return ;
-    }
+//    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
+//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+//        return ;
+//    }
     NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
     OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
     NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
-    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
-        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-        return ;
+//    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
+//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+//        return ;
+//    }
+    if (![cell1.engine.text isEqualToString:@""]) {
+        if (![HelperUtil validateEngineNo:cell1.engine.text]) {
+            [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
+            return ;
+        }
     }
-    if (![HelperUtil validateEngineNo:cell1.engine.text]) {
-        [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
-        return ;
+    if (![cell1.carFrameCode.text isEqualToString:@""]) {
+        if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
+            [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
+            return ;
+        }
     }
-    if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
-        [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
-        return ;
+    if (![cell2.carUserCard.text isEqualToString:@""]) {
+        if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
+            [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
+            return ;
+        }
     }
-    if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
-        [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
-        return ;
-    }
+    
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSDictionary *myServerDict = @{
@@ -125,9 +132,9 @@ static CGFloat headerHeight = 30;
                                    @"baseId":@"",
                                    @"customerId":@"",
                                    @"orderType":@"",
-                                   @"cityCode":self.carCity,
+                                   @"cityCode":self.clientData.cityCode,
                                    @"custName":cell2.carUserName.text,
-                                   @"phoneNo":self.phoneNo,
+                                   @"phoneNo":self.clientData.phoneNo,
                                    @"licenseNo":cell1.carCode.text,
                                    @"engineNo":cell1.engine.text,
                                    @"frameNo":cell1.carFrameCode.text,
@@ -149,28 +156,34 @@ static CGFloat headerHeight = 30;
     
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
     OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
-    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
-        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-        return ;
-    }
+//    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
+//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+//        return ;
+//    }
     NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
     OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
     NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
-    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
-        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-        return ;
+//    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
+//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
+//        return ;
+//    }
+    if (![cell1.engine.text isEqualToString:@""]) {
+        if (![HelperUtil validateEngineNo:cell1.engine.text]) {
+            [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
+            return ;
+        }
     }
-    if (![HelperUtil validateEngineNo:cell1.engine.text]) {
-        [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
-        return ;
+    if (![cell1.carFrameCode.text isEqualToString:@""]) {
+        if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
+            [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
+            return ;
+        }
     }
-    if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
-        [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
-        return ;
-    }
-    if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
-        [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
-        return ;
+    if (![cell2.carUserCard.text isEqualToString:@""]) {
+        if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
+            [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
+            return ;
+        }
     }
     AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     delegate.isThird=YES;
@@ -200,7 +213,7 @@ static CGFloat headerHeight = 30;
                                        @"userId":user.userId,
                                        @"accountType":@"3",
                                        @"cityCode":self.clientData.cityCode,
-                                       @"registerDate":@"2015-01-01"}
+                                       @"registerDate":cell1.firstTime.text}
                              };
     
 
@@ -217,9 +230,9 @@ static CGFloat headerHeight = 30;
                                            @"baseId":baseId,
                                            @"customerId":@"",
                                            @"orderType":@"",
-                                           @"cityCode":self.carCity,
+                                           @"cityCode":self.clientData.cityCode,
                                            @"custName":cell2.carUserName.text,
-                                           @"phoneNo":self.phoneNo,
+                                           @"phoneNo":self.clientData.phoneNo,
                                            @"licenseNo":cell1.carCode.text,
                                            @"engineNo":cell1.engine.text,
                                            @"frameNo":cell1.carFrameCode.text,
@@ -275,21 +288,7 @@ static CGFloat headerHeight = 30;
     
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OfferTableViewCell" owner:self options:nil];
-        if (self.clientData == nil) {
-            if (indexPath.section == 0) {
-                cell = [array objectAtIndex:0];
-                if (![self.carCode isEqualToString:@""]) {
-                    cell.carCode.text = self.carCode;
-                }else {
-                    cell.carCode.placeholder = @"暂无车牌号";
-                }
-                
-            }else{
-                cell = [array objectAtIndex:1];
-                cell.carUserName.text = self.custName;
-            }
 
-        }else {
             if (indexPath.section == 0) {
                 cell = [array objectAtIndex:0];
                 if (![self.clientData.licenseNo isEqualToString:@""]) {
@@ -301,16 +300,16 @@ static CGFloat headerHeight = 30;
                 cell.carFrameCode.text = self.clientData.frameNo;
                 cell.engineType.text = self.clientData.vehicleModelName;
                 cell.firstTime.text = [HelperUtil timeFormat:self.clientData.primaryDate format:@"yyyy-MM-dd"];
-                self.carCity = self.clientData.cityCode;
-                self.phoneNo = self.clientData.phoneNo;
+           
                 
             }else{
                 cell = [array objectAtIndex:1];
                 cell.carUserName.text = self.clientData.custName;
                 cell.carUserCard.text = self.clientData.cappld;
+                cell.carUserPhone.text = self.clientData.phoneNo;
             }
 
-        }
+        
                cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
@@ -344,7 +343,7 @@ static CGFloat headerHeight = 30;
     if (indexPath.section == 0) {
         return 279;
     }else{
-        return 105;
+        return 161;
     }
     
 }
