@@ -93,29 +93,6 @@ static NSString *const select_CellID = @"selectCell";
         }
         [self.tableView reloadData];
         return;
-//        typeof(self) weakSelf = self;
-//        
-//        User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-//        __block ResetPhonePopView *popView = [[[NSBundle mainBundle] loadNibNamed:@"ResetPhonePopView" owner:weakSelf options:nil] firstObject];
-//        popView.frame = [UIScreen mainScreen].bounds;
-//        [popView showViewWithCallBack:^(NSInteger btnIndex) {
-//
-//            if (btnIndex == 1) {
-//                [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckPhoneNumAPI] params:@{@"phoneNo":user.phoneNo,@"code":popView.phoneNum} successBlock:^(id returnData) {
-//                    if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
-//                        
-//                        [weakSelf.rightBtn setTitle:@"提交" forState:(UIControlStateNormal)];
-//                        [weakSelf.tableView reloadData];
-//                        popView = nil;
-//                    }else {
-//                        [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:weakSelf.view];
-//                    }
-//                    
-//                } failureBlock:^(NSError *error) {
-//                    
-//                } showHUD:YES];
-//            }
-//        }];
     }
     [self resignKeyBoardInView:self.view];
     NSDictionary *dict = [self getParam];
