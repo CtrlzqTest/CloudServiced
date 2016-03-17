@@ -21,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于";
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    self.versionLabel.text = version;
     __weak typeof(self) weakSelf = self;
     [self setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];

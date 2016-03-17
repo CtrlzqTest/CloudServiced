@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstTime;
 @property (weak, nonatomic) IBOutlet UITextField *carUserName;
 @property (weak, nonatomic) IBOutlet UITextField *carUserCard;
+@property (weak, nonatomic) IBOutlet UITextField *carUserPhone;
 
 @end
