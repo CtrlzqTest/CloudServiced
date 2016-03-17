@@ -112,14 +112,16 @@
     if ([segue.identifier isEqualToString:@"offer"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OfferViewController *offerVC = segue.destinationViewController;
-//        offerVC.carCode = _tfLicenseNo.text;
-//        offerVC.phoneNo = _tfPhone.text;
-//        offerVC.custName = _tfName.text;
-//        offerVC.carCity = _cityCode;
-        offerVC.clientData.licenseNo = _tfLicenseNo.text;
-        offerVC.clientData.phoneNo = _tfPhone.text;
-        offerVC.custName = _tfName.text;
-        offerVC.carCode = _cityCode;
+        ClientData *clientData = [[ClientData alloc] init];
+        if ([_tfLicenseNo.text isEqualToString:@""]) {
+           clientData.licenseNo = @"";
+        }else {
+           clientData.licenseNo = _tfLicenseNo.text;
+        }
+        clientData.phoneNo = _tfPhone.text;
+        clientData.custName = _tfName.text;
+        clientData.cityCode = _cityCode;
+        offerVC.clientData = clientData;
     }
 }
 /** 消失键盘*/

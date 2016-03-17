@@ -188,7 +188,7 @@ static CGFloat headerHeight = 30;
                              @"sign":@"",
                              @"data":@{@"proportion":@"0.8",
                                        @"customerName":cell2.carUserName.text,
-                                       @"phoneNo":self.phoneNo,
+                                       @"phoneNo":self.clientData.phoneNo,
                                        @"dataType":@"02",
                                        @"comeFrom":@"YPT",
                                        @"activeType":@"1",
@@ -199,7 +199,7 @@ static CGFloat headerHeight = 30;
                                        @"vehicleModelName":cell1.engineType.text,
                                        @"userId":user.userId,
                                        @"accountType":@"3",
-                                       @"cityCode":self.carCity,
+                                       @"cityCode":self.clientData.cityCode,
                                        @"registerDate":@"2015-01-01"}
                              };
     
