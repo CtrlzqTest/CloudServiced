@@ -11,6 +11,9 @@
 #import "ZQCityPickerView.h"
 
 @interface CreatClientViewController ()
+{
+    NSString *_cityCode;
+}
 @property (weak, nonatomic)IBOutlet UITextField *tfName;
 @property (weak, nonatomic)IBOutlet UITextField *tfPhone;
 @property (weak, nonatomic)IBOutlet UITextField *tfLicenseNo;
@@ -83,6 +86,7 @@
     
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         self.tfCarCity.text = [NSString stringWithFormat:@"%@ %@",province,city];
+        _cityCode = cityCode;
         NSLog(@"%@",cityCode);
         cityPickerView = nil;
     }];
@@ -105,7 +109,7 @@
         offerVC.carCode = _tfLicenseNo.text;
         offerVC.phoneNo = _tfPhone.text;
         offerVC.custName = _tfName.text;
-        offerVC.carCity = _tfCarCity.text;
+        offerVC.carCity = _cityCode;
     }
 }
 /** 消失键盘*/

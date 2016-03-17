@@ -228,9 +228,6 @@
             if (totalCount-_pageSize1*_page1<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView1.mj_footer endRefreshingWithNoMoreData];
-            }else{
-                //有数据，则结束刷新状态，以便下次能够刷新
-                [_tableView1.mj_footer endRefreshing];
             }
 
             NSArray *listArray = [dataDic objectForKey:@"list"];
@@ -244,6 +241,7 @@
         
         [_tableView1 reloadData];
         [_tableView1.mj_header endRefreshing];
+   
     } failureBlock:^(NSError *error) {
         [_tableView1 addSubview:_noDataImg];
         [_tableView1 addSubview:_lbNoData];
@@ -280,7 +278,7 @@
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView1 reloadData];
-        [_tableView1.mj_footer endRefreshing];
+ 
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
         [_tableView1.mj_footer endRefreshing];
@@ -314,9 +312,6 @@
             if (totalCount-_pageSize2*_page2<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView2.mj_footer endRefreshingWithNoMoreData];
-            }else{
-                //有数据，则结束刷新状态，以便下次能够刷新
-                [_tableView2.mj_footer endRefreshing];
             }
 
         NSArray *listArray = [dataDic objectForKey:@"list"];
@@ -329,6 +324,7 @@
         }
         [_tableView2 reloadData];
         [_tableView2.mj_header endRefreshing];
+
     } failureBlock:^(NSError *error) {
         [_tableView2 addSubview:_noDataImg];
         [_tableView2 addSubview:_lbNoData];
@@ -365,7 +361,7 @@
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView2 reloadData];
-        [_tableView2.mj_footer endRefreshing];
+
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
         [_tableView2.mj_footer endRefreshing];

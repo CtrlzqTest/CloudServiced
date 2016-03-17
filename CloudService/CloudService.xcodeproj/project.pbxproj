@@ -20,6 +20,13 @@
 		630EF1A51C8579630059CB34 /* IntergralChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A21C8579630059CB34 /* IntergralChangeViewController.m */; };
 		630EF1A61C8579630059CB34 /* MyIntergralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630EF1A41C8579630059CB34 /* MyIntergralViewController.m */; };
 		6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */ = {isa = PBXBuildFile; fileRef = 6320B73B1C89A2CE0076FC7E /* Coupons.m */; };
+		634EE61F1C995A8D00FB526D /* activity2.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE61D1C995A8D00FB526D /* activity2.png */; };
+		634EE6201C995A8D00FB526D /* activity2@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE61E1C995A8D00FB526D /* activity2@2X.png */; };
+		634EE6231C9961CB00FB526D /* activity3@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6211C9961CB00FB526D /* activity3@2X.png */; };
+		634EE6241C9961CB00FB526D /* activity3.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6221C9961CB00FB526D /* activity3.png */; };
+		634EE6271C997F0000FB526D /* rulebg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6251C997F0000FB526D /* rulebg1.png */; };
+		634EE6281C997F0000FB526D /* rulebg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6261C997F0000FB526D /* rulebg2.png */; };
+		634EE62B1C997F9400FB526D /* RuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 634EE62A1C997F9400FB526D /* RuleViewController.m */; };
 		63508C851C86D37800505F08 /* YWBCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63508C841C86D37800505F08 /* YWBCityPickerView.m */; };
 		635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635C2AC81C8527D10051708D /* CreatClientViewController.m */; };
 		636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */; };
@@ -165,6 +172,14 @@
 		630EF1A41C8579630059CB34 /* MyIntergralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntergralViewController.m; sourceTree = "<group>"; };
 		6320B73A1C89A2CE0076FC7E /* Coupons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupons.h; sourceTree = "<group>"; };
 		6320B73B1C89A2CE0076FC7E /* Coupons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupons.m; sourceTree = "<group>"; };
+		634EE61D1C995A8D00FB526D /* activity2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity2.png; sourceTree = "<group>"; };
+		634EE61E1C995A8D00FB526D /* activity2@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity2@2X.png"; sourceTree = "<group>"; };
+		634EE6211C9961CB00FB526D /* activity3@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity3@2X.png"; sourceTree = "<group>"; };
+		634EE6221C9961CB00FB526D /* activity3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity3.png; sourceTree = "<group>"; };
+		634EE6251C997F0000FB526D /* rulebg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg1.png; sourceTree = "<group>"; };
+		634EE6261C997F0000FB526D /* rulebg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg2.png; sourceTree = "<group>"; };
+		634EE6291C997F9400FB526D /* RuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleViewController.h; sourceTree = "<group>"; };
+		634EE62A1C997F9400FB526D /* RuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleViewController.m; sourceTree = "<group>"; };
 		63508C831C86D37800505F08 /* YWBCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWBCityPickerView.h; sourceTree = "<group>"; };
 		63508C841C86D37800505F08 /* YWBCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWBCityPickerView.m; sourceTree = "<group>"; };
 		635C2AC71C8527D10051708D /* CreatClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatClientViewController.h; sourceTree = "<group>"; };
@@ -547,6 +562,8 @@
 				63790FE81C93B19C006CB0E2 /* ActivityViewController.m */,
 				63FE2FF61C97ED9B00537876 /* ActivityRuleViewController.h */,
 				63FE2FF71C97ED9B00537876 /* ActivityRuleViewController.m */,
+				634EE6291C997F9400FB526D /* RuleViewController.h */,
+				634EE62A1C997F9400FB526D /* RuleViewController.m */,
 			);
 			name = "HomeController(首页)";
 			sourceTree = "<group>";
@@ -638,6 +655,12 @@
 			isa = PBXGroup;
 			children = (
 				637533AF1C83F64100A12932 /* details-icon.png */,
+				634EE61D1C995A8D00FB526D /* activity2.png */,
+				634EE61E1C995A8D00FB526D /* activity2@2X.png */,
+				634EE6211C9961CB00FB526D /* activity3@2X.png */,
+				634EE6221C9961CB00FB526D /* activity3.png */,
+				634EE6251C997F0000FB526D /* rulebg1.png */,
+				634EE6261C997F0000FB526D /* rulebg2.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -964,18 +987,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634EE61F1C995A8D00FB526D /* activity2.png in Resources */,
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
 				F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
+				634EE6201C995A8D00FB526D /* activity2@2X.png in Resources */,
 				63FE2FFB1C97F3BE00537876 /* ButelCommonConnectSDK.bundle in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
 				630EF18B1C8530940059CB34 /* MyClientTableViewCell.xib in Resources */,
+				634EE6271C997F0000FB526D /* rulebg1.png in Resources */,
 				F09A5F901A55BEDD008D4963 /* HomeHeaderView.xib in Resources */,
 				F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */,
+				634EE6231C9961CB00FB526D /* activity3@2X.png in Resources */,
 				63C2FB951C7FEC9500D48B8C /* OrderInfoTableViewCell.xib in Resources */,
+				634EE6241C9961CB00FB526D /* activity3.png in Resources */,
 				F0292BBD1C7B00CD00A810A9 /* LaunchScreen.storyboard in Resources */,
 				630EF1981C8567960059CB34 /* IntegralTableViewCell.xib in Resources */,
 				630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */,
+				634EE6281C997F0000FB526D /* rulebg2.png in Resources */,
 				F0292BBA1C7B00CD00A810A9 /* Assets.xcassets in Resources */,
 				63790FEE1C93C03C006CB0E2 /* ActivityCollectionCell.xib in Resources */,
 				F07FF9E01C81752D00EB1BB1 /* MyTeamTableViewCell.xib in Resources */,
@@ -1090,6 +1119,7 @@
 				63C2FB941C7FEC9500D48B8C /* OrderInfoTableViewCell.m in Sources */,
 				63C07B9A1C7B14BB0084581F /* MBProgressHUD+Add.m in Sources */,
 				63C07BA81C7B15C10084581F /* NSArray+AYCUnicode.m in Sources */,
+				634EE62B1C997F9400FB526D /* RuleViewController.m in Sources */,
 				63C07BAA1C7B15C10084581F /* NSObject+AYCUnicode.m in Sources */,
 				F019C9D91C7BFD8D00E73A2C /* RegisterViewController.m in Sources */,
 				63AA2BDD1C8AAEF700D7CF04 /* ClientData.m in Sources */,
@@ -1197,8 +1227,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1242,8 +1272,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

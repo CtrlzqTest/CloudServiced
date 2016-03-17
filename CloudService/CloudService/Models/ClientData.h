@@ -28,4 +28,7 @@
 @property (nonatomic, copy)NSString *type;
 @property (nonatomic, copy)NSString *baseId;
 @property (nonatomic, copy)NSString *endCode;
+@property (nonatomic, copy)NSString *cityCode;
+@property (nonatomic, copy)NSString *vehicleModelName;
+@property (nonatomic, copy)NSString *primaryDate;
 @end

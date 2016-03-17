@@ -98,8 +98,10 @@
  *  字符串转时间戳
  */
 +(NSString *)getDateWithDateStr:(NSString *)dateStr;
-
-
+/**
+ *  消失键盘
+ */
++ (void)resignKeyBoardInView:(UIView *)view;
 
 
 @end

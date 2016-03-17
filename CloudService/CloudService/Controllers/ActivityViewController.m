@@ -12,6 +12,7 @@
 #import "ActifityModel.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
+#import "ActivityRuleViewController.h"
 
 static NSString *cellID = @"cellID";
 @interface ActivityViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>

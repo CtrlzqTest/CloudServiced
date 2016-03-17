@@ -134,11 +134,13 @@
         {
             case ImageTypeNet:
                 [self.frontImgView sd_setImageWithURL:[NSURL URLWithString:_imageArray[_currenIndex - 1]] placeholderImage:nil];
+                
                 [self.lastImgView sd_setImageWithURL:[NSURL URLWithString:[_imageArray firstObject]] placeholderImage:nil];
                 break;
             case ImageTypeBundle:
                 self.frontImgView.image = [UIImage imageNamed:_imageArray[_currenIndex - 1]];
                 self.lastImgView.image = [UIImage imageNamed:[_imageArray firstObject]];
+
                 break;
             default:
                 break;
@@ -168,6 +170,7 @@
             break;
         case ImageTypeBundle:
             self.midImgView.image = [UIImage imageNamed:_imageArray[_currenIndex]];
+            
             break;
         default:
             break;
@@ -188,7 +191,7 @@
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width * i, 0, self.frame.size.width, self.frame.size.height)];
         imageView.userInteractionEnabled = YES;
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.clipsToBounds = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView:)];
         [imageView addGestureRecognizer:tap];

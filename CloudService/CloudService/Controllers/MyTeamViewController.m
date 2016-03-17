@@ -94,9 +94,6 @@ static NSString *cell_id = @"myTeamCell";
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
-            }else{
-                //有数据，则结束刷新状态，以便下次能够刷新
-                [_tableView.mj_footer endRefreshing];
             }
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
@@ -108,6 +105,7 @@ static NSString *cell_id = @"myTeamCell";
         
         [_tableView reloadData];
         [_tableView.mj_header endRefreshing];
+      
     } failureBlock:^(NSError *error) {
     
         [_tableView.mj_header endRefreshing];
@@ -142,7 +140,7 @@ static NSString *cell_id = @"myTeamCell";
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
-        [_tableView.mj_footer endRefreshing];
+ 
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
         [_tableView.mj_footer endRefreshing];

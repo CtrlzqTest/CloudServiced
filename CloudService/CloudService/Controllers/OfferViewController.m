@@ -12,6 +12,7 @@
 #import "MyClientViewController.h"
 #import "AppDelegate.h"
 #import "OrderH5ViewController.h"
+#import "ClientData.h"
 
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
@@ -117,13 +118,24 @@ static CGFloat headerHeight = 30;
         [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
         return ;
     }
+    
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kEstablishCustBySelf] params:@{@"userId":user.userId,
-                 @"custName":self.custName,
-                 @"phoneNo":self.phoneNo,
-                 @"licenseNo":self.carCode,
-                 @"engineNo":cell1.engine.text,
-                 @"frameNo":cell1.carFrameCode.text}
+    NSDictionary *myServerDict = @{
+                                   @"userId":user.userId,
+                                   @"baseId":@"",
+                                   @"customerId":@"",
+                                   @"orderType":@"",
+                                   @"cityCode":self.carCity,
+                                   @"custName":cell2.carUserName.text,
+                                   @"phoneNo":self.phoneNo,
+                                   @"licenseNo":cell1.carCode.text,
+                                   @"engineNo":cell1.engine.text,
+                                   @"frameNo":cell1.carFrameCode.text,
+                                   @"cappld":cell2.carUserCard.text,
+                                   @"date":cell1.firstTime.text,
+                                   @"vehicleModelName":cell1.engineType.text
+                                   };
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kEstablishCustBySelf] params:myServerDict
         successBlock:^(id returnData) {
         MyClientViewController *VC = self.navigationController.viewControllers[1];
         VC.isSaveCarInfo = YES;
@@ -166,8 +178,8 @@ static CGFloat headerHeight = 30;
      *  dataType 01:创建订单,获取新数据 02:创建客户
      */
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSString *licenseNo = self.carCode;
-    if ([self.carCode isEqualToString:@""]) {
+    NSString *licenseNo = self.clientData.licenseNo;
+    if ([self.clientData.licenseNo isEqualToString:@""]) {
         licenseNo = @"新车";
     }
     NSDictionary *params = @{@"operType":@"测试",
@@ -205,13 +217,15 @@ static CGFloat headerHeight = 30;
                                            @"baseId":baseId,
                                            @"customerId":@"",
                                            @"orderType":@"",
-                                           @"city":self.carCity,
+                                           @"cityCode":self.carCity,
                                            @"custName":cell2.carUserName.text,
                                            @"phoneNo":self.phoneNo,
                                            @"licenseNo":cell1.carCode.text,
                                            @"engineNo":cell1.engine.text,
                                            @"frameNo":cell1.carFrameCode.text,
-                                           @"cappld":@"421123199303042452",
+                                           @"cappld":cell2.carUserCard.text,
+                                           @"date":cell1.firstTime.text,
+                                           @"vehicleModelName":cell1.engineType.text
                                            };
             OrderH5ViewController *cliteVC = [[OrderH5ViewController alloc] init];
             cliteVC.url = url;
@@ -261,19 +275,43 @@ static CGFloat headerHeight = 30;
     
     if (cell == nil) {
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"OfferTableViewCell" owner:self options:nil];
-        if (indexPath.section == 0) {
-            cell = [array objectAtIndex:0];
-            if (![self.carCode isEqualToString:@""]) {
-                cell.carCode.text = self.carCode;
-            }else {
-                cell.carCode.placeholder = @"暂无车牌号";
+        if (self.clientData == nil) {
+            if (indexPath.section == 0) {
+                cell = [array objectAtIndex:0];
+                if (![self.carCode isEqualToString:@""]) {
+                    cell.carCode.text = self.carCode;
+                }else {
+                    cell.carCode.placeholder = @"暂无车牌号";
+                }
+                
+            }else{
+                cell = [array objectAtIndex:1];
+                cell.carUserName.text = self.custName;
             }
-            
-        }else{
-            cell = [array objectAtIndex:1];
-            cell.carUserName.text = self.custName;
+
+        }else {
+            if (indexPath.section == 0) {
+                cell = [array objectAtIndex:0];
+                if (![self.clientData.licenseNo isEqualToString:@""]) {
+                    cell.carCode.text = self.clientData.licenseNo;
+                }else {
+                    cell.carCode.placeholder = @"暂无车牌号";
+                }
+                cell.engine.text = self.clientData.engineNo;
+                cell.carFrameCode.text = self.clientData.frameNo;
+                cell.engineType.text = self.clientData.vehicleModelName;
+                cell.firstTime.text = [HelperUtil timeFormat:self.clientData.primaryDate format:@"yyyy-MM-dd"];
+                self.carCity = self.clientData.cityCode;
+                self.phoneNo = self.clientData.phoneNo;
+                
+            }else{
+                cell = [array objectAtIndex:1];
+                cell.carUserName.text = self.clientData.custName;
+                cell.carUserCard.text = self.clientData.cappld;
+            }
+
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+               cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }

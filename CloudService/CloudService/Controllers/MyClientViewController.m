@@ -10,6 +10,9 @@
 #import "MyClientTableViewCell.h"
 #import <MJRefresh.h>
 #import "ClientData.h"
+#import "OfferViewController.h"
+#import "OrderInfoViewController.h"
+#import "ButelHandle.h"
 
 @interface MyClientViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
@@ -17,6 +20,7 @@
     int _pageSize;//每页加载数
     NSMutableArray *_clientArray;
     NSString *_conditon;//模糊搜索
+    ClientData *_clientData;
 }
 @property (weak, nonatomic)IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
@@ -44,6 +48,7 @@
     
     [super viewWillAppear:animated];
     self.title = @"我的客户";
+    [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
     __weak typeof(self) weakSelf = self;
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"head-add" selectImage:@"head-add" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];
@@ -92,9 +97,6 @@
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
-            }else{
-                //有数据，则结束刷新状态，以便下次能够刷新
-                [_tableView.mj_footer endRefreshing];
             }
            
             NSArray *listArray = [dataDic objectForKey:@"list"];
@@ -127,7 +129,6 @@
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
@@ -145,7 +146,7 @@
         }
 
         [self.tableView reloadData];
-        [self.tableView.mj_footer endRefreshing];
+        
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
         [self.tableView.mj_footer endRefreshing];
@@ -176,10 +177,28 @@
     return 79;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    _clientData = [_clientArray objectAtIndex:indexPath.row];
+    if ([_clientData.baseId isEqualToString:@""]) {
+        [self performSegueWithIdentifier:@"offerInfo" sender:self];
+    }else{
+        [self performSegueWithIdentifier:@"clientOrder" sender:self];
+    }
 }
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // segue.identifier：获取连线的ID
+    if ([segue.identifier isEqualToString:@"offerInfo"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        OfferViewController *receive = segue.destinationViewController;
+        receive.clientData = _clientData;
+    }
+    if ([segue.identifier isEqualToString:@"clientOrder"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        OrderInfoViewController *receive = segue.destinationViewController;
+        receive.clientData = _clientData;
+    }
+}
 #pragma mark searchBar
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     searchBar.text = @"";

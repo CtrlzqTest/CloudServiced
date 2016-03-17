@@ -397,7 +397,7 @@
  发动机号验证 MODIFIED BY HELENSONG
  */
 + (BOOL)validateEngineNo:(NSString *) engineNo {
-    NSString *carRegex = @"^[a-zA-Z0-9]{6+}$";
+    NSString *carRegex = @"^[a-zA-Z0-9]{6,}$";
     NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",carRegex];
     return [carTest evaluateWithObject:engineNo];
 }
@@ -429,5 +429,26 @@
     long time2 = (long )(time * 1000);
     return [NSString stringWithFormat:@"%ldL",time2];
 }
+/** 消失键盘*/
++ (void)resignKeyBoardInView:(UIView *)view
 
+{
+    
+    for (UIView *v in view.subviews) {
+        
+        if ([v.subviews count] > 0) {
+            
+            [self resignKeyBoardInView:v];
+            
+        }
+        
+        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
+            
+            [v resignFirstResponder];
+            
+        }
+        
+    }
+    
+}
 @end

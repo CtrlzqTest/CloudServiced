@@ -395,9 +395,6 @@
                 if (totalCount-_pageSize1*_page1<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView1.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    //有数据，则结束刷新状态，以便下次能够刷新
-                    [_tableView1.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_dayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
@@ -405,9 +402,6 @@
                 if (totalCount-_pageSize2*_page2<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView2.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    //有数据，则结束刷新状态，以便下次能够刷新
-                    [_tableView2.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_weekArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
@@ -415,9 +409,6 @@
                 if (totalCount-_pageSize3*_page3<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView3.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    //有数据，则结束刷新状态，以便下次能够刷新
-                    [_tableView3.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_monthArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
@@ -431,12 +422,15 @@
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];
             [_tableView1.mj_header endRefreshing];
+      
         }if ([type isEqualToString:@"week"]) {
             [_tableView2 reloadData];
             [_tableView2.mj_header endRefreshing];
+        
         }if ([type isEqualToString:@"month"]) {
             [_tableView3 reloadData];
             [_tableView3.mj_header endRefreshing];
+          
         }
         
        
@@ -525,25 +519,24 @@
         }
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];
-            [_tableView1.mj_header endRefreshing];
         }if ([type isEqualToString:@"week"]) {
             [_tableView2 reloadData];
-            [_tableView2.mj_header endRefreshing];
+        
         }if ([type isEqualToString:@"month"]) {
             [_tableView3 reloadData];
-            [_tableView3.mj_header endRefreshing];
+         
         }
 
     } failureBlock:^(NSError *error) {
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];
-            [_tableView1.mj_header endRefreshing];
+            [_tableView1.mj_footer endRefreshing];
         }if ([type isEqualToString:@"week"]) {
             [_tableView2 reloadData];
-            [_tableView2.mj_header endRefreshing];
+            [_tableView2.mj_footer endRefreshing];
         }if ([type isEqualToString:@"month"]) {
             [_tableView3 reloadData];
-            [_tableView3.mj_header endRefreshing];
+            [_tableView3.mj_footer endRefreshing];
         }
     } showHUD:YES];
 }

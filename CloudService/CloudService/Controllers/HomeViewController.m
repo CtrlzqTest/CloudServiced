@@ -17,6 +17,7 @@
 #import "OrderInfoViewController.h"
 #import "FireData.h"
 #import "ButelHandle.h"
+#import "RuleViewController.h"
 
 @interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -52,7 +53,7 @@ static NSString *headerView_ID = @"headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollectionView:) name:ReloadHomeData object:nil];
     
     [[ButelHandle shareButelHandle] initCallView];
-    [[ButelHandle shareButelHandle] isHidden:NO tel:@""];
+    
 }
 
 - (void)initData {
@@ -68,7 +69,7 @@ static NSString *headerView_ID = @"headerView";
     [_dataDict setValue:@"业绩查询" forKey:_dataKeyArray[4]];
     [_dataDict setValue:@"积分明细查询" forKey:_dataKeyArray[5]];
     
-    _scrollImgArray = @[@"banner",@"head-bg.png",@"head-bg.png"];
+    _scrollImgArray = @[@"banner",@"activity3",@"activity2"];
 
 }
 - (IBAction)my:(id)sender {
@@ -113,6 +114,8 @@ static NSString *headerView_ID = @"headerView";
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     self.tabBarController.title = @"云客服";
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    
+    [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
     
 }
 
@@ -181,6 +184,20 @@ static NSString *headerView_ID = @"headerView";
         [_headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
             if (index == 0) {
                 [self performSegueWithIdentifier:@"activity" sender:self];
+            }
+            if (index == 1) {
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                RuleViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RuleVC"];
+                vc.ruleStr = @"活动2";
+                [self.navigationController pushViewController:vc animated:YES];
+
+            }
+            if (index == 2) {
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                RuleViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RuleVC"];
+                vc.ruleStr = @"活动3";
+                [self.navigationController pushViewController:vc animated:YES];
+
             }
         }];
         return _headerView;

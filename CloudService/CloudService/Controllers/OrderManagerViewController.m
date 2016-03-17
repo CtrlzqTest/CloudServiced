@@ -10,7 +10,8 @@
 #import "OrderManagerCell.h"
 #import <MJRefresh.h>
 #import "Order.h"
-//#import "ButelHandle.h"
+#import "ButelHandle.h"
+#import "OrderInfoViewController.h"
 
 @interface OrderManagerViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -51,8 +52,9 @@
     [self.tabBarController setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"searchOrder" sender:weakSelf];
     }];
-    
+    [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
 }
+
 - (void)setupNoData {
     _noDataImg = [[UIImageView alloc] initWithFrame:CGRectMake(KWidth/2-30, KHeight/2-80, 75, 85)];
     _noDataImg.image = [UIImage imageNamed:@"pix2"];
@@ -245,7 +247,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self performSegueWithIdentifier:@"orderInfo" sender:self];
 }
-#pragma mark 加载团队业绩
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // segue.identifier：获取连线的ID
+    
+    if ([segue.identifier isEqualToString:@"orderInfo"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        OrderInfoViewController *receive = segue.destinationViewController;
+//        receive.clientData = _clientData;
+    }
+}
+#pragma mark 加载订单
 - (void)requestTeamAchievement:(NSString *)type {
     NSDictionary *paramsDic;
     if ([type isEqualToString:@"未完成"]) {
@@ -294,9 +306,6 @@
                 if (totalCount-_pageSize1*_page1<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView1.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    //有数据，则结束刷新状态，以便下次能够刷新
-                    [_tableView1.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_unfinishedArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
@@ -304,9 +313,6 @@
                 if (totalCount-_pageSize2*_page2<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView2.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    //有数据，则结束刷新状态，以便下次能够刷新
-                    [_tableView2.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_waitPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
@@ -314,9 +320,6 @@
                 if (totalCount-_pageSize3*_page3<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView3.mj_footer endRefreshingWithNoMoreData];
-                }else{
-                    //有数据，则结束刷新状态，以便下次能够刷新
-                    [_tableView3.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_alreadyPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
@@ -330,12 +333,15 @@
         if ([type isEqualToString:@"未完成"]) {
             [_tableView1 reloadData];
             [_tableView1.mj_header endRefreshing];
+      
         }if ([type isEqualToString:@"待支付"]) {
             [_tableView2 reloadData];
             [_tableView2.mj_header endRefreshing];
+     
         }if ([type isEqualToString:@"已支付"]) {
             [_tableView3 reloadData];
             [_tableView3.mj_header endRefreshing];
+    
         }
         
         
@@ -424,25 +430,25 @@
         }
         if ([type isEqualToString:@"未完成"]) {
             [_tableView1 reloadData];
-            [_tableView1.mj_header endRefreshing];
+       
         }if ([type isEqualToString:@"待支付"]) {
             [_tableView2 reloadData];
-            [_tableView2.mj_header endRefreshing];
+     
         }if ([type isEqualToString:@"已支付"]) {
             [_tableView3 reloadData];
-            [_tableView3.mj_header endRefreshing];
+      
         }
         
     } failureBlock:^(NSError *error) {
         if ([type isEqualToString:@"未完成"]) {
             [_tableView1 reloadData];
-            [_tableView1.mj_header endRefreshing];
+            [_tableView1.mj_footer endRefreshing];
         }if ([type isEqualToString:@"待支付"]) {
             [_tableView2 reloadData];
-            [_tableView2.mj_header endRefreshing];
+            [_tableView2.mj_footer endRefreshing];
         }if ([type isEqualToString:@"已支付"]) {
             [_tableView3 reloadData];
-            [_tableView3.mj_header endRefreshing];
+            [_tableView3.mj_footer endRefreshing];
         }
     } showHUD:YES];
 }

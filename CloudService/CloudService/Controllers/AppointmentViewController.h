@@ -10,4 +10,5 @@
 
 @interface AppointmentViewController : BaseViewController
 
+@property (nonatomic, strong)NSString *customerId;
 @end

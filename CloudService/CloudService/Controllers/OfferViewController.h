@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+@class ClientData;
 
 @interface OfferViewController : BaseViewController
 
@@ -15,4 +16,5 @@
 @property (nonatomic,copy)NSString *custName;
 @property (nonatomic,copy)NSString *carCity;
 
+@property (nonatomic,strong)ClientData *clientData;
 @end

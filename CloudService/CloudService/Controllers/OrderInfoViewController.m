@@ -9,7 +9,8 @@
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
 #import "ClientData.h"
-//#import "ButelHandle.h"
+#import "ButelHandle.h"
+#import "AppointmentViewController.h"
 
 
 @interface OrderInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -36,7 +37,7 @@
     
     [super viewWillAppear:animated];
     self.title=@"订单详情";
-//    [[ButelHandle shareButelHandle] isHidden:NO tel:@"18701564714"];
+    [[ButelHandle shareButelHandle] isHidden:NO tel:@"18701564714"];
     
 }
 
@@ -71,14 +72,23 @@
  
 
 }
-/** */
+/** 报价*/
 - (void)priceClick:(UIButton *)sender {
     
 }
-/** */
+/** 预约*/
 - (void)appointmentClick:(UIButton *)sender {
     [self performSegueWithIdentifier:@"appointment" sender:self];
 }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // segue.identifier：获取连线的ID
+    if ([segue.identifier isEqualToString:@"appointment"]) {
+        // segue.destinationViewController：获取连线时所指的界面（VC）
+        AppointmentViewController *receive = segue.destinationViewController;
+        receive.customerId = self.clientData.clientId;
+    }
+}
+
 /** */
 /** */
 - (void)didReceiveMemoryWarning {
