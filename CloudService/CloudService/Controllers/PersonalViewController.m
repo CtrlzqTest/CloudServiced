@@ -198,7 +198,12 @@ static NSString *cell_id = @"personalCell";
                 break;
             case 3:
             {
-                [self performSegueWithIdentifier:@"invateFriend_push" sender:self];
+                if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+                    [self performSegueWithIdentifier:@"invateFriend_push" sender:self];
+                }else{
+                    [MBProgressHUD showMessag:@"您不是团队长" toView:self.view];
+                }
+                
             }
                 break;
             case 4:

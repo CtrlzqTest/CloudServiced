@@ -10,17 +10,24 @@
 #import "Utility.h"
 
 @interface VerifyCodeViewController ()
-
+{
+    BOOL _isEye;
+}
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextWord;
-
+@property (strong, nonatomic)UIImageView *eyeImg;
 @end
 
 @implementation VerifyCodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.eyeImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
+
+    self.pwdTextWord.rightView = self.eyeImg;
     
-    self.pwdTextWord.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
+    self.pwdTextWord.rightView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(eyeTap:)];
+    [self.pwdTextWord.rightView addGestureRecognizer:tap];
     self.pwdTextWord.rightViewMode = UITextFieldViewModeAlways;
     
     self.title = @"验证原始密码";
@@ -30,6 +37,18 @@
     }];
 }
 
+- (void)eyeTap:(UITapGestureRecognizer *)sender {
+    _isEye = !_isEye;
+    if (_isEye) {
+        
+        self.eyeImg.image = [UIImage imageNamed:@"login-line_"];
+        self.pwdTextWord.secureTextEntry = NO;
+    }else {
+        
+        self.eyeImg.image = [UIImage imageNamed:@"login-line"];
+        self.pwdTextWord.secureTextEntry = YES;
+    }
+}
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
