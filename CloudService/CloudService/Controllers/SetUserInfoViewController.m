@@ -284,8 +284,8 @@ static NSString *const select_CellID = @"selectCell";
     
     BOOL isCell2 = (indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 8) ? 1 : 0;
     // 个人信息,带下拉框
-    if (indexPath.section == 0) {
-        if (isCell2) {
+    if (indexPath.section == 0 && isCell2) {
+
             SetUserInfoCell2 *cell2 = [tableView dequeueReusableCellWithIdentifier:cell_Id2 forIndexPath:indexPath];
             cell2.titleLabelWidth.constant = 80;
             cell2.titleLabel.text = _keyArray_User[indexPath.row];
@@ -309,7 +309,6 @@ static NSString *const select_CellID = @"selectCell";
                 }
             }
             return cell2;
-        }
     }
     // 个人信息，不带下拉框
     SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
@@ -319,6 +318,8 @@ static NSString *const select_CellID = @"selectCell";
     cell.label.text = indexPath.section == 0 ? _keyArray_User[indexPath.row] : _keyArray_Bank[indexPath.row];
     cell.textFiled.text = indexPath.section == 0 ? _valueArray_User[indexPath.row] : _valueArray_Bank[indexPath.row];
     cell.delegate = self;
+    cell.textFiled.enabled = YES;
+    cell.textFiled.keyboardType = UIKeyboardTypeDefault;
     
     if (self.notEnable) {
         cell.textFiled.enabled = NO;
@@ -355,7 +356,7 @@ static NSString *const select_CellID = @"selectCell";
     BOOL isCell2 = (indexPath.section == 0) && (indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 8) ? 1 : 0;
     CGRect tempRect = CGRectZero;
     CGRect cellFrame = CGRectZero;
-    if (!isCell2) {
+    if (!isCell2 || indexPath.section == 1) {
         SetUserInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         tempRect = [cell.contentView convertRect:cell.textFiled.frame fromView:self.view];
         cellFrame = cell.frame;

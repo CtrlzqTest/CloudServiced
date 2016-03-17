@@ -51,7 +51,7 @@ static NSString *headerView_ID = @"headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyintegralData) name:ExchangeIntegralSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollectionView:) name:ReloadHomeData object:nil];
     
-    [[ButelHandle shareButelHandle] initCallView];
+    [[ButelHandle shareButelHandle] Init];
     
 }
 
@@ -114,7 +114,7 @@ static NSString *headerView_ID = @"headerView";
     self.tabBarController.title = @"云客服";
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
     
-    [[ButelHandle shareButelHandle] isHidden:YES tel:@""];
+    [[ButelHandle shareButelHandle] hideCallView];
     
 }
 

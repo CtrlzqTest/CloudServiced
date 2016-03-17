@@ -10,6 +10,7 @@
 #import "ZQCityPickerView.h"
 #import "AppDelegate.h"
 #import "OrderH5ViewController.h"
+#import "ButelHandle.h"
 // baseId 25961588
 @interface CreatOrderViewController ()<UITextFieldDelegate>
 {
@@ -177,6 +178,7 @@
     
     [super viewWillAppear:animated];
     self.title=@"创建订单";
+    [[ButelHandle shareButelHandle] showCallView];
 }
 
 - (void)didReceiveMemoryWarning {

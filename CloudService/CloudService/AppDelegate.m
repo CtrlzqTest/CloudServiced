@@ -61,7 +61,6 @@
     [FireData sharedInstance].sendTimeInterval = 2;
     [FireData sharedInstance].enableIDFA = NO;
 
-    
     [[FireData sharedInstance] loginWithUserid:@"user1" uvar:@"UvarsJson"];
     [FireData sharedInstance].refcode = @"refcode100000";
 }
@@ -140,6 +139,7 @@
 }
 
 - (void)logOut {
+    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavi"];
     UIViewController *oldVC = self.window.rootViewController;

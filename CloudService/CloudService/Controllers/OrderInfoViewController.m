@@ -26,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
- 
     self.tableView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
@@ -39,10 +38,9 @@
     
     [super viewWillAppear:animated];
     self.title=@"订单详情";
-    [[ButelHandle shareButelHandle] isHidden:NO tel:@"18701564714"];
+    [[ButelHandle shareButelHandle] showCallView];
     
 }
-
 
 #pragma mark tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

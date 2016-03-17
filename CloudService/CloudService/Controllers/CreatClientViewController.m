@@ -101,7 +101,8 @@
     
     [super viewWillAppear:animated];
     self.title = @"创建客户";
-   
+    [[ButelHandle shareButelHandle] showCallView];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -121,6 +122,7 @@
         offerVC.order = order;
     }
 }
+
 /** 消失键盘*/
 - (void)resignKeyBoardInView:(UIView *)view
 
