@@ -127,7 +127,7 @@ static NSString *headerView_ID = @"headerView";
 - (void)signAction:(UIButton *)sender {
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    if ([user.roleName isEqualToString:@"普通用户"]) {
+    if ([user.roleName isEqualToString:@"普通用户"] || user.roleName.length <= 0) {
         [MBProgressHUD showError:@"当前用户为普通用户,不能签到,请先认证" toView:self.view];
         return ;
     }

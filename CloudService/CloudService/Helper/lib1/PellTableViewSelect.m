@@ -71,6 +71,7 @@ UITableView *tableView;
     tableView.delegate = backgroundView;
     tableView.layer.cornerRadius = 10.0f;
     tableView.rowHeight = 40;
+    tableView.backgroundColor = [UIColor colorWithWhite:0.695 alpha:1.000];
     [win addSubview:tableView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackgroundClick)];
@@ -110,6 +111,7 @@ UITableView *tableView;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:0 reuseIdentifier:Identifier];
     }
+    cell.backgroundColor = [UIColor colorWithWhite:0.695 alpha:1.000];
     cell.textLabel.text = _selectData[indexPath.row];
     return cell;
 }

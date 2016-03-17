@@ -67,21 +67,22 @@
     self.maskView.backgroundColor = [UIColor blackColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMaskView)];
     [self.maskView addGestureRecognizer:tap];
-    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KHeight + 30, KWidth, KHeight * 3 / 8.0 - 30)];
+    CGFloat accessHeight = 50;
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KHeight + accessHeight, KWidth, KHeight * 3 / 8.0 - accessHeight)];
     self.pickerView.backgroundColor = [UIColor whiteColor];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     
-    _accessInputView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.pickerView.frame) - 30, KWidth, 30)];
+    _accessInputView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.pickerView.frame) - accessHeight, KWidth, accessHeight)];
 //    _accessInputView.hidden = YES;
     _accessInputView.backgroundColor = [UIColor whiteColor];
     
     UIButton *cancleBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    cancleBtn.frame = CGRectMake(20, 0, 30, 30);
+    cancleBtn.frame = CGRectMake(20, 15, 30, 30);
     [cancleBtn setTitle:@"取消" forState:(UIControlStateNormal)];
     [cancleBtn addTarget:self action:@selector(cancleAction:) forControlEvents:(UIControlEventTouchUpInside)];
     UIButton *ensureBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    ensureBtn.frame = CGRectMake(KWidth - 20 - 30, 0, 30, 30);
+    ensureBtn.frame = CGRectMake(KWidth - 20 - 30, 15, 30, 30);
     [ensureBtn setTitle:@"确定" forState:(UIControlStateNormal)];
     [ensureBtn addTarget:self action:@selector(ensureAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [_accessInputView addSubview:cancleBtn];
