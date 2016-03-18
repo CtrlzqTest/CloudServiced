@@ -72,7 +72,7 @@
     {
         [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox_"] forState:(UIControlStateNormal)];
         self.tfLicenseNo.enabled = NO;
-        self.tfLicenseNo.placeholder = @"暂无车牌号";
+        self.tfLicenseNo.placeholder = @"新车";
     }
     self.isNewCarBtn.selected = !self.isNewCarBtn.selected;
     

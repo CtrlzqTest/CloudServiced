@@ -181,7 +181,7 @@ static NSString *headerView_ID = @"headerView";
         }else {
             _headerView.integralLabel.text = [NSString stringWithFormat:@"%@",_integral];
         }
-//        _headerView.integralLabel.text = _integral;
+//        _headerView.integralLabel.text = _integral;·
         NSString *userName = nil;
         userName = user.realName.length > 0 ? user.realName : user.userName;
         [_headerView setDataWithDictionary:@{@"userName":userName}];
