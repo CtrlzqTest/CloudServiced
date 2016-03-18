@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
+    
 }
 
 - (void)setupViews {
@@ -33,6 +34,7 @@
     self.backView.layer.cornerRadius = KWidth * 3 / 7 / 2.0;
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    self.intergTotalLabel.font = [UIFont systemFontOfSize:45 * KWidth / 414.0];
     if ([user.totalNum floatValue] >= 100000) {
         self.intergTotalLabel.text = [NSString stringWithFormat:@"%.1lf万",[user.totalNum floatValue] / 10000.0];
     }else {

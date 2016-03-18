@@ -245,7 +245,7 @@ static NSString *const select_CellID = @"selectCell";
         }else {
             NSString *bankBin = [text substringToIndex:6];
             if ([self getBankNameWithBankbin:bankBin].length <= 0) {
-                [MBProgressHUD showError:@"你输入的银行卡号无效,请重新输入" toView:self.view];
+                [MBProgressHUD showError:@"查不到你的银行卡信息,请手动输入开户银行" toView:self.view];
             }else {
                 _valueArray_Bank[2] = [self getBankNameWithBankbin:bankBin];
             }
@@ -330,6 +330,8 @@ static NSString *const select_CellID = @"selectCell";
     }else if(indexPath.row == 2 || indexPath.row == 5)
     {
             cell.textFiled.enabled = NO;
+        }
+        
     }
     
 //  银行信息
@@ -338,7 +340,7 @@ static NSString *const select_CellID = @"selectCell";
         if(indexPath.row == 1){
             cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
         }
-        if (indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 5)
+        if (indexPath.row == 4 || indexPath.row == 5)
         {
             cell.textFiled.enabled = NO;
         }
