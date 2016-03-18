@@ -22,7 +22,6 @@
     [super viewDidLoad];
     [self setupViews];
     
-    
 }
 
 - (void)setupViews {
