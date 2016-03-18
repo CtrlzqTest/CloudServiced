@@ -19,8 +19,8 @@
 
 @property (nonatomic, strong) PlaceholderTextView * textView;
 @property (weak, nonatomic)IBOutlet UIView *bgView;
-@property (weak, nonatomic) IBOutlet UILabel *lbCode;
-@property (weak, nonatomic) IBOutlet UILabel *lbDate;
+@property (weak, nonatomic) IBOutlet UITextField *tfCode;
+@property (weak, nonatomic) IBOutlet UITextField *tfDate;
 //字数的限制
 @property (nonatomic, strong)UILabel *wordCountLabel;
 @property (strong, nonatomic)HZQDatePickerView *pickerView;//时间选择器
@@ -46,29 +46,23 @@
     self.wordCountLabel.backgroundColor = [UIColor whiteColor];
     self.wordCountLabel.textAlignment = NSTextAlignmentRight;
     [self.bgView addSubview:self.wordCountLabel];
-    self.lbCode.userInteractionEnabled = YES;
-    UITapGestureRecognizer *codeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(codeClick:)];
-    [self.lbCode addGestureRecognizer:codeTap];
-    
-    self.lbDate.userInteractionEnabled = YES;
-    UITapGestureRecognizer *dateTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateClick:)];
-    [self.lbDate addGestureRecognizer:dateTap];
+   
     // Do any additional setup after loading the view.
 }
 
 
-- (void)codeClick:(UITapGestureRecognizer *)tap {
+- (IBAction)codeAction:(id)sender {
     [self resignKeyBoardInView:self.view];
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(110, 135, 200, 200) selectData:
 
      [[SingleHandle shareSingleHandle] getEndCodeArray]
                                                         action:^(NSInteger index) {
                                                             
-                                                            _lbCode.text = [[[SingleHandle shareSingleHandle] getEndCodeArray] objectAtIndex:index];
+                                                            self.tfCode.text = [[[SingleHandle shareSingleHandle] getEndCodeArray] objectAtIndex:index];
                                                         } animated:YES];
 }
 
-- (void)dateClick:(UITapGestureRecognizer *)tap {
+- (IBAction)dateAction:(id)sender{
     [self resignKeyBoardInView:self.view];
     [self setupDateView:DateTypeOfStart];
 }
@@ -95,7 +89,7 @@
     switch (type) {
         case DateTypeOfStart:
     
-            self.lbDate.text = currentOlderOneDateStr;
+            self.tfDate.text = currentOlderOneDateStr;
             
             break;
             
@@ -147,7 +141,7 @@
 }
 - (IBAction)save:(id)sender {
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kaddReserve];
-    NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"customerId":self.customerId,@"time":self.lbDate.text,@"comment":self.textView.text,@"endCode":_lbCode.text};
+    NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"customerId":self.customerId,@"time":self.tfDate.text,@"comment":self.textView.text,@"endCode":self.tfCode.text};
     [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {

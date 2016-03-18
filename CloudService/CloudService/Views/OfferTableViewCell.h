@@ -13,9 +13,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *engine;
 @property (weak, nonatomic) IBOutlet UITextField *carFrameCode;
 @property (weak, nonatomic) IBOutlet UITextField *engineType;
-@property (weak, nonatomic) IBOutlet UILabel *firstTime;
+@property (weak, nonatomic) IBOutlet UITextField *firstTime;
 @property (weak, nonatomic) IBOutlet UITextField *carUserName;
 @property (weak, nonatomic) IBOutlet UITextField *carUserCard;
 @property (weak, nonatomic) IBOutlet UITextField *carUserPhone;
+@property (weak, nonatomic) IBOutlet UIButton *dateSelectBtn;
 
 @end

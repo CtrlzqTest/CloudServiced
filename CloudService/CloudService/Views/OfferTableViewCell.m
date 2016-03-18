@@ -22,7 +22,7 @@
     
 }
 
-- (IBAction)tapDateLabel:(id)sender {
+- (IBAction)tapDateButton:(UIButton *)sender {
     
     _pickerView = [HZQDatePickerView instanceDatePickerView];
     [_pickerView showDateViewWithDelegate:self];

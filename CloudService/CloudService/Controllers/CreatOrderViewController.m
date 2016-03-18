@@ -53,14 +53,7 @@
         [MBProgressHUD showMessag:@"请输入汽车所在城市" toView:self.view];
         return ;
     }
-    if (![HelperUtil checkTelNumber:_tfPhone.text]){
-        [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
-        return ;
-    }
-    if (![_tfLicenseNo.text isEqualToString:@""] && ![HelperUtil validateCarNo:_tfLicenseNo.text]){
-        [MBProgressHUD showMessag:@"车牌号格式不正确" toView:self.view];
-        return ;
-    }
+    
     
         AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
         delegate.isThird=YES;
@@ -164,6 +157,20 @@
     if ([textField isEqual:self.tfLicenseNo]) {
         self.tfLicenseNo.text = [textField.text uppercaseString];
     }
+    if ([textField isEqual:self.tfPhone]) {
+        if (![HelperUtil checkTelNumber:self.tfPhone.text]){
+            [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
+            return ;
+        }
+    }
+    
+    if ([textField isEqual:self.tfLicenseNo]) {
+        if (![self.tfLicenseNo.text isEqualToString:@""] && ![HelperUtil validateCarNo:self.tfLicenseNo.text]){
+            [MBProgressHUD showMessag:@"车牌号格式不正确" toView:self.view];
+            return ;
+        }
+    }
+    
 }
 /** 消失键盘*/
 - (void)resignKeyBoardInView:(UIView *)view

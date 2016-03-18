@@ -130,7 +130,7 @@ static CGFloat headerHeight = 30;
     NSDictionary *myServerDict = @{
                                    @"userId":user.userId,
                                    @"baseId":self.order.baseId,
-                                                                                   @"customerId":self.order.customerId,
+                                   @"id":self.order.customerId,
                                    @"orderType":@"",
                                    @"cityCode":self.order.cityCode,
                                    @"custName":cell2.carUserName.text,
@@ -156,17 +156,11 @@ static CGFloat headerHeight = 30;
     
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
     OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
-//    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
-//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-//        return ;
-//    }
+
     NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
     OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
     NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
-//    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
-//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-//        return ;
-//    }
+
     if (![cell1.engine.text isEqualToString:@""]) {
         if (![HelperUtil validateEngineNo:cell1.engine.text]) {
             [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
@@ -229,10 +223,10 @@ static CGFloat headerHeight = 30;
             NSDictionary *myServerDict = @{
                                            @"userId":user.userId,
                                            @"baseId":baseId,
-                                           @"customerId":self.order.customerId,
+                                           @"id":self.order.customerId,
                                            @"orderType":@"",
                                            @"cityCode":self.order.cityCode,
-                                           @"customerName":cell2.carUserName.text,
+                                           @"custName":cell2.carUserName.text,
                                            @"phoneNo":self.order.phoneNo,
                                            @"licenseNo":cell1.carCode.text,
                                            @"engineNo":cell1.engine.text,

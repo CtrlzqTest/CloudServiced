@@ -85,7 +85,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入发动机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WY2-KJ-qyj">
-                                <rect key="frame" x="102" y="60" width="185" height="30"/>
+                                <rect key="frame" x="102" y="60" width="253" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="m0m-yL-ew7"/>
                                 </constraints>
@@ -111,7 +111,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入品牌型号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnQ-Ud-Xp0">
-                                <rect key="frame" x="104" y="172" width="185" height="30"/>
+                                <rect key="frame" x="104" y="172" width="251" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="oBa-Nb-yrO"/>
                                 </constraints>
@@ -142,19 +142,24 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择初登日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgq-py-hfQ">
-                                <rect key="frame" x="102" y="235" width="185" height="21"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择初登日期" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Et8-Dz-tLt">
+                                <rect key="frame" x="102" y="231" width="253" height="30"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="xHq-Ky-dZB"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ocv-bw-MMU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="0.63951684397163122" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymi-I4-AAK">
+                                <rect key="frame" x="102" y="228" width="253" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="VM0-DM-FKa"/>
+                                </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="BBK-ZR-tdG" appends="YES" id="zDn-5y-okZ"/>
+                                    <action selector="tapDateButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1B5-t9-Au1"/>
                                 </connections>
-                            </label>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -164,6 +169,7 @@
                             <constraint firstItem="qXj-cU-eqV" firstAttribute="top" secondItem="WY2-KJ-qyj" secondAttribute="bottom" constant="15" id="4A1-8z-TcI"/>
                             <constraint firstItem="cLk-fs-20G" firstAttribute="top" secondItem="IPv-qV-X09" secondAttribute="bottom" constant="8" id="6FE-Dn-807"/>
                             <constraint firstItem="kGz-s8-jPN" firstAttribute="top" secondItem="GoY-7G-SDm" secondAttribute="top" id="7IC-Ai-TbR"/>
+                            <constraint firstAttribute="trailing" secondItem="ymi-I4-AAK" secondAttribute="trailing" constant="20" id="8EJ-tA-uD5"/>
                             <constraint firstItem="t9J-il-nDP" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" id="BLf-cZ-Ep6"/>
                             <constraint firstItem="4NR-US-LP3" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="15" id="EPL-KV-Dw1"/>
                             <constraint firstItem="IPv-qV-X09" firstAttribute="top" secondItem="kGz-s8-jPN" secondAttribute="bottom" constant="9" id="KEW-en-1tJ"/>
@@ -178,22 +184,24 @@
                             <constraint firstItem="YdC-ez-Rtg" firstAttribute="top" secondItem="qXj-cU-eqV" secondAttribute="bottom" constant="12" id="Tj4-5w-Rcc"/>
                             <constraint firstItem="umc-LP-9jR" firstAttribute="top" secondItem="cLk-fs-20G" secondAttribute="bottom" constant="16" id="VWx-wC-wIR"/>
                             <constraint firstAttribute="trailing" secondItem="h1a-1q-eaK" secondAttribute="trailing" id="WLZ-a5-lXn"/>
-                            <constraint firstItem="t9J-il-nDP" firstAttribute="top" secondItem="pgq-py-hfQ" secondAttribute="bottom" constant="20" id="XOK-Pw-HLC"/>
-                            <constraint firstAttribute="trailing" secondItem="pgq-py-hfQ" secondAttribute="trailing" constant="88" id="ZqJ-hB-Xae"/>
-                            <constraint firstItem="pgq-py-hfQ" firstAttribute="leading" secondItem="WRG-H7-qB2" secondAttribute="trailing" constant="13" id="alP-PI-ga2"/>
+                            <constraint firstItem="ymi-I4-AAK" firstAttribute="leading" secondItem="WRG-H7-qB2" secondAttribute="trailing" constant="13" id="ZRQ-hc-5BA"/>
                             <constraint firstItem="KYu-Tn-eg8" firstAttribute="top" secondItem="h1a-1q-eaK" secondAttribute="bottom" constant="17" id="bGD-ct-MJO"/>
-                            <constraint firstItem="pgq-py-hfQ" firstAttribute="top" secondItem="4NR-US-LP3" secondAttribute="bottom" constant="17" id="boI-f1-2uv"/>
                             <constraint firstItem="7Ux-5V-KQ6" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="17" id="cf4-RF-PXM"/>
-                            <constraint firstAttribute="trailing" secondItem="pnQ-Ud-Xp0" secondAttribute="trailing" constant="86" id="d6J-Qw-WlP"/>
+                            <constraint firstAttribute="trailing" secondItem="pnQ-Ud-Xp0" secondAttribute="trailing" constant="20" id="d6J-Qw-WlP"/>
                             <constraint firstAttribute="trailing" secondItem="IPv-qV-X09" secondAttribute="trailing" constant="20" id="daj-KU-ccd"/>
                             <constraint firstItem="umc-LP-9jR" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="17" id="eF2-ek-yCe"/>
                             <constraint firstItem="qXj-cU-eqV" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="15" id="ffr-Cq-Swa"/>
                             <constraint firstItem="pnQ-Ud-Xp0" firstAttribute="top" secondItem="h1a-1q-eaK" secondAttribute="bottom" constant="12" id="gJw-Q3-ZoS"/>
                             <constraint firstItem="kGz-s8-jPN" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" id="gVF-dQ-EK4"/>
-                            <constraint firstAttribute="trailing" secondItem="WY2-KJ-qyj" secondAttribute="trailing" constant="88" id="hTB-zz-ewE"/>
+                            <constraint firstAttribute="trailing" secondItem="Et8-Dz-tLt" secondAttribute="trailing" constant="20" id="ggq-r9-12p"/>
+                            <constraint firstAttribute="trailing" secondItem="WY2-KJ-qyj" secondAttribute="trailing" constant="20" id="hTB-zz-ewE"/>
+                            <constraint firstItem="t9J-il-nDP" firstAttribute="top" secondItem="Et8-Dz-tLt" secondAttribute="bottom" constant="15" id="hVV-80-k4d"/>
+                            <constraint firstItem="ymi-I4-AAK" firstAttribute="top" secondItem="4NR-US-LP3" secondAttribute="bottom" constant="10" id="hZy-WU-zed"/>
                             <constraint firstItem="cLk-fs-20G" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="15" id="iWU-Eq-Ovs"/>
                             <constraint firstAttribute="trailing" secondItem="cLk-fs-20G" secondAttribute="trailing" id="iWX-De-UQ5"/>
+                            <constraint firstItem="Et8-Dz-tLt" firstAttribute="top" secondItem="4NR-US-LP3" secondAttribute="bottom" constant="13" id="jUV-0S-6H4"/>
                             <constraint firstItem="KYu-Tn-eg8" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="19" id="nPs-p8-OXq"/>
+                            <constraint firstItem="Et8-Dz-tLt" firstAttribute="leading" secondItem="WRG-H7-qB2" secondAttribute="trailing" constant="13" id="q3g-Fb-7m9"/>
                             <constraint firstItem="WY2-KJ-qyj" firstAttribute="top" secondItem="cLk-fs-20G" secondAttribute="bottom" constant="11" id="txc-N6-Max"/>
                             <constraint firstAttribute="trailing" secondItem="t9J-il-nDP" secondAttribute="trailing" id="vKM-84-gY9"/>
                             <constraint firstItem="h1a-1q-eaK" firstAttribute="leading" secondItem="GoY-7G-SDm" secondAttribute="leading" constant="15" id="wP1-mp-eGN"/>
@@ -214,9 +222,10 @@
             <connections>
                 <outlet property="carCode" destination="IPv-qV-X09" id="QeD-Lm-BWz"/>
                 <outlet property="carFrameCode" destination="YdC-ez-Rtg" id="Ssb-sI-oon"/>
+                <outlet property="dateSelectBtn" destination="ymi-I4-AAK" id="F7u-Vh-FXj"/>
                 <outlet property="engine" destination="WY2-KJ-qyj" id="JkA-ZM-qP0"/>
                 <outlet property="engineType" destination="pnQ-Ud-Xp0" id="IbI-8d-qFm"/>
-                <outlet property="firstTime" destination="pgq-py-hfQ" id="5OI-lc-RNv"/>
+                <outlet property="firstTime" destination="Et8-Dz-tLt" id="FBZ-kt-l4S"/>
             </connections>
             <point key="canvasLocation" x="392.5" y="252.5"/>
         </tableViewCell>
@@ -359,10 +368,5 @@
             </connections>
             <point key="canvasLocation" x="383.5" y="542"/>
         </tableViewCell>
-        <tapGestureRecognizer id="BBK-ZR-tdG">
-            <connections>
-                <action selector="tapDateLabel:" destination="KGk-i7-Jjw" id="EEb-hU-gQb"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>
