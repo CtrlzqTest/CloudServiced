@@ -24,14 +24,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupViews];
     [self setLayoutConstraints];
+    [self setupViews];
 }
 
 - (void)setLayoutConstraints {
     
-    self.bottom.constant = 15 * KHeight / 568;
-    self.viewTop.constant = 15 * KHeight / 568;
+    self.bottom.constant = 40 * KHeight / 667.0;
+    self.viewTop.constant = 40 * KHeight / 667.0;
     
 }
 
