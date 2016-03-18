@@ -120,10 +120,14 @@ static User *user = nil;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:@"iOS" forKey:@"clientType"];
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckVersionAPI] params:@{@"clientType":@"iOS"} successBlock:^(id returnData) {
-        NSDictionary *dict = [returnData objectForKey:@"list"];
-        double newVersion = [[dict objectForKey:@"versionNum"] doubleValue];
-        BOOL flag = newVersion > currentVersion;
-        versionCheckBlock(flag);
+        
+        if ([returnData[@"flag"] isEqualToString:@"success"]) {
+            NSDictionary *dict = [returnData objectForKey:@"data"];
+            double newVersion = [[dict objectForKey:@"version"] doubleValue];
+            BOOL flag = newVersion > currentVersion;
+            versionCheckBlock(flag);
+        }
+        
     } failureBlock:^(NSError *error) {
         versionCheckBlock(NO);
     } showHUD:NO];
