@@ -17,11 +17,10 @@ static ButelHandle *singleHandle = nil;
 @interface ButelHandle()<ButelCommonConnectDelegateV1>
 {
     BOOL isCall;//是否拨号
-    // 通话时长
-    NSInteger _callDuration;
+   
     BOOL isCanCall;  // 拨号之前判断能否拨号
 }
-@property (nonatomic, strong) NSTimer *timerForDuration;
+
 @property (retain) ButelCommonConnectV1 *connect;
 @property (retain) NSString *deviceId;
 @property (nonatomic,strong)CallView *callView;
@@ -96,7 +95,13 @@ static ButelHandle *singleHandle = nil;
                 if ([[dic objectForKey:@"code"] isEqualToString:@"000"]) {
                     NSLog(@"拨打电话成功");
                 }else {
-                    [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:nil];
+                    if ([[dic objectForKey:@"msg"] isEqual:[NSNull null]]) {
+                        [MBProgressHUD showError:@"服务器异常" toView:nil];
+                        
+                    }else{
+                        [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:nil];
+                    }
+                    
                 }
                 delegate.isThird = NO;
             } failureBlock:^(NSError *error) {
@@ -162,55 +167,10 @@ static ButelHandle *singleHandle = nil;
 //打电话成功回调
 - (void)OnConnect:(int)mediaFormat Sid:(NSString*)Sid {
     
-    self.timerForDuration =nil;
-    if (!self.timerForDuration) {
-        NSLog(@"开启通话时长计时");
-        self.timerForDuration = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(setCallDurationDisp) userInfo:nil repeats:YES];
-        [[NSRunLoop mainRunLoop] addTimer:self.timerForDuration forMode:NSDefaultRunLoopMode];
-    }
+    [self.callView OnConnectSuccess];
     NSLog(@"%i,%@",mediaFormat,Sid);
 }
-/**
- *  设置通话时长显示
- */
-- (void)setCallDurationDisp
-{
-    NSString *timeStr = @"00:00";
-    NSInteger hour = 0;
-    NSInteger minute = 0;
-    NSInteger second = 0;
-    _callDuration ++;
-    if (_callDuration > 0){
-        minute = _callDuration / 60;
-        if (minute < 60) {
-            second = _callDuration % 60;
-            timeStr = [NSString stringWithFormat:@"%@:%@", [self unitFormat:minute], [self unitFormat:second]];
-        } else {
-            hour = minute / 60;
-            if (hour > 99) { // 最大值
-                timeStr =  @"99:59:59";
-            } else {
-                minute = minute % 60;
-                second = _callDuration - hour * 3600 - minute * 60;
-                timeStr = [NSString stringWithFormat:@"%@:%@:%@", [self unitFormat:hour], [self unitFormat:minute], [self unitFormat:second]];
-            }
-        }
-    }
-}
 
-/**
- *  格式化分秒
- */
-- (NSString *)unitFormat:(NSInteger)i
-{
-    NSString *retStr;
-    if (i >= 0 && i < 10){
-        retStr = [NSString stringWithFormat:@"0%ld", (long)i];
-    } else {
-        retStr = [NSString stringWithFormat:@"%ld", (long)i];
-    }
-    return retStr;
-}
 
 - (void)OnNewcall:(NSString*)szCallerNum szCallerNickname:(NSString*)szCallerNickname Sid:(NSString*)Sid  nCallType:(int) nCallType  szExtendSignalInfo:(NSString*)szExtendSignalInfo{
     NSLog(@"%@",szCallerNum);
@@ -219,13 +179,8 @@ static ButelHandle *singleHandle = nil;
 //挂断回调
 - (void)OnDisconnect:(int) nReason Sid:(NSString*)Sid{
     isCall = !isCall;
-    if (self.timerForDuration) {
-        NSLog(@"取消通话计时器");
-        _callDuration = 0;
-        
-        [self.timerForDuration invalidate];
-        self.timerForDuration = nil;
-    }
+    [self.callView OnDisconnect];
+    
 }
 -(void)OnCdrNotify:(NSString *)cdrInfo {
     

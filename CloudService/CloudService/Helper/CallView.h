@@ -12,14 +12,19 @@
 
 @property (nonatomic,copy)NSString *telNumStr;
 
-- (void)isHidden:(BOOL)hidden tel:(NSString *)telNum;
 /**
  *  释放拨打界面,同时退出青牛
  */
 - (void)dismissCallView;
 
 /**
- *  拨号
+ *  打电话成功回调开始计时
  */
+- (void)OnConnectSuccess;
 
+
+/**
+ *  挂断成功回调停止计时
+ */
+- (void)OnDisconnect;
 @end

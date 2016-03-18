@@ -30,6 +30,7 @@
     [super viewDidLoad];
     __weak typeof(self) weakSelf = self;
     self.tfLicenseNo.delegate = self;
+    self.tfPhone.delegate = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
@@ -68,9 +69,13 @@
     if (self.isNewCarBtn.selected)
     {
         [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox"] forState:(UIControlStateNormal)];
+        self.tfLicenseNo.enabled = YES;
+        self.tfLicenseNo.placeholder = @"请输入车牌号";
     }else
     {
         [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox_"] forState:(UIControlStateNormal)];
+        self.tfLicenseNo.enabled = NO;
+        self.tfLicenseNo.placeholder = @"暂无车牌号";
     }
     self.isNewCarBtn.selected = !self.isNewCarBtn.selected;
     
@@ -96,6 +101,9 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:self.tfLicenseNo]) {
         self.tfLicenseNo.text = [textField.text uppercaseString];
+    }
+    if ([textField isEqual:self.tfPhone]) {
+        [[ButelHandle shareButelHandle] setPhoneNo:self.tfPhone.text];
     }
 }
 - (void)viewWillAppear:(BOOL)animated {

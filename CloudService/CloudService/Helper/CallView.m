@@ -14,9 +14,10 @@
 {
     UIButton *_button;
     
-    bool isSpeaker; // 是否开启扬声器
+    BOOL isSpeaker; // 是否开启扬声器
     BOOL isMute;//是否静音
-    
+    // 通话时长
+    NSInteger _callDuration;
     UIButton *_btnCall;//拨号按钮
     UIImageView *_imgCall;//电话图标
     UILabel *_labelCallDuration;//通话计时
@@ -28,6 +29,7 @@
     UIButton *_btnSpeaker;//扬声器按钮
     UIButton *_btnMute;//静音按钮
 }
+@property (nonatomic, strong) NSTimer *timerForDuration;
 @end
 
 @implementation CallView
@@ -139,8 +141,8 @@
 
 - (void)callNum:(UIButton *)sender {
     
-    if (self.telNumStr.length <= 0) {
-        [MBProgressHUD showError:@"没有手机号" toView:nil];
+    if (![HelperUtil checkTelNumber:self.telNumStr]) {
+        [MBProgressHUD showError:@"手机号格式不正确" toView:nil];
         return;
     }else {
         [[ButelHandle shareButelHandle] makeCallWithPhoneNo:self.telNumStr];
@@ -246,80 +248,80 @@
 //    NSLog(@"%@",Sid);
 //    
 //}
-////打电话成功回调
-//- (void)OnConnect:(int)mediaFormat Sid:(NSString*)Sid {
-//    _labelCallDuration.hidden = NO;
-//    _imgCall.hidden = YES;
-//    self.timerForDuration =nil;
-//    if (!self.timerForDuration) {
-//        NSLog(@"开启通话时长计时");
-//        self.timerForDuration = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(setCallDurationDisp) userInfo:nil repeats:YES];
-//        [[NSRunLoop mainRunLoop] addTimer:self.timerForDuration forMode:NSDefaultRunLoopMode];
-//    }
-//    NSLog(@"%i,%@",mediaFormat,Sid);
-//}
-///**
-// *  设置通话时长显示
-// */
-//- (void)setCallDurationDisp
-//{
-//    NSString *timeStr = @"00:00";
-//    NSInteger hour = 0;
-//    NSInteger minute = 0;
-//    NSInteger second = 0;
-//    _callDuration ++;
-//    if (_callDuration > 0){
-//        minute = _callDuration / 60;
-//        if (minute < 60) {
-//            second = _callDuration % 60;
-//            timeStr = [NSString stringWithFormat:@"%@:%@", [self unitFormat:minute], [self unitFormat:second]];
-//        } else {
-//            hour = minute / 60;
-//            if (hour > 99) { // 最大值
-//                timeStr =  @"99:59:59";
-//            } else {
-//                minute = minute % 60;
-//                second = _callDuration - hour * 3600 - minute * 60;
-//                timeStr = [NSString stringWithFormat:@"%@:%@:%@", [self unitFormat:hour], [self unitFormat:minute], [self unitFormat:second]];
-//            }
-//        }
-//    }
-//    [_labelCallDuration setText:timeStr];
-//}
-//
-///**
-// *  格式化分秒
-// */
-//- (NSString *)unitFormat:(NSInteger)i
-//{
-//    NSString *retStr;
-//    if (i >= 0 && i < 10){
-//        retStr = [NSString stringWithFormat:@"0%ld", (long)i];
-//    } else {
-//        retStr = [NSString stringWithFormat:@"%ld", (long)i];
-//    }
-//    return retStr;
-//}
+//打电话成功回调
+- (void)OnConnectSuccess{
+    _labelCallDuration.hidden = NO;
+    _imgCall.hidden = YES;
+    self.timerForDuration =nil;
+    if (!self.timerForDuration) {
+        NSLog(@"开启通话时长计时");
+        self.timerForDuration = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(setCallDurationDisp) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.timerForDuration forMode:NSDefaultRunLoopMode];
+    }
+
+}
+/**
+ *  设置通话时长显示
+ */
+- (void)setCallDurationDisp
+{
+    NSString *timeStr = @"00:00";
+    NSInteger hour = 0;
+    NSInteger minute = 0;
+    NSInteger second = 0;
+    _callDuration ++;
+    if (_callDuration > 0){
+        minute = _callDuration / 60;
+        if (minute < 60) {
+            second = _callDuration % 60;
+            timeStr = [NSString stringWithFormat:@"%@:%@", [self unitFormat:minute], [self unitFormat:second]];
+        } else {
+            hour = minute / 60;
+            if (hour > 99) { // 最大值
+                timeStr =  @"99:59:59";
+            } else {
+                minute = minute % 60;
+                second = _callDuration - hour * 3600 - minute * 60;
+                timeStr = [NSString stringWithFormat:@"%@:%@:%@", [self unitFormat:hour], [self unitFormat:minute], [self unitFormat:second]];
+            }
+        }
+    }
+    [_labelCallDuration setText:timeStr];
+}
+
+/**
+ *  格式化分秒
+ */
+- (NSString *)unitFormat:(NSInteger)i
+{
+    NSString *retStr;
+    if (i >= 0 && i < 10){
+        retStr = [NSString stringWithFormat:@"0%ld", (long)i];
+    } else {
+        retStr = [NSString stringWithFormat:@"%ld", (long)i];
+    }
+    return retStr;
+}
 //
 //- (void)OnNewcall:(NSString*)szCallerNum szCallerNickname:(NSString*)szCallerNickname Sid:(NSString*)Sid  nCallType:(int) nCallType  szExtendSignalInfo:(NSString*)szExtendSignalInfo{
 //    NSLog(@"%@",szCallerNum);
 //}
-////挂断回调
-//- (void)OnDisconnect:(int) nReason Sid:(NSString*)Sid{
-//    _labelCallDuration.hidden = YES;
-//    _imgCall.hidden = NO;
-//    [_btnCall setBackgroundImage:[UIImage imageNamed:@"pop2-btn1"] forState:UIControlStateNormal];
-//    _lbCall.text = @"拨号";
-//    isCall = !isCall;
-//    if (self.timerForDuration) {
-//        NSLog(@"取消通话计时器");
-//        _callDuration = 0;
-//        
-//        _labelCallDuration.text = @"00:00";
-//        [self.timerForDuration invalidate];
-//        self.timerForDuration = nil;
-//    }
-//}
+//挂断回调
+- (void)OnDisconnect{
+    _labelCallDuration.hidden = YES;
+    _imgCall.hidden = NO;
+    [_btnCall setBackgroundImage:[UIImage imageNamed:@"pop2-btn1"] forState:UIControlStateNormal];
+    _lbCall.text = @"拨号";
+   
+    if (self.timerForDuration) {
+        NSLog(@"取消通话计时器");
+        _callDuration = 0;
+        
+        _labelCallDuration.text = @"00:00";
+        [self.timerForDuration invalidate];
+        self.timerForDuration = nil;
+    }
+}
 //-(void)OnCdrNotify:(NSString *)cdrInfo {
 //    
 //}
