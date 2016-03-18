@@ -147,10 +147,10 @@
 		F09A5F901A55BEDD008D4963 /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09A5F8E1A55BEDD008D4963 /* HomeHeaderView.xib */; };
 		F09A5F931A55F0AA008D4963 /* InviteFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */; };
 		F0AB898C1C8ED04F00849E3A /* ZQCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */; };
-		F0AFC5441C9BDCB600BC3CBC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC5401C9BDCB600BC3CBC /* Default-568h@2x.png */; };
-		F0AFC5451C9BDCB600BC3CBC /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC5411C9BDCB600BC3CBC /* Default-667h@2x.png */; };
-		F0AFC5461C9BDCB600BC3CBC /* Default-736h@2x .png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC5421C9BDCB600BC3CBC /* Default-736h@2x .png */; };
-		F0AFC5471C9BDCB600BC3CBC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC5431C9BDCB600BC3CBC /* Default@2x.png */; };
+		F0AFC54C1C9C0D2B00BC3CBC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC5481C9C0D2B00BC3CBC /* Default-568h@2x.png */; };
+		F0AFC54D1C9C0D2B00BC3CBC /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC5491C9C0D2B00BC3CBC /* Default-667h@2x.png */; };
+		F0AFC54E1C9C0D2B00BC3CBC /* Default-736h@2x .png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC54A1C9C0D2B00BC3CBC /* Default-736h@2x .png */; };
+		F0AFC54F1C9C0D2B00BC3CBC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AFC54B1C9C0D2B00BC3CBC /* Default@2x.png */; };
 		F0DF32121C87E612008D098F /* ResetUserPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */; };
 		F0FED91D1C96D38B008186C3 /* AboutAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FED91C1C96D38B008186C3 /* AboutAppViewController.m */; };
 /* End PBXBuildFile section */
@@ -396,10 +396,10 @@
 		F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendViewController.m; sourceTree = "<group>"; };
 		F0AB898A1C8ED04F00849E3A /* ZQCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQCityPickerView.h; sourceTree = "<group>"; };
 		F0AB898B1C8ED04F00849E3A /* ZQCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQCityPickerView.m; sourceTree = "<group>"; };
-		F0AFC5401C9BDCB600BC3CBC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		F0AFC5411C9BDCB600BC3CBC /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
-		F0AFC5421C9BDCB600BC3CBC /* Default-736h@2x .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@2x .png"; sourceTree = "<group>"; };
-		F0AFC5431C9BDCB600BC3CBC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F0AFC5481C9C0D2B00BC3CBC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F0AFC5491C9C0D2B00BC3CBC /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		F0AFC54A1C9C0D2B00BC3CBC /* Default-736h@2x .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@2x .png"; sourceTree = "<group>"; };
+		F0AFC54B1C9C0D2B00BC3CBC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F0DF32101C87E612008D098F /* ResetUserPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetUserPwdViewController.h; sourceTree = "<group>"; };
 		F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetUserPwdViewController.m; sourceTree = "<group>"; };
 		F0FED91B1C96D38B008186C3 /* AboutAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutAppViewController.h; sourceTree = "<group>"; };
@@ -666,10 +666,10 @@
 		F019C9DA1C7C05FD00E73A2C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F0AFC5401C9BDCB600BC3CBC /* Default-568h@2x.png */,
-				F0AFC5411C9BDCB600BC3CBC /* Default-667h@2x.png */,
-				F0AFC5421C9BDCB600BC3CBC /* Default-736h@2x .png */,
-				F0AFC5431C9BDCB600BC3CBC /* Default@2x.png */,
+				F0AFC5481C9C0D2B00BC3CBC /* Default-568h@2x.png */,
+				F0AFC5491C9C0D2B00BC3CBC /* Default-667h@2x.png */,
+				F0AFC54A1C9C0D2B00BC3CBC /* Default-736h@2x .png */,
+				F0AFC54B1C9C0D2B00BC3CBC /* Default@2x.png */,
 				637533AF1C83F64100A12932 /* details-icon.png */,
 				634EE61D1C995A8D00FB526D /* activity2.png */,
 				634EE61E1C995A8D00FB526D /* activity2@2X.png */,
@@ -1018,10 +1018,10 @@
 				F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */,
 				634EE6231C9961CB00FB526D /* activity3@2X.png in Resources */,
 				63C2FB951C7FEC9500D48B8C /* OrderInfoTableViewCell.xib in Resources */,
-				F0AFC5451C9BDCB600BC3CBC /* Default-667h@2x.png in Resources */,
+				F0AFC54D1C9C0D2B00BC3CBC /* Default-667h@2x.png in Resources */,
 				634EE6241C9961CB00FB526D /* activity3.png in Resources */,
 				F0292BBD1C7B00CD00A810A9 /* LaunchScreen.storyboard in Resources */,
-				F0AFC5471C9BDCB600BC3CBC /* Default@2x.png in Resources */,
+				F0AFC54F1C9C0D2B00BC3CBC /* Default@2x.png in Resources */,
 				630EF1981C8567960059CB34 /* IntegralTableViewCell.xib in Resources */,
 				630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */,
 				634EE6281C997F0000FB526D /* rulebg2.png in Resources */,
@@ -1033,7 +1033,7 @@
 				F094B5A41C80223400A2312D /* PersonalViewCell.xib in Resources */,
 				F01A61611C7D3D3E008CBBD5 /* SetUserInfoCell.xib in Resources */,
 				637533BC1C84321500A12932 /* OfferTableViewCell.xib in Resources */,
-				F0AFC5461C9BDCB600BC3CBC /* Default-736h@2x .png in Resources */,
+				F0AFC54E1C9C0D2B00BC3CBC /* Default-736h@2x .png in Resources */,
 				F074D9361C93CC35007A6A88 /* province.sqlite in Resources */,
 				637A624D1C8EC0020020AE5E /* CouponsDistributeCell.xib in Resources */,
 				6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */,
@@ -1041,7 +1041,7 @@
 				6367FB0D1C9AA19900947038 /* rulebg1.png in Resources */,
 				630EF1901C8543900059CB34 /* PersonResultCell.xib in Resources */,
 				637533B01C83F64100A12932 /* details-icon.png in Resources */,
-				F0AFC5441C9BDCB600BC3CBC /* Default-568h@2x.png in Resources */,
+				F0AFC54C1C9C0D2B00BC3CBC /* Default-568h@2x.png in Resources */,
 				63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

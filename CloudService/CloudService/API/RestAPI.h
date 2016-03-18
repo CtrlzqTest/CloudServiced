@@ -67,7 +67,7 @@
 
 #define kassignTeamCoupon      @"/app/coupon/assignTeamCoupon"                 //团队优惠券下发
 
-#define kZhiKe      @"http://139.198.0.49:80/zkyq-web/platform/getInfo"              //直客
+#define kZhiKe      @"http://10.136.96.114:80/zkyq-web/platform/getInfo"              //直客
 
 #define kfindOrderByCondition     @"/app/order/findOrderByCondition"             //订单条件查询
 

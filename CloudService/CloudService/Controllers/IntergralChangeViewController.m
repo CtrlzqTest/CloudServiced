@@ -14,6 +14,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *intergNumTextFiled;
 @property (weak, nonatomic) IBOutlet UILabel *maxChangeLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *top;
+
 @end
 
 @implementation IntergralChangeViewController
@@ -21,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
+    [self setLayoutConstraints];
+}
+
+- (void)setLayoutConstraints {
+    
+    self.bottom.constant = 15 * KHeight / 568;
+    self.viewTop.constant = 15 * KHeight / 568;
     
 }
 
@@ -42,6 +53,10 @@
     }
     self.maxChangeLabel.text = [NSString stringWithFormat:@"最多可兑换%.0f元",[user.totalNum floatValue] / 100];
     
+}
+
+- (IBAction)btnAction:(id)sender {
+    [self.intergNumTextFiled becomeFirstResponder];
 }
 
 - (IBAction)changeIntergralAction:(id)sender {
