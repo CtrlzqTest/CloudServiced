@@ -12,7 +12,7 @@
 #import "OrderH5ViewController.h"
 #import "ButelHandle.h"
 // baseId 25961588
-@interface CreatOrderViewController ()
+@interface CreatOrderViewController ()<UITextFieldDelegate>
 {
     NSString *_cityCode;
 }
@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weak typeof(self) weakSelf = self;
+    self.tfLicenseNo.delegate = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
@@ -82,6 +83,7 @@
                                            @"comeFrom":@"YPT",
                                            @"activeType":@"1",
                                            @"macAdress":@"28:f0:76:18:c1:08",
+                                           @"agentCode":@"",
                                            @"engineNo":@"jhg345325b135",
                                            @"vehicleFrameNo":@"dg3452",
                                            @"licenseNo":licenseNo,
@@ -153,6 +155,11 @@
     
 
 
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField isEqual:self.tfLicenseNo]) {
+        self.tfLicenseNo.text = [textField.text uppercaseString];
+    }
 }
 /** 消失键盘*/
 - (void)resignKeyBoardInView:(UIView *)view

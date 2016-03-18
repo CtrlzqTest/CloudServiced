@@ -24,11 +24,13 @@
 		634EE6201C995A8D00FB526D /* activity2@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE61E1C995A8D00FB526D /* activity2@2X.png */; };
 		634EE6231C9961CB00FB526D /* activity3@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6211C9961CB00FB526D /* activity3@2X.png */; };
 		634EE6241C9961CB00FB526D /* activity3.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6221C9961CB00FB526D /* activity3.png */; };
-		634EE6271C997F0000FB526D /* rulebg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6251C997F0000FB526D /* rulebg1.png */; };
+		634EE6271C997F0000FB526D /* rulebg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6251C997F0000FB526D /* rulebg3.png */; };
 		634EE6281C997F0000FB526D /* rulebg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 634EE6261C997F0000FB526D /* rulebg2.png */; };
 		634EE62B1C997F9400FB526D /* RuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 634EE62A1C997F9400FB526D /* RuleViewController.m */; };
 		63508C851C86D37800505F08 /* YWBCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63508C841C86D37800505F08 /* YWBCityPickerView.m */; };
 		635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635C2AC81C8527D10051708D /* CreatClientViewController.m */; };
+		6367FB0D1C9AA19900947038 /* rulebg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6367FB0C1C9AA19900947038 /* rulebg1.png */; };
+		6367FB101C9ACDCC00947038 /* CouponsRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6367FB0F1C9ACDCC00947038 /* CouponsRuleViewController.m */; };
 		636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */; };
 		636CD9181C880BF40050935E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9171C880BF40050935E /* libz.tbd */; };
 		636CD91A1C880BFD0050935E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9191C880BFD0050935E /* libc++.tbd */; };
@@ -63,7 +65,6 @@
 		63AA2BD51C8A70ED00D7CF04 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* DataSource.m */; };
 		63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */; };
 		63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BD91C8A8E1E00D7CF04 /* Integral.m */; };
-		63AA2BDD1C8AAEF700D7CF04 /* ClientData.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */; };
 		63ADFBE11C7E8E8F000D3164 /* OrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADFBE01C7E8E8F000D3164 /* OrderInfoViewController.m */; };
 		63ADFBE61C7EAC52000D3164 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADFBE41C7EAC52000D3164 /* ResultTableViewCell.m */; };
 		63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63ADFBE51C7EAC52000D3164 /* ResultTableViewCell.xib */; };
@@ -87,7 +88,6 @@
 		63C54E3E1C7C35AA007CE8CA /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E3D1C7C35AA007CE8CA /* ResultViewController.m */; };
 		63C54E411C7C35BA007CE8CA /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E401C7C35BA007CE8CA /* PersonalViewController.m */; };
 		63E9BFDD1C9659B200FFE0BA /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9BFDC1C9659B200FFE0BA /* Order.m */; };
-		63FE2FF81C97ED9B00537876 /* ActivityRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FE2FF71C97ED9B00537876 /* ActivityRuleViewController.m */; };
 		63FE2FFB1C97F3BE00537876 /* ButelCommonConnectSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63FE2FF91C97F3BE00537876 /* ButelCommonConnectSDK.bundle */; };
 		63FE2FFC1C97F3BE00537876 /* ButelCommonConnectSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FE2FFA1C97F3BE00537876 /* ButelCommonConnectSDK.framework */; };
 		63FE30011C97F3CB00537876 /* ButelHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FE2FFE1C97F3CB00537876 /* ButelHandle.m */; };
@@ -178,7 +178,7 @@
 		634EE61E1C995A8D00FB526D /* activity2@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity2@2X.png"; sourceTree = "<group>"; };
 		634EE6211C9961CB00FB526D /* activity3@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity3@2X.png"; sourceTree = "<group>"; };
 		634EE6221C9961CB00FB526D /* activity3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity3.png; sourceTree = "<group>"; };
-		634EE6251C997F0000FB526D /* rulebg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg1.png; sourceTree = "<group>"; };
+		634EE6251C997F0000FB526D /* rulebg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg3.png; sourceTree = "<group>"; };
 		634EE6261C997F0000FB526D /* rulebg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg2.png; sourceTree = "<group>"; };
 		634EE6291C997F9400FB526D /* RuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleViewController.h; sourceTree = "<group>"; };
 		634EE62A1C997F9400FB526D /* RuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleViewController.m; sourceTree = "<group>"; };
@@ -186,6 +186,9 @@
 		63508C841C86D37800505F08 /* YWBCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWBCityPickerView.m; sourceTree = "<group>"; };
 		635C2AC71C8527D10051708D /* CreatClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatClientViewController.h; sourceTree = "<group>"; };
 		635C2AC81C8527D10051708D /* CreatClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatClientViewController.m; sourceTree = "<group>"; };
+		6367FB0C1C9AA19900947038 /* rulebg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg1.png; sourceTree = "<group>"; };
+		6367FB0E1C9ACDCC00947038 /* CouponsRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsRuleViewController.h; sourceTree = "<group>"; };
+		6367FB0F1C9ACDCC00947038 /* CouponsRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsRuleViewController.m; sourceTree = "<group>"; };
 		636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		636CD9171C880BF40050935E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		636CD9191C880BFD0050935E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -234,8 +237,6 @@
 		63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		63AA2BD81C8A8E1E00D7CF04 /* Integral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Integral.h; sourceTree = "<group>"; };
 		63AA2BD91C8A8E1E00D7CF04 /* Integral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Integral.m; sourceTree = "<group>"; };
-		63AA2BDB1C8AAEF700D7CF04 /* ClientData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientData.h; sourceTree = "<group>"; };
-		63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientData.m; sourceTree = "<group>"; };
 		63ADFBDF1C7E8E8F000D3164 /* OrderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoViewController.h; sourceTree = "<group>"; };
 		63ADFBE01C7E8E8F000D3164 /* OrderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoViewController.m; sourceTree = "<group>"; };
 		63ADFBE31C7EAC52000D3164 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
@@ -282,8 +283,6 @@
 		63C54E401C7C35BA007CE8CA /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
 		63E9BFDB1C9659B200FFE0BA /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		63E9BFDC1C9659B200FFE0BA /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
-		63FE2FF61C97ED9B00537876 /* ActivityRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityRuleViewController.h; sourceTree = "<group>"; };
-		63FE2FF71C97ED9B00537876 /* ActivityRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityRuleViewController.m; sourceTree = "<group>"; };
 		63FE2FF91C97F3BE00537876 /* ButelCommonConnectSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ButelCommonConnectSDK.bundle; sourceTree = "<group>"; };
 		63FE2FFA1C97F3BE00537876 /* ButelCommonConnectSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ButelCommonConnectSDK.framework; sourceTree = "<group>"; };
 		63FE2FFD1C97F3CB00537876 /* ButelHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButelHandle.h; sourceTree = "<group>"; };
@@ -565,8 +564,6 @@
 				636CD9871C884E9A0050935E /* IntergralSearchViewController.m */,
 				63790FE71C93B19C006CB0E2 /* ActivityViewController.h */,
 				63790FE81C93B19C006CB0E2 /* ActivityViewController.m */,
-				63FE2FF61C97ED9B00537876 /* ActivityRuleViewController.h */,
-				63FE2FF71C97ED9B00537876 /* ActivityRuleViewController.m */,
 				634EE6291C997F9400FB526D /* RuleViewController.h */,
 				634EE62A1C997F9400FB526D /* RuleViewController.m */,
 			);
@@ -599,6 +596,8 @@
 				F09A5F921A55F0AA008D4963 /* InviteFriendViewController.m */,
 				630EF1991C856CD00059CB34 /* CouponsViewController.h */,
 				630EF19A1C856CD00059CB34 /* CouponsViewController.m */,
+				6367FB0E1C9ACDCC00947038 /* CouponsRuleViewController.h */,
+				6367FB0F1C9ACDCC00947038 /* CouponsRuleViewController.m */,
 				637A62461C8EBEC60020AE5E /* CouponsDistributeViewController.h */,
 				637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */,
 				F0FED91B1C96D38B008186C3 /* AboutAppViewController.h */,
@@ -664,8 +663,9 @@
 				634EE61E1C995A8D00FB526D /* activity2@2X.png */,
 				634EE6211C9961CB00FB526D /* activity3@2X.png */,
 				634EE6221C9961CB00FB526D /* activity3.png */,
-				634EE6251C997F0000FB526D /* rulebg1.png */,
+				634EE6251C997F0000FB526D /* rulebg3.png */,
 				634EE6261C997F0000FB526D /* rulebg2.png */,
+				6367FB0C1C9AA19900947038 /* rulebg1.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -830,8 +830,6 @@
 				6320B73B1C89A2CE0076FC7E /* Coupons.m */,
 				63AA2BD81C8A8E1E00D7CF04 /* Integral.h */,
 				63AA2BD91C8A8E1E00D7CF04 /* Integral.m */,
-				63AA2BDB1C8AAEF700D7CF04 /* ClientData.h */,
-				63AA2BDC1C8AAEF700D7CF04 /* ClientData.m */,
 				6392CFEF1C8D235400D84F38 /* TeamMember.h */,
 				6392CFF01C8D235400D84F38 /* TeamMember.m */,
 				6392CFF21C8D8F8200D84F38 /* Achievement.h */,
@@ -1003,7 +1001,7 @@
 				63FE2FFB1C97F3BE00537876 /* ButelCommonConnectSDK.bundle in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
 				630EF18B1C8530940059CB34 /* MyClientTableViewCell.xib in Resources */,
-				634EE6271C997F0000FB526D /* rulebg1.png in Resources */,
+				634EE6271C997F0000FB526D /* rulebg3.png in Resources */,
 				F09A5F901A55BEDD008D4963 /* HomeHeaderView.xib in Resources */,
 				F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */,
 				634EE6231C9961CB00FB526D /* activity3@2X.png in Resources */,
@@ -1025,6 +1023,7 @@
 				637A624D1C8EC0020020AE5E /* CouponsDistributeCell.xib in Resources */,
 				6383656B1C7DB8BA001A10C4 /* HZQDatePickerView.xib in Resources */,
 				F0292BB81C7B00CD00A810A9 /* Main.storyboard in Resources */,
+				6367FB0D1C9AA19900947038 /* rulebg1.png in Resources */,
 				630EF1901C8543900059CB34 /* PersonResultCell.xib in Resources */,
 				637533B01C83F64100A12932 /* details-icon.png in Resources */,
 				63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */,
@@ -1124,14 +1123,12 @@
 				630EF19F1C856CFD0059CB34 /* CouponsTableViewCell.m in Sources */,
 				F07FF9DB1C815BF600EB1BB1 /* MyTeamViewController.m in Sources */,
 				637533BB1C84321500A12932 /* OfferTableViewCell.m in Sources */,
-				63FE2FF81C97ED9B00537876 /* ActivityRuleViewController.m in Sources */,
 				63C2FB941C7FEC9500D48B8C /* OrderInfoTableViewCell.m in Sources */,
 				63C07B9A1C7B14BB0084581F /* MBProgressHUD+Add.m in Sources */,
 				63C07BA81C7B15C10084581F /* NSArray+AYCUnicode.m in Sources */,
 				634EE62B1C997F9400FB526D /* RuleViewController.m in Sources */,
 				63C07BAA1C7B15C10084581F /* NSObject+AYCUnicode.m in Sources */,
 				F019C9D91C7BFD8D00E73A2C /* RegisterViewController.m in Sources */,
-				63AA2BDD1C8AAEF700D7CF04 /* ClientData.m in Sources */,
 				63C54E411C7C35BA007CE8CA /* PersonalViewController.m in Sources */,
 				F06DDBB01C7DACDE00C862A1 /* OrderManagerViewController.m in Sources */,
 				6383656A1C7DB8BA001A10C4 /* HZQDatePickerView.m in Sources */,
@@ -1164,6 +1161,7 @@
 				F09A5F931A55F0AA008D4963 /* InviteFriendViewController.m in Sources */,
 				63C54E3E1C7C35AA007CE8CA /* ResultViewController.m in Sources */,
 				630EF1A61C8579630059CB34 /* MyIntergralViewController.m in Sources */,
+				6367FB101C9ACDCC00947038 /* CouponsRuleViewController.m in Sources */,
 				F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */,
 				F07FF9DF1C81752D00EB1BB1 /* MyTeamTableViewCell.m in Sources */,
 				630EF18A1C8530940059CB34 /* MyClientTableViewCell.m in Sources */,

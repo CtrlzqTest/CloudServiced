@@ -9,7 +9,7 @@
 #import "MyClientViewController.h"
 #import "MyClientTableViewCell.h"
 #import <MJRefresh.h>
-#import "ClientData.h"
+#import "Order.h"
 #import "OfferViewController.h"
 #import "OrderInfoViewController.h"
 #import "ButelHandle.h"
@@ -20,7 +20,7 @@
     int _pageSize;//每页加载数
     NSMutableArray *_clientArray;
     NSString *_conditon;//模糊搜索
-    ClientData *_clientData;
+    Order *_order;
 }
 @property (weak, nonatomic)IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
@@ -102,7 +102,7 @@
             }
            
             NSArray *listArray = [dataDic objectForKey:@"list"];
-            [_clientArray addObjectsFromArray:[ClientData mj_objectArrayWithKeyValuesArray:listArray]];
+            [_clientArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_clientArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -140,7 +140,7 @@
             }
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
-            [_clientArray addObjectsFromArray:[ClientData mj_objectArrayWithKeyValuesArray:listArray]];
+            [_clientArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_clientArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
@@ -167,9 +167,9 @@
         NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"MyClientTableViewCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
     }
-    ClientData *clientData = [_clientArray objectAtIndex:indexPath.row];
-    cell.lbCustName.text = clientData.custName;
-    cell.lbLicenseNo.text = clientData.licenseNo;
+    Order *order = [_clientArray objectAtIndex:indexPath.row];
+    cell.lbCustName.text = order.customerName;
+    cell.lbLicenseNo.text = order.licenseNo;
     cell.lbInfo.layer.borderColor = [[HelperUtil colorWithHexString:@"FDB164"]CGColor];
     
     return cell;
@@ -181,8 +181,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    _clientData = [_clientArray objectAtIndex:indexPath.row];
-    if ([_clientData.baseId isEqualToString:@""]) {
+    _order = [_clientArray objectAtIndex:indexPath.row];
+    if ([_order.baseId isEqualToString:@""]) {
         [self performSegueWithIdentifier:@"offerInfo" sender:self];
     }else{
         [self performSegueWithIdentifier:@"clientOrder" sender:self];
@@ -193,12 +193,12 @@
     if ([segue.identifier isEqualToString:@"offerInfo"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OfferViewController *receive = segue.destinationViewController;
-        receive.clientData = _clientData;
+        receive.order = _order;
     }
     if ([segue.identifier isEqualToString:@"clientOrder"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OrderInfoViewController *receive = segue.destinationViewController;
-        receive.clientData = _clientData;
+        receive.order = _order;
     }
 }
 #pragma mark searchBar

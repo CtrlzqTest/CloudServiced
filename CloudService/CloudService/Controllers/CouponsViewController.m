@@ -40,7 +40,10 @@
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
-
+    [weakSelf setRightTextBarButtonItemWithFrame:CGRectMake(0, 0, 90, 30) title:@"优惠券使用规则" titleColor:[UIColor whiteColor] backImage:@"" selectBackImage:@"" action:^(AYCButton *button) {
+        [weakSelf performSegueWithIdentifier:@"couponsRule" sender:weakSelf];
+        
+    }];
     if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
         [self initPageView];
     }else{

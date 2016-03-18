@@ -358,7 +358,7 @@ static NSString *const select_CellID = @"selectCell";
     }
     [self resignKeyBoardInView:self.view];
     _indexPath = indexPath;
-    BOOL isCell2 = (indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 8) ? 1 : 0;
+    BOOL isCell2 = (indexPath.section == 0) && (indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 8) ? 1 : 0;
     CGRect tempRect = CGRectZero;
     CGRect cellFrame = CGRectZero;
     if (!isCell2 || indexPath.section == 1) {

@@ -20,4 +20,13 @@
 @property (nonatomic, copy)NSString *customerId;
 @property (nonatomic, copy)NSString *endCode;
 @property (nonatomic, copy)NSString *phoneNo;
+@property (nonatomic, copy)NSString *cappld;
+@property (nonatomic, copy)NSString *comment;
+@property (nonatomic, copy)NSString *engineNo;
+@property (nonatomic, copy)NSString *frameNo;
+@property (nonatomic, copy)NSString *cityCode;
+@property (nonatomic, copy)NSString *vehicleModelName;
+@property (nonatomic, copy)NSString *primaryDate;
+@property (nonatomic, copy)NSString *baseId;
 @end
+

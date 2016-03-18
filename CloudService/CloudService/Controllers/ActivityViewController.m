@@ -12,7 +12,7 @@
 #import "ActifityModel.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
-#import "ActivityRuleViewController.h"
+#import "RuleViewController.h"
 
 static NSString *cellID = @"cellID";
 @interface ActivityViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
@@ -47,7 +47,10 @@ static NSString *cellID = @"cellID";
     }];
     
     [weakSelf setRightTextBarButtonItemWithFrame:CGRectMake(0, 0, 70, 25) title:@"活动规则" titleColor:[UIColor whiteColor] backImage:@"" selectBackImage:@"" action:^(AYCButton *button) {
-        [weakSelf performSegueWithIdentifier:@"rule" sender:self];
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        RuleViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RuleVC"];
+        vc.ruleStr = @"活动1";
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg"] forBarMetrics:UIBarMetricsCompact];
@@ -325,7 +328,7 @@ static NSString *cellID = @"cellID";
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:content
                                          images:imageArray
-                                            url:[NSURL URLWithString:@"www.baidu.com"]
+                                            url:[NSURL URLWithString:_linkUrl]
                                           title:@"云客服"
                                            type:SSDKContentTypeAuto];
         //2、分享（可以弹出我们的分享菜单和编辑界面）

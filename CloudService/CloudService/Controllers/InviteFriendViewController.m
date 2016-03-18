@@ -59,14 +59,14 @@
 {
     //可以把你要使用的信息加进去生成二维码
     UIImage *qrImg = [LBXScanWrapper createQRWithString:linkUrl size:_qrImgView.bounds.size];
-    UIImage *newImage= [LBXScanWrapper addImageLogo:qrImg centerLogoImage:[UIImage imageNamed:@"sharLogo"] logoSize:CGSizeMake(50, 50)];
+    UIImage *newImage= [LBXScanWrapper addImageLogo:qrImg centerLogoImage:[UIImage imageNamed:@"sharLogo"] logoSize:CGSizeMake(35, 35)];
     
     _qrImgView.image = newImage;
     
 }
 - (IBAction)shareAction:(id)sender {
     
-    if (_teamInviteCode.length <= 0) {
+    if (_linkUrl.length <= 0) {
         [MBProgressHUD showError:@"生成邀请url失败" toView:self.view];
         return;
     }
@@ -77,7 +77,7 @@
             if (self.isTeamInvite) {
                 content = [NSString stringWithFormat:@"诚心邀请您加入云客服，送万元梦想基金\n团队邀请码:%@",_teamInviteCode];
             }else {
-                content = [NSString stringWithFormat:@"诚心邀请您加入云客服，送万元梦想基金\n个人邀请码:%@",_teamInviteCode];
+                content = [NSString stringWithFormat:@"诚心邀请您加入云客服，送万元梦想基金\n个人邀请码:%@",_personInviteCode];
             }
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:content

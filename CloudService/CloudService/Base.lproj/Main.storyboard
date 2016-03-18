@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1021,44 +1021,6 @@
             </objects>
             <point key="canvasLocation" x="-224.5" y="391.5"/>
         </scene>
-        <!--活动规则-->
-        <scene sceneID="16f-Yi-UWa">
-            <objects>
-                <viewController title="活动规则" id="glp-MJ-rqP" customClass="ActivityRuleViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iBI-Cl-wHJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="ori-OC-xqU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wzH-7l-lBf">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dU-h1-rbF">
-                                <rect key="frame" x="20" y="0.0" width="335" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6dU-h1-rbF" secondAttribute="trailing" constant="20" id="7ag-Ns-cau"/>
-                            <constraint firstItem="6dU-h1-rbF" firstAttribute="top" secondItem="iBI-Cl-wHJ" secondAttribute="bottom" id="9kV-kq-nfE"/>
-                            <constraint firstItem="ori-OC-xqU" firstAttribute="top" secondItem="6dU-h1-rbF" secondAttribute="bottom" id="bTa-XY-PQk"/>
-                            <constraint firstItem="6dU-h1-rbF" firstAttribute="leading" secondItem="wzH-7l-lBf" secondAttribute="leading" constant="20" id="i8H-FW-DPT"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="活动规则" id="3Ce-1v-qn2"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="tvConent" destination="6dU-h1-rbF" id="2bj-25-cF3"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SyZ-ZX-BWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-663.5" y="-1460.5"/>
-        </scene>
         <!--我的猴运-->
         <scene sceneID="0FD-S6-Ovc">
             <objects>
@@ -1251,12 +1213,12 @@
                         <outlet property="button3" destination="fTs-lD-HSs" id="PeV-g4-8Jt"/>
                         <outlet property="getCoupon" destination="jMB-Eo-JBf" id="1GK-Vo-cR8"/>
                         <outlet property="shareBtn" destination="UvJ-wT-F3W" id="37N-7b-wAw"/>
-                        <segue destination="glp-MJ-rqP" kind="push" identifier="rule" id="ypN-un-uD7"/>
+                        <segue destination="iXX-Bk-qd7" kind="push" identifier="rule" id="01e-LJ-s33"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DLQ-CR-rsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284.5" y="-1394.5"/>
+            <point key="canvasLocation" x="132.5" y="-1396.5"/>
         </scene>
         <!--活动规则-->
         <scene sceneID="yCf-b8-Rlg">
@@ -1273,7 +1235,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMP-Qz-HDR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WZh-ee-k5i">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZh-ee-k5i">
                                 <rect key="frame" x="20" y="170" width="335" height="433"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1286,9 +1248,17 @@
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="top" secondItem="fXg-13-9kZ" secondAttribute="bottom" id="Bpf-fz-kfD"/>
                             <constraint firstAttribute="trailing" secondItem="lMP-Qz-HDR" secondAttribute="trailing" id="CUt-hr-FqV"/>
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="top" secondItem="fXg-13-9kZ" secondAttribute="bottom" id="Nbn-0x-YZy"/>
+                            <constraint firstItem="vgf-jE-rKT" firstAttribute="top" secondItem="WZh-ee-k5i" secondAttribute="bottom" id="S2L-Aw-m09"/>
+                            <constraint firstItem="WZh-ee-k5i" firstAttribute="leading" secondItem="i90-oa-I8P" secondAttribute="leading" constant="20" id="WOa-vX-CTA"/>
                             <constraint firstAttribute="trailing" secondItem="lMP-Qz-HDR" secondAttribute="trailing" id="YIt-Dh-bAA"/>
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="leading" secondItem="i90-oa-I8P" secondAttribute="leading" id="YSf-3o-Tbf"/>
+                            <constraint firstItem="vgf-jE-rKT" firstAttribute="top" secondItem="lMP-Qz-HDR" secondAttribute="bottom" id="bbn-wy-dRa"/>
+                            <constraint firstItem="lMP-Qz-HDR" firstAttribute="top" secondItem="fXg-13-9kZ" secondAttribute="bottom" id="bfc-rB-b20"/>
+                            <constraint firstAttribute="trailing" secondItem="lMP-Qz-HDR" secondAttribute="trailing" id="hXJ-Gq-Au3"/>
                             <constraint firstAttribute="bottom" secondItem="lMP-Qz-HDR" secondAttribute="bottom" id="hmw-jI-f5j"/>
+                            <constraint firstItem="WZh-ee-k5i" firstAttribute="top" secondItem="fXg-13-9kZ" secondAttribute="bottom" constant="170" id="iVO-K1-ZSv"/>
+                            <constraint firstAttribute="trailing" secondItem="WZh-ee-k5i" secondAttribute="trailing" constant="20" id="leu-P5-H3L"/>
+                            <constraint firstItem="lMP-Qz-HDR" firstAttribute="leading" secondItem="i90-oa-I8P" secondAttribute="leading" id="mR8-og-cOQ"/>
                             <constraint firstAttribute="bottom" secondItem="lMP-Qz-HDR" secondAttribute="bottom" id="mfx-wv-ezB"/>
                         </constraints>
                     </view>
@@ -1296,12 +1266,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="imageView" destination="lMP-Qz-HDR" id="dxK-SD-7wm"/>
+                        <outlet property="topLayout" destination="iVO-K1-ZSv" id="P1N-D2-6Uf"/>
                         <outlet property="tvConent" destination="WZh-ee-k5i" id="bpT-lk-dID"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MzH-gx-871" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="328.5" y="-2182.5"/>
+            <point key="canvasLocation" x="704.5" y="-2240.5"/>
         </scene>
         <!--首页-->
         <scene sceneID="HYx-ge-Xgu">
@@ -1960,14 +1931,14 @@
                                     <action selector="shareAction:" destination="TCA-u7-md9" eventType="touchUpInside" id="NB6-wp-DPl"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
                                 <rect key="frame" x="93" y="232" width="188" height="188"/>
                                 <color key="backgroundColor" red="1" green="0.26188047339999998" blue="0.28042493629999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bmO-QB-zPa" secondAttribute="height" id="dq7-v2-Q4k"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
                                 <rect key="frame" x="93" y="428" width="188" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0z4-W7-1GS"/>
@@ -2129,11 +2100,50 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="29r-zM-NAa" kind="push" identifier="distribute" id="vb2-PX-STz"/>
+                        <segue destination="YdR-zt-ONF" kind="push" identifier="couponsRule" id="FgH-wK-38r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhm-AB-eKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1683.5" y="2556.5"/>
+        </scene>
+        <!--优惠券使用规则-->
+        <scene sceneID="5FH-VL-XHK">
+            <objects>
+                <viewController id="YdR-zt-ONF" customClass="CouponsRuleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YIg-Xj-Jbr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Roa-6H-l1v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ewW-8D-blJ">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5q-41-Ylr">
+                                <rect key="frame" x="20" y="20" width="335" height="563"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="T5q-41-Ylr" secondAttribute="trailing" constant="20" id="8cg-Wj-PAQ"/>
+                            <constraint firstItem="T5q-41-Ylr" firstAttribute="top" secondItem="YIg-Xj-Jbr" secondAttribute="bottom" constant="20" id="TIT-EP-b3F"/>
+                            <constraint firstAttribute="bottom" secondItem="T5q-41-Ylr" secondAttribute="bottom" constant="20" id="aWT-DN-xNf"/>
+                            <constraint firstItem="T5q-41-Ylr" firstAttribute="leading" secondItem="ewW-8D-blJ" secondAttribute="leading" constant="20" id="mK1-A6-jmC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="优惠券使用规则" id="KEQ-uF-zlr"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tvContent" destination="T5q-41-Ylr" id="sAg-yq-Z5K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rz2-mX-Ea2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2301.5" y="2512.5"/>
         </scene>
         <!--优惠券派发-->
         <scene sceneID="3Dp-hs-Okd">
@@ -2224,7 +2234,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XBH-Af-Oj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="h4p-3q-x1A"/>
             </objects>
-            <point key="canvasLocation" x="2346.5" y="2556.5"/>
+            <point key="canvasLocation" x="2377.5" y="3019.5"/>
         </scene>
         <!--积分查询-->
         <scene sceneID="TFm-ND-MAv">
@@ -2936,7 +2946,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEI-e1-eG5">
                                 <rect key="frame" x="217" y="260" width="108" height="30"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point2" translatesAutoresizingMaskIntoConstraints="NO" id="5Qp-rF-ITq">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="point2" translatesAutoresizingMaskIntoConstraints="NO" id="5Qp-rF-ITq">
                                         <rect key="frame" x="0.0" y="10" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Qp-rF-ITq" secondAttribute="height" id="QqV-Bo-Vz3"/>
@@ -3464,8 +3474,9 @@
         <image name="youhuiquan-checkbox" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hk9-Xv-JLY"/>
         <segue reference="aJV-kD-afh"/>
         <segue reference="KaR-KU-zbk"/>
+        <segue reference="01e-LJ-s33"/>
+        <segue reference="hk9-Xv-JLY"/>
     </inferredMetricsTieBreakers>
 </document>

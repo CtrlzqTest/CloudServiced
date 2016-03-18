@@ -8,9 +8,11 @@
 
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
-#import "ClientData.h"
+#import "Order.h"
 #import "ButelHandle.h"
 #import "AppointmentViewController.h"
+#import "AppDelegate.h"
+#import "OrderH5ViewController.h"
 
 
 @interface OrderInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -52,11 +54,11 @@
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.lbOrderNum.text = _clientData.baseId;
-    cell.lbCustName.text = _clientData.custName;
-    cell.lbPhoneNo.text = _clientData.phoneNo;
-    cell.lbLicenseNo.text = _clientData.licenseNo;
-    cell.lbEndCode.text = _clientData.endCode;
+    cell.lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@",_order.baseId];
+    cell.lbCustName.text = _order.customerName;
+    cell.lbPhoneNo.text = _order.phoneNo;
+    cell.lbLicenseNo.text = _order.licenseNo;
+    cell.lbEndCode.text = _order.endCode;
     [cell.callBtn addTarget:self action:@selector(callClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.priceBtn addTarget:self action:@selector(priceClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.appointmentBtn addTarget:self action:@selector(appointmentClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -72,8 +74,52 @@
 }
 /** 报价*/
 - (void)priceClick:(UIButton *)sender {
+    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    delegate.isThird=YES;
+    /**
+     *  dataType 01:创建订单,获取新数据 02:创建客户
+     */
+    NSDictionary *params = @{@"operType":@"测试",
+                             @"msg":@"",
+                             @"sendTime":@"",
+                             @"sign":@"",
+                             @"data":@{@"proportion":@"0.8",
+                                       @"customerName":self.order.customerName,
+                                       @"phoneNo":self.order.phoneNo,
+                                       @"dataType":@"01",
+                                       @"comeFrom":@"YPT",
+                                       @"activeType":@"1",
+                                       @"macAdress":@"28:f0:76:18:c1:08",
+                                       @"agentCode":@"123",
+                                       @"engineNo":self.order.engineNo,
+                                       @"vehicleFrameNo":self.order.frameNo,
+                                       @"licenseNo":self.order.licenseNo,
+                                       @"vehicleModelName":self.order.vehicleModelName,
+                                       @"userId":user.userId,
+                                       @"accountType":@"3",
+                                       @"cityCode":self.order.cityCode}
+                             };
     
+    __weak typeof(self) weakSelf = self;
+    [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {
+        
+        delegate.isThird=NO;
+        if ([returnData[@"state"] isEqualToString:@"0"]) {
+            NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
+            OrderH5ViewController *orderH5VC = [[OrderH5ViewController alloc] init];
+            orderH5VC.url = url;
+            [weakSelf.navigationController pushViewController:orderH5VC animated:YES];
+            
+        }
+        
+    } failureBlock:^(NSError *error) {
+        delegate.isThird=NO;
+        
+    } showHUD:YES];
 }
+
+
 /** 预约*/
 - (void)appointmentClick:(UIButton *)sender {
     [self performSegueWithIdentifier:@"appointment" sender:self];
@@ -83,7 +129,7 @@
     if ([segue.identifier isEqualToString:@"appointment"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         AppointmentViewController *receive = segue.destinationViewController;
-        receive.customerId = self.clientData.clientId;
+        receive.customerId = self.order.customerId;
     }
 }
 

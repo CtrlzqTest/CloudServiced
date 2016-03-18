@@ -31,6 +31,7 @@
     BOOL _isLoad3;//是否已加载
     UIImageView *_noDataImg;
     UILabel *_lbNoData;
+    Order *_order;
 }
 @end
 
@@ -245,7 +246,16 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([tableView isEqual:_tableView1]) {
+        _order= [_unfinishedArray objectAtIndex:indexPath.row];
+    }else if ([tableView isEqual:_tableView2]) {
+        _order = [_waitPayArray objectAtIndex:indexPath.row];
+    }else if ([tableView isEqual:_tableView3]){
+        _order = [_alreadyPayArray objectAtIndex:indexPath.row];
+    }
     [self performSegueWithIdentifier:@"orderInfo" sender:self];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -254,7 +264,8 @@
     if ([segue.identifier isEqualToString:@"orderInfo"]) {
         // segue.destinationViewController：获取连线时所指的界面（VC）
         OrderInfoViewController *receive = segue.destinationViewController;
-//        receive.clientData = _clientData;
+        receive.order = _order;
+        NSLog(@"%@",receive.order);
     }
 }
 #pragma mark 加载订单

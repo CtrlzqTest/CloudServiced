@@ -1,19 +1,19 @@
 //
-//  ActivityRuleViewController.m
+//  CouponsRuleViewController.m
 //  CloudService
 //
-//  Created by 安永超 on 16/3/15.
+//  Created by 安永超 on 16/3/17.
 //  Copyright © 2016年 zhangqiang. All rights reserved.
 //
 
-#import "ActivityRuleViewController.h"
+#import "CouponsRuleViewController.h"
 
-@interface ActivityRuleViewController ()
+@interface CouponsRuleViewController ()
 
-@property (weak, nonatomic)IBOutlet UITextView *tvConent;
+@property (weak, nonatomic)IBOutlet UITextView *tvContent;
 @end
 
-@implementation ActivityRuleViewController
+@implementation CouponsRuleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,7 +21,6 @@
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
-    
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 8;// 字体的行间距
     
@@ -29,10 +28,10 @@
                                  NSFontAttributeName:[UIFont systemFontOfSize:15],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
-        self.tvConent.attributedText = [[NSAttributedString alloc] initWithString:@"【活动参与规则】\n 1.首次注册的用户并认证成功（每位用户限参与一次）；\n 2.通过邀请新用户，新用户注册成功后，赠送邀请人一只猴子（猴子种类随机派分）。\n 3.活动时间内集齐三种不同的猴子方可成功获得创业基金5000元优惠券。\n【兑现规则】\n 凡是在活动期间按照活动规则集满三种不同的小猴子，5000元创业基金优惠劵当日打到云客服优惠劵账户。\n【优惠劵使用规则】\n 车险保费每满1500元可使用100元优惠券，出单是保费满1500元系统会自动将优惠劵转换为积分打到用户积分账户内（积分转换比例为：1:100）\n活动时间：2016年3月20日零时起-----2016年4月30日24时止。" attributes:attributes];
-      
-    self.tvConent.textColor = [UIColor lightGrayColor];
-        // Do any additional setup after loading the view.
+
+    self.tvContent.attributedText = [[NSAttributedString alloc] initWithString:@"【优惠券使用规则】\n单张车险保费每满1500元即可使用100元优惠券，出单时保费每满1500元系统会自动将优惠券转换为积分打到用户积分账户内（积分转换比例为：1:100）。优惠券到期日期以单张优惠券标注时间为准。优惠券扣除规则按到期时间优先扣除。" attributes:attributes];
+    
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

@@ -151,7 +151,8 @@
     [MHNetworkManager postReqeustWithURL:url params:params successBlock:^(id returnData) {
         
         if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
-         
+            [MBProgressHUD showSuccess:@"预约成功" toView:nil];
+            [self.navigationController popViewControllerAnimated:YES];
             
         }else {
             [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];

@@ -12,7 +12,7 @@
 #import "MyClientViewController.h"
 #import "AppDelegate.h"
 #import "OrderH5ViewController.h"
-#import "ClientData.h"
+#import "Order.h"
 
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
@@ -132,9 +132,9 @@ static CGFloat headerHeight = 30;
                                    @"baseId":@"",
                                    @"customerId":@"",
                                    @"orderType":@"",
-                                   @"cityCode":self.clientData.cityCode,
+                                   @"cityCode":self.order.cityCode,
                                    @"custName":cell2.carUserName.text,
-                                   @"phoneNo":self.clientData.phoneNo,
+                                   @"phoneNo":self.order.phoneNo,
                                    @"licenseNo":cell1.carCode.text,
                                    @"engineNo":cell1.engine.text,
                                    @"frameNo":cell1.carFrameCode.text,
@@ -191,8 +191,8 @@ static CGFloat headerHeight = 30;
      *  dataType 01:创建订单,获取新数据 02:创建客户
      */
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSString *licenseNo = self.clientData.licenseNo;
-    if ([self.clientData.licenseNo isEqualToString:@""]) {
+    NSString *licenseNo = self.order.licenseNo;
+    if ([self.order.licenseNo isEqualToString:@""]) {
         licenseNo = @"新车";
     }
     NSDictionary *params = @{@"operType":@"测试",
@@ -201,18 +201,19 @@ static CGFloat headerHeight = 30;
                              @"sign":@"",
                              @"data":@{@"proportion":@"0.8",
                                        @"customerName":cell2.carUserName.text,
-                                       @"phoneNo":self.clientData.phoneNo,
+                                       @"phoneNo":self.order.phoneNo,
                                        @"dataType":@"02",
                                        @"comeFrom":@"YPT",
                                        @"activeType":@"1",
                                        @"macAdress":@"",
+                                       @"agentCode":@"",
                                        @"engineNo":cell1.engine.text,
                                        @"vehicleFrameNo":cell1.carFrameCode.text,
                                        @"licenseNo":licenseNo,
                                        @"vehicleModelName":cell1.engineType.text,
                                        @"userId":user.userId,
                                        @"accountType":@"3",
-                                       @"cityCode":self.clientData.cityCode,
+                                       @"cityCode":self.order.cityCode,
                                        @"registerDate":cell1.firstTime.text}
                              };
     
@@ -230,9 +231,9 @@ static CGFloat headerHeight = 30;
                                            @"baseId":baseId,
                                            @"customerId":@"",
                                            @"orderType":@"",
-                                           @"cityCode":self.clientData.cityCode,
+                                           @"cityCode":self.order.cityCode,
                                            @"custName":cell2.carUserName.text,
-                                           @"phoneNo":self.clientData.phoneNo,
+                                           @"phoneNo":self.order.phoneNo,
                                            @"licenseNo":cell1.carCode.text,
                                            @"engineNo":cell1.engine.text,
                                            @"frameNo":cell1.carFrameCode.text,
@@ -291,22 +292,22 @@ static CGFloat headerHeight = 30;
 
             if (indexPath.section == 0) {
                 cell = [array objectAtIndex:0];
-                if (![self.clientData.licenseNo isEqualToString:@""]) {
-                    cell.carCode.text = self.clientData.licenseNo;
+                if (![self.order.licenseNo isEqualToString:@""]) {
+                    cell.carCode.text = self.order.licenseNo;
                 }else {
                     cell.carCode.placeholder = @"暂无车牌号";
                 }
-                cell.engine.text = self.clientData.engineNo;
-                cell.carFrameCode.text = self.clientData.frameNo;
-                cell.engineType.text = self.clientData.vehicleModelName;
-                cell.firstTime.text = [HelperUtil timeFormat:self.clientData.primaryDate format:@"yyyy-MM-dd"];
+                cell.engine.text = self.order.engineNo;
+                cell.carFrameCode.text = self.order.frameNo;
+                cell.engineType.text = self.order.vehicleModelName;
+                cell.firstTime.text = [HelperUtil timeFormat:self.order.primaryDate format:@"yyyy-MM-dd"];
            
                 
             }else{
                 cell = [array objectAtIndex:1];
-                cell.carUserName.text = self.clientData.custName;
-                cell.carUserCard.text = self.clientData.cappld;
-                cell.carUserPhone.text = self.clientData.phoneNo;
+                cell.carUserName.text = self.order.customerName;
+                cell.carUserCard.text = self.order.cappld;
+                cell.carUserPhone.text = self.order.phoneNo;
             }
 
         

@@ -7,11 +7,11 @@
 //
 
 #import "BaseViewController.h"
-@class ClientData;
+@class Order;
 
 @interface OfferViewController : BaseViewController
 
 
 
-@property (nonatomic,strong)ClientData *clientData;
+@property (nonatomic,strong)Order *order;
 @end

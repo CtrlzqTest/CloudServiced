@@ -7,9 +7,9 @@
 //
 
 #import "BaseViewController.h"
-@class ClientData;
+@class Order;
 
 @interface OrderInfoViewController : BaseViewController
 
-@property (nonatomic,strong)ClientData *clientData;
+@property (nonatomic,strong)Order *order;
 @end
