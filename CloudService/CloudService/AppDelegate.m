@@ -62,7 +62,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
     
     if(buttonIndex == 0) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"www.baidu.com"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.baidu.com"]];
     }
 }
 
@@ -195,6 +195,12 @@
         [self.locateManager startUpdatingLocation];
     }
 }
+
+#pragma mark AppDelegate
+//-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+//    return [application ];
+//}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
