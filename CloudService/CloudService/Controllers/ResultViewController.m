@@ -350,22 +350,19 @@
 - (void)requestTeamAchievement:(NSString *)type {
     NSDictionary *paramsDic;
     if ([type isEqualToString:@"day"]) {
-        _dayArray = nil;
-        _dayArray = [NSMutableArray array];
+     
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
                     @"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],
                     @"pageNo":[NSString stringWithFormat:@"%i",_page1],
                     @"type":type};
     }if ([type isEqualToString:@"week"]) {
-        _weekArray = nil;
-        _weekArray = [NSMutableArray array];
+    
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
                     @"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@
                     "pageNo":[NSString stringWithFormat:@"%i",_page2],
                     @"type":type};
     }if ([type isEqualToString:@"month"]) {
-        _monthArray = nil;
-        _monthArray = [NSMutableArray array];
+     
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
                     @"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],
                     @"pageNo":[NSString stringWithFormat:@"%i",_page3],
@@ -392,23 +389,32 @@
                 [self.pageView addSubview:_lbNoData];
             }
             if ([type isEqualToString:@"day"]) {
+                [_dayArray removeAllObjects];
                 if (totalCount-_pageSize1*_page1<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView1.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [_tableView1.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_dayArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"week"]) {
+                [_weekArray removeAllObjects];
                 if (totalCount-_pageSize2*_page2<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView2.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [_tableView2.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_weekArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"month"]) {
+                [_monthArray removeAllObjects];
                 if (totalCount-_pageSize3*_page3<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView3.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [_tableView3.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_monthArray addObjectsFromArray:[Achievement mj_objectArrayWithKeyValuesArray:listArray]];

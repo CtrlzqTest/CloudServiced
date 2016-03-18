@@ -207,8 +207,7 @@
 #pragma mark 加载个人优惠券
 - (void)requestPersonalData {
     [self removeNoData];
-    _userArray = nil;
-    _userArray = [NSMutableArray array];
+  
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
@@ -216,6 +215,7 @@
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            [_userArray removeAllObjects];
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
@@ -231,6 +231,8 @@
             if (totalCount-_pageSize1*_page1<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView1.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [_tableView1.mj_footer endRefreshing];
             }
 
             NSArray *listArray = [dataDic objectForKey:@"list"];
@@ -290,8 +292,7 @@
 #pragma mark 加载团队优惠券
 - (void)requestGroupData {
     [self removeNoData];
-    _teamArray = nil;
-    _teamArray = [NSMutableArray array];
+
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
@@ -299,6 +300,7 @@
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            [_teamArray removeAllObjects];
         NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
@@ -315,6 +317,8 @@
             if (totalCount-_pageSize2*_page2<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView2.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [_tableView2.mj_footer endRefreshing];
             }
 
         NSArray *listArray = [dataDic objectForKey:@"list"];

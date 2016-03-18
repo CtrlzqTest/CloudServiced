@@ -16,7 +16,7 @@
 
 static NSString *const header_id = @"setUserInfoHeader";
 static CGFloat headerHeight = 30;
-@interface OfferViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface OfferViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UIView *_footView;
 }
@@ -32,8 +32,10 @@ static CGFloat headerHeight = 30;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
+    
     [self initFootView];
     [self.tableView registerClass:[SetUserInfoHeaderView class] forHeaderFooterViewReuseIdentifier:header_id];
+    self.tableView.keyboardDismissMode  = UIScrollViewKeyboardDismissModeInteractive;
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,47 +97,26 @@ static CGFloat headerHeight = 30;
     
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
     OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
-//    if (!cell1.engine.text || !cell1.engineType.text || !cell1.carFrameCode.text || [cell1.firstTime.text isEqualToString:@"请选择初登日期"]) {
-//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-//        return ;
-//    }
+
     NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
     OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
     NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
-//    if (!cell2.carUserName.text || !cell2.carUserCard.text) {
-//        [MBProgressHUD showError:@"信息填写不全" toView:self.view];
-//        return ;
-//    }
-    if (![cell1.engine.text isEqualToString:@""]) {
-        if (![HelperUtil validateEngineNo:cell1.engine.text]) {
-            [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
-            return ;
-        }
-    }
-    if (![cell1.carFrameCode.text isEqualToString:@""]) {
-        if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
-            [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
-            return ;
-        }
-    }
-    if (![cell2.carUserCard.text isEqualToString:@""]) {
-        if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
-            [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
-            return ;
-        }
-    }
+
+    
     
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSDictionary *myServerDict = @{
-                                   @"userId":user.userId,
-                                   @"baseId":self.order.baseId,
-                                   @"id":self.order.customerId,
+    NSLog(@"%@,%@%@%@",self.order.baseId,self.order.customerId,self.order.cityCode,self.order.phoneNo);
+    
+    NSLog(@"%@",cell1.carCode.text);
+    NSDictionary *myServerDict = @{@"userId":user.userId,
+                                   @"baseId":self.order.baseId<=0?@"":self.order.baseId,
+                                   @"id":self.order.customerId<=0?@"":self.order.customerId,
                                    @"orderType":@"",
                                    @"cityCode":self.order.cityCode,
                                    @"custName":cell2.carUserName.text,
                                    @"phoneNo":self.order.phoneNo,
-                                   @"licenseNo":cell1.carCode.text,
+                                   @"licenseNo":self.order.licenseNo,
                                    @"engineNo":cell1.engine.text,
                                    @"frameNo":cell1.carFrameCode.text,
                                    @"cappld":cell2.carUserCard.text,
@@ -161,24 +142,7 @@ static CGFloat headerHeight = 30;
     OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
     NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
 
-    if (![cell1.engine.text isEqualToString:@""]) {
-        if (![HelperUtil validateEngineNo:cell1.engine.text]) {
-            [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
-            return ;
-        }
-    }
-    if (![cell1.carFrameCode.text isEqualToString:@""]) {
-        if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
-            [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
-            return ;
-        }
-    }
-    if (![cell2.carUserCard.text isEqualToString:@""]) {
-        if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
-            [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
-            return ;
-        }
-    }
+    
     AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     delegate.isThird=YES;
     /**
@@ -228,7 +192,7 @@ static CGFloat headerHeight = 30;
                                            @"cityCode":self.order.cityCode,
                                            @"custName":cell2.carUserName.text,
                                            @"phoneNo":self.order.phoneNo,
-                                           @"licenseNo":cell1.carCode.text,
+                                           @"licenseNo":self.order.licenseNo,
                                            @"engineNo":cell1.engine.text,
                                            @"frameNo":cell1.carFrameCode.text,
                                            @"cappld":cell2.carUserCard.text,
@@ -289,7 +253,7 @@ static CGFloat headerHeight = 30;
                 if (![self.order.licenseNo isEqualToString:@""]) {
                     cell.carCode.text = self.order.licenseNo;
                 }else {
-                    cell.carCode.placeholder = @"暂无车牌号";
+                    cell.carCode.text = @"新车";
                 }
                 cell.engine.text = self.order.engineNo;
                 cell.carFrameCode.text = self.order.frameNo;
@@ -348,6 +312,39 @@ static CGFloat headerHeight = 30;
     return headerHeight;
 }
 
+#pragma mark textField
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+    OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
+    
+    NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
+    OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
+    if ([textField isEqual:cell1.engine]) {
+        if (![cell1.engine.text isEqualToString:@""]) {
+            if (![HelperUtil validateEngineNo:cell1.engine.text]) {
+                [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
+                return ;
+            }
+        }
+    }
+    if ([textField isEqual:cell1.carFrameCode]) {
+        if (![cell1.carFrameCode.text isEqualToString:@""]) {
+            if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
+                [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
+                return ;
+            }
+        }
+    }
+    if ([textField isEqual:cell2.carUserCard]) {
+        if (![cell2.carUserCard.text isEqualToString:@""]) {
+            if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
+                [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
+                return ;
+            }
+        }
+    }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

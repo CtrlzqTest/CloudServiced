@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1939,28 +1939,14 @@
                                     <constraint firstAttribute="width" secondItem="rNB-5N-iK2" secondAttribute="height" multiplier="2:1" id="iNh-te-PpI"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9z-G5-nNA">
-                                <rect key="frame" x="0.0" y="509" width="375" height="45"/>
-                                <color key="backgroundColor" red="0.98039215686274506" green="0.43036067318456256" blue="0.45177634339512518" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="uyz-8e-8Dn"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="分享">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="shareAction:" destination="TCA-u7-md9" eventType="touchUpInside" id="NB6-wp-DPl"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
                                 <rect key="frame" x="93" y="232" width="188" height="188"/>
                                 <color key="backgroundColor" red="1" green="0.26188047339999998" blue="0.28042493629999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bmO-QB-zPa" secondAttribute="height" id="dq7-v2-Q4k"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
                                 <rect key="frame" x="93" y="428" width="188" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0z4-W7-1GS"/>
@@ -1969,20 +1955,33 @@
                                 <color key="textColor" red="0.51342051024955437" green="0.50637112919328808" blue="0.51165816498548777" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9z-G5-nNA">
+                                <rect key="frame" x="20" y="536" width="335" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="2Nk-bT-9d0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="分享" backgroundImage="btn9_">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareAction:" destination="TCA-u7-md9" eventType="touchUpInside" id="NB6-wp-DPl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="x9z-G5-nNA" firstAttribute="leading" secondItem="5yE-mW-sUo" secondAttribute="leading" id="AON-Du-Unx"/>
+                            <constraint firstAttribute="trailing" secondItem="x9z-G5-nNA" secondAttribute="trailing" constant="20" id="2Je-83-AHt"/>
+                            <constraint firstItem="x9z-G5-nNA" firstAttribute="leading" secondItem="5yE-mW-sUo" secondAttribute="leading" constant="20" id="AVp-Qz-seU"/>
+                            <constraint firstAttribute="bottom" secondItem="x9z-G5-nNA" secondAttribute="bottom" constant="30" id="BZo-tM-Hbj"/>
                             <constraint firstItem="rNB-5N-iK2" firstAttribute="top" secondItem="6S6-yN-9KF" secondAttribute="bottom" id="Da4-09-flA"/>
                             <constraint firstItem="x9z-G5-nNA" firstAttribute="top" secondItem="6yh-O9-n4r" secondAttribute="bottom" id="L0u-kL-m0V"/>
                             <constraint firstItem="6yh-O9-n4r" firstAttribute="top" secondItem="bmO-QB-zPa" secondAttribute="bottom" constant="8" id="WY1-9z-VW4"/>
-                            <constraint firstItem="Ffv-V5-0Os" firstAttribute="top" secondItem="x9z-G5-nNA" secondAttribute="bottom" id="eMT-ta-P6m"/>
                             <constraint firstItem="6yh-O9-n4r" firstAttribute="leading" secondItem="bmO-QB-zPa" secondAttribute="leading" id="ef2-zU-ZSl"/>
                             <constraint firstAttribute="trailing" secondItem="rNB-5N-iK2" secondAttribute="trailing" id="fzO-Yi-0py"/>
                             <constraint firstItem="6yh-O9-n4r" firstAttribute="trailing" secondItem="bmO-QB-zPa" secondAttribute="trailing" id="nHu-aU-uKp"/>
                             <constraint firstItem="rNB-5N-iK2" firstAttribute="leading" secondItem="5yE-mW-sUo" secondAttribute="leading" id="riA-7w-rRk"/>
                             <constraint firstItem="bmO-QB-zPa" firstAttribute="centerX" secondItem="5yE-mW-sUo" secondAttribute="centerX" id="ss6-RZ-Vbc"/>
-                            <constraint firstAttribute="trailing" secondItem="x9z-G5-nNA" secondAttribute="trailing" id="wCq-8c-d7t"/>
                             <constraint firstItem="bmO-QB-zPa" firstAttribute="top" secondItem="rNB-5N-iK2" secondAttribute="bottom" constant="45" id="wOs-TE-mjd"/>
                             <constraint firstItem="bmO-QB-zPa" firstAttribute="width" secondItem="5yE-mW-sUo" secondAttribute="width" multiplier="1:2" id="wfv-NX-RNX"/>
                             <constraint firstItem="x9z-G5-nNA" firstAttribute="height" secondItem="5yE-mW-sUo" secondAttribute="height" multiplier="45:640" id="xg8-jl-rCz"/>
@@ -1995,6 +1994,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="A0p-QV-GX6"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="qrImgView" destination="bmO-QB-zPa" id="87a-cw-aA8"/>
@@ -3484,6 +3484,7 @@
     <resources>
         <image name="btn-icon1" width="20" height="20"/>
         <image name="btn2" width="330" height="40"/>
+        <image name="btn9_" width="160" height="40"/>
         <image name="card-bg" width="360" height="640"/>
         <image name="card-btn" width="245" height="32"/>
         <image name="checkbox" width="19" height="19"/>

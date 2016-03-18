@@ -272,22 +272,18 @@
 - (void)requestTeamAchievement:(NSString *)type {
     NSDictionary *paramsDic;
     if ([type isEqualToString:@"未完成"]) {
-        _unfinishedArray = nil;
-        _unfinishedArray = [NSMutableArray array];
+        
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
                     @"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],
                     @"pageNo":[NSString stringWithFormat:@"%i",_page1],
                     @"orderStatus":type};
     }if ([type isEqualToString:@"待支付"]) {
-        _waitPayArray = nil;
-        _waitPayArray = [NSMutableArray array];
+
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
                     @"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@
                     "pageNo":[NSString stringWithFormat:@"%i",_page2],
                     @"orderStatus":type};
     }if ([type isEqualToString:@"已支付"]) {
-        _alreadyPayArray = nil;
-        _alreadyPayArray = [NSMutableArray array];
         paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,
                     @"pageSize":[NSString stringWithFormat:@"%i",_pageSize3],
                     @"pageNo":[NSString stringWithFormat:@"%i",_page3],
@@ -314,23 +310,32 @@
                 [self.pageView addSubview:_lbNoData];
             }
             if ([type isEqualToString:@"未完成"]) {
+                [_unfinishedArray removeAllObjects];
                 if (totalCount-_pageSize1*_page1<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView1.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [_tableView1.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_unfinishedArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"待支付"]) {
+                [_waitPayArray removeAllObjects];
                 if (totalCount-_pageSize2*_page2<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView2.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [_tableView2.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_waitPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             }if ([type isEqualToString:@"已支付"]) {
+                [_alreadyPayArray removeAllObjects];
                 if (totalCount-_pageSize3*_page3<=0) {
                     //没有数据，直接提示没有更多数据
                     [_tableView3.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    [_tableView3.mj_footer endRefreshing];
                 }
                 NSArray *listArray = [dataDic objectForKey:@"list"];
                 [_alreadyPayArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];

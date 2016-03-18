@@ -83,9 +83,7 @@
 }
 
 - (void)requestData:(NSString *)condition{
-    
-//    _clientArray = nil;
-//    _clientArray = [NSMutableArray array];
+
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"condition":condition};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
@@ -100,6 +98,8 @@
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [_tableView.mj_footer endRefreshing];
             }
            
             NSArray *listArray = [dataDic objectForKey:@"list"];
@@ -208,12 +208,12 @@
     searchBar.text = @"";
     
     _conditon = searchBar.text;
-    [self requestData:_conditon];
+    [self.tableView.mj_header beginRefreshing];
     [searchBar resignFirstResponder];
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     _conditon = searchBar.text;
-    [self requestData:_conditon];
+    [self.tableView.mj_header beginRefreshing];
     [searchBar resignFirstResponder];
 }
 - (void)didReceiveMemoryWarning {
