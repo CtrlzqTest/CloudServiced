@@ -14,14 +14,29 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default-667h.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zgr-IU-o2I">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zgr-IU-o2I" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-20" id="AJH-aX-7oy"/>
+                            <constraint firstAttribute="trailing" secondItem="Zgr-IU-o2I" secondAttribute="trailing" id="Wsa-1C-pPL"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Zgr-IU-o2I" secondAttribute="bottom" id="oHn-9Q-EQv"/>
+                            <constraint firstItem="Zgr-IU-o2I" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="zus-2A-Lxg"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="269" y="358"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Default-667h.png" width="375" height="667"/>
+    </resources>
 </document>

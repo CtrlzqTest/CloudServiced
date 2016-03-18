@@ -18,7 +18,7 @@
 #define MObAppKey  @"100082c56c5c0"
 #define WXAppID   @"wx125bcc153468cc36"
 #define WXAppSecret   @"5d792862f07b6ff0b27eaced2ffbd01d"
-@interface AppDelegate ()<CLLocationManagerDelegate> {
+@interface AppDelegate ()<CLLocationManagerDelegate,UIAlertViewDelegate> {
     BOOL _isSetCity;
 }
 
@@ -35,6 +35,15 @@
     
     //检测网络状态
     [MHAsiNetworkHandler startMonitoring];
+    
+    // 检查版本号
+    [Utility checkNewVersion:^(BOOL hasNewVersion) {
+        if (hasNewVersion) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:@"系统检测有新版本" delegate:self cancelButtonTitle:nil otherButtonTitles:@"点击进入下载", nil];
+            [alertView show];
+        }
+    }];
+    
     // 注册shareSDK
     [self registerShareSDK];
     // 注册通知
@@ -47,6 +56,14 @@
 
     [self registerFireData];
     return YES;
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
+    
+    if(buttonIndex == 0) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"www.baidu.com"]];
+    }
 }
 
 /**
@@ -176,19 +193,6 @@
     if(status==kCLAuthorizationStatusAuthorizedWhenInUse)
     {
         [self.locateManager startUpdatingLocation];
-    }
-    
-}
-
-#pragma mark 青牛回调入口
-/****************************************************回调实现****************************************************************/
-- (void)OnInit:(int)reason
-{
-    NSLog(@"APP::OnInit()...");
-    
-    if (reason == 0) {
-        
-        NSLog(@"青牛SDK初始化成功");
     }
 }
 
