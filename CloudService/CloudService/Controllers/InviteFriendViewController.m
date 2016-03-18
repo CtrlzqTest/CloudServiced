@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"邀请队员";
+    self.title = @"邀请";
     [self setUpInviteLink];
   
     __weak typeof(self) weakSelf = self;

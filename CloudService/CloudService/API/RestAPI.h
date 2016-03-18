@@ -77,6 +77,8 @@
 
 #define kActifityCouponAPI      @"/app/activity/assignActivityCoupon"   // 下发活动优惠券
 
+#define kCheckVersionAPI        @""                         // 版本检测
+
 //   常量
 /**************************************************************************************/
 

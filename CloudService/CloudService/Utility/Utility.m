@@ -115,21 +115,18 @@ static User *user = nil;
 
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{
     
-//    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-////    NSLog(@"%@",[infoDict objectForKey:@"CFBundleShortVersionString"]);
-//    __block double currentVersion = [[infoDict objectForKey:@"CFBundleShortVersionString"] doubleValue];
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    [dict setObject:@"IOS" forKey:@"clientType"];
-//    [RequestManager startRequest:kCheckNewVersionAPI paramer:dict method:(RequestMethodPost) success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        NSDictionary *dict = [responseObject objectForKey:@"list"];
-//        double newVersion = [[dict objectForKey:@"versionNum"] doubleValue];
-//        BOOL flag = newVersion > currentVersion;
-//        versionCheckBlock(flag);
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-////        versionCheckBlock(NO);
-//    }];
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    __block double currentVersion = [[infoDict objectForKey:@"CFBundleShortVersionString"] doubleValue];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@"iOS" forKey:@"clientType"];
+    [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kCheckVersionAPI] params:@{@"clientType":@"iOS"} successBlock:^(id returnData) {
+        NSDictionary *dict = [returnData objectForKey:@"list"];
+        double newVersion = [[dict objectForKey:@"versionNum"] doubleValue];
+        BOOL flag = newVersion > currentVersion;
+        versionCheckBlock(flag);
+    } failureBlock:^(NSError *error) {
+        versionCheckBlock(NO);
+    } showHUD:NO];
 }
 
 @end
