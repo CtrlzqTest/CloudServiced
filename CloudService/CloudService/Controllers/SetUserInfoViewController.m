@@ -326,7 +326,7 @@ static NSString *const select_CellID = @"selectCell";
         return cell;
     }
     if (indexPath.row == 1) {
-            cell.textFiled.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textFiled.keyboardType = UIKeyboardTypeDefault;
     }else if(indexPath.row == 2 || indexPath.row == 5)
     {
             cell.textFiled.enabled = NO;

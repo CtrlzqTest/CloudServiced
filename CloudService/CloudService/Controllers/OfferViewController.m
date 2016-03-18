@@ -129,8 +129,8 @@ static CGFloat headerHeight = 30;
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     NSDictionary *myServerDict = @{
                                    @"userId":user.userId,
-                                   @"baseId":@"",
-                                   @"customerId":@"",
+                                   @"baseId":self.order.baseId,
+                                                                                   @"customerId":self.order.customerId,
                                    @"orderType":@"",
                                    @"cityCode":self.order.cityCode,
                                    @"custName":cell2.carUserName.text,
@@ -229,10 +229,10 @@ static CGFloat headerHeight = 30;
             NSDictionary *myServerDict = @{
                                            @"userId":user.userId,
                                            @"baseId":baseId,
-                                           @"customerId":@"",
+                                           @"customerId":self.order.customerId,
                                            @"orderType":@"",
                                            @"cityCode":self.order.cityCode,
-                                           @"custName":cell2.carUserName.text,
+                                           @"customerName":cell2.carUserName.text,
                                            @"phoneNo":self.order.phoneNo,
                                            @"licenseNo":cell1.carCode.text,
                                            @"engineNo":cell1.engine.text,

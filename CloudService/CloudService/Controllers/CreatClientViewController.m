@@ -10,6 +10,7 @@
 #import "OfferViewController.h"
 #import "ZQCityPickerView.h"
 #import "Order.h"
+#import "ButelHandle.h"
 
 @interface CreatClientViewController ()<UITextFieldDelegate>
 {
@@ -29,6 +30,7 @@
     [super viewDidLoad];
     __weak typeof(self) weakSelf = self;
     self.tfLicenseNo.delegate = self;
+    self.tfPhone.delegate = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
@@ -95,6 +97,9 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:self.tfLicenseNo]) {
         self.tfLicenseNo.text = [textField.text uppercaseString];
+    }
+    if ([textField isEqual:self.tfPhone]) {
+        [[ButelHandle shareButelHandle] setPhoneNo:self.tfPhone.text];
     }
 }
 - (void)viewWillAppear:(BOOL)animated {
