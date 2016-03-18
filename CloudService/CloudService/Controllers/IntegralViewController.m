@@ -19,6 +19,7 @@
     UIImageView *_noDataImg;
     UILabel *_lbNoData;
 }
+
 @property (weak, nonatomic)IBOutlet UITableView *tableView;
 @end
 

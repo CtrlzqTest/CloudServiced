@@ -236,6 +236,12 @@ static NSString *const select_CellID = @"selectCell";
     
     if (_indexPath.section == 0) {
         _valueArray_User[_indexPath.row] = text;
+        if (_indexPath.row == 1) {
+            if (![HelperUtil checkUserIdCard:_valueArray_User[1]]) {
+                [MBProgressHUD showMessag:@"身份证号输入不正确" toView:self.view];
+                return ;
+            }
+        }
     }else {
         _valueArray_Bank[_indexPath.row] = text;
     }
@@ -468,12 +474,14 @@ static NSString *const select_CellID = @"selectCell";
             return nil;
         }
     }
+    
     for (int i = 0; i < _valueArray_Bank.count; i ++) {
         if ([_valueArray_Bank[i] length] <= 0) {
             [MBProgressHUD showMessag:[NSString stringWithFormat:@"%@不能为空",_keyArray_Bank[i]] toView:self.view];
             return nil;
         }
     }
+    
     if (![HelperUtil checkUserIdCard:_valueArray_User[1]]) {
         [MBProgressHUD showMessag:@"身份证号输入不正确" toView:self.view];
         return nil;
@@ -649,6 +657,7 @@ static NSString *const select_CellID = @"selectCell";
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     [user setValuesForKeysWithDictionary:dict];
     user.workStartDate = [HelperUtil getDateWithDateStr:user.workStartDate];
+    user.saleCityValue = [self changeStrArraytoTextString:_saleCityArray];
     [[SingleHandle shareSingleHandle] saveUserInfo:user];
 }
 /*
