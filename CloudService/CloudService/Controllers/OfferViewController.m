@@ -39,7 +39,7 @@ static CGFloat headerHeight = 30;
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    self.title = @"立即报价";
+    self.title = @"客户信息";
     
 }
 - (void)initFootView {

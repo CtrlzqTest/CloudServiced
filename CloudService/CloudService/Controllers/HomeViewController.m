@@ -176,13 +176,12 @@ static NSString *headerView_ID = @"headerView";
         _headerView.headImg.userInteractionEnabled = YES;
         [_headerView.headImg addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction)]];
         [_headerView.sginBtn addTarget:self action:@selector(signAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        _integral = @"1000000";
         if ([_integral floatValue] >= 100000) {
             _headerView.integralLabel.text = [NSString stringWithFormat:@"%.1lf万",[_integral floatValue] / 10000.0];
         }else {
             _headerView.integralLabel.text = [NSString stringWithFormat:@"%@",_integral];
         }
-//        _headerView.integralLabel.text = _integral;
+//        _headerView.integralLabel.text = _integral;·
         NSString *userName = nil;
         userName = user.realName.length > 0 ? user.realName : user.userName;
         [_headerView setDataWithDictionary:@{@"userName":userName}];
