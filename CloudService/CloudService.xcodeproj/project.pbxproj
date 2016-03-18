@@ -1342,7 +1342,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "09d2e9af-2ae1-4c81-824e-cf8f5dc370d9";
 			};
 			name = Debug;
 		};
@@ -1368,7 +1368,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "09d2e9af-2ae1-4c81-824e-cf8f5dc370d9";
 			};
 			name = Release;
 		};

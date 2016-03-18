@@ -79,8 +79,7 @@ static NSString *cell_id = @"myTeamCell";
 
 #pragma mark 加载个人优惠券
 - (void)requestTeamMemberData {
-    _teamMemberArray = nil;
-    _teamMemberArray = [NSMutableArray array];
+  
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
@@ -88,6 +87,7 @@ static NSString *cell_id = @"myTeamCell";
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            [_teamMemberArray removeAllObjects];
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
@@ -95,6 +95,8 @@ static NSString *cell_id = @"myTeamCell";
             if (totalCount-_pageSize*_page<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [_tableView.mj_footer endRefreshing];
             }
             
             NSArray *listArray = [dataDic objectForKey:@"list"];

@@ -111,7 +111,7 @@ static NSString *headerView_ID = @"headerView";
     //隐藏导航栏黑线
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    self.tabBarController.title = @"云客服";
+    self.tabBarController.title = @"首页";
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
     
     [[ButelHandle shareButelHandle] hideCallView];
