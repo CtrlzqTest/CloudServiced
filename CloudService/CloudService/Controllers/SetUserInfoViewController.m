@@ -332,7 +332,7 @@ static NSString *const select_CellID = @"selectCell";
             cell.textFiled.enabled = NO;
         }
         
-    }
+    
     
 //  银行信息
     if (indexPath.section == 1)

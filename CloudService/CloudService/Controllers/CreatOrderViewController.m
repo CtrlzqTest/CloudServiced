@@ -134,9 +134,13 @@
     if (self.isNewCarBtn.selected)
     {
         [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox"] forState:(UIControlStateNormal)];
+        self.tfLicenseNo.enabled = YES;
+        self.tfLicenseNo.placeholder = @"请输入车牌号";
     }else
     {
         [self.isNewCarBtn setImage:[UIImage imageNamed:@"checkbox_"] forState:(UIControlStateNormal)];
+        self.tfLicenseNo.enabled = NO;
+        self.tfLicenseNo.placeholder = @"暂无车牌号";
     }
     self.isNewCarBtn.selected = !self.isNewCarBtn.selected;
     
