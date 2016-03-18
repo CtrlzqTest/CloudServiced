@@ -83,9 +83,9 @@
 }
 
 - (void)requestData:(NSString *)condition{
-//    [_clientArray removeAllObjects];
-    _clientArray = nil;
-    _clientArray = [NSMutableArray array];
+    
+//    _clientArray = nil;
+//    _clientArray = [NSMutableArray array];
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"condition":condition};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
@@ -93,6 +93,7 @@
         NSDictionary *dic = returnData;
          NSDictionary *dataDic = [dic objectForKey:@"data"];
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            [_clientArray removeAllObjects];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
     
@@ -111,6 +112,7 @@
         
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
+        
     } failureBlock:^(NSError *error) {
         
         [self.tableView.mj_header endRefreshing];
