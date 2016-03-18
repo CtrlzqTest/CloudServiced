@@ -90,10 +90,10 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindPersonCustList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
         NSLog(@"%@",returnData);
-        [_clientArray removeAllObjects];
         NSDictionary *dic = returnData;
          NSDictionary *dataDic = [dic objectForKey:@"data"];
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
+            [_clientArray removeAllObjects];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
     
