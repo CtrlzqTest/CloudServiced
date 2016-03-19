@@ -40,18 +40,19 @@ static NSString *cell_id = @"personalCell";
 
 - (void)initData {
     
-    NSArray *array1 = @[@"我的团队",@"积分管理",@"用户认证",@"团队成员邀请",@"好友邀请"];
+    NSArray *array1 = @[@"个人中心",@"我的团队",@"积分管理",@"用户认证",@"团队成员邀请",@"好友邀请"];
     NSArray *array2 = @[@"我的优惠券"];
     NSArray *array3 = @[@"关于应用"];
     
     _dataArray = [NSArray arrayWithObjects:array1,array2,array3, nil];
     
     _dataDict = [NSMutableDictionary dictionary];
-    [_dataDict setValue:@"user-icon1" forKey:array1[0]];
-    [_dataDict setValue:@"user-icon2" forKey:array1[1]];
-    [_dataDict setValue:@"user-icon3" forKey:array1[2]];
-    [_dataDict setValue:@"user-icon4" forKey:array1[3]];
-    [_dataDict setValue:@"user-icon5" forKey:array1[4]];
+    [_dataDict setValue:@"userInfo" forKey:array1[0]];
+    [_dataDict setValue:@"user-icon1" forKey:array1[1]];
+    [_dataDict setValue:@"user-icon2" forKey:array1[2]];
+    [_dataDict setValue:@"user-icon3" forKey:array1[3]];
+    [_dataDict setValue:@"user-icon4" forKey:array1[4]];
+    [_dataDict setValue:@"user-icon5" forKey:array1[5]];
     [_dataDict setValue:@"user-icon6" forKey:array2[0]];
     [_dataDict setValue:@"user-icon7" forKey:array3[0]];
 //    [_dataDict setValue:@"user-icon8" forKey:array3[1]];
@@ -165,7 +166,15 @@ static NSString *cell_id = @"personalCell";
     
     if (indexPath.section == 0) {
         switch (indexPath.row) {
-            case 0:
+                case 0:
+            {
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
+                setUserInfoVC.rightBtnTitle = @"保存";
+                [self.navigationController pushViewController:setUserInfoVC animated:YES];
+            }
+                break;
+            case 1:
             {
                 if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]||[[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"认证用户"]) {
                    [self performSegueWithIdentifier:@"pushMyTeam" sender:self];
@@ -175,7 +184,7 @@ static NSString *cell_id = @"personalCell";
                 
             }
                 break;
-            case 1:
+            case 2:
             {
                 
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -184,7 +193,7 @@ static NSString *cell_id = @"personalCell";
                 
             }
                 break;
-            case 2:
+            case 3:
             {
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
@@ -197,7 +206,7 @@ static NSString *cell_id = @"personalCell";
                 [self.navigationController pushViewController:setUserInfoVC animated:YES];
             }
                 break;
-            case 3:
+            case 4:
             {
                 if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
                     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -210,7 +219,7 @@ static NSString *cell_id = @"personalCell";
                 
             }
                 break;
-            case 4:
+            case 5:
             {
                 [self performSegueWithIdentifier:@"invateFriend_push" sender:self];
             }
