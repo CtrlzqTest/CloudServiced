@@ -7,7 +7,6 @@
 //
 
 #import "InviteFriendViewController.h"
-#import "LBXScanWrapper.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 
@@ -43,7 +42,6 @@
             _linkUrl = [dataDic objectForKey:@"inviteLink"];
             _personInviteCode = [dataDic objectForKey:@"personInviteCode"];
             _teamInviteCode = [dataDic objectForKey:@"teamInviteCode"];
-            [self createQR1:_linkUrl];
             
         }else {
             [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
@@ -55,15 +53,7 @@
     } showHUD:NO];
 
 }
-- (void)createQR1:(NSString *)linkUrl
-{
-    //可以把你要使用的信息加进去生成二维码
-    UIImage *qrImg = [LBXScanWrapper createQRWithString:linkUrl size:_qrImgView.bounds.size];
-    UIImage *newImage= [LBXScanWrapper addImageLogo:qrImg centerLogoImage:[UIImage imageNamed:@"sharLogo"] logoSize:CGSizeMake(35, 35)];
-    
-    _qrImgView.image = newImage;
-    
-}
+
 - (IBAction)shareAction:(id)sender {
     
     if (_linkUrl.length <= 0) {
