@@ -38,7 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _unfinishedArray = [NSMutableArray array];
+    _waitPayArray = [NSMutableArray array];
+    _alreadyPayArray = [NSMutableArray array];
     [self initPageView];
     [self setupNoData];
     // Do any additional setup after loading the view.

@@ -35,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _userArray = [NSMutableArray array];
+    _teamArray = [NSMutableArray array];
     [self setupNoData];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {

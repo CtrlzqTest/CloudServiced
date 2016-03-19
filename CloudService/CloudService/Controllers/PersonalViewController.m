@@ -170,7 +170,7 @@ static NSString *cell_id = @"personalCell";
                 if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]||[[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"认证用户"]) {
                    [self performSegueWithIdentifier:@"pushMyTeam" sender:self];
                 }else{
-                    [MBProgressHUD showMessag:@"sorry,you have no team!" toView:self.view];
+                    [MBProgressHUD showMessag:@"对不起，您还没有自己的团队" toView:self.view];
                 }
                 
             }

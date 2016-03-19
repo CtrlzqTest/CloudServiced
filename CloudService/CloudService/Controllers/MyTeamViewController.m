@@ -29,6 +29,7 @@ static NSString *cell_id = @"myTeamCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _teamMemberArray = [NSMutableArray array];
     if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
         [self setupViews];
         [self addMjRefresh];

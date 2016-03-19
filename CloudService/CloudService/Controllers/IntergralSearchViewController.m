@@ -38,6 +38,7 @@
     [super viewDidLoad];
     _startTime = @"";
     _endTime = @"";
+    _integralArray = [NSMutableArray array];
     __weak typeof(self) weakSelf = self;
     [weakSelf setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"back" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
