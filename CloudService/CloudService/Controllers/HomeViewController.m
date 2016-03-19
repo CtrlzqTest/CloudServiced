@@ -175,7 +175,11 @@ static NSString *headerView_ID = @"headerView";
         if ([_integral floatValue] >= 100000) {
             _headerView.integralLabel.text = [NSString stringWithFormat:@"%.1lf万",[_integral floatValue] / 10000.0];
         }else {
-            _headerView.integralLabel.text = [NSString stringWithFormat:@"%@",_integral];
+            if (_integral.length <= 0) {
+                _headerView.integralLabel.text = [NSString stringWithFormat:@"%@",@""];
+            }else {
+                _headerView.integralLabel.text = [NSString stringWithFormat:@"%@",_integral];
+            }
         }
 //        _headerView.integralLabel.text = _integral;·
         NSString *userName = nil;
