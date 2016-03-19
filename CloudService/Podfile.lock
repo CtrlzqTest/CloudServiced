@@ -19,8 +19,6 @@ PODS:
   - FMDB/standard (2.6)
   - IQKeyboardManager (4.0.0)
   - LazyPageScrollView (1.1)
-  - LBXScan (1.1.1):
-    - ZXingObjC (~> 3.0)
   - Masonry (0.6.4)
   - MBProgressHUD (0.9.2)
   - MJExtension (3.0.10)
@@ -34,16 +32,12 @@ PODS:
   - ShareSDK3/ShareSDK (3.2.0)
   - ShareSDK3/ShareSDKPlatforms/WeChat (3.2.0)
   - ShareSDK3/ShareSDKUI (3.2.0)
-  - ZXingObjC (3.1.0):
-    - ZXingObjC/All (= 3.1.0)
-  - ZXingObjC/All (3.1.0)
 
 DEPENDENCIES:
   - AFNetworking
   - FMDB (~> 2.6)
   - IQKeyboardManager
   - LazyPageScrollView
-  - LBXScan (~> 1.1.1)
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -59,7 +53,6 @@ SPEC CHECKSUMS:
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   IQKeyboardManager: b91928f7927ba55a5829b4dcf4b7a6736ac9fc22
   LazyPageScrollView: 98e3f9981443e5f49d4136440399966f6118dd92
-  LBXScan: dfb4d8ae8e4cff2aa0c9e1771e43954dce1469a9
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
@@ -67,6 +60,5 @@ SPEC CHECKSUMS:
   MOBFoundation: abbf5616d1d9f758db612cf8d57a72541d1345ef
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   ShareSDK3: 2987b2c38210299d8c3259fff65740f59691a688
-  ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
 COCOAPODS: 0.39.0

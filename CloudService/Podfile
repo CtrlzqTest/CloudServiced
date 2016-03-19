@@ -13,7 +13,6 @@ pod 'MJExtension'
 pod 'MJRefresh'
 pod 'LazyPageScrollView'
 pod 'SDWebImage'
-pod 'LBXScan', '~> 1.1.1'
 pod 'FMDB', '~> 2.6'
 # 主模块(必须)
 pod 'ShareSDK3'
