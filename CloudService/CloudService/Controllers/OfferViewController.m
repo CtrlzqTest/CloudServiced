@@ -260,7 +260,7 @@ static CGFloat headerHeight = 30;
                 cell.carFrameCode.text = self.order.frameNo;
                 cell.engineType.text = self.order.vehicleModelName;
                 NSLog(@"%@",self.order.primaryDate);
-                if (self.order.primaryDate>=0) {
+                if (self.order.primaryDate.length>0) {
                     cell.firstTime.text = [HelperUtil timeFormat:self.order.primaryDate format:@"yyyy-MM-dd"];
                 }
                 
@@ -349,6 +349,25 @@ static CGFloat headerHeight = 30;
         }
     }
     
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+    OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
+    
+    NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
+    OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
+
+    if ([textField isEqual:cell1.carFrameCode]) {
+        if (cell1.carFrameCode.text.length >=17) {
+            cell1.carFrameCode.text = [cell1.carFrameCode.text substringToIndex:16];
+        }
+    }
+    if ([textField isEqual:cell2.carUserCard]) {
+        if (cell2.carUserCard.text.length >=18) {
+           cell2.carUserCard.text = [cell2.carUserCard.text substringToIndex:17];
+        }
+    }
+    return YES;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

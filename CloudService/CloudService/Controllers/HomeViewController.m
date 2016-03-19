@@ -60,9 +60,9 @@ static NSString *headerView_ID = @"headerView";
     
     _dataDict = [NSMutableDictionary dictionary];
     [_dataDict setValue:@"获取客户数据" forKey:_dataKeyArray[0]];
-    [_dataDict setValue:@"我的客户内容" forKey:_dataKeyArray[1]];
+    [_dataDict setValue:@"我的客户明细" forKey:_dataKeyArray[1]];
     [_dataDict setValue:@"创建我的订单" forKey:_dataKeyArray[2]];
-    [_dataDict setValue:@"积分自选商城" forKey:_dataKeyArray[3]];
+    [_dataDict setValue:@"积分兑换商城" forKey:_dataKeyArray[3]];
     [_dataDict setValue:@"邀请我的好友" forKey:_dataKeyArray[4]];
     [_dataDict setValue:@"积分明细查看" forKey:_dataKeyArray[5]];
     
@@ -123,7 +123,7 @@ static NSString *headerView_ID = @"headerView";
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     if ([user.roleName isEqualToString:@"普通用户"] || user.roleName.length <= 0) {
-        [MBProgressHUD showError:@"当前用户为普通用户,不能签到,请先认证" toView:self.view];
+        [MBProgressHUD showError:@"当前用户为普通用户,不能签到,请到个人中心认证" toView:self.view];
         return ;
     }
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];

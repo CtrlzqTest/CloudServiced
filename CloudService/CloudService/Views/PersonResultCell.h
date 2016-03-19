@@ -12,4 +12,5 @@
 
 @property (nonatomic, weak)IBOutlet UILabel *lbOrderNum;
 @property (nonatomic, weak)IBOutlet UILabel *lbTotalPremium;
+@property (nonatomic, weak)IBOutlet UIButton *resultTime;
 @end
