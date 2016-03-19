@@ -30,7 +30,7 @@
 @synthesize isThird;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
+    NSLog(@"");
     // Override point for customization after application launch.
     NSLog(@"sdfsdfsdf");
     //检测网络状态
