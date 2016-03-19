@@ -32,7 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     // Override point for customization after application launch.
-    
+    NSLog(@"sdfsdfsdf");
     //检测网络状态
     [MHAsiNetworkHandler startMonitoring];
     
