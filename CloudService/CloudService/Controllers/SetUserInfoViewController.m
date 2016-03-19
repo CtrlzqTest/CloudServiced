@@ -56,7 +56,7 @@ static NSString *const select_CellID = @"selectCell";
 
     [self setupTableView];
     [self initData];
-    
+    self.title = @"个人信息";
     if (self.notEnable) {
         [self.rightBtn setTitle:@"修改" forState:(UIControlStateNormal)];
         return;
