@@ -289,7 +289,7 @@ static NSString *cellID = @"cellID";
         if ([returnData[@"flag"] isEqualToString:@"success"]) {
             [MBProgressHUD showSuccess:@"成功领取优惠券,请到个人中心查看" toView:self.view];
         }else {
-            [MBProgressHUD showMessag:returnData[@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:@"你还没有集齐所有猴子，请再接再厉" toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
