@@ -31,6 +31,7 @@
 		635C2AC91C8527D10051708D /* CreatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635C2AC81C8527D10051708D /* CreatClientViewController.m */; };
 		6367FB0D1C9AA19900947038 /* rulebg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6367FB0C1C9AA19900947038 /* rulebg1.png */; };
 		6367FB101C9ACDCC00947038 /* CouponsRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6367FB0F1C9ACDCC00947038 /* CouponsRuleViewController.m */; };
+		636A35D01C9CFEB900540CD0 /* guize.png in Resources */ = {isa = PBXBuildFile; fileRef = 636A35CF1C9CFEB900540CD0 /* guize.png */; };
 		636CD9161C880BE70050935E /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */; };
 		636CD9181C880BF40050935E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9171C880BF40050935E /* libz.tbd */; };
 		636CD91A1C880BFD0050935E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 636CD9191C880BFD0050935E /* libc++.tbd */; };
@@ -189,6 +190,7 @@
 		6367FB0C1C9AA19900947038 /* rulebg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rulebg1.png; sourceTree = "<group>"; };
 		6367FB0E1C9ACDCC00947038 /* CouponsRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsRuleViewController.h; sourceTree = "<group>"; };
 		6367FB0F1C9ACDCC00947038 /* CouponsRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsRuleViewController.m; sourceTree = "<group>"; };
+		636A35CF1C9CFEB900540CD0 /* guize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guize.png; sourceTree = "<group>"; };
 		636CD9151C880BE70050935E /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		636CD9171C880BF40050935E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		636CD9191C880BFD0050935E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -646,6 +648,7 @@
 		F019C9DA1C7C05FD00E73A2C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				636A35CF1C9CFEB900540CD0 /* guize.png */,
 				F0AFC5481C9C0D2B00BC3CBC /* Default-568h@2x.png */,
 				F0AFC5491C9C0D2B00BC3CBC /* Default-667h@2x.png */,
 				F0AFC54A1C9C0D2B00BC3CBC /* Default-736h@2x .png */,
@@ -953,7 +956,7 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = LH28XA7T22;
+						DevelopmentTeam = 7PS2AH4H79;
 					};
 				};
 			};
@@ -980,6 +983,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				636A35D01C9CFEB900540CD0 /* guize.png in Resources */,
 				634EE61F1C995A8D00FB526D /* activity2.png in Resources */,
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
 				F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */,
@@ -1312,7 +1316,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CloudService/Venders",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.EYunKeFu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.EYunKeFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1338,7 +1342,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CloudService/Venders",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.EYunKeFu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.EYunKeFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

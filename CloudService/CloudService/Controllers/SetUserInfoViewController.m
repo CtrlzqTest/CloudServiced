@@ -331,14 +331,14 @@ static NSString *const select_CellID = @"selectCell";
         cell.textFiled.enabled = NO;
         return cell;
     }
-    if (indexPath.row == 1) {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 1) {
             cell.textFiled.keyboardType = UIKeyboardTypeDefault;
-    }else if(indexPath.row == 2 || indexPath.row == 5)
-    {
+        }else if(indexPath.row == 2 || indexPath.row == 5)
+        {
             cell.textFiled.enabled = NO;
         }
-        
-    
+    }
     
 //  银行信息
     if (indexPath.section == 1)
