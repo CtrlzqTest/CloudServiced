@@ -36,7 +36,6 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:date];
     self.firstTime.text = currentOlderOneDateStr;
-    
     _pickerView = nil;
 }
 

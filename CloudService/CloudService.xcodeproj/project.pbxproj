@@ -978,7 +978,7 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = LH28XA7T22;
+						DevelopmentTeam = 7PS2AH4H79;
 					};
 				};
 			};
@@ -1342,7 +1342,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "09d2e9af-2ae1-4c81-824e-cf8f5dc370d9";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1368,7 +1368,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.CloudService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "09d2e9af-2ae1-4c81-824e-cf8f5dc370d9";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

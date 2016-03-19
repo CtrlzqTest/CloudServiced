@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface OfferTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UITextField *carCode;
 @property (weak, nonatomic) IBOutlet UITextField *engine;
 @property (weak, nonatomic) IBOutlet UITextField *carFrameCode;
