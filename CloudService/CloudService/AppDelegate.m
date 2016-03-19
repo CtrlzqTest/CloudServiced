@@ -15,8 +15,8 @@
 #import "MHAsiNetworkHandler.h"
 #import "FireData.h"
 
-#define MObAppKey  @"100082c56c5c0"
-#define WXAppID   @"wx125bcc153468cc36"
+#define MObAppKey     @"100082c56c5c0"
+#define WXAppID       @"wx125bcc153468cc36"
 #define WXAppSecret   @"5d792862f07b6ff0b27eaced2ffbd01d"
 @interface AppDelegate ()<CLLocationManagerDelegate,UIAlertViewDelegate> {
     BOOL _isSetCity;
