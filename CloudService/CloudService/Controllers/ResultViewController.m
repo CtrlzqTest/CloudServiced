@@ -43,6 +43,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _dayArray = [NSMutableArray array];
+    _weekArray = [NSMutableArray array];
+    _monthArray = [NSMutableArray array];
+    
     [self setupNoData];
     if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
             [self initPageView];
