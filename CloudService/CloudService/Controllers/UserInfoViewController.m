@@ -45,8 +45,18 @@
             [self.navigationController setNavigationBarHidden:YES animated:animated];
         }
     }
+}
+
+- (IBAction)resetUserInfoAction:(id)sender {
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
+    _isTosetUserInfo = YES;
+    setUserInfoVC.rightBtnTitle = @"保存";
+    [self.navigationController pushViewController:setUserInfoVC animated:YES];
     
 }
+
 
 - (void)initData {
     
@@ -80,15 +90,15 @@
     self.title = @"个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     __weak typeof(self) weakSelf = self;
-    
-    [self setRightTextBarButtonItemWithFrame:CGRectMake(10, 0, 40, 30) title:@"更多" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
-        _isTosetUserInfo = YES;
-        setUserInfoVC.notEnable = YES;
-        setUserInfoVC.rightBtnTitle = @"保存";
-        [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
-    }];
+//
+//    [self setRightTextBarButtonItemWithFrame:CGRectMake(10, 0, 40, 30) title:@"更多" titleColor:[UIColor whiteColor] backImage:nil selectBackImage:nil action:^(AYCButton *button) {
+//        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
+//        _isTosetUserInfo = YES;
+//        setUserInfoVC.notEnable = YES;
+//        setUserInfoVC.rightBtnTitle = @"保存";
+//        [weakSelf.navigationController pushViewController:setUserInfoVC animated:YES];
+//    }];
 
     [self setLeftImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"title-back" selectImage:@"" action:^(AYCButton *button) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -103,6 +113,8 @@
     [self.view addSubview:self.tableView];
     
 }
+
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;

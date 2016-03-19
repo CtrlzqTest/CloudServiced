@@ -2304,12 +2304,29 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="3GL-9L-bXq">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="7eh-oe-ahp">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1ri-Yx-KeH">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="dXR-9L-zbu">
+                            <view key="customView" contentMode="scaleToFill" id="SQ7-WP-lH4">
+                                <rect key="frame" x="276" y="5" width="83" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="编辑"/>
-                            </button>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgB-58-o0h">
+                                        <rect key="frame" x="0.0" y="0.0" width="83" height="33"/>
+                                        <state key="normal" title="修改">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetUserInfoAction:" destination="0QY-Ze-2iA" eventType="touchUpInside" id="JaG-9X-MIE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NgB-58-o0h" secondAttribute="bottom" id="FMF-hd-Act"/>
+                                    <constraint firstAttribute="trailing" secondItem="NgB-58-o0h" secondAttribute="trailing" id="b4b-ZH-2Xg"/>
+                                    <constraint firstItem="NgB-58-o0h" firstAttribute="top" secondItem="SQ7-WP-lH4" secondAttribute="top" id="dAz-IB-YCd"/>
+                                    <constraint firstItem="NgB-58-o0h" firstAttribute="leading" secondItem="SQ7-WP-lH4" secondAttribute="leading" id="r9a-U2-tW4"/>
+                                </constraints>
+                            </view>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -3509,8 +3526,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="01e-LJ-s33"/>
+        <segue reference="S4h-y3-d1W"/>
         <segue reference="NFY-LR-cER"/>
         <segue reference="KaR-KU-zbk"/>
-        <segue reference="hk9-Xv-JLY"/>
     </inferredMetricsTieBreakers>
 </document>
