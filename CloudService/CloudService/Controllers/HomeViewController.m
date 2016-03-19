@@ -15,7 +15,6 @@
 #import "Utility.h"
 #import "OrderInfoViewController.h"
 #import "FireData.h"
-#import "ButelHandle.h"
 #import "RuleViewController.h"
 #import "Order.h"
 
@@ -50,8 +49,7 @@ static NSString *headerView_ID = @"headerView";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyintegralData) name:ExchangeIntegralSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollectionView:) name:ReloadHomeData object:nil];
-    
-    [[ButelHandle shareButelHandle] Init];
+
     
 }
 
@@ -113,9 +111,7 @@ static NSString *headerView_ID = @"headerView";
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     self.tabBarController.title = @"首页";
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
-    
-    [[ButelHandle shareButelHandle] hideCallView];
-    
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -240,7 +236,8 @@ static NSString *headerView_ID = @"headerView";
             [self performSegueWithIdentifier:@"myClient" sender:self];
             break;
         case 2:
-            [self performSegueWithIdentifier:@"creatOrder" sender:self];
+//            [self performSegueWithIdentifier:@"creatOrder" sender:self];
+            [MBProgressHUD showMessag:@"程序猿正在火力开发中" toView:self.view];
             break;
         case 3:
 //        {

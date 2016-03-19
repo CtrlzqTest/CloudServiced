@@ -39,6 +39,7 @@
     // 检查版本号
     [Utility checkNewVersion:^(BOOL hasNewVersion) {
         if (hasNewVersion) {
+            [Utility saveVersion:hasNewVersion];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:@"系统检测有新版本" delegate:self cancelButtonTitle:nil otherButtonTitles:@"点击进入下载", nil];
             [alertView show];
         }
@@ -62,7 +63,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
     
     if(buttonIndex == 0) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.eyunkf.com/html/download.html"]];
     }
 }
 
@@ -213,11 +214,15 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    if ([Utility isNewVersion]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:@"系统检测有新版本" delegate:self cancelButtonTitle:nil otherButtonTitles:@"点击进入下载", nil];
+        [alertView show];
+    }
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-   
+    
 
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }

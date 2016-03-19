@@ -112,7 +112,18 @@ static User *user = nil;
     return [[NSUserDefaults standardUserDefaults] valueForKey:@"passWord"];
 }
 
++(void)saveVersion:(BOOL )isNewVersion {
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isNewVersion forKey:@"isNewVersion"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 
++(BOOL )isNewVersion {
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isNewVersion"];
+    
+}
 +(void)checkNewVersion:(void(^)(BOOL hasNewVersion))versionCheckBlock{
     
     NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
@@ -125,6 +136,7 @@ static User *user = nil;
             NSDictionary *dict = [returnData objectForKey:@"data"];
             double newVersion = [[dict objectForKey:@"version"] doubleValue];
             BOOL flag = newVersion > currentVersion;
+            
             versionCheckBlock(flag);
         }
         

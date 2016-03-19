@@ -88,10 +88,6 @@
 		63C54E3E1C7C35AA007CE8CA /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E3D1C7C35AA007CE8CA /* ResultViewController.m */; };
 		63C54E411C7C35BA007CE8CA /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C54E401C7C35BA007CE8CA /* PersonalViewController.m */; };
 		63E9BFDD1C9659B200FFE0BA /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9BFDC1C9659B200FFE0BA /* Order.m */; };
-		63FE2FFB1C97F3BE00537876 /* ButelCommonConnectSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63FE2FF91C97F3BE00537876 /* ButelCommonConnectSDK.bundle */; };
-		63FE2FFC1C97F3BE00537876 /* ButelCommonConnectSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FE2FFA1C97F3BE00537876 /* ButelCommonConnectSDK.framework */; };
-		63FE30011C97F3CB00537876 /* ButelHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FE2FFE1C97F3CB00537876 /* ButelHandle.m */; };
-		63FE30021C97F3CB00537876 /* CallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FE30001C97F3CB00537876 /* CallView.m */; };
 		91A97CA728DD2D371997D3F7 /* libPods-CloudService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D96943D8DC951CBCC61FF495 /* libPods-CloudService.a */; };
 		F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F019C9D51C7BFD7900E73A2C /* LoginViewController.m */; };
 		F019C9D91C7BFD8D00E73A2C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F019C9D81C7BFD8D00E73A2C /* RegisterViewController.m */; };
@@ -287,12 +283,6 @@
 		63C54E401C7C35BA007CE8CA /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
 		63E9BFDB1C9659B200FFE0BA /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		63E9BFDC1C9659B200FFE0BA /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
-		63FE2FF91C97F3BE00537876 /* ButelCommonConnectSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ButelCommonConnectSDK.bundle; sourceTree = "<group>"; };
-		63FE2FFA1C97F3BE00537876 /* ButelCommonConnectSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ButelCommonConnectSDK.framework; sourceTree = "<group>"; };
-		63FE2FFD1C97F3CB00537876 /* ButelHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButelHandle.h; sourceTree = "<group>"; };
-		63FE2FFE1C97F3CB00537876 /* ButelHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButelHandle.m; sourceTree = "<group>"; };
-		63FE2FFF1C97F3CB00537876 /* CallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallView.h; sourceTree = "<group>"; };
-		63FE30001C97F3CB00537876 /* CallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallView.m; sourceTree = "<group>"; };
 		8080CD2CAEE01D9CB60C40F6 /* Pods-CloudService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudService/Pods-CloudService.debug.xcconfig"; sourceTree = "<group>"; };
 		AA863A4D44EB33149F738225 /* Pods-CloudService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudService.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudService/Pods-CloudService.release.xcconfig"; sourceTree = "<group>"; };
 		D96943D8DC951CBCC61FF495 /* libPods-CloudService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CloudService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -412,7 +402,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				636CD92C1C880C4E0050935E /* AVFoundation.framework in Frameworks */,
-				63FE2FFC1C97F3BE00537876 /* ButelCommonConnectSDK.framework in Frameworks */,
 				F0906A811C96A9CF007C3BBC /* libFireData.a in Frameworks */,
 				636CD92A1C880C4A0050935E /* MediaPlayer.framework in Frameworks */,
 				636CD9281C880C440050935E /* AudioToolbox.framework in Frameworks */,
@@ -614,15 +603,6 @@
 			name = "PersonalController(个人中心)";
 			sourceTree = "<group>";
 		};
-		63F7D8FC1C894829002E56C9 /* 青牛 */ = {
-			isa = PBXGroup;
-			children = (
-				63FE2FF91C97F3BE00537876 /* ButelCommonConnectSDK.bundle */,
-				63FE2FFA1C97F3BE00537876 /* ButelCommonConnectSDK.framework */,
-			);
-			path = "青牛";
-			sourceTree = "<group>";
-		};
 		A6CD7BDAF137CB5E4056C631 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,7 +781,6 @@
 		F0292BD31C7B015200A810A9 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				63F7D8FC1C894829002E56C9 /* 青牛 */,
 				63ADFBE81C7F0622000D3164 /* lib1 */,
 				63508C831C86D37800505F08 /* YWBCityPickerView.h */,
 				63508C841C86D37800505F08 /* YWBCityPickerView.m */,
@@ -819,10 +798,6 @@
 				F06DDBA81C7DAB7400C862A1 /* UIViewController+AYCNavigationItem.m */,
 				63C07B8B1C7B14BB0084581F /* MBProgressHUD+Add.h */,
 				63C07B8C1C7B14BB0084581F /* MBProgressHUD+Add.m */,
-				63FE2FFD1C97F3CB00537876 /* ButelHandle.h */,
-				63FE2FFE1C97F3CB00537876 /* ButelHandle.m */,
-				63FE2FFF1C97F3CB00537876 /* CallView.h */,
-				63FE30001C97F3CB00537876 /* CallView.m */,
 				63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */,
 				63C07B8D1C7B14BB0084581F /* NetwrokHandle */,
 			);
@@ -978,7 +953,7 @@
 				TargetAttributes = {
 					F0292BA91C7B00CD00A810A9 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7PS2AH4H79;
+						DevelopmentTeam = LH28XA7T22;
 					};
 				};
 			};
@@ -1010,7 +985,6 @@
 				F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
 				634EE6201C995A8D00FB526D /* activity2@2X.png in Resources */,
-				63FE2FFB1C97F3BE00537876 /* ButelCommonConnectSDK.bundle in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
 				630EF18B1C8530940059CB34 /* MyClientTableViewCell.xib in Resources */,
 				634EE6271C997F0000FB526D /* rulebg3.png in Resources */,
@@ -1130,7 +1104,6 @@
 				6320B73C1C89A2CE0076FC7E /* Coupons.m in Sources */,
 				F07FF9D61C81469400EB1BB1 /* ResetPhonePopView.m in Sources */,
 				636CD9881C884E9A0050935E /* IntergralSearchViewController.m in Sources */,
-				63FE30011C97F3CB00537876 /* ButelHandle.m in Sources */,
 				F094B5A31C80223400A2312D /* PersonalViewCell.m in Sources */,
 				F06DDBA41C7DAAE900C862A1 /* SearchOrderViewController.m in Sources */,
 				F07FF9E31C8189E200EB1BB1 /* UserInfoViewController.m in Sources */,
@@ -1160,7 +1133,6 @@
 				63ADFBE61C7EAC52000D3164 /* ResultTableViewCell.m in Sources */,
 				63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */,
 				F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */,
-				63FE30021C97F3CB00537876 /* CallView.m in Sources */,
 				63C07B9B1C7B14BB0084581F /* MHAsiNetworkHandler.m in Sources */,
 				F0906A7E1C964FD2007C3BBC /* ActifityModel.m in Sources */,
 				F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */,
@@ -1340,7 +1312,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CloudService/Venders",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.EYunKeFu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.EYunKeFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1366,7 +1338,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CloudService/Venders",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyun.EYunKeFu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sinosig.EYunKeFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

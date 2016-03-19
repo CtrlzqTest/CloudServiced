@@ -134,82 +134,83 @@ static CGFloat headerHeight = 30;
 }
 
 - (void)offerAction {
-    
-    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
-    OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
+    [MBProgressHUD showMessag:@"程序猿正在火力开发中" toView:self.view];
 
-    NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
-    OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
-    NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
-
-    
-    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    delegate.isThird=YES;
-    /**
-     *  dataType 01:创建订单,获取新数据 02:创建客户
-     */
-    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
-    NSString *licenseNo = self.order.licenseNo;
-    if ([self.order.licenseNo isEqualToString:@""]) {
-        licenseNo = @"新车";
-    }
-    NSDictionary *params = @{@"operType":@"测试",
-                             @"msg":@"",
-                             @"sendTime":@"",
-                             @"sign":@"",
-                             @"data":@{@"proportion":@"0.8",
-                                       @"customerName":cell2.carUserName.text,
-                                       @"phoneNo":self.order.phoneNo,
-                                       @"dataType":@"02",
-                                       @"comeFrom":@"YPT",
-                                       @"activeType":@"1",
-                                       @"macAdress":@"",
-                                       @"agentCode":@"",
-                                       @"engineNo":cell1.engine.text,
-                                       @"vehicleFrameNo":cell1.carFrameCode.text,
-                                       @"licenseNo":licenseNo,
-                                       @"vehicleModelName":cell1.engineType.text,
-                                       @"userId":user.userId,
-                                       @"accountType":@"3",
-                                       @"cityCode":self.order.cityCode,
-                                       @"registerDate":cell1.firstTime.text}
-                             };
-    
-
-    __weak typeof(self) weakSelf = self;
-    [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {
-        
-        NSLog(@"%@",returnData);
-        delegate.isThird=NO;
-        if ([returnData[@"state"] isEqualToString:@"0"]) {
-            NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
-            NSString *baseId = [returnData[@"data"] valueForKey:@"baseId"];
-            NSDictionary *myServerDict = @{
-                                           @"userId":user.userId,
-                                           @"baseId":baseId,
-                                           @"id":self.order.customerId,
-                                           @"orderType":@"",
-                                           @"cityCode":self.order.cityCode,
-                                           @"custName":cell2.carUserName.text,
-                                           @"phoneNo":self.order.phoneNo,
-                                           @"licenseNo":self.order.licenseNo,
-                                           @"engineNo":cell1.engine.text,
-                                           @"frameNo":cell1.carFrameCode.text,
-                                           @"cappld":cell2.carUserCard.text,
-                                           @"date":cell1.firstTime.text,
-                                           @"vehicleModelName":cell1.engineType.text
-                                           };
-            OrderH5ViewController *cliteVC = [[OrderH5ViewController alloc] init];
-            cliteVC.url = url;
-            [weakSelf createOrderWithParam:myServerDict pushUrl:url];
-        }else{
-            [MBProgressHUD showError:returnData[@"msg"] toView:self.view];
-        }
-        
-    } failureBlock:^(NSError *error) {
-        delegate.isThird=NO;
-        
-    } showHUD:YES];
+//    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:0];
+//    OfferTableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:path1];
+//
+//    NSIndexPath *path2 = [NSIndexPath indexPathForRow:0 inSection:1];
+//    OfferTableViewCell *cell2 = [self.tableView cellForRowAtIndexPath:path2];
+//    NSLog(@"%@%@",cell2.carUserCard.text,cell2.carUserName.text);
+//
+//    
+//    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+//    delegate.isThird=YES;
+//    /**
+//     *  dataType 01:创建订单,获取新数据 02:创建客户
+//     */
+//    User *user = [[SingleHandle shareSingleHandle] getUserInfo];
+//    NSString *licenseNo = self.order.licenseNo;
+//    if ([self.order.licenseNo isEqualToString:@""]) {
+//        licenseNo = @"新车";
+//    }
+//    NSDictionary *params = @{@"operType":@"测试",
+//                             @"msg":@"",
+//                             @"sendTime":@"",
+//                             @"sign":@"",
+//                             @"data":@{@"proportion":@"0.8",
+//                                       @"customerName":cell2.carUserName.text,
+//                                       @"phoneNo":self.order.phoneNo,
+//                                       @"dataType":@"02",
+//                                       @"comeFrom":@"YPT",
+//                                       @"activeType":@"1",
+//                                       @"macAdress":@"",
+//                                       @"agentCode":@"",
+//                                       @"engineNo":cell1.engine.text,
+//                                       @"vehicleFrameNo":cell1.carFrameCode.text,
+//                                       @"licenseNo":licenseNo,
+//                                       @"vehicleModelName":cell1.engineType.text,
+//                                       @"userId":user.userId,
+//                                       @"accountType":@"3",
+//                                       @"cityCode":self.order.cityCode,
+//                                       @"registerDate":cell1.firstTime.text}
+//                             };
+//    
+//
+//    __weak typeof(self) weakSelf = self;
+//    [MHNetworkManager postReqeustWithURL:kZhiKe params:params successBlock:^(id returnData) {
+//        
+//        NSLog(@"%@",returnData);
+//        delegate.isThird=NO;
+//        if ([returnData[@"state"] isEqualToString:@"0"]) {
+//            NSString *url = [returnData[@"data"] valueForKey:@"retPage"];
+//            NSString *baseId = [returnData[@"data"] valueForKey:@"baseId"];
+//            NSDictionary *myServerDict = @{
+//                                           @"userId":user.userId,
+//                                           @"baseId":baseId,
+//                                           @"id":self.order.customerId,
+//                                           @"orderType":@"",
+//                                           @"cityCode":self.order.cityCode,
+//                                           @"custName":cell2.carUserName.text,
+//                                           @"phoneNo":self.order.phoneNo,
+//                                           @"licenseNo":self.order.licenseNo,
+//                                           @"engineNo":cell1.engine.text,
+//                                           @"frameNo":cell1.carFrameCode.text,
+//                                           @"cappld":cell2.carUserCard.text,
+//                                           @"date":cell1.firstTime.text,
+//                                           @"vehicleModelName":cell1.engineType.text
+//                                           };
+//            OrderH5ViewController *cliteVC = [[OrderH5ViewController alloc] init];
+//            cliteVC.url = url;
+//            [weakSelf createOrderWithParam:myServerDict pushUrl:url];
+//        }else{
+//            [MBProgressHUD showError:returnData[@"msg"] toView:self.view];
+//        }
+//        
+//    } failureBlock:^(NSError *error) {
+//        delegate.isThird=NO;
+//        
+//    } showHUD:YES];
 }
 
 - (void)createOrderWithParam:(NSDictionary *)param pushUrl:(NSString *)url{
@@ -258,7 +259,11 @@ static CGFloat headerHeight = 30;
                 cell.engine.text = self.order.engineNo;
                 cell.carFrameCode.text = self.order.frameNo;
                 cell.engineType.text = self.order.vehicleModelName;
-                cell.firstTime.text = [HelperUtil timeFormat:self.order.primaryDate format:@"yyyy-MM-dd"];
+                NSLog(@"%@",self.order.primaryDate);
+                if (self.order.primaryDate>=0) {
+                    cell.firstTime.text = [HelperUtil timeFormat:self.order.primaryDate format:@"yyyy-MM-dd"];
+                }
+                
            
                 
             }else{

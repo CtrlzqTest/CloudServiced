@@ -12,7 +12,6 @@
 #import "Order.h"
 #import "OfferViewController.h"
 #import "OrderInfoViewController.h"
-#import "ButelHandle.h"
 
 @interface MyClientViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
@@ -48,7 +47,6 @@
     
     [super viewWillAppear:animated];
     self.title = @"我的客户";
-    [[ButelHandle shareButelHandle] hideCallView];
     __weak typeof(self) weakSelf = self;
     [weakSelf setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 35, 35) image:@"head-add" selectImage:@"head-add" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"creatClient" sender:weakSelf];

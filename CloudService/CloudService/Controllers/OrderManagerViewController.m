@@ -10,7 +10,6 @@
 #import "OrderManagerCell.h"
 #import <MJRefresh.h>
 #import "Order.h"
-#import "ButelHandle.h"
 #import "OrderInfoViewController.h"
 
 @interface OrderManagerViewController ()<LazyPageScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -53,7 +52,7 @@
     [self.tabBarController setRightImageBarButtonItemWithFrame:CGRectMake(0, 0, 30, 30) image:@"title-search" selectImage:@"title-search_" action:^(AYCButton *button) {
         [weakSelf performSegueWithIdentifier:@"searchOrder" sender:weakSelf];
     }];
-    [[ButelHandle shareButelHandle] hideCallView];
+
 }
 
 - (void)setupNoData {

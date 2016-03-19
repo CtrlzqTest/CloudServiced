@@ -9,7 +9,6 @@
 #import "OrderInfoViewController.h"
 #import "OrderInfoTableViewCell.h"
 #import "Order.h"
-#import "ButelHandle.h"
 #import "AppointmentViewController.h"
 #import "AppDelegate.h"
 #import "OrderH5ViewController.h"
@@ -38,7 +37,6 @@
     
     [super viewWillAppear:animated];
     self.title=@"订单详情";
-    [[ButelHandle shareButelHandle] showCallView];
     
 }
 

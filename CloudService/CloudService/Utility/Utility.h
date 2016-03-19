@@ -85,4 +85,12 @@
  *  保存用户密码和用户名
  */
 +(void)saveUserName:(NSString *)userName passWord:(NSString *)passWord;
+/**
+ *  保存版本号
+ */
++(void)saveVersion:(BOOL )isNewVersion;
+/**
+ *  是否有最新版本
+ */
++(BOOL )isNewVersion;
 @end

@@ -10,7 +10,6 @@
 #import "OfferViewController.h"
 #import "ZQCityPickerView.h"
 #import "Order.h"
-#import "ButelHandle.h"
 
 @interface CreatClientViewController ()<UITextFieldDelegate>
 {
@@ -53,10 +52,7 @@
         [MBProgressHUD showMessag:@"请输入汽车所在城市" toView:self.view];
         return ;
     }
-    if (![HelperUtil checkTelNumber:_tfPhone.text]){
-        [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
-        return ;
-    }
+    
    
     
     [self performSegueWithIdentifier:@"offer" sender:self];
@@ -105,14 +101,17 @@
         }
     }
     if ([textField isEqual:self.tfPhone]) {
-        [[ButelHandle shareButelHandle] setPhoneNo:self.tfPhone.text];
+        if (![_tfPhone.text isEqualToString:@""] &&![HelperUtil checkTelNumber:_tfPhone.text]){
+            [MBProgressHUD showMessag:@"手机号格式不正确" toView:self.view];
+            return ;
+        }
     }
 }
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     self.title = @"创建客户";
-    [[ButelHandle shareButelHandle] showCallView];
+
     
 }
 
