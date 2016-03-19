@@ -94,7 +94,7 @@
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:self.tfLicenseNo]) {
-        self.tfLicenseNo.text = [textField.text uppercaseString];
+        
         if (![_tfLicenseNo.text isEqualToString:@""] && ![HelperUtil validateCarNo:_tfLicenseNo.text]){
             [MBProgressHUD showMessag:@"车牌号格式不正确" toView:self.view];
             return ;
@@ -106,6 +106,13 @@
             return ;
         }
     }
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([textField isEqual:self.tfLicenseNo]) {
+        self.tfLicenseNo.text = [self.tfLicenseNo.text uppercaseString];
+    }
+  
+    return YES;
 }
 - (void)viewWillAppear:(BOOL)animated {
     

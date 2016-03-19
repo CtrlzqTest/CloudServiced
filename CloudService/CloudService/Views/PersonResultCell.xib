@@ -112,6 +112,7 @@
             <connections>
                 <outlet property="lbOrderNum" destination="mgV-wr-t8M" id="5V8-Ar-4Qi"/>
                 <outlet property="lbTotalPremium" destination="Tc3-ry-MMS" id="jbz-oQ-QU4"/>
+                <outlet property="resultTime" destination="Ld5-IZ-cJJ" id="fnI-GX-vc8"/>
             </connections>
             <point key="canvasLocation" x="385.5" y="320.5"/>
         </tableViewCell>

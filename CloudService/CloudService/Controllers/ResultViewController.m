@@ -115,7 +115,7 @@
     _tableView1.mj_header.automaticallyChangeAlpha = YES;
     [_tableView1.mj_header beginRefreshing];
     
-    [_pageView addTab:@"当日业绩" View:_tableView1 Info:nil];
+    [_pageView addTab:@"本日业绩" View:_tableView1 Info:nil];
     _tableView2 = [[UITableView alloc] init];
     _tableView2.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
     _tableView2.showsHorizontalScrollIndicator = NO;
@@ -241,6 +241,8 @@
         Achievement *achievement = [_userAchievementArray objectAtIndex:indexPath.row];
         cell.lbOrderNum.text = [NSString stringWithFormat:@"%i",achievement.orderNum];
         cell.lbTotalPremium.text = [NSString stringWithFormat:@"%.2f",achievement.totalPremium];
+        [cell.resultTime setTitle:achievement.resultTime forState:UIControlStateNormal];
+        
         return cell;
     }else{
         ResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -320,16 +322,19 @@
             Achievement *dayAchievement = [[Achievement alloc] init];
             dayAchievement.orderNum = [[dayDic objectForKey:@"orderNum"] intValue];
             dayAchievement.totalPremium = [[dayDic objectForKey:@"totalPremium"] floatValue];
+            dayAchievement.resultTime = @"本日业绩";
             
             NSDictionary *monthDic = [dataDic objectForKey:@"month"];
             Achievement *monthAchievement = [[Achievement alloc] init];
             monthAchievement.orderNum = [[monthDic objectForKey:@"orderNum"] intValue];
             monthAchievement.totalPremium = [[monthDic objectForKey:@"totalPremium"] floatValue];
+            monthAchievement.resultTime = @"本月业绩";
             
             NSDictionary *weekDic = [dataDic objectForKey:@"week"];
             Achievement *weekAchievement = [[Achievement alloc] init];
             weekAchievement.orderNum = [[weekDic objectForKey:@"orderNum"] intValue];
             weekAchievement.totalPremium = [[weekDic objectForKey:@"totalPremium"] floatValue];
+            weekAchievement.resultTime = @"本周业绩";
             
             _userAchievementArray = @[dayAchievement,monthAchievement,weekAchievement];
             [_tableView reloadData];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="moG-sH-JKE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1940,14 +1940,14 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bmO-QB-zPa">
-                                <rect key="frame" x="93" y="232" width="188" height="188"/>
+                                <rect key="frame" x="93" y="233" width="188" height="188"/>
                                 <color key="backgroundColor" red="1" green="0.26188047339999998" blue="0.28042493629999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bmO-QB-zPa" secondAttribute="height" id="dq7-v2-Q4k"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无论你在哪里，只要你有空闲时间，就可以拿出手机赚钱，非常棒！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-O9-n4r">
-                                <rect key="frame" x="93" y="428" width="188" height="50"/>
+                                <rect key="frame" x="96" y="429" width="191" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0z4-W7-1GS"/>
                                 </constraints>
@@ -1977,9 +1977,9 @@
                             <constraint firstItem="rNB-5N-iK2" firstAttribute="top" secondItem="6S6-yN-9KF" secondAttribute="bottom" id="Da4-09-flA"/>
                             <constraint firstItem="x9z-G5-nNA" firstAttribute="top" secondItem="6yh-O9-n4r" secondAttribute="bottom" id="L0u-kL-m0V"/>
                             <constraint firstItem="6yh-O9-n4r" firstAttribute="top" secondItem="bmO-QB-zPa" secondAttribute="bottom" constant="8" id="WY1-9z-VW4"/>
-                            <constraint firstItem="6yh-O9-n4r" firstAttribute="leading" secondItem="bmO-QB-zPa" secondAttribute="leading" id="ef2-zU-ZSl"/>
+                            <constraint firstItem="6yh-O9-n4r" firstAttribute="leading" secondItem="bmO-QB-zPa" secondAttribute="leading" constant="3" id="ef2-zU-ZSl"/>
                             <constraint firstAttribute="trailing" secondItem="rNB-5N-iK2" secondAttribute="trailing" id="fzO-Yi-0py"/>
-                            <constraint firstItem="6yh-O9-n4r" firstAttribute="trailing" secondItem="bmO-QB-zPa" secondAttribute="trailing" id="nHu-aU-uKp"/>
+                            <constraint firstItem="6yh-O9-n4r" firstAttribute="trailing" secondItem="bmO-QB-zPa" secondAttribute="trailing" constant="6" id="nHu-aU-uKp"/>
                             <constraint firstItem="rNB-5N-iK2" firstAttribute="leading" secondItem="5yE-mW-sUo" secondAttribute="leading" id="riA-7w-rRk"/>
                             <constraint firstItem="bmO-QB-zPa" firstAttribute="centerX" secondItem="5yE-mW-sUo" secondAttribute="centerX" id="ss6-RZ-Vbc"/>
                             <constraint firstItem="bmO-QB-zPa" firstAttribute="top" secondItem="rNB-5N-iK2" secondAttribute="bottom" constant="45" id="wOs-TE-mjd"/>
@@ -2647,7 +2647,7 @@
                                             <constraint firstAttribute="height" constant="1" id="7PA-kM-JxX"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apE-tZ-AEA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车主姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apE-tZ-AEA">
                                         <rect key="frame" x="17" y="16" width="78" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="dag-H9-1V9"/>
@@ -2684,7 +2684,7 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入客户姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqN-XN-Wi2">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车主姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqN-XN-Wi2">
                                         <rect key="frame" x="115" y="11" width="217" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Jbm-hJ-XhI"/>
@@ -2983,7 +2983,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEI-e1-eG5">
                                 <rect key="frame" x="217" y="260" width="108" height="30"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point2" translatesAutoresizingMaskIntoConstraints="NO" id="5Qp-rF-ITq">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="point2" translatesAutoresizingMaskIntoConstraints="NO" id="5Qp-rF-ITq">
                                         <rect key="frame" x="0.0" y="10" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Qp-rF-ITq" secondAttribute="height" id="QqV-Bo-Vz3"/>

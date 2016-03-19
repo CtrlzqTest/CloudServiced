@@ -165,7 +165,7 @@ static NSString *cell_id = @"myTeamCell";
         [MHNetworkManager postReqeustWithURL:url params:@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId} successBlock:^(id returnData) {
             
             if ([[returnData objectForKey:@"flag"] isEqualToString:@"success"]) {
-                [MBProgressHUD showMessag:@"申请团队长成功" toView:nil];
+                [MBProgressHUD showMessag:@"提交申请团队长成功" toView:nil];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }else {
