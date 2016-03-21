@@ -1247,6 +1247,7 @@
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="leading" secondItem="i90-oa-I8P" secondAttribute="leading" id="9En-Es-WsJ"/>
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="top" secondItem="fXg-13-9kZ" secondAttribute="bottom" id="Bpf-fz-kfD"/>
                             <constraint firstAttribute="trailing" secondItem="lMP-Qz-HDR" secondAttribute="trailing" id="CUt-hr-FqV"/>
+                            <constraint firstItem="lMP-Qz-HDR" firstAttribute="bottom" secondItem="WZh-ee-k5i" secondAttribute="bottom" id="Ke8-CA-dxI"/>
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="top" secondItem="fXg-13-9kZ" secondAttribute="bottom" id="Nbn-0x-YZy"/>
                             <constraint firstItem="vgf-jE-rKT" firstAttribute="top" secondItem="WZh-ee-k5i" secondAttribute="bottom" id="S2L-Aw-m09"/>
                             <constraint firstItem="WZh-ee-k5i" firstAttribute="leading" secondItem="i90-oa-I8P" secondAttribute="leading" constant="20" id="WOa-vX-CTA"/>
@@ -1261,6 +1262,13 @@
                             <constraint firstItem="lMP-Qz-HDR" firstAttribute="leading" secondItem="i90-oa-I8P" secondAttribute="leading" id="mR8-og-cOQ"/>
                             <constraint firstAttribute="bottom" secondItem="lMP-Qz-HDR" secondAttribute="bottom" id="mfx-wv-ezB"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hmw-jI-f5j"/>
+                                <exclude reference="mfx-wv-ezB"/>
+                                <exclude reference="bbn-wy-dRa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="活动规则" id="6xP-0N-LRF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
