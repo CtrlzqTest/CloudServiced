@@ -105,6 +105,8 @@ static NSString *const ExchangeIntegralSuccess = @"ExchangeIntegralSuccess";
 
 static NSString *const ReloadHomeData = @"ReloadHomeData";
 
+static NSString *const ChooseSaleCompany = @"ChooseSaleCompany";
+
 /**************************************************************************************/
 
 #endif
