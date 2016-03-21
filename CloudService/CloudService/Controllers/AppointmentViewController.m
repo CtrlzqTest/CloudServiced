@@ -15,7 +15,7 @@
 #undef  RGBCOLOR
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
-@interface AppointmentViewController ()<HZQDatePickerViewDelegate,UITextViewDelegate>
+@interface AppointmentViewController ()<HZQDatePickerViewDelegate>
 
 @property (nonatomic, strong) PlaceholderTextView * textView;
 @property (weak, nonatomic)IBOutlet UIView *bgView;
@@ -52,7 +52,7 @@
 
 
 - (IBAction)codeAction:(id)sender {
-    [self resignKeyBoardInView:self.view];
+    [HelperUtil resignKeyBoardInView:self.view];
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(110, 135, 200, 200) selectData:
 
      [[SingleHandle shareSingleHandle] getEndCodeArray]
@@ -63,7 +63,7 @@
 }
 
 - (IBAction)dateAction:(id)sender{
-    [self resignKeyBoardInView:self.view];
+    [HelperUtil resignKeyBoardInView:self.view];
     [self setupDateView:DateTypeOfStart];
 }
 
@@ -98,19 +98,20 @@
             break;
     }
 }
+/**
+ *  懒加载textView
+ */
 -(PlaceholderTextView *)textView{
     
     if (!_textView) {
         _textView = [[PlaceholderTextView alloc]initWithFrame:CGRectMake(15, 155, self.view.frame.size.width - 30, 70)];
         _textView.backgroundColor = [UIColor whiteColor];
-        _textView.delegate = self;
         _textView.font = [UIFont systemFontOfSize:15.f];
         _textView.textColor = [UIColor blackColor];
         _textView.textAlignment = NSTextAlignmentLeft;
-        _textView.editable = YES;
         _textView.placeholderColor = RGBCOLOR(0x89, 0x89, 0x89);
         _textView.placeholder = @"请输入备注内容";
-
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextFieldTextDidChangeNotification object:self.textView];
     }
     
     return _textView;
@@ -118,27 +119,18 @@
 
 #pragma mark textField的字数限制
 
+
 //在这个地方计算输入的字数
-- (void)textViewDidChange:(UITextView *)textView
+- (void)textViewChanged:(UITextView *)textView
 {
     NSInteger wordCount = textView.text.length;
     self.wordCountLabel.text = [NSString stringWithFormat:@"%ld/50",(long)wordCount];
-    [self wordLimit:textView];
-}
-#pragma mark 超过50字不能输入
--(BOOL)wordLimit:(UITextView *)text{
-    if (text.text.length < 50) {
-
-        self.textView.editable = YES;
-        
-    }
-    else{
-        self.textView.text=[text.text substringToIndex:50];
+    if (wordCount >= 50) {
+        self.textView.text=[textView.text substringToIndex:50];
         [MBProgressHUD showMessag:@"最多输入50个字符" toView:self.view];
-        
     }
-    return nil;
 }
+
 - (IBAction)save:(id)sender {
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kaddReserve];
     NSDictionary *params = @{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"customerId":self.customerId,@"time":self.tfDate.text,@"comment":self.textView.text,@"endCode":self.tfCode.text};
@@ -156,28 +148,7 @@
         
     } showHUD:NO];
 }
-/** 消失键盘*/
-- (void)resignKeyBoardInView:(UIView *)view
 
-{
-    
-    for (UIView *v in view.subviews) {
-        
-        if ([v.subviews count] > 0) {
-            
-            [self resignKeyBoardInView:v];
-            
-        }
-        
-        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
-            
-            [v resignFirstResponder];
-            
-        }
-        
-    }
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

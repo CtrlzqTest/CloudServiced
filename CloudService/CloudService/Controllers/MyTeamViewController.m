@@ -182,10 +182,7 @@ static NSString *cell_id = @"myTeamCell";
 }
 
 
-//-(void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
-//}
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -205,9 +202,10 @@ static NSString *cell_id = @"myTeamCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     TeamMember *teamMember = [_teamMemberArray objectAtIndex:indexPath.row];
-    cell.lbName.text = teamMember.userName;
+    cell.lbName.text = teamMember.realName;
     cell.lbIdCard.text = [NSString stringWithFormat:@"ID:%@",teamMember.userNum];
     [cell.phoneBtn setTitle:teamMember.phoneNo forState:UIControlStateNormal];
+    [cell.chatName setTitle:teamMember.chatName forState:UIControlStateNormal];
     return cell;
     
 }

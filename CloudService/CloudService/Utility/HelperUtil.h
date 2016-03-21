@@ -102,6 +102,8 @@
  *  消失键盘
  */
 + (void)resignKeyBoardInView:(UIView *)view;
-
-
+/**
+ *  获取网络状态
+ */
++(NSString *)getNetWorkStates;
 @end

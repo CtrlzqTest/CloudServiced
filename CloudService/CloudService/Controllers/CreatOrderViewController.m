@@ -140,7 +140,7 @@
 }
 - (IBAction)showCityPickerView:(id)sender {
     
-    [self resignKeyBoardInView:self.view];
+    [HelperUtil resignKeyBoardInView:self.view];
     
     __block ZQCityPickerView *cityPickerView = [[ZQCityPickerView alloc] initWithProvincesArray:nil cityArray:nil componentsCount:2];
     
@@ -172,19 +172,7 @@
     }
     
 }
-/** 消失键盘*/
-- (void)resignKeyBoardInView:(UIView *)view
 
-{
-    for (UIView *v in view.subviews) {
-        if ([v.subviews count] > 0) {
-            [self resignKeyBoardInView:v];
-        }
-        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
-            [v resignFirstResponder];
-        }
-    }
-}
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];

@@ -63,6 +63,7 @@
 		6383656C1C7DB8BA001A10C4 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 638365671C7DB8BA001A10C4 /* UIColor+HexString.m */; };
 		6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6392CFF01C8D235400D84F38 /* TeamMember.m */; };
 		6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6392CFF31C8D8F8200D84F38 /* Achievement.m */; };
+		639CF6AD1C9FF0800086C72B /* UIViewController+AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 639CF6AC1C9FF0800086C72B /* UIViewController+AlertView.m */; };
 		63AA2BD51C8A70ED00D7CF04 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEE71C89AB3C00168BF8 /* DataSource.m */; };
 		63AA2BD71C8A89FA00D7CF04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */; };
 		63AA2BDA1C8A8E1E00D7CF04 /* Integral.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA2BD91C8A8E1E00D7CF04 /* Integral.m */; };
@@ -240,6 +241,8 @@
 		6392CFF01C8D235400D84F38 /* TeamMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMember.m; sourceTree = "<group>"; };
 		6392CFF21C8D8F8200D84F38 /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
 		6392CFF31C8D8F8200D84F38 /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
+		639CF6AB1C9FF0800086C72B /* UIViewController+AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AlertView.h"; sourceTree = "<group>"; };
+		639CF6AC1C9FF0800086C72B /* UIViewController+AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AlertView.m"; sourceTree = "<group>"; };
 		63AA2BD61C8A89FA00D7CF04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		63AA2BD81C8A8E1E00D7CF04 /* Integral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Integral.h; sourceTree = "<group>"; };
 		63AA2BD91C8A8E1E00D7CF04 /* Integral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Integral.m; sourceTree = "<group>"; };
@@ -861,6 +864,8 @@
 				63C07BA71C7B15C10084581F /* HelperUtil.m */,
 				F05732091C859D2400D88B78 /* SingleHandle.h */,
 				F057320A1C859D2400D88B78 /* SingleHandle.m */,
+				639CF6AB1C9FF0800086C72B /* UIViewController+AlertView.h */,
+				639CF6AC1C9FF0800086C72B /* UIViewController+AlertView.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1192,6 +1197,7 @@
 				6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */,
 				630EF1971C8567960059CB34 /* IntegralTableViewCell.m in Sources */,
 				F05732051C8584F300D88B78 /* IntergralCityViewController.m in Sources */,
+				639CF6AD1C9FF0800086C72B /* UIViewController+AlertView.m in Sources */,
 				F0DF32121C87E612008D098F /* ResetUserPwdViewController.m in Sources */,
 				F0FED91D1C96D38B008186C3 /* AboutAppViewController.m in Sources */,
 				63C07B9C1C7B14BB0084581F /* MHAsiNetworkItem.m in Sources */,
@@ -1247,8 +1253,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
@@ -1271,7 +1277,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1d845a3f-dc6f-487f-975f-4be95ad4ef10";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1293,8 +1299,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -1310,7 +1316,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "1d845a3f-dc6f-487f-975f-4be95ad4ef10";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1321,8 +1327,8 @@
 			baseConfigurationReference = 8080CD2CAEE01D9CB60C40F6 /* Pods-CloudService.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1347,8 +1353,8 @@
 			baseConfigurationReference = AA863A4D44EB33149F738225 /* Pods-CloudService.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

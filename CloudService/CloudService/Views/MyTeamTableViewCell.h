@@ -13,4 +13,5 @@
 @property (weak, nonatomic)IBOutlet UILabel *lbName;
 @property (weak, nonatomic)IBOutlet UILabel *lbIdCard;
 @property (weak, nonatomic)IBOutlet UIButton *phoneBtn;
+@property (weak, nonatomic)IBOutlet UIButton *chatName;
 @end
