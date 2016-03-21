@@ -32,21 +32,19 @@ static NSString *const select_CellID = @"selectCell";
 {
     NSArray *_keyArray_User;
     NSArray *_keyArray_Bank;
-    NSMutableArray *_valueArray_User;
-    NSMutableArray *_valueArray_Bank;
-    NSMutableArray *_companyArray;
-    NSMutableArray *_saleCityArray;
+    NSMutableArray *_valueArray_User;   // 需要填写的个人信息
+    NSMutableArray *_valueArray_Bank;   // 需要填写的银行信息
+    NSMutableArray *_companyArray;      // 申请销售数据公司,数据处理数组
+    NSMutableArray *_saleCityArray;     // 销售城市数据处理数组
     
-    NSIndexPath *_indexPath;
-    BOOL _isAnimating;
+    NSIndexPath *_indexPath;            // 正在编辑某一Cell的Indexpath
     
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic,strong) NSArray *selectArray;
-@property(nonatomic,strong) UIButton *maskBtn;
-@property (nonatomic,strong)HZQDatePickerView *pickerView;
+@property(nonatomic,strong) NSArray *selectArray;               // 下拉框数据存储数组,多套数据公用一个数组
+@property (nonatomic,strong)HZQDatePickerView *pickerView;      // 城市选择
 
 @end
 

@@ -24,6 +24,7 @@
 
 @property (nonatomic, strong) YWBCityPickerView *cityPickerView;
 @property (nonatomic,strong)UIView *maskView;
+
 @end
 
 @implementation RegisterViewController
