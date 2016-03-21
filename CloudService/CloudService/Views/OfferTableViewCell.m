@@ -19,9 +19,21 @@
 - (void)awakeFromNib {
     // Initialization code
     self.carCode.enabled = NO;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(carFrameCodeChanged:) name:UITextFieldTextDidChangeNotification object:self.carFrameCode];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(carUserCardChanged:) name:UITextFieldTextDidChangeNotification object:self.carUserCard];
     
 }
-
+- (void)carFrameCodeChanged:(NSNotificationCenter *)sender {
+    if (self.carFrameCode.text.length >=17) {
+        self.carFrameCode.text = [self.carFrameCode.text substringToIndex:17];
+    }
+}
+- (void)carUserCardChanged:(NSNotificationCenter *)sender {
+    if (self.carUserCard.text.length >=18) {
+        self.carUserCard.text = [self.carUserCard.text substringToIndex:18];
+    }
+}
 - (IBAction)tapDateButton:(UIButton *)sender {
     
     _pickerView = [HZQDatePickerView instanceDatePickerView];

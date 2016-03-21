@@ -74,6 +74,8 @@
     self.UserTextFiled.attributedPlaceholder = [[NSAttributedString alloc]
                                                 initWithString:@"用户名/手机号码/邮箱"
                                                 attributes:@{NSForegroundColorAttributeName:color}];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:self.UserTextFiled];
     
     self.pwdTextFiled.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-key"]];
     self.eyeImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login-line"]];
@@ -190,6 +192,13 @@
     _eyeImg = nil;
 }
 
+
+
+- (void)textFieldChanged:(NSNotificationCenter *)sender {
+    if ([self.UserTextFiled.text isEqualToString:@""]) {
+        self.pwdTextFiled.text = @"";
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

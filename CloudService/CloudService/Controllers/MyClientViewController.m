@@ -53,7 +53,6 @@
     }];
     if (self.isSaveCarInfo) {
         _conditon = @"";
-//        [self requestData:@""];
         [self.tableView.mj_header beginRefreshing];
     }
 }
