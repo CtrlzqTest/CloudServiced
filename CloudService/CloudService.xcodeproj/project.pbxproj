@@ -98,8 +98,6 @@
 		F01A61611C7D3D3E008CBBD5 /* SetUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01A615F1C7D3D3E008CBBD5 /* SetUserInfoCell.xib */; };
 		F01A61641C7D456B008CBBD5 /* SetUserInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F01A61631C7D456B008CBBD5 /* SetUserInfoHeaderView.m */; };
 		F01A616D1C7D860E008CBBD5 /* LoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = F01A616C1C7D860E008CBBD5 /* LoginInputView.m */; };
-		F01FD4551C98270300C87B88 /* ChooseCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F01FD4531C98270300C87B88 /* ChooseCompanyViewController.m */; };
-		F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01FD4541C98270300C87B88 /* ChooseCompanyViewController.xib */; };
 		F0292BAF1C7B00CD00A810A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F0292BAE1C7B00CD00A810A9 /* main.m */; };
 		F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0292BB11C7B00CD00A810A9 /* AppDelegate.m */; };
 		F0292BB81C7B00CD00A810A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0292BB61C7B00CD00A810A9 /* Main.storyboard */; };
@@ -135,6 +133,12 @@
 		F0906A811C96A9CF007C3BBC /* libFireData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0906A801C96A9CF007C3BBC /* libFireData.a */; };
 		F090DEDA1C89394900168BF8 /* RequestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DED91C89394900168BF8 /* RequestEntity.m */; };
 		F090DEE01C896B1800168BF8 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F090DEDF1C896B1800168BF8 /* RequestManager.m */; };
+		F094A83F1C9F9A7E00E89967 /* ChooseCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F094A83D1C9F9A7E00E89967 /* ChooseCompanyViewController.m */; };
+		F094A8401C9F9A7E00E89967 /* ChooseCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094A83E1C9F9A7E00E89967 /* ChooseCompanyViewController.xib */; };
+		F094A8441C9F9A9600E89967 /* HeaderCompanyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094A8421C9F9A9600E89967 /* HeaderCompanyView.m */; };
+		F094A8451C9F9A9600E89967 /* HeaderCompanyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094A8431C9F9A9600E89967 /* HeaderCompanyView.xib */; };
+		F094A8491C9F9D5900E89967 /* TagSelectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F094A8471C9F9D5900E89967 /* TagSelectItem.m */; };
+		F094A84A1C9F9D5900E89967 /* TagSelectItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094A8481C9F9D5900E89967 /* TagSelectItem.xib */; };
 		F094B5991C7FF8D600A2312D /* ZQScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */; };
 		F094B59D1C8000E500A2312D /* HomeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F094B59B1C8000E500A2312D /* HomeCollectionCell.m */; };
 		F094B59E1C8000E500A2312D /* HomeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F094B59C1C8000E500A2312D /* HomeCollectionCell.xib */; };
@@ -303,9 +307,6 @@
 		F01A61631C7D456B008CBBD5 /* SetUserInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUserInfoHeaderView.m; sourceTree = "<group>"; };
 		F01A616B1C7D860E008CBBD5 /* LoginInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInputView.h; sourceTree = "<group>"; };
 		F01A616C1C7D860E008CBBD5 /* LoginInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInputView.m; sourceTree = "<group>"; };
-		F01FD4521C98270300C87B88 /* ChooseCompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCompanyViewController.h; sourceTree = "<group>"; };
-		F01FD4531C98270300C87B88 /* ChooseCompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCompanyViewController.m; sourceTree = "<group>"; };
-		F01FD4541C98270300C87B88 /* ChooseCompanyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCompanyViewController.xib; sourceTree = "<group>"; };
 		F0292BAA1C7B00CD00A810A9 /* CloudService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0292BAE1C7B00CD00A810A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F0292BB01C7B00CD00A810A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -373,6 +374,15 @@
 		F090DEDF1C896B1800168BF8 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
 		F090DEE61C89AB3C00168BF8 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = CloudService/API/DataSource.h; sourceTree = SOURCE_ROOT; };
 		F090DEE71C89AB3C00168BF8 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataSource.m; path = CloudService/API/DataSource.m; sourceTree = SOURCE_ROOT; };
+		F094A83C1C9F9A7E00E89967 /* ChooseCompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCompanyViewController.h; sourceTree = "<group>"; };
+		F094A83D1C9F9A7E00E89967 /* ChooseCompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCompanyViewController.m; sourceTree = "<group>"; };
+		F094A83E1C9F9A7E00E89967 /* ChooseCompanyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCompanyViewController.xib; sourceTree = "<group>"; };
+		F094A8411C9F9A9600E89967 /* HeaderCompanyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCompanyView.h; sourceTree = "<group>"; };
+		F094A8421C9F9A9600E89967 /* HeaderCompanyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCompanyView.m; sourceTree = "<group>"; };
+		F094A8431C9F9A9600E89967 /* HeaderCompanyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderCompanyView.xib; sourceTree = "<group>"; };
+		F094A8461C9F9D5900E89967 /* TagSelectItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSelectItem.h; sourceTree = "<group>"; };
+		F094A8471C9F9D5900E89967 /* TagSelectItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSelectItem.m; sourceTree = "<group>"; };
+		F094A8481C9F9D5900E89967 /* TagSelectItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagSelectItem.xib; sourceTree = "<group>"; };
 		F094B5971C7FF8D600A2312D /* ZQScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQScrollPageView.h; sourceTree = "<group>"; };
 		F094B5981C7FF8D600A2312D /* ZQScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQScrollPageView.m; sourceTree = "<group>"; };
 		F094B59A1C8000E500A2312D /* HomeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionCell.h; sourceTree = "<group>"; };
@@ -601,6 +611,9 @@
 				637A62471C8EBEC60020AE5E /* CouponsDistributeViewController.m */,
 				F0FED91B1C96D38B008186C3 /* AboutAppViewController.h */,
 				F0FED91C1C96D38B008186C3 /* AboutAppViewController.m */,
+				F094A83C1C9F9A7E00E89967 /* ChooseCompanyViewController.h */,
+				F094A83D1C9F9A7E00E89967 /* ChooseCompanyViewController.m */,
+				F094A83E1C9F9A7E00E89967 /* ChooseCompanyViewController.xib */,
 			);
 			name = "PersonalController(个人中心)";
 			sourceTree = "<group>";
@@ -638,9 +651,6 @@
 				F019C9E41C7C7BB700E73A2C /* SetUserInfoViewController.m */,
 				F0DF32101C87E612008D098F /* ResetUserPwdViewController.h */,
 				F0DF32111C87E612008D098F /* ResetUserPwdViewController.m */,
-				F01FD4521C98270300C87B88 /* ChooseCompanyViewController.h */,
-				F01FD4531C98270300C87B88 /* ChooseCompanyViewController.m */,
-				F01FD4541C98270300C87B88 /* ChooseCompanyViewController.xib */,
 			);
 			name = "LoginRegisterControllers(登录注册)";
 			sourceTree = "<group>";
@@ -917,6 +927,12 @@
 				637A62491C8EC0020020AE5E /* CouponsDistributeCell.h */,
 				637A624A1C8EC0020020AE5E /* CouponsDistributeCell.m */,
 				637A624B1C8EC0020020AE5E /* CouponsDistributeCell.xib */,
+				F094A8411C9F9A9600E89967 /* HeaderCompanyView.h */,
+				F094A8421C9F9A9600E89967 /* HeaderCompanyView.m */,
+				F094A8431C9F9A9600E89967 /* HeaderCompanyView.xib */,
+				F094A8461C9F9D5900E89967 /* TagSelectItem.h */,
+				F094A8471C9F9D5900E89967 /* TagSelectItem.m */,
+				F094A8481C9F9D5900E89967 /* TagSelectItem.xib */,
 			);
 			name = "PersonalViews(个人中心)";
 			sourceTree = "<group>";
@@ -986,7 +1002,6 @@
 				636A35D01C9CFEB900540CD0 /* guize.png in Resources */,
 				634EE61F1C995A8D00FB526D /* activity2.png in Resources */,
 				63ADFBE71C7EAC52000D3164 /* ResultTableViewCell.xib in Resources */,
-				F01FD4561C98270300C87B88 /* ChooseCompanyViewController.xib in Resources */,
 				F07531D21C8687BB00E71796 /* area.plist in Resources */,
 				634EE6201C995A8D00FB526D /* activity2@2X.png in Resources */,
 				63C54E331C7C2F96007CE8CA /* OrderManagerCell.xib in Resources */,
@@ -999,17 +1014,20 @@
 				F0AFC54D1C9C0D2B00BC3CBC /* Default-667h@2x.png in Resources */,
 				634EE6241C9961CB00FB526D /* activity3.png in Resources */,
 				F0292BBD1C7B00CD00A810A9 /* LaunchScreen.storyboard in Resources */,
+				F094A8401C9F9A7E00E89967 /* ChooseCompanyViewController.xib in Resources */,
 				F0AFC54F1C9C0D2B00BC3CBC /* Default@2x.png in Resources */,
 				630EF1981C8567960059CB34 /* IntegralTableViewCell.xib in Resources */,
 				630EF1A01C856CFD0059CB34 /* CouponsTableViewCell.xib in Resources */,
 				634EE6281C997F0000FB526D /* rulebg2.png in Resources */,
 				F0292BBA1C7B00CD00A810A9 /* Assets.xcassets in Resources */,
+				F094A84A1C9F9D5900E89967 /* TagSelectItem.xib in Resources */,
 				63790FEE1C93C03C006CB0E2 /* ActivityCollectionCell.xib in Resources */,
 				F07FF9E01C81752D00EB1BB1 /* MyTeamTableViewCell.xib in Resources */,
 				F07FF9D81C8146D800EB1BB1 /* ResetPhonePopView.xib in Resources */,
 				F06DE1DB1C9957CF006D3BE7 /* SetUserInfoCell2.xib in Resources */,
 				F094B5A41C80223400A2312D /* PersonalViewCell.xib in Resources */,
 				F01A61611C7D3D3E008CBBD5 /* SetUserInfoCell.xib in Resources */,
+				F094A8451C9F9A9600E89967 /* HeaderCompanyView.xib in Resources */,
 				637533BC1C84321500A12932 /* OfferTableViewCell.xib in Resources */,
 				F0AFC54E1C9C0D2B00BC3CBC /* Default-736h@2x .png in Resources */,
 				F074D9361C93CC35007A6A88 /* province.sqlite in Resources */,
@@ -1166,9 +1184,9 @@
 				F074D93C1C93F0F5007A6A88 /* OrderH5ViewController.m in Sources */,
 				63C07BA91C7B15C10084581F /* NSDictionary+AYCUnicode.m in Sources */,
 				637A624C1C8EC0020020AE5E /* CouponsDistributeCell.m in Sources */,
+				F094A8491C9F9D5900E89967 /* TagSelectItem.m in Sources */,
 				F019C9D61C7BFD7900E73A2C /* LoginViewController.m in Sources */,
 				6392CFF11C8D235400D84F38 /* TeamMember.m in Sources */,
-				F01FD4551C98270300C87B88 /* ChooseCompanyViewController.m in Sources */,
 				F0292BB21C7B00CD00A810A9 /* AppDelegate.m in Sources */,
 				F057320B1C859D2400D88B78 /* SingleHandle.m in Sources */,
 				6392CFF41C8D8F8200D84F38 /* Achievement.m in Sources */,
@@ -1180,8 +1198,10 @@
 				F0292BAF1C7B00CD00A810A9 /* main.m in Sources */,
 				F06DDBA21C7DAAE900C862A1 /* CreatOrderViewController.m in Sources */,
 				F01A61641C7D456B008CBBD5 /* SetUserInfoHeaderView.m in Sources */,
+				F094A8441C9F9A9600E89967 /* HeaderCompanyView.m in Sources */,
 				630EF18F1C8543900059CB34 /* PersonResultCell.m in Sources */,
 				63790FE91C93B19C006CB0E2 /* ActivityViewController.m in Sources */,
+				F094A83F1C9F9A7E00E89967 /* ChooseCompanyViewController.m in Sources */,
 				63C2FB981C8022D900D48B8C /* PlaceholderTextView.m in Sources */,
 				63790FED1C93C03C006CB0E2 /* ActivityCollectionCell.m in Sources */,
 				F06DDBA91C7DAB7400C862A1 /* AYCButton.m in Sources */,

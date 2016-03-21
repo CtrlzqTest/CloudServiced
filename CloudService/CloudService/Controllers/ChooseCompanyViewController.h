@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface ChooseCompanyViewController : UIViewController
+
+@property(nonatomic,strong)NSMutableArray *selectArray;
+@property(nonatomic,strong)NSMutableArray *dataArray;
 
 @end

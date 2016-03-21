@@ -43,6 +43,8 @@
     }
 }
 
+
+
 - (void)isPullDown:(BOOL )pullDown {
     if (pullDown) {
         self.imgView.hidden = NO;

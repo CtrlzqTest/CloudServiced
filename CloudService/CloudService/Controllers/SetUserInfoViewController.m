@@ -20,6 +20,7 @@
 #import "ResetPhonePopView.h"
 #import "SetUserInfoCell2.h"
 #import "PellTableViewSelect.h"
+#import "ChooseCompanyViewController.h"
 
 static NSString *const cell_id = @"setUserInfoCell";
 static NSString *const cell_Id2 = @"setUserInfoCell2";
@@ -139,6 +140,7 @@ static NSString *const select_CellID = @"selectCell";
     [self.tableView registerClass:[SetUserInfoHeaderView class] forHeaderFooterViewReuseIdentifier:header_id];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidHidden) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:ChooseSaleCompany object:nil];
 }
 
 - (void)initData {
@@ -195,6 +197,11 @@ static NSString *const select_CellID = @"selectCell";
         [_saleCityArray addObject:model];
         i ++;
     }
+}
+
+- (void)reloadTableView {
+    _valueArray_User[_indexPath.row] = [self changeStrArraytoTextString:_companyArray];
+    [self.tableView reloadData];
 }
 
 #pragma mark -- HZQDatePickerViewDelegate
@@ -292,29 +299,33 @@ static NSString *const select_CellID = @"selectCell";
     // 个人信息,带下拉框
     if (indexPath.section == 0 && isCell2) {
 
-            SetUserInfoCell2 *cell2 = [tableView dequeueReusableCellWithIdentifier:cell_Id2 forIndexPath:indexPath];
-            cell2.titleLabelWidth.constant = 80;
-            cell2.titleLabel.text = _keyArray_User[indexPath.row];
-            cell2.delegate = self;
-            cell2.contentLabel.text = _valueArray_User[indexPath.row];
-            [cell2 isPullDown:NO];
+        SetUserInfoCell2 *cell2 = [tableView dequeueReusableCellWithIdentifier:cell_Id2 forIndexPath:indexPath];
+        cell2.titleLabelWidth.constant = 80;
+        cell2.titleLabel.text = _keyArray_User[indexPath.row];
+        cell2.delegate = self;
+        cell2.contentLabel.text = _valueArray_User[indexPath.row];
+        [cell2 isPullDown:NO];
             
-            if (self.notEnable) {
-                if(indexPath.row == 8 || indexPath.row == 7) {
-                    cell2.titleLabelWidth.constant = 120;
-                }
-                return cell2;
-            }
-            [cell2 isPullDown:YES];
-            if (indexPath.row == 7 || indexPath.row == 8) {
+        if (self.notEnable) {
+            if(indexPath.row == 8 || indexPath.row == 7) {
                 cell2.titleLabelWidth.constant = 120;
-                if (cell2.contentLabel.text.length > 0) {
-                    [cell2 setDeleteImage:YES];
-                }else{
-                    [cell2 setDeleteImage:NO];
-                }
             }
             return cell2;
+        }
+        [cell2 isPullDown:YES];
+        if (indexPath.row == 8) {
+            cell2.titleLabelWidth.constant = 120;
+            if (cell2.contentLabel.text.length > 0) {
+                [cell2 setDeleteImage:YES];
+            }else{
+                [cell2 setDeleteImage:NO];
+            }
+        }
+        if (indexPath.row == 7) {
+            cell2.titleLabelWidth.constant = 120;
+            cell2.imgView.image = [UIImage imageNamed:@"details-arrow1"];
+        }
+        return cell2;
     }
     // 个人信息，不带下拉框
     SetUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
@@ -401,24 +412,32 @@ static NSString *const select_CellID = @"selectCell";
                             } animated:YES];
                     }
                         break;
-            case 7:{     _selectArray = [DataSource insureCommpanyNameArray];
-                        CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cellFrame) - self.tableView.contentOffset.y + 64, tempRect.size.width, 4 * 40);
-//                        [self showPullDownViewWithRect:rect7];
-                            [PellTableViewSelect addPellTableViewSelectWithWindowFrame:rect7 selectData:_selectArray action:^(NSInteger index) {
-                                NSString *code = [[DataSource insureCommpanyCodeArray] objectAtIndex:index];
-                                // 可以用二分查找
-                                for (CodeNameModel *model in _companyArray) {
-                                    if ([model.companyCode isEqualToString:code]) {
-                                        return;
-                                    }
-                                }
-                                CodeNameModel *model = [[CodeNameModel alloc] init];
-                                model.companyName = _selectArray[index];
-                                model.companyCode = code;
-                                [_companyArray addObject:model];
-                                _valueArray_User[_indexPath.row] = [self changeStrArraytoTextString:_companyArray];
-                                [self.tableView reloadData];
-                            } animated:YES];
+            case 7:{
+                
+                ChooseCompanyViewController *chooseVC = [[ChooseCompanyViewController alloc] init];
+                chooseVC.selectArray = _companyArray;
+                [self getChooseDataArray];
+                chooseVC.dataArray = [NSMutableArray arrayWithArray:[self getChooseDataArray]];
+                [self.navigationController pushViewController:chooseVC animated:YES];
+                
+//                        _selectArray = [DataSource insureCommpanyNameArray];
+//                        CGRect rect7 = CGRectMake(tempRect.origin.x, CGRectGetMaxY(cellFrame) - self.tableView.contentOffset.y + 64, tempRect.size.width, 4 * 40);
+////                        [self showPullDownViewWithRect:rect7];
+//                            [PellTableViewSelect addPellTableViewSelectWithWindowFrame:rect7 selectData:_selectArray action:^(NSInteger index) {
+//                                NSString *code = [[DataSource insureCommpanyCodeArray] objectAtIndex:index];
+//                                // 可以用二分查找
+//                                for (CodeNameModel *model in _companyArray) {
+//                                    if ([model.companyCode isEqualToString:code]) {
+//                                        return;
+//                                    }
+//                                }
+//                                CodeNameModel *model = [[CodeNameModel alloc] init];
+//                                model.companyName = _selectArray[index];
+//                                model.companyCode = code;
+//                                [_companyArray addObject:model];
+//                                _valueArray_User[_indexPath.row] = [self changeStrArraytoTextString:_companyArray];
+//                                [self.tableView reloadData];
+//                            } animated:YES];
                         break;
                     }
             case 8:     [self showCityPickerViewWithCount:1];
@@ -511,6 +530,26 @@ static NSString *const select_CellID = @"selectCell";
     [dict setValue:_valueArray_Bank[5] forKey:@"accountCity"];
     
     return dict;
+}
+
+
+/**
+ *  获取未选中的销售公司
+ */
+- (NSArray *)getChooseDataArray {
+    
+    NSMutableArray *dataArray = [NSMutableArray array];
+    for (NSString *companyName in [DataSource insureCommpanyNameArray]) {
+        
+        if ([_valueArray_User[7] containsString:companyName]) {
+            continue;
+        }
+        CodeNameModel *model = [[CodeNameModel alloc] init];
+        model.companyCode = [DataSource changeCompanyTextToCode:companyName];
+        model.companyName = companyName;
+        [dataArray addObject:model];
+    }
+    return dataArray;
 }
 
 // 二分查找卡户银行

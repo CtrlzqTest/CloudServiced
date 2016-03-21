@@ -155,8 +155,6 @@ static NSString *headerView_ID = @"headerView";
     return _dataKeyArray.count;
 }
 
-
-
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
