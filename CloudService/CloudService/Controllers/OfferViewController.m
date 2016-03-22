@@ -61,33 +61,35 @@ static CGFloat headerHeight = 30;
     [btnOffer addTarget:self action:@selector(offerAction) forControlEvents:(UIControlEventTouchUpInside)];
     [btnOffer setBackgroundImage:[UIImage imageNamed:@"btn4"] forState:UIControlStateNormal];
     [_footView addSubview:btnOffer];
-    // 给左边视图添加约束
+    
+    
+    // 给右边视图添加约束
     [btnSave mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        //添加上边距约束
+        make.top.mas_equalTo(10);
+        // 添加左边距约束（距离左边按键的距离）
+        make.left.equalTo(btnOffer.mas_right).with.offset(20);
+        // 添加右边距约束（距离当前主视图右边的距离）
+        make.right.mas_equalTo(-20);
+        // 添加当前按钮的高度
+        make.height.mas_equalTo(40);
+        // 添加宽度（宽度跟左边按键一样）
+        make.width.equalTo(btnOffer);
+    }];
+    
+    // 给左边视图添加约束
+    [btnOffer mas_makeConstraints:^(MASConstraintMaker *make) {
         
         //添加上边距约束
         make.top.mas_equalTo(10);
         // 添加左边距约束（距离当前主视图左边的距离）
         make.left.mas_equalTo(20);
         // 添加右边距约束（距离第二个按键左边的距离）
-        make.right.equalTo(btnOffer.mas_left).with.offset(-20);
+        make.right.equalTo(btnSave.mas_left).with.offset(-20);
         // 添加当前按钮的高度
         make.height.mas_equalTo(40);
         // 添加宽度（宽度跟右边按键一样）
-        make.width.equalTo(btnOffer);
-    }];
-    
-    // 给右边视图添加约束
-    [btnOffer mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        //添加上边距约束
-        make.top.mas_equalTo(10);
-        // 添加左边距约束（距离左边按键的距离）
-        make.left.equalTo(btnSave.mas_right).with.offset(20);
-        // 添加右边距约束（距离当前主视图右边的距离）
-        make.right.mas_equalTo(-20);
-        // 添加当前按钮的高度
-        make.height.mas_equalTo(40);
-        // 添加宽度（宽度跟左边按键一样）
         make.width.equalTo(btnSave);
     }];
 }

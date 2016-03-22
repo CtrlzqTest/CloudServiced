@@ -52,7 +52,7 @@
 
 /** 正则匹配用户身份证号
  */
-+ (BOOL)checkUserIdCard: (NSString *) idCard;
++ (BOOL)checkUserIdCard: (NSString *) value;
 
 /** 正则匹员工号,12位的数字
  */
@@ -106,4 +106,5 @@
  *  获取网络状态
  */
 +(NSString *)getNetWorkStates;
+
 @end

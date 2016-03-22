@@ -86,16 +86,28 @@
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     int useCache = [user.usableNum intValue];
     int cacheNmb = [self.intergNumTextFiled.text intValue];
-    BOOL isCacheMatch = cacheNmb >= 10000 && (cacheNmb % 100 == 0);
-    if (!isCacheMatch)
-    {
-        [MBProgressHUD showError:@"现金数目不对" toView:self.view];
+
+    if (useCache == 0) {
+        [MBProgressHUD showError:@"暂无可兑换积分！" toView:self.view];
+        return false;
+    }
+    if (cacheNmb == 0) {
+        [MBProgressHUD showError:@"兑换积分不能为空！" toView:self.view];
+        return false;
+    }
+    if (cacheNmb < 10000) {
+        [MBProgressHUD showError:@"兑换积分不低于10000！" toView:self.view];
+        return false;
+    }
+    if (cacheNmb % 100 != 0) {
+        [MBProgressHUD showError:@"兑换积分必须为100的整数倍！" toView:self.view];
         return false;
     }
     if (cacheNmb > useCache) {
-        [MBProgressHUD showError:@"可用积分不足" toView:self.view];
+        [MBProgressHUD showError:@"可兑换积分不足！" toView:self.view];
         return false;
     }
+    
     return true;
 }
 
