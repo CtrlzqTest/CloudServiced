@@ -24,11 +24,12 @@
     self.contentView.backgroundColor = [UIColor colorWithWhite:0.919 alpha:1.000];
     
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorWithRed:0.000 green:0.548 blue:0.000 alpha:1.000];
+    lineView.backgroundColor = [HelperUtil colorWithHexString:@"1FAAF2"];
     [self addSubview:lineView];
     
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont systemFontOfSize:17];
+    self.titleLabel.textColor = [HelperUtil colorWithHexString:@"1FAAF2"];
     [self addSubview:self.titleLabel];
     
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {

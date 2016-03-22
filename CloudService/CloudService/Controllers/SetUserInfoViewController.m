@@ -335,14 +335,16 @@ static NSString *const select_CellID = @"selectCell";
     cell.delegate = self;
     cell.textFiled.enabled = YES;
     cell.textFiled.keyboardType = UIKeyboardTypeDefault;
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
     if (self.notEnable) {
         cell.textFiled.enabled = NO;
         return cell;
     }
+    
     if (indexPath.section == 0) {
         if (indexPath.row == 1) {
             cell.textFiled.keyboardType = UIKeyboardTypeDefault;
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(carUserCardChanged:) name:UITextFieldTextDidChangeNotification object:cell.textFiled];
         }else if(indexPath.row == 2 || indexPath.row == 5)
         {
             cell.textFiled.enabled = NO;
@@ -354,6 +356,7 @@ static NSString *const select_CellID = @"selectCell";
     {
         if(indexPath.row == 1){
             cell.textFiled.keyboardType = UIKeyboardTypePhonePad;
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bankCardChanged:) name:UITextFieldTextDidChangeNotification object:cell.textFiled];
         }
         if (indexPath.row == 4 || indexPath.row == 5)
         {
@@ -363,6 +366,18 @@ static NSString *const select_CellID = @"selectCell";
     return cell;
 }
 
+- (void)carUserCardChanged:(NSNotification *)sender {
+    UITextField *tfUserCard = (UITextField *)sender.object;
+        if (tfUserCard.text.length >=18) {
+        tfUserCard.text = [tfUserCard.text substringToIndex:18];
+    }
+}
+- (void)bankCardChanged:(NSNotification *)sender {
+    UITextField *tfUserCard = (UITextField *)sender.object;
+    if (tfUserCard.text.length >=21) {
+        tfUserCard.text = [tfUserCard.text substringToIndex:21];
+    }
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.notEnable) {
