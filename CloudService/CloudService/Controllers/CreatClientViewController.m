@@ -86,7 +86,6 @@
     [cityPickerView showPickViewAnimated:^(NSString *province, NSString *city,NSString *cityCode,NSString *provinceCode) {
         self.tfCarCity.text = [NSString stringWithFormat:@"%@ %@",province,city];
         _cityCode = cityCode;
-        NSLog(@"%@",cityCode);
         cityPickerView = nil;
     }];
     

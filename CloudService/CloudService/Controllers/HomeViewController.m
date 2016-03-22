@@ -292,7 +292,6 @@ static NSString *headerView_ID = @"headerView";
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     __weak typeof(self) weakSelf = self;
-    NSLog(@"%@",user.userId);
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetuserIntergralAPI]
                                   params:@{@"userId":user.userId}
                             successBlock:^(id returnData) {

@@ -108,7 +108,6 @@
 //    NSLog(@"%f\n%f",proposedContentOffset.x,offsetAdjustment);
 //    return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
     CGPoint currentPoint = _point;
-    NSLog(@"-----  %@",NSStringFromCGPoint(velocity));
     if(velocity.x < 0){
         currentPoint.x -= self.collectionView.frame.size.width * 0.5;
         if(currentPoint.x < 0){

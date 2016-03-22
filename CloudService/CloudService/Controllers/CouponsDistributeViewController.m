@@ -49,7 +49,6 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindTeamMember];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
@@ -61,7 +60,6 @@
                 [_teamMemberArray removeObjectAtIndex:0];
             }
             
-            NSLog(@"%@",_teamMemberArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
         }
@@ -113,7 +111,6 @@
                     NSDictionary *paramsDic=@{@"teamId":teamMember.teamId,@"totalCouponNum":[NSString stringWithFormat:@"%i",_couponsCount],@"couponId":_coupons.couponId,@"coupon":[couponStr substringFromIndex:1],@"teamerId":[teamerIdStr substringFromIndex:1]};
                     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kassignTeamCoupon];
                     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-                        NSLog(@"%@",returnData);
                         
                         NSDictionary *dic = returnData;
                         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
