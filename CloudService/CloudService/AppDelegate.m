@@ -34,7 +34,9 @@
     // Override point for customization after application launch.
     
     //检测网络状态
-    [MHAsiNetworkHandler startMonitoring];
+    if ([[HelperUtil getNetWorkStates] isEqualToString:@"2G"]) {
+        [MBProgressHUD showMessag:@"当前处于2G网络，您当前所有操作可能会有延迟！" toView:nil];
+    }
     
     // 检查版本号
     [Utility checkNewVersion:^(BOOL hasNewVersion) {

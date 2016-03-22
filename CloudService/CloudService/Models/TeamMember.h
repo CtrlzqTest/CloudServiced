@@ -16,4 +16,6 @@
 @property (nonatomic, copy)NSString *teamId;
 @property (assign, nonatomic)BOOL isCheck;
 @property (assign, nonatomic)int moneyNum;
+@property (nonatomic, copy)NSString *realName;
+@property (nonatomic, copy)NSString *chatName;
 @end

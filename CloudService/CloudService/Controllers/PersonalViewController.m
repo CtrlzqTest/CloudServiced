@@ -208,13 +208,13 @@ static NSString *cell_id = @"personalCell";
                 break;
             case 4:
             {
-                if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]) {
+                if ([[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队长"]||[[[SingleHandle shareSingleHandle] getUserInfo].roleName isEqualToString:@"团队成员"]) {
                     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     InviteFriendViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"InviteFriendsVC"];
                     vc.isTeamInvite = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else{
-                    [MBProgressHUD showMessag:@"您不是团队长" toView:self.view];
+                    [MBProgressHUD showMessag:@"您还没有团队" toView:self.view];
                 }
                 
             }

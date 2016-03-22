@@ -44,7 +44,7 @@
                         <rect key="frame" x="164" y="10" width="136" height="28"/>
                         <state key="normal" title="15027164687"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MF-0R-Tke">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MF-0R-Tke">
                         <rect key="frame" x="164" y="43" width="136" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal" title="上官天宇">
@@ -85,6 +85,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="chatName" destination="0MF-0R-Tke" id="xeg-G0-r8S"/>
                 <outlet property="lbIdCard" destination="fgm-co-0Su" id="RDF-ch-Sg1"/>
                 <outlet property="lbName" destination="snU-RP-UeT" id="WuL-bZ-qWm"/>
                 <outlet property="phoneBtn" destination="0yH-HA-gga" id="4aU-Py-8Bq"/>

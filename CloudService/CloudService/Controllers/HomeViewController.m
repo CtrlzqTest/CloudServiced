@@ -17,8 +17,9 @@
 #import "FireData.h"
 #import "RuleViewController.h"
 #import "Order.h"
+#import "SetUserInfoViewController.h"
 
-@interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface HomeViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate>
 {
     NSMutableDictionary *_dataDict;
     NSArray *_dataKeyArray;
@@ -123,7 +124,10 @@ static NSString *headerView_ID = @"headerView";
     
     User *user = [[SingleHandle shareSingleHandle] getUserInfo];
     if ([user.roleName isEqualToString:@"普通用户"] || user.roleName.length <= 0) {
-        [MBProgressHUD showError:@"当前用户为普通用户,不能签到,请到个人中心认证" toView:self.view];
+        
+        UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前用户为普通用户,不能签到,请到个人中心认证" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去认证", nil];
+    
+        [alterView show];
         return ;
     }
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -146,7 +150,15 @@ static NSString *headerView_ID = @"headerView";
     } showHUD:YES];
     
 }
-
+//UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
+    if (buttonIndex == 1) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SetUserInfoViewController *setUserInfoVC = [storyBoard instantiateViewControllerWithIdentifier:@"setUserInfo"];
+        setUserInfoVC.rightBtnTitle = @"提交";
+        [self.navigationController pushViewController:setUserInfoVC animated:YES];
+    }
+}
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }

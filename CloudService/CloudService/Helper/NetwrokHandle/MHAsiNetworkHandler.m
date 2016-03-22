@@ -90,7 +90,10 @@
                 [MHAsiNetworkHandler sharedInstance].networkError = NO;
                 break;
             case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
-                [MHAsiNetworkHandler sharedInstance].networkError = YES;
+                [MHAsiNetworkHandler sharedInstance].networkError = NO;
+                //取消网络请求项
+                [self cancelAllNetItems];
+                [MBProgressHUD showMessag:@"网络不给力，请检查网络状态！" toView:nil];
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
                 DTLog(@"手机自带网络");
