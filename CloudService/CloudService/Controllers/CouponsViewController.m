@@ -159,7 +159,6 @@
             _isLoad = YES;
         }
     }
-    NSLog(@"之前下标：%ld 当前下标：%ld",preIndex,index);
 }
 
 -(void)LazyPageScrollViewEdgeSwipe:(LazyPageScrollView *)pageScrollView Left:(BOOL)bLeft
@@ -213,7 +212,6 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
@@ -221,7 +219,6 @@
             NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
             //如果有数据显示数据，如果没有数据则显示暂无数据
             if (totalCount>0) {
                 [self removeNoData];
@@ -239,7 +236,6 @@
 
             NSArray *listArray = [dataDic objectForKey:@"list"];
             [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
-            NSLog(@"%@",_userArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
             [_tableView1 addSubview:_noDataImg];
@@ -262,14 +258,12 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize1],@"pageNo":[NSString stringWithFormat:@"%i",_page1]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kUserCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
             if (totalCount-_pageSize1*_page1<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView1.mj_footer endRefreshingWithNoMoreData];
@@ -280,14 +274,14 @@
 
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
-        NSLog(@"%@",_userArray);
+
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView1 reloadData];
  
     } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
+
         [_tableView1.mj_footer endRefreshing];
     } showHUD:YES];
 }
@@ -298,7 +292,6 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
@@ -306,7 +299,6 @@
         NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
             //如果有数据显示数据，如果没有数据则显示暂无数据
             if (totalCount>0) {
                 [self removeNoData];
@@ -347,14 +339,12 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize2],@"pageNo":[NSString stringWithFormat:@"%i",_page2]};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kTeamCouponsList];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
         NSDictionary *dataDic = [dic objectForKey:@"data"];
             //取出总条数
             int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-            NSLog(@"总条数：%i",totalCount);
             if (totalCount-_pageSize2*_page2<=0) {
                 //没有数据，直接提示没有更多数据
                 [_tableView2.mj_footer endRefreshingWithNoMoreData];
@@ -365,14 +355,12 @@
 
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
-        NSLog(@"%@",_teamArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView2 reloadData];
 
     } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
         [_tableView2.mj_footer endRefreshing];
     } showHUD:YES];
 }

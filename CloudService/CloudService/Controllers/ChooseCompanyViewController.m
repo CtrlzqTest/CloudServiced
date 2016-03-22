@@ -59,7 +59,6 @@ static NSString *header_Id = @"header_Id";
     
     TagSelectItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cell_Id forIndexPath:indexPath];
     CodeNameModel *model = indexPath.section == 0 ? _selectArray[indexPath.row] : _dataArray[indexPath.row];
-    NSLog(@"%@",model.companyName);
     cell.titleLabel.text = model.companyName;
     return cell;
 }

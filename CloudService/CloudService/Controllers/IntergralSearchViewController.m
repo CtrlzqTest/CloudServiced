@@ -350,7 +350,6 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"startDate":_startTime,@"endData":_endTime};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         NSDictionary *dic = returnData;
         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
             [_integralArray removeAllObjects];
@@ -371,7 +370,6 @@
             
             NSArray *listArray = [dataDic objectForKey:@"list"];
             [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
-            NSLog(@"%@",_integralArray);
         }else {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
             [self setupNoData];
@@ -394,13 +392,11 @@
     NSDictionary *paramsDic=@{@"userId":[[SingleHandle shareSingleHandle] getUserInfo].userId,@"pageSize":[NSString stringWithFormat:@"%i",_pageSize],@"pageNo":[NSString stringWithFormat:@"%i",_page],@"startDate":_startTime,@"endData":_endTime};
     NSString *url = [NSString stringWithFormat:@"%@%@",BaseAPI,kfindUserCreditsRecord];
     [MHNetworkManager postReqeustWithURL:url params:paramsDic successBlock:^(id returnData) {
-        NSLog(@"%@",returnData);
         
         NSDictionary *dic = returnData;
         NSDictionary *dataDic = [dic objectForKey:@"data"];
         //取出总条数
         int totalCount=[[[dataDic objectForKey:@"pageVO"] objectForKey:@"recordCount"] intValue];
-        NSLog(@"总条数：%i",totalCount);
         if (totalCount-_pageSize*_page<=0) {
             //没有数据，直接提示没有更多数据
             [_tableView.mj_footer endRefreshingWithNoMoreData];
@@ -411,11 +407,9 @@
         
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_integralArray addObjectsFromArray:[Integral mj_objectArrayWithKeyValuesArray:listArray]];
-        NSLog(@"%@",_integralArray);
         [self.tableView reloadData];
      
     } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
         [self.tableView.mj_footer endRefreshing];
     } showHUD:YES];
     
