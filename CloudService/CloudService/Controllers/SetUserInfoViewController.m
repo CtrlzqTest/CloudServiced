@@ -668,7 +668,9 @@ static NSString *const select_CellID = @"selectCell";
 // 通过数组模型得到城市或公司字符串
 - (NSString *)changeStrArraytoTextString:(NSArray *)array {
     
-    
+    if (array.count <= 0) {
+        return @"";
+    }
     NSMutableString *resultStr = [NSMutableString string];
     for (CodeNameModel *model in array) {
         if (model.provinceName.length > 0)
@@ -686,7 +688,9 @@ static NSString *const select_CellID = @"selectCell";
 // 通过数组模型得到城市或公司编码
 - (NSString *)changeStrArraytoCodeString:(NSArray *)array {
     
-    
+    if (array.count <= 0) {
+        return @"";
+    }
     NSMutableString *resultStr = [NSMutableString string];
     for (CodeNameModel *model in array) {
         if (model.provinceName.length > 0)
