@@ -104,7 +104,7 @@ static NSString *cell_id = @"myTeamCell";
             [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_teamMemberArray);
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         
         [_tableView reloadData];
@@ -141,7 +141,7 @@ static NSString *cell_id = @"myTeamCell";
             [_teamMemberArray addObjectsFromArray:[TeamMember mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_teamMemberArray);
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView reloadData];
  
@@ -169,7 +169,7 @@ static NSString *cell_id = @"myTeamCell";
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }else {
-                [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+                [MBProgressHUD showMessag:[returnData objectForKey:@"msg"] toView:self.view];
             }
             
         } failureBlock:^(NSError *error) {

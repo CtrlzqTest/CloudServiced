@@ -149,7 +149,7 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginToMenuViewNotice object:nil];
         }else if([[returnData valueForKey:@"flag"] isEqualToString:@"error"]){
-            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData valueForKey:@"msg"] toView:self.view];
         }
     } failureBlock:^(NSError *error) {
  
@@ -163,11 +163,11 @@
 {
     
     if (self.UserTextFiled.text.length <= 0) {
-        [MBProgressHUD showError:@"用户名不能为空" toView:self.view];
+        [MBProgressHUD showMessag:@"用户名不能为空" toView:self.view];
         return false;
     }else if (self.pwdTextFiled.text.length <= 0){
         
-        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        [MBProgressHUD showMessag:@"请输入密码" toView:self.view];
         return false;
     }
     
@@ -176,7 +176,7 @@
     BOOL isPasswordMatch = [predicatePasswordNum evaluateWithObject: self.pwdTextFiled.text];
     if (!isPasswordMatch)
     {
-        [MBProgressHUD showError:@"密码格式错误,请输入6到16位密码" toView:self.view];
+        [MBProgressHUD showMessag:@"密码格式错误,请输入6到16位密码" toView:self.view];
         return false;
     }
     return true;

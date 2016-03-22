@@ -343,7 +343,7 @@
             }
             
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             [self.pageView addSubview:_noDataImg];
             [self.pageView addSubview:_lbNoData];
         }
@@ -443,7 +443,7 @@
             }
             
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         if ([type isEqualToString:@"未完成"]) {
             [_tableView1 reloadData];

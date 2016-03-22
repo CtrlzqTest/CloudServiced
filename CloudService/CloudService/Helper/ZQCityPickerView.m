@@ -68,7 +68,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMaskView)];
     [self.maskView addGestureRecognizer:tap];
     CGFloat accessHeight = 50;
-    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KHeight + accessHeight, KWidth, KHeight * 3 / 8.0 - accessHeight)];
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, KHeight , KWidth, 180)];
     self.pickerView.backgroundColor = [UIColor whiteColor];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
@@ -149,8 +149,8 @@
     self.hidden = NO;
     [UIView animateWithDuration:0.3 animations:^{
         self.maskView.alpha = 0.5;
-        _accessInputView.transform = CGAffineTransformMakeTranslation(0, - KHeight * 3 / 8.0);
-        self.pickerView.transform = CGAffineTransformMakeTranslation(0, - KHeight * 3 / 8.0);
+        _accessInputView.transform = CGAffineTransformMakeTranslation(0, -180);
+        self.pickerView.transform = CGAffineTransformMakeTranslation(0, -180);
     } completion:^(BOOL finished) {
         
     }];

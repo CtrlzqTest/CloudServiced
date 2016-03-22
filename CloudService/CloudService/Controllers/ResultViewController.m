@@ -342,7 +342,7 @@
             
         }else {
             [_tableView.mj_header endRefreshing];
-            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData objectForKey:@"msg"] toView:self.view];
             [self.tableView addSubview:_noDataImg];
             [self.tableView addSubview:_lbNoData];
         }
@@ -430,7 +430,7 @@
             }
             
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             [self.pageView addSubview:_noDataImg];
             [self.pageView addSubview:_lbNoData];
         }
@@ -530,7 +530,7 @@
             }
 
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         if ([type isEqualToString:@"day"]) {
             [_tableView1 reloadData];

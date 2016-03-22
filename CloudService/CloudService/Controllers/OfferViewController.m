@@ -206,7 +206,7 @@ static CGFloat headerHeight = 30;
 //            cliteVC.url = url;
 //            [weakSelf createOrderWithParam:myServerDict pushUrl:url];
 //        }else{
-//            [MBProgressHUD showError:returnData[@"msg"] toView:self.view];
+//            [MBProgressHUD showMessag:returnData[@"msg"] toView:self.view];
 //        }
 //        
 //    } failureBlock:^(NSError *error) {
@@ -225,7 +225,7 @@ static CGFloat headerHeight = 30;
             orderH5VC.url = url;
             [weakSelf.navigationController pushViewController:orderH5VC animated:YES];
         }else {
-            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData objectForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -329,7 +329,7 @@ static CGFloat headerHeight = 30;
     if ([textField isEqual:cell1.engine]) {
         if (![cell1.engine.text isEqualToString:@""]) {
             if (![HelperUtil validateEngineNo:cell1.engine.text]) {
-                [MBProgressHUD showError:@"发动机号格式错误" toView:self.view];
+                [MBProgressHUD showMessag:@"发动机号格式错误" toView:self.view];
                 return ;
             }
         }
@@ -337,7 +337,7 @@ static CGFloat headerHeight = 30;
     if ([textField isEqual:cell1.carFrameCode]) {
         if (![cell1.carFrameCode.text isEqualToString:@""]) {
             if (![HelperUtil validateCarFrame:cell1.carFrameCode.text]) {
-                [MBProgressHUD showError:@"车架号格式错误" toView:self.view];
+                [MBProgressHUD showMessag:@"车架号格式错误" toView:self.view];
                 return ;
             }
         }
@@ -345,7 +345,7 @@ static CGFloat headerHeight = 30;
     if ([textField isEqual:cell2.carUserCard]) {
         if (![cell2.carUserCard.text isEqualToString:@""]) {
             if (![HelperUtil checkUserIdCard:cell2.carUserCard.text]) {
-                [MBProgressHUD showError:@"身份证号格式错误" toView:self.view];
+                [MBProgressHUD showMessag:@"身份证号格式错误" toView:self.view];
                 return ;
             }
         }

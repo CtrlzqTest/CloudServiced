@@ -326,7 +326,7 @@ static NSString *headerView_ID = @"headerView";
                 [self performSegueWithIdentifier:@"getData" sender:self];
                 
             }else {
-                [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+                [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             }
             
         } failureBlock:^(NSError *error) {
