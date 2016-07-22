@@ -57,7 +57,7 @@
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData valueForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -73,7 +73,7 @@
     BOOL isPhoneMatch = [predicatePhoneNum evaluateWithObject:self.phoneNum.text];
     if (!isPhoneMatch)
     {
-        [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
+        [MBProgressHUD showMessag:@"手机号输入错误" toView:self.view];
     }else {
         [self countDownTime:@60];
         [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":self.phoneNum.text} successBlock:^(id returnData) {
@@ -134,17 +134,17 @@
     BOOL ensurePwd = [self.pwdTextFiled.text isEqualToString:self.ensurePwd.text];
     if (!isPhoneMatch)
     {
-        [MBProgressHUD showError:@"手机号输入错误" toView:self.view];
+        [MBProgressHUD showMessag:@"手机号输入错误" toView:self.view];
         return false;
     }
     if (!isPasswordMatch)
     {
-        [MBProgressHUD showError:@"密码格式错误,请输入6到16位密码" toView:self.view];
+        [MBProgressHUD showMessag:@"密码格式错误,请输入6到16位密码" toView:self.view];
         return false;
     }
     if (!ensurePwd)
     {
-        [MBProgressHUD showError:@"两次输入密码不一致" toView:self.view];
+        [MBProgressHUD showMessag:@"两次输入密码不一致" toView:self.view];
         return false;
     }
     return true;

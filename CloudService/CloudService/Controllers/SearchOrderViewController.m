@@ -516,7 +516,7 @@
             [_orderArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_orderArray);
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             [self setupNoData];
             
         }

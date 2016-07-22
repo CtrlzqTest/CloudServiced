@@ -237,7 +237,7 @@
             NSArray *listArray = [dataDic objectForKey:@"list"];
             [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             [_tableView1 addSubview:_noDataImg];
             [_tableView1 addSubview:_lbNoData];
         }
@@ -276,7 +276,7 @@
         [_userArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
 
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView1 reloadData];
  
@@ -318,7 +318,7 @@
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             
             [_tableView2 addSubview:_noDataImg];
             [_tableView2 addSubview:_lbNoData];
@@ -356,7 +356,7 @@
         NSArray *listArray = [dataDic objectForKey:@"list"];
         [_teamArray addObjectsFromArray:[Coupons mj_objectArrayWithKeyValuesArray:listArray]];
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         [_tableView2 reloadData];
 

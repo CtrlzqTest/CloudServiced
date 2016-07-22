@@ -71,7 +71,7 @@
             [self.navigationController popViewControllerAnimated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:ExchangeIntegralSuccess object:nil];
         }else{
-            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData valueForKey:@"msg"] toView:self.view];
         }
     } failureBlock:^(NSError *error) {
         
@@ -88,23 +88,23 @@
     int cacheNmb = [self.intergNumTextFiled.text intValue];
 
     if (useCache == 0) {
-        [MBProgressHUD showError:@"暂无可兑换积分！" toView:self.view];
+        [MBProgressHUD showMessag:@"暂无可兑换积分！" toView:self.view];
         return false;
     }
     if (cacheNmb == 0) {
-        [MBProgressHUD showError:@"兑换积分不能为空！" toView:self.view];
+        [MBProgressHUD showMessag:@"兑换积分不能为空！" toView:self.view];
         return false;
     }
     if (cacheNmb < 10000) {
-        [MBProgressHUD showError:@"兑换积分不低于10000！" toView:self.view];
+        [MBProgressHUD showMessag:@"兑换积分不低于10000！" toView:self.view];
         return false;
     }
     if (cacheNmb % 100 != 0) {
-        [MBProgressHUD showError:@"兑换积分必须为100的整数倍！" toView:self.view];
+        [MBProgressHUD showMessag:@"兑换积分必须为100的整数倍！" toView:self.view];
         return false;
     }
     if (cacheNmb > useCache) {
-        [MBProgressHUD showError:@"可兑换积分不足！" toView:self.view];
+        [MBProgressHUD showMessag:@"可兑换积分不足！" toView:self.view];
         return false;
     }
     

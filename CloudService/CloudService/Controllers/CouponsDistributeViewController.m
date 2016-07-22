@@ -61,7 +61,7 @@
             }
             
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
         }
         [self.tableView reloadData];
 
@@ -116,7 +116,7 @@
                         if ([[dic objectForKey:@"flag"] isEqualToString:@"success"]) {
                             [MBProgressHUD showMessag:@"派发优惠券成功" toView:self.view];
                         }else {
-                            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+                            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
                         }
                         
                     } failureBlock:^(NSError *error) {

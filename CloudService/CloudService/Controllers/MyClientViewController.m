@@ -103,7 +103,7 @@
             [_clientArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_clientArray);
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             
         }
         
@@ -142,7 +142,7 @@
             [_clientArray addObjectsFromArray:[Order mj_objectArrayWithKeyValuesArray:listArray]];
             NSLog(@"%@",_clientArray);
         }else {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[dic objectForKey:@"msg"] toView:self.view];
             
         }
 

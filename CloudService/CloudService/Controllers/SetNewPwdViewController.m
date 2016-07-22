@@ -69,7 +69,7 @@
             [self.navigationController popToViewController:[VCArrary objectAtIndex:1] animated:YES];
         }else
         {
-            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData valueForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -89,12 +89,12 @@
     BOOL ensurePwd = [self.pwdTextFiled.text isEqualToString:self.enSurePwdTextFiled.text];
     if (!isPasswordMatch)
     {
-        [MBProgressHUD showError:@"密码格式错误,请输入6到16位密码" toView:self.view];
+        [MBProgressHUD showMessag:@"密码格式错误,请输入6到16位密码" toView:self.view];
         return false;
     }
     if (!ensurePwd)
     {
-        [MBProgressHUD showError:@"两次输入密码不一致" toView:self.view];
+        [MBProgressHUD showMessag:@"两次输入密码不一致" toView:self.view];
         return false;
     }
     return true;

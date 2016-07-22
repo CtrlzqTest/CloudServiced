@@ -61,7 +61,7 @@
         [self performSegueWithIdentifier:@"setNewPwd_push" sender:self];
     }else
     {
-        [MBProgressHUD showError:@"原始密码错误" toView:self.view];
+        [MBProgressHUD showMessag:@"原始密码错误" toView:self.view];
     }
 }
 

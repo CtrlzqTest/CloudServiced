@@ -28,9 +28,9 @@
     __weak typeof(self) weakSelf = self;
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kGetCodeAPI] params:@{@"phoneNo":user.phoneNo} successBlock:^(id returnData) {
         [weakSelf countDownTime:@60];
-        [MBProgressHUD showSuccess:@"验证码获取成功" toView:nil];
+        [MBProgressHUD showMessag:@"验证码获取成功" toView:nil];
     } failureBlock:^(NSError *error) {
-        [MBProgressHUD showError:@"验证码获取失败" toView:nil];
+        [MBProgressHUD showMessag:@"验证码获取失败" toView:nil];
     } showHUD:YES];
 //    _myBlock(2);
 }

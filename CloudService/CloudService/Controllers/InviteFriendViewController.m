@@ -44,7 +44,7 @@
             _teamInviteCode = [dataDic objectForKey:@"teamInviteCode"];
             
         }else {
-            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData objectForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -57,7 +57,7 @@
 - (IBAction)shareAction:(id)sender {
     
     if (_linkUrl.length <= 0) {
-        [MBProgressHUD showError:@"生成邀请url失败" toView:self.view];
+        [MBProgressHUD showMessag:@"生成邀请url失败" toView:self.view];
         return;
     }
     //1、创建分享参数

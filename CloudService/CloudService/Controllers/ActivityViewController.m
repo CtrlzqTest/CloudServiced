@@ -84,7 +84,7 @@ static NSString *cellID = @"cellID";
             _personInviteCode = [dataDic objectForKey:@"personInviteCode"];
             
         }else {
-            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData objectForKey:@"msg"] toView:self.view];
         }
     } failureBlock:^(NSError *error) {
         
@@ -161,16 +161,16 @@ static NSString *cellID = @"cellID";
             break;
         case 1:
             if (![actifityModel.monkeyTwo isEqualToString:@"0"]) {
-                cell.imgView.image = [UIImage imageNamed:@"card2"];
+                cell.imgView.image = [UIImage imageNamed:@"card3"];
             }else {
-                cell.imgView.image = [UIImage imageNamed:@"card2_"];
+                cell.imgView.image = [UIImage imageNamed:@"card3_"];
             }
             break;
         case 2:
             if (![actifityModel.monkeyThree isEqualToString:@"0"]) {
-                cell.imgView.image = [UIImage imageNamed:@"card3"];
+                cell.imgView.image = [UIImage imageNamed:@"card2"];
             }else {
-                cell.imgView.image = [UIImage imageNamed:@"card3_"];
+                cell.imgView.image = [UIImage imageNamed:@"card2_"];
             }
             break;
         default:
@@ -235,20 +235,20 @@ static NSString *cellID = @"cellID";
     }
     
     if (![actifityModel.monkeyTwo isEqualToString:@"0"]) {
-        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home6"] forState:(UIControlStateNormal)];
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home5"] forState:(UIControlStateNormal)];
         self.btnNum2.hidden = NO;
         [self.btnNum2 setTitle:actifityModel.monkeyTwo forState:(UIControlStateNormal)];
     }else {
-        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home6_"] forState:(UIControlStateNormal)];
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"home5_"] forState:(UIControlStateNormal)];
         self.btnNum2.hidden = YES;
     }
     
     if (![actifityModel.monkeyThree isEqualToString:@"0"]) {
-        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home5"] forState:(UIControlStateNormal)];
+        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home6"] forState:(UIControlStateNormal)];
         self.btnNum3.hidden = NO;
         [self.btnNum3 setTitle:actifityModel.monkeyThree forState:(UIControlStateNormal)];
     }else {
-        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home5_"] forState:(UIControlStateNormal)];
+        [self.button3 setBackgroundImage:[UIImage imageNamed:@"home6_"] forState:(UIControlStateNormal)];
         self.btnNum3.hidden = YES;
     }
     
@@ -287,7 +287,7 @@ static NSString *cellID = @"cellID";
     [MHNetworkManager postReqeustWithURL:[RequestEntity urlString:kActifityCouponAPI] params:@{@"userId":user.userId} successBlock:^(id returnData) {
         
         if ([returnData[@"flag"] isEqualToString:@"success"]) {
-            [MBProgressHUD showSuccess:@"成功领取优惠券,请到个人中心查看" toView:self.view];
+            [MBProgressHUD showMessag:@"成功领取优惠券,请到个人中心查看" toView:self.view];
         }else {
             [MBProgressHUD showMessag:@"你还没有集齐所有猴子，请再接再厉" toView:self.view];
         }
@@ -307,7 +307,7 @@ static NSString *cellID = @"cellID";
         
             
         }else {
-            [MBProgressHUD showError:[returnData objectForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData objectForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -318,7 +318,7 @@ static NSString *cellID = @"cellID";
 }
 - (IBAction)shareAction:(id)sender {
     if (!_linkUrl) {
-        [MBProgressHUD showError:@"生成邀请url失败" toView:self.view];
+        [MBProgressHUD showMessag:@"生成邀请url失败" toView:self.view];
         return;
     }
     //1、创建分享参数

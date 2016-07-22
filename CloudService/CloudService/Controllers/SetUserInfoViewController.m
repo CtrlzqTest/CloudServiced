@@ -103,9 +103,9 @@ static NSString *const select_CellID = @"selectCell";
         if ([[returnData valueForKey:@"flag"] isEqualToString:@"success"]) {
             [self saveUserInfo:dict];
             if ([self.rightBtn.titleLabel.text isEqualToString:@"提交"]) {
-                [MBProgressHUD showSuccess:@"提交成功,一个小时后生效" toView:nil];
+                [MBProgressHUD showMessag:@"提交成功,一个小时后生效" toView:nil];
             }else {
-                [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+                [MBProgressHUD showMessag:@"修改成功" toView:nil];
             }
             UIViewController *VC = [self.navigationController.viewControllers firstObject];
             if ([[VC class] isSubclassOfClass:[LoginViewController class]]) {
@@ -115,7 +115,7 @@ static NSString *const select_CellID = @"selectCell";
             [[NSNotificationCenter defaultCenter] postNotificationName:ReloadHomeData object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else {
-            [MBProgressHUD showError:[returnData valueForKey:@"msg"] toView:self.view];
+            [MBProgressHUD showMessag:[returnData valueForKey:@"msg"] toView:self.view];
         }
         
     } failureBlock:^(NSError *error) {
@@ -252,11 +252,11 @@ static NSString *const select_CellID = @"selectCell";
     }
     if (_indexPath.section == 1 && (_indexPath.row == 1)) {
         if (![HelperUtil checkBankCard:text]) {
-            [MBProgressHUD showError:@"你输入的银行卡号无效,请重新输入" toView:self.view];
+            [MBProgressHUD showMessag:@"你输入的银行卡号无效,请重新输入" toView:self.view];
         }else {
             NSString *bankBin = [text substringToIndex:6];
             if ([self getBankNameWithBankbin:bankBin].length <= 0) {
-                [MBProgressHUD showError:@"查不到你的银行卡信息,请手动输入开户银行" toView:self.view];
+                [MBProgressHUD showMessag:@"查不到你的银行卡信息,请手动输入开户银行" toView:self.view];
             }else {
                 _valueArray_Bank[2] = [self getBankNameWithBankbin:bankBin];
             }
@@ -600,7 +600,7 @@ static NSString *const select_CellID = @"selectCell";
         if (_indexPath.section == 0)
         {
             if (_saleCityArray.count > 3) {
-                [MBProgressHUD showSuccess:@"城市选择不能超过四个" toView:self.view];
+                [MBProgressHUD showMessag:@"城市选择不能超过四个" toView:self.view];
                 return ;
             }
             
