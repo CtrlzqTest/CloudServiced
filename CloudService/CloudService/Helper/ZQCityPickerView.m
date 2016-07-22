@@ -112,7 +112,6 @@
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-
     return component == 0 ? _provinceArray[row] : _cityArray[row];
 }
 
