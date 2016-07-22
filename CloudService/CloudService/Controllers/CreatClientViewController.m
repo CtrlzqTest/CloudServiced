@@ -91,6 +91,7 @@
     
     
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:self.tfLicenseNo]) {
         
@@ -107,10 +108,11 @@
     }
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSLog(@"%lu   %lu",(unsigned long)range.location,(unsigned long)range.length);
     if ([textField isEqual:self.tfLicenseNo]) {
         self.tfLicenseNo.text = [self.tfLicenseNo.text uppercaseString];
+        [string uppercaseString];
     }
-  
     return YES;
 }
 - (void)viewWillAppear:(BOOL)animated {

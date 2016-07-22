@@ -443,6 +443,7 @@
     long time2 = (long )(time * 1000);
     return [NSString stringWithFormat:@"%ldL",time2];
 }
+
 /** 
  *
  *消失键盘

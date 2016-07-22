@@ -19,6 +19,8 @@
     // Do any additional setup after loading the view.
 }
 
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[FireData sharedInstance] beginLogPageView:self.title attributes:nil cvar:nil];

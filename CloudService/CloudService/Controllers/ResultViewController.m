@@ -74,6 +74,7 @@
     _lbNoData.font = [UIFont systemFontOfSize:14];
     _lbNoData.textColor = [UIColor lightGrayColor];
 }
+
 - (void)removeNoData {
     [_noDataImg removeFromSuperview];
     [_lbNoData removeFromSuperview];

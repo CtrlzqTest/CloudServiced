@@ -79,7 +79,9 @@ static NSString *headerView_ID = @"headerView";
     self.view.backgroundColor = [UIColor whiteColor];
     self.collectionView.scrollEnabled = NO;
     self.collectionView.backgroundColor = [HelperUtil colorWithHexString:@"F4F4F4"];
+    // 注册cell
     [self.collectionView registerNib:[UINib nibWithNibName:@"HomeCollectionCell" bundle:nil] forCellWithReuseIdentifier:cell_id];
+    // 注册header
     [self.collectionView registerNib:[UINib nibWithNibName:@"HomeHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerView_ID];
     
     CGFloat inset = 8;
@@ -167,6 +169,7 @@ static NSString *headerView_ID = @"headerView";
     return _dataKeyArray.count;
 }
 
+// 自定义header
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
@@ -199,7 +202,7 @@ static NSString *headerView_ID = @"headerView";
         [_headerView playWithImageArray:_scrollImgArray clickAtIndex:^(NSInteger index) {
             if (index == 0) {
                 [self performSegueWithIdentifier:@"activity" sender:self];
-            }
+            }e
             if (index == 1) {
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 RuleViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"RuleVC"];
